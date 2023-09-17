@@ -2,7 +2,9 @@
   "name": "@backroad/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "backroad":"backroad"
+  },
   "private": true,
   "devDependencies": {
     "@nrwl/node": "^16.8.1",

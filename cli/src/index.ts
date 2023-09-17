@@ -1,1 +1,3 @@
-export * from './lib/cli';
+#!/usr/bin/env node
+
+console.log("hi")

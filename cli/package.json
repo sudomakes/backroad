@@ -1,4 +1,5 @@
 {
   "name": "backroad",
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "bin": "./src/index.js"
 }
