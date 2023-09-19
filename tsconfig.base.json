@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "backroad": ["cli/src/index.ts"]
+      "@backroad/cli": ["libs/cli/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

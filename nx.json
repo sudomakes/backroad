@@ -12,7 +12,9 @@
     }
   },
   "workspaceLayout": {
-    "projectNameAndRootFormat": "as-provided"
+    "projectNameAndRootFormat": "derived",
+    "appsDir": "apps",
+    "libsDir": "libs"
   },
   "targetDefaults": {
     "build": {
@@ -26,6 +28,9 @@
         "{workspaceRoot}/.eslintignore",
         "{workspaceRoot}/eslint.config.js"
       ]
+    },
+    "test": {
+      "inputs": ["default", "^production"]
     }
   },
   "namedInputs": {
@@ -33,8 +38,27 @@
     "production": [
       "default",
       "!{projectRoot}/.eslintrc.json",
-      "!{projectRoot}/eslint.config.js"
+      "!{projectRoot}/eslint.config.js",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json"
     ],
     "sharedGlobals": []
+  },
+  "generators": {
+    "@nx/react": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint",
+        "bundler": "vite",
+        "babel": true
+      },
+      "component": {
+        "style": "scss"
+      },
+      "library": {
+        "style": "scss",
+        "linter": "eslint"
+      }
+    }
   }
 }

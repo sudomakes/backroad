@@ -1,5 +1,5 @@
 {
-  "name": "backroad",
+  "name": "@backroad/cli",
   "version": "0.0.1",
   "bin": "./src/index.js"
 }
