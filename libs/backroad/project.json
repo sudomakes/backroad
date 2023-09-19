@@ -1,0 +1,34 @@
+{
+  "name": "backroad",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/backroad/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/backroad",
+        "tsConfig": "libs/backroad/tsconfig.lib.json",
+        "packageJson": "libs/backroad/package.json",
+        "main": "libs/backroad/src/index.ts",
+        "assets": ["libs/backroad/*.md"]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs backroad {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/backroad/**/*.ts",
+          "libs/backroad/package.json"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
