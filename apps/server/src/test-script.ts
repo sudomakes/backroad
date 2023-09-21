@@ -1,4 +1,6 @@
-import * as br from "@backroad/backroad"
+import br from "@backroad/backroad"
+
+
 function getDouble(num: number) {
   return num * 2
 }
