@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@backroad/backroad": ["libs/backroad/src/index.ts"],
-      "@backroad/cli": ["libs/cli/src/index.ts"]
+      "@backroad/server": ["libs/server/src/index.ts"],
+      "backroad": ["libs/cli/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

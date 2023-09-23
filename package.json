@@ -3,7 +3,11 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "backroad": "backroad"
+    "backroad": "backroad",
+    "build": "nx run cli:build",
+    "watch": "nx run cli:build --watch",
+    "cli": "node dist/libs/cli",
+    "dev": "nx run-many --parallel --target=serve --projects=server-debug,client"
   },
   "private": true,
   "devDependencies": {
@@ -51,13 +55,16 @@
   "dependencies": {
     "@swc/helpers": "~0.5.0",
     "axios": "^1.0.0",
+    "commander": "^11.0.0",
     "express": "^4.18.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.11.2",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2",
-    "tslib": "^2.3.0"
+    "superjson": "^1.13.1",
+    "tslib": "^2.3.0",
+    "tsx": "^3.12.10"
   },
   "nx": {
     "includedScripts": []

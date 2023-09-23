@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 export function App() {
   const [connected,setConnected] = useState(false)
   useEffect(()=>{
-    fetch('/api').then(res=>res.json()).then(console.log)
     socket.on('connect', ()=>setConnected(true));
     socket.on('disconnect', ()=>setConnected(false));
 
@@ -20,7 +19,7 @@ export function App() {
       </h1>
       <button className="btn" onClick={()=>{
         console.log("running script")
-        socket.emit('run-script')
+        socket.emit('run_script')
       }}>Run Script</button>
       {/* <RoutesDemo/> */}
       <div id='backroad-main'></div>

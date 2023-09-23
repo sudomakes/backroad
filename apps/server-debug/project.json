@@ -1,7 +1,7 @@
 {
-  "name": "server",
+  "name": "server-debug",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/server/src",
+  "sourceRoot": "apps/server-debug/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -11,12 +11,12 @@
       "options": {
         "target": "node",
         "compiler": "tsc",
-        "outputPath": "dist/apps/server",
-        "main": "apps/server/src/main.ts",
-        "tsConfig": "apps/server/tsconfig.app.json",
-        "assets": ["apps/server/src/assets"],
+        "outputPath": "dist/apps/server-debug",
+        "main": "apps/server-debug/src/main.ts",
+        "tsConfig": "apps/server-debug/tsconfig.app.json",
+        "assets": ["apps/server-debug/src/assets"],
         "isolatedConfig": true,
-        "webpackConfig": "apps/server/webpack.config.js"
+        "webpackConfig": "apps/server-debug/webpack.config.js"
       },
       "configurations": {
         "development": {},
@@ -27,14 +27,14 @@
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "server:build"
+        "buildTarget": "server-debug:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "server:build:development"
+          "buildTarget": "server-debug:build:development"
         },
         "production": {
-          "buildTarget": "server:build:production"
+          "buildTarget": "server-debug:build:production"
         }
       }
     },
@@ -42,7 +42,7 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/server/**/*.ts"]
+        "lintFilePatterns": ["apps/server-debug/**/*.ts"]
       }
     }
   },

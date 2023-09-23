@@ -12,11 +12,13 @@
         "tsConfig": "libs/cli/tsconfig.lib.json",
         "packageJson": "libs/cli/package.json",
         "main": "libs/cli/src/index.ts",
-        "assets": ["libs/cli/*.md"]
+        "assets": ["libs/cli/*.md"],
+        "updateBuildableProjectDepsInPackageJson": true,
+        "buildableProjectDepsInPackageJsonType": "dependencies"
       }
     },
     "publish": {
-      "command": "node tools/scripts/publish.mjs libs/cli {args.ver} {args.tag}",
+      "command": "node tools/scripts/publish.mjs cli {args.ver} {args.tag}",
       "dependsOn": ["build"]
     },
     "lint": {

@@ -1,7 +1,7 @@
-import { BackroadContainer } from "../../base";
+import { BackroadContainer } from '../../base';
 
 export class ColumnsContainer extends BackroadContainer {
-    constructor(props:{key: string,columnCount:number}) {
-        super({key:props.key})
-    }
+  constructor(props: { key: string; columnCount: number }) {
+    super({ path: props.key });
+  }
 }
