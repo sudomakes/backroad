@@ -29,6 +29,10 @@ export class BaseContainer extends BackroadContainer {
   }
 
   numberInput(args: { label: string }) {
+    return 5;
     // this.addDescendant(NumberInputComponent, args);
+  }
+  button(args: { label: string }) {
+    // this.addDescendant(ButtonComponent, args);
   }
 }

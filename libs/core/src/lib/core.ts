@@ -32,11 +32,7 @@ export type ContainerPropsMapping = {
 };
 
 export type InbuiltNodeTypes = InbuiltComponentTypes | InbuiltContainerTypes;
-// interface ArgsType {
-//   args: {
-//     [key: string]: unknown;
-//   };
-// }
+
 interface BackroadBaseNode<
   NodeType extends InbuiltNodeTypes
   // NodeProps extends ArgsType,
@@ -53,36 +49,10 @@ interface BackroadBaseNode<
 export interface BackroadComponent<Value = unknown>
   extends BackroadBaseNode<InbuiltComponentTypes> {
   value: Value;
-  // path: string;
-  // args: ArgsType;
 }
 
 export interface BackroadContainer
   extends BackroadBaseNode<InbuiltContainerTypes> {
   children: (BackroadContainer | BackroadComponent)[];
 }
-
-// export type BaseContainer = BackroadContainer;
-// export type ColumnsContainer = BackroadContainer<{
-//   columnCount: number;
-// }>;
-
-// export class BackroadComponent<
-//   ArgsType extends Record<string, unknown> = Record<string, unknown>,
-//   U = undefined
-// > {
-//   path: string;
-//   key: string;
-//   type: string;
-//   args: ArgsType;
-//   constructor(path: string, type: string, args: ArgsType) {
-//     this.path = path;
-//     this.type = type;
-//     this.args = args;
-//     sessionConnector.requestRender(this);
-//   }
-//   get value() {
-//     return sessionConnector.getValueOf(this.path);
-//   }
-// }
 export type BackroadNode = BackroadComponent | BackroadContainer;

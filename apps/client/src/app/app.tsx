@@ -40,6 +40,7 @@ export function App() {
       <Navbar />
       <div className="flex-1">
         <TreeRender tree={treeStruct} />
+        <div className="container mx-auto mt-3">10</div>
       </div>
       <Footer />
     </div>
