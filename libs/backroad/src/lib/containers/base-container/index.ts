@@ -27,4 +27,8 @@ export class BaseContainer extends BackroadContainer {
     this.addDescendant(ColumnsContainer, { columnCount });
     return;
   }
+
+  numberInput(args: { label: string }) {
+    // this.addDescendant(NumberInputComponent, args);
+  }
 }
