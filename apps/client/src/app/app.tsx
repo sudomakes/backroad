@@ -1,7 +1,6 @@
 import { socket } from '../socket';
 import { useEffect, useState } from 'react';
-// import { RoutesDemo } from './routes';
-import type { BackroadComponent, BackroadContainer } from '@backroad/core';
+import type { BackroadContainer } from '@backroad/core';
 import { TreeRender } from './tree';
 import { Navbar } from './layout/navbar';
 import { Footer } from './layout/footer';
@@ -19,7 +18,7 @@ const treeStruct: BackroadContainer<'base'> = {
         defaultValue: 5,
       },
       key: '0.0',
-    } satisfies BackroadComponent<'number_input'>,
+    },
     {
       type: 'button',
       // value: 5,
@@ -29,7 +28,15 @@ const treeStruct: BackroadContainer<'base'> = {
         label: 'Submit',
         defaultValue: false,
       },
-    } satisfies BackroadComponent<'button'>,
+    },
+    {
+      type: 'markdown',
+      path: '0.2',
+      key: '0.2',
+      args: {
+        body: 5,
+      },
+    },
   ],
 };
 export function App() {
@@ -44,7 +51,6 @@ export function App() {
       <Navbar connected={connected} />
       <div className="flex-1">
         <TreeRender tree={treeStruct} />
-        <div className="container mx-auto mt-3">10</div>
       </div>
       <Footer />
     </div>

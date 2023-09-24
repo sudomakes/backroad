@@ -64,6 +64,8 @@ export interface BackroadContainer<Type extends InbuiltContainerTypes> {
     type: InbuiltNodeTypes;
     path: string;
     children?: BackroadContainer<Type>['children'];
+    args?: any;
+    key?: string;
   }[];
   args: Type extends InbuiltContainerTypes
     ? ContainerArgsMapping[Type]['args']
