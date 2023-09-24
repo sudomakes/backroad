@@ -1,4 +1,4 @@
-export const Navbar = () => {
+export const Navbar = (props: { connected: boolean }) => {
   return (
     <div className="navbar bg-base-100 mb-5">
       <div className="navbar-start">
@@ -23,7 +23,7 @@ export const Navbar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <li>
+            {/* <li>
               <a>Homepage</a>
             </li>
             <li>
@@ -31,16 +31,18 @@ export const Navbar = () => {
             </li>
             <li>
               <a>About</a>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
       <div className="navbar-center">
-        <a className="btn btn-ghost normal-case text-xl">Backroad</a>
+        <a className="btn btn-ghost normal-case text-xl" href="/">
+          Backroad
+        </a>
       </div>
       <div className="navbar-end gap-4">
         <button className="btn btn-outline">
-          <div>Connected</div>
+          <div>{props.connected ? 'Connected' : 'Disconnected'}</div>
           <div className="badge badge-primary badge-xs"></div>
         </button>
         <a
