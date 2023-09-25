@@ -14,6 +14,7 @@ import { sessionManager } from './sessions/session-manager';
 import { BackroadSession } from './sessions/session';
 import { handleInit } from './server-socket-event-handlers/init';
 import { setValue } from './server-socket-event-handlers/set_value';
+import { requestRender } from './server-socket-event-handlers/request-render';
 
 // server.listen(port, () => {
 //   console.log(`Listening at http://localhost:${port}/api`);
@@ -52,6 +53,7 @@ export const startBackroadServer = (options: {
     socket.join(backroadSession.id);
     socket.on('set_value', setValue(socket));
     socket.on('init', handleInit(socket));
+    socket.on('request-render', requestRender);
     socket.on('run_script', () => {
       console.log(
         'running script',
