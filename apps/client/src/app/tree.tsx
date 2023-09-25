@@ -1,28 +1,33 @@
 import {
   BackroadComponent,
-  BackroadContainer,
+  // BackroadContainer,
   BackroadNode,
+  ComponentPropsMapping,
+  InbuiltComponentTypes,
+  isBackroadComponent,
 } from '@backroad/core';
 import { backroadClientComponents } from './components';
 import { backroadClientContainers } from './containers';
 
-function isComponentLeaf(element: BackroadNode): element is BackroadComponent {
-  return !('children' in element);
-}
 export const TreeRender = (props: {
-  tree: BackroadContainer | BackroadComponent;
+  tree:
+    | BackroadComponent<InbuiltComponentTypes>
+    | (BackroadComponent<InbuiltComponentTypes> & {
+        value: ComponentPropsMapping[InbuiltComponentTypes]['value'];
+      });
 }) => {
-  if (isComponentLeaf(props.tree)) {
+  if (isBackroadComponent(props.tree)) {
     const ComponentRenderer = backroadClientComponents[props.tree.type];
     return (
-      // @ts-expect-error there are sufficient checks to ensure this is correct
       <ComponentRenderer
+        // @ts-expect-error there are sufficient checks to ensure this is correct
+        key={props.tree.key}
         {...{ args: props.tree.args, value: props.tree.value }}
       />
     );
   } else {
-    const ContainerRenderer = backroadClientContainers[props.tree.type];
     // @ts-expect-error there are sufficient checks to ensure this is correct
+    const ContainerRenderer = backroadClientContainers[props.tree.type];
     return <ContainerRenderer {...props.tree} />;
   }
 };

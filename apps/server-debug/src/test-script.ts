@@ -3,11 +3,17 @@ import br from '@backroad/backroad';
 function getDouble(num: number) {
   return num * 2;
 }
-const val = br.numberInput({
-  label: 'Enter Value',
-  defaultValue: 5,
-  key: 'numinput',
-});
-br.button({ label: 'Submit', key: 'submit' });
-const ans = getDouble(val);
-br.write({ body: ans });
+console.debug('trying to get value');
+(async () => {
+  const val = await br.numberInput({
+    label: 'Enter Value',
+    defaultValue: 5,
+    key: 'numinput',
+  });
+  console.debug('got value', val, 'rendering button');
+  br.button({ label: 'Submit', key: 'submit' });
+  console.debug('rendered button, getting double');
+  const ans = getDouble(val);
+  console.debug('got double', ans, 'writing to backroad');
+  br.write({ body: ans });
+})();

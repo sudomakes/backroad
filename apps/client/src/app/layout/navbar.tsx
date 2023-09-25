@@ -1,4 +1,12 @@
+import { useEffect } from 'react';
+import { socket } from '../../socket';
+
 export const Navbar = (props: { connected: boolean }) => {
+  useEffect(() => {
+    socket.on('connect', () => {
+      console.log('connected inside navbar');
+    });
+  });
   return (
     <div className="navbar bg-base-100 mb-5">
       <div className="navbar-start">
@@ -41,6 +49,15 @@ export const Navbar = (props: { connected: boolean }) => {
         </a>
       </div>
       <div className="navbar-end gap-4">
+        <button
+          className="btn btn-outline"
+          onClick={() => {
+            console.log('requesting run');
+            socket.emit('run_script');
+          }}
+        >
+          Request Run
+        </button>
         <button className="btn btn-outline">
           <div>{props.connected ? 'Connected' : 'Disconnected'}</div>
           <div className="badge badge-primary badge-xs"></div>

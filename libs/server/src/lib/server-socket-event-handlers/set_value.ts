@@ -3,8 +3,8 @@ import { IServerSocketEventHandler } from './base';
 import superjson from 'superjson';
 
 export const setValue: IServerSocketEventHandler =
-  (socket) => (props: { key: string; data: string }, callback) => {
-    const session = sessionManager.getSession(socket.id);
+  () => (props: { key: string; sessionId: string; data: string }, callback) => {
+    const session = sessionManager.getSession(props.sessionId);
     if (session) {
       session.setValue(props.key, superjson.parse(props.data));
       callback({ message: 'Success' });

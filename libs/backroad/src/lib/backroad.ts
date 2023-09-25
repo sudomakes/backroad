@@ -36,18 +36,19 @@ class BackroadNodeManager<ContainerType extends InbuiltContainerTypes> {
     return componentNode;
   }
 
-  addComponentDescendant<ComponentType extends InbuiltComponentTypes>(
+  async addComponentDescendant<ComponentType extends InbuiltComponentTypes>(
     nodeData: BackroadComponent<ComponentType>
   ) {
+    console.debug('Adding component', nodeData);
     this.container.children.push(nodeData);
-    sessionConnector.setValueIfNotExists({
+    await sessionConnector.setValueIfNotExists({
       key: nodeData.key,
       value: nodeData.args.defaultValue,
     });
-    sessionConnector.requestRender(this.container);
+    await sessionConnector.requestRender(nodeData);
     return sessionConnector.getValueOf(nodeData);
   }
-  addContainerDescendant<ContainerType extends InbuiltContainerTypes>(
+  async addContainerDescendant<ContainerType extends InbuiltContainerTypes>(
     containerNodeData: Omit<
       BackroadContainer<ContainerType>,
       'path' | 'children'
@@ -63,12 +64,15 @@ class BackroadNodeManager<ContainerType extends InbuiltContainerTypes> {
       children: containerNodeData.children || [],
     };
     this.container.children.push(containerNode);
+    await sessionConnector.requestRender(containerNode);
     return new BackroadNodeManager(
       containerNode as BackroadContainer<ContainerType>
     );
   }
   getDescendantKey() {
-    return `${this.container.path}.${this.container.children.length}`;
+    return `${this.container.path ? this.container.path + '.' : ''}children.${
+      this.container.children.length
+    }`;
   }
 
   button(props: BackroadComponentFormat<'button'>) {

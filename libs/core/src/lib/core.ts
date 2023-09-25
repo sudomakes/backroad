@@ -85,4 +85,16 @@ export type BackroadNode<Type extends InbuiltNodeTypes | unknown = 'unknown'> =
     ? BackroadComponent<Type>
     : Type extends InbuiltContainerTypes
     ? BackroadContainer<Type>
-    : object;
+    : {
+        path: string;
+        type: string;
+        key?: string;
+      };
+
+export function isBackroadComponent(
+  element: BackroadNode
+): element is BackroadComponent<InbuiltComponentTypes> & {
+  value: ComponentPropsMapping[InbuiltComponentTypes]['value'];
+} {
+  return !('children' in element);
+}

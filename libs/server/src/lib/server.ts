@@ -3,24 +3,19 @@
  * This is only a minimal backend to get started.
  */
 
-import * as childProcess from 'child_process';
 import express from 'express';
-import superjson from 'superjson';
 // import { readFileSync } from 'fs';
 import * as http from 'http';
 import * as path from 'path';
 import { Server } from 'socket.io';
-import { sessionManager } from './sessions/session-manager';
-import { BackroadSession } from './sessions/session';
-import { handleInit } from './server-socket-event-handlers/init';
+import { getValue } from './server-socket-event-handlers/get_value';
+import { requestRender } from './server-socket-event-handlers/request_render';
+import { runScript } from './server-socket-event-handlers/run_script';
 import { setValue } from './server-socket-event-handlers/set_value';
-import { requestRender } from './server-socket-event-handlers/request-render';
+import { BackroadSession } from './sessions/session';
+import { sessionManager } from './sessions/session-manager';
+import { setValueIfNotExists } from './server-socket-event-handlers/set_value_if_not_exists';
 
-// server.listen(port, () => {
-//   console.log(`Listening at http://localhost:${port}/api`);
-// });
-
-let debugConnectionCount = 0;
 export const startBackroadServer = (options: {
   port?: number;
   scriptPath: string;
@@ -28,18 +23,8 @@ export const startBackroadServer = (options: {
   const serverPort = options.port || 3333;
   const app = express();
   const server = http.createServer(app);
-  const io = new Server(server, { path: '/api/socket.io' });
+  const io = new Server(server, { path: '/api/socket.io', cors: {} });
   app.use('/assets', express.static(path.join(__dirname, 'assets')));
-  app.get('/api/:sessionId/:key', (req, res) => {
-    const { sessionId, key } = req.params;
-    const session = sessionManager.getSession(sessionId);
-    if (session) {
-      const value = session.valueOf(key);
-      res.send({ data: superjson.stringify(value) });
-    } else {
-      res.status(400).send({ message: 'Session not found' });
-    }
-  });
 
   app.get('/api', (req, res) => {
     res.send({ message: 'Welcome to server!' });
@@ -47,49 +32,29 @@ export const startBackroadServer = (options: {
 
   io.on('connection', (socket) => {
     const backroadSession = new BackroadSession(socket);
-    debugConnectionCount += 1;
-    console.log('a user connected', debugConnectionCount, socket.id);
-    const myDebugId = debugConnectionCount;
+    sessionManager.register(backroadSession);
+    console.log('a user connected', backroadSession.id);
+    // every session joins a room with name equal to its own id,
+    // useful for informing to client app to render a node (when script requests for it through request_render)
     socket.join(backroadSession.id);
+    socket.on('get_value', getValue(socket));
     socket.on('set_value', setValue(socket));
-    socket.on('init', handleInit(socket));
-    socket.on('request-render', requestRender);
-    socket.on('run_script', () => {
-      console.log(
-        'running script',
-        options.scriptPath,
-        'connectionCount',
-        myDebugId
-      );
-      const scriptProcess = childProcess.spawn(
-        `BACKROAD_SESSION=${backroadSession.id} BACKROAD_SERVER_PORT=${serverPort} npx -y tsx ${options.scriptPath}`,
-        {
-          shell: true,
-          cwd: path.dirname(options.scriptPath),
-        }
-      );
-      // const output = eval(ts.transpile(readFileSync(scriptPath).toString()))
-      // console.log("here goes your output",output)
-      scriptProcess.stdout.on('data', (data) => {
-        console.log(`stdout (${myDebugId}): ${data}`);
-        socket.emit('data', data.toString());
-      });
-      scriptProcess.stderr.on('data', (data) => {
-        console.log(`stderr: ${data}`);
-        // socket.emit('data', data.toString());
-      });
+    // socket.on('init', handleInit(socket));
+    socket.on('request_render', requestRender(socket));
+    socket.on('set_value_if_not_exists', setValueIfNotExists(socket));
+    socket.on(
+      'run_script',
+      runScript(socket, {
+        serverPort,
+        scriptPath: options.scriptPath,
+        backroadSession,
+      })
+    );
 
-      scriptProcess.on('error', (err) => {
-        console.log('error', err);
-      });
-      scriptProcess.on('message', (message) => {
-        console.log('message', message);
-      });
-      scriptProcess.on('exit', function (code, signal) {
-        console.log(
-          'child process exited with ' + `code ${code} and signal ${signal}`
-        );
-      });
+    // account for disconnection
+    socket.on('disconnect', () => {
+      sessionManager.unregister(backroadSession);
+      console.log('user disconnected', backroadSession.id);
     });
   });
   server.listen(serverPort);
