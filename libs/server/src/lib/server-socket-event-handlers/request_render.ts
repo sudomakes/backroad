@@ -1,4 +1,4 @@
-import { BackroadNode } from '@backroad/core';
+import { BackroadNode } from 'backroad-core';
 import { IServerSocketEventHandler } from './base';
 import { sessionManager } from '../sessions/session-manager';
 

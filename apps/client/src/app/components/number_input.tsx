@@ -1,4 +1,4 @@
-import { ComponentPropsMapping } from '@backroad/core';
+import { ComponentPropsMapping } from 'backroad-core';
 import { useState } from 'react';
 
 export const NumberInput = (props: ComponentPropsMapping['number_input']) => {

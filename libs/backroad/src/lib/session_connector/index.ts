@@ -3,7 +3,7 @@ import {
   BackroadNode,
   ComponentPropsMapping,
   InbuiltComponentTypes,
-} from '@backroad/core';
+} from 'backroad-core';
 import { io, Socket } from 'socket.io-client';
 import superjson from 'superjson';
 // import deasync from 'deasync';

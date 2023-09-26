@@ -15,9 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@backroad/backroad": ["libs/backroad/src/index.ts"],
-      "@backroad/core": ["libs/core/src/index.ts"],
-      "@backroad/server": ["libs/server/src/index.ts"],
+      "backroad-sdk": ["libs/backroad/src/index.ts"],
+      "backroad-core": ["libs/core/src/index.ts"],
+      "backroad-server": ["libs/server/src/index.ts"],
       "backroad": ["libs/cli/src/index.ts"]
     }
   },

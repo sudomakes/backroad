@@ -3,7 +3,19 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/server/src",
   "projectType": "library",
-  "targets": {
+  "targets": {"build": {
+    "executor": "@nx/js:tsc",
+    "outputs": ["{options.outputPath}"],
+    "options": {
+      "outputPath": "dist/libs/server",
+      "tsConfig": "libs/server/tsconfig.lib.json",
+      "packageJson": "libs/server/package.json",
+      "main": "libs/server/src/index.ts",
+      "assets": ["libs/server/*.md"],
+      "updateBuildableProjectDepsInPackageJson": true,
+      "buildableProjectDepsInPackageJsonType": "dependencies"
+    }
+  },
     "lint": {
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],

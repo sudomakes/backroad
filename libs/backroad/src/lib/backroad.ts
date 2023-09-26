@@ -5,7 +5,7 @@ import {
   ComponentPropsMapping,
   InbuiltComponentTypes,
   InbuiltContainerTypes,
-} from '@backroad/core';
+} from 'backroad-core';
 import { sessionConnector } from './session_connector';
 import { omit } from 'lodash';
 type BackroadComponentFormat<ComponentType extends InbuiltComponentTypes> = {

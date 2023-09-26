@@ -1,4 +1,4 @@
-import { startBackroadServer } from '@backroad/server';
+import { startBackroadServer } from 'backroad-server';
 // import path from 'path';
 
 // for debugging and booting the server without cli

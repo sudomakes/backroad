@@ -1,0 +1,8 @@
+{
+    "name": "backroad-server",
+    "version": "0.0.2",
+    "bin": "src/index.js","scripts": {
+      "publish-package": "npm publish"
+    }
+  }
+  

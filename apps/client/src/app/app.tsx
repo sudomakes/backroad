@@ -4,7 +4,7 @@ import type {
   BackroadContainer,
   BackroadNode,
   InbuiltContainerTypes,
-} from '@backroad/core';
+} from 'backroad-core';
 import { TreeRender } from './tree';
 import { Navbar } from './layout/navbar';
 import { Footer } from './layout/footer';

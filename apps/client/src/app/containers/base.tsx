@@ -1,4 +1,4 @@
-import { ContainerPropsMapping } from '@backroad/core';
+import { ContainerPropsMapping } from 'backroad-core';
 import { TreeRender } from '../tree';
 
 export const Base = (props: ContainerPropsMapping['base']) => {

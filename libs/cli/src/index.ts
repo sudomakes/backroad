@@ -2,7 +2,7 @@
 
 import { Command } from 'commander';
 import { join } from 'path';
-import { startBackroadServer } from '@backroad/server';
+import { startBackroadServer } from 'backroad-server';
 const program = new Command();
 console.log('running backroad cli');
 program.name('backroad').description('Run a backroad script in dev mode');

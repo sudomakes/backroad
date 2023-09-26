@@ -1,4 +1,4 @@
-import br from '@backroad/backroad';
+import br from 'backroad-sdk';
 
 function getDouble(num: number) {
   return num * 2;

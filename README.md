@@ -9,3 +9,8 @@ A node js equivalent to https://streamlit.io/
 ## Use Cases
 
 <img src="./docs/assets/use-cases/chat-prompt.png"/>
+
+
+## Commands 
+
+to run local registry: nx local-registry

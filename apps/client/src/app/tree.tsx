@@ -5,7 +5,7 @@ import {
   ComponentPropsMapping,
   InbuiltComponentTypes,
   isBackroadComponent,
-} from '@backroad/core';
+} from 'backroad-core';
 import { backroadClientComponents } from './components';
 import { backroadClientContainers } from './containers';
 
