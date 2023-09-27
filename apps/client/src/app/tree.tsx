@@ -19,10 +19,14 @@ export const TreeRender = (props: {
   if (isBackroadComponent(props.tree)) {
     const ComponentRenderer = backroadClientComponents[props.tree.type];
     return (
+      // @ts-expect-error there are sufficient checks to ensure this is correct
       <ComponentRenderer
-        // @ts-expect-error there are sufficient checks to ensure this is correct
-        key={props.tree.key}
-        {...{ args: props.tree.args, value: props.tree.value }}
+        // key={props.tree.id}
+        {...{
+          args: props.tree.args,
+          value: props.tree.value,
+          id: props.tree.id,
+        }}
       />
     );
   } else {

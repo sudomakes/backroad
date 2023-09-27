@@ -42,7 +42,7 @@ class BackroadNodeManager<ContainerType extends InbuiltContainerTypes> {
     console.debug('Adding component', nodeData);
     this.container.children.push(nodeData);
     await sessionConnector.setValueIfNotExists({
-      key: nodeData.id,
+      id: nodeData.id,
       value: nodeData.args.defaultValue,
     });
     await sessionConnector.requestRender(nodeData);

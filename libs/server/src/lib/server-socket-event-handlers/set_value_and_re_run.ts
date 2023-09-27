@@ -1,4 +1,3 @@
-import { getBackroadScriptRunner } from '../runner';
 import { BackroadSession } from '../sessions/session';
 import { sessionManager } from '../sessions/session-manager';
 import { IServerSocketEventHandler } from './base';
@@ -12,15 +11,15 @@ export const setValueAndReRun: IServerSocketEventHandler<
   }
 > = (socket, context) => (props) => {
   const backroadSession = sessionManager.getSession(socket.id);
-
-  backroadSession.setValue(props.id, superjson.parse(props.value));
-  backroadSession.setRunnerProcess(
-    getBackroadScriptRunner({
-      scriptPath: context.scriptPath,
-      envVariables: {
-        BACKROAD_SESSION: backroadSession.id,
-        BACKROAD_SERVER_PORT: context.serverPort.toString(),
-      },
-    })
+  console.log(
+    'setting value before triggering rerun, new value for ',
+    props.id,
+    ' is ',
+    props.value
   );
+  backroadSession.setValue(props.id, superjson.parse(props.value));
+  backroadSession.setRunnerProcess({
+    scriptPath: context.scriptPath,
+    serverPort: context.serverPort,
+  });
 };

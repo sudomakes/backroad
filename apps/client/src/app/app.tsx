@@ -20,14 +20,18 @@ export function App() {
     children: [],
   });
 
-
   useEffect(() => {
-    socket.on('connect', () => setConnected(true));
+    socket.on('connect', () => {
+      setConnected(true);
+      socket.emit('run_script', undefined, () => {
+        console.log('ran script');
+      });
+    });
     socket.on('disconnect', () => setConnected(false));
   });
 
-  useEffect(()=>{
-    const onRender = (node: BackroadNode, callback:()=>void) => {
+  useEffect(() => {
+    const onRender = (node: BackroadNode, callback: () => void) => {
       console.log('received render order for', node);
       setTreeStruct((oldTreeStruct) => {
         const newTree = set(oldTreeStruct, node.path, node);
@@ -35,13 +39,13 @@ export function App() {
         return { ...newTree }; // need to update the object ref by destructuring to trigger a rerender
       });
       callback();
-    }
-    socket.on('render',onRender);
+    };
+    socket.on('render', onRender);
 
-    return ()=>{
-      socket.off('render',onRender);
-    }
-  })
+    return () => {
+      socket.off('render', onRender);
+    };
+  });
 
   return (
     <div className="flex flex-col min-h-screen">

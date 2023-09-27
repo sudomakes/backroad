@@ -1,14 +1,19 @@
-import { BackroadEvents, BackroadEventsMapping } from 'backroad-core';
+import {
+  BackroadEvents,
+  BackroadEventsMapping,
+  ClientToServerEvents,
+  ServerToClientEvents,
+} from 'backroad-core';
 import { Socket } from 'socket.io';
 
 export type IServerSocketEventHandler<
   EventType extends BackroadEvents,
-  Context = unknown
+  Context = undefined
 > = (
-  socket: Socket,
-  context?: Context
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-) => (
+  socket: Socket<ClientToServerEvents, ServerToClientEvents>,
+  ...context: Context extends undefined ? [undefined?] : [Context]
+) => // eslint-disable-next-line @typescript-eslint/no-explicit-any
+(
   args: BackroadEventsMapping[EventType]['args'],
   callback?: (
     callbackArgs: BackroadEventsMapping[EventType]['response']

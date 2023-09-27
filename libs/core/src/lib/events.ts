@@ -6,23 +6,24 @@ type ClientToServerEventTypes =
   | 'request_render'
   | 'run_script'
   | 'set_value_and_re_run';
-interface ClientToServerEvents {
-  [key in ClientToServerEventTypes]: (
-    args: BackroadEventsMapping[typeof key]['args'],
-    callback: (
-      callBackArgs: BackroadEventsMapping[typeof key]['response']
-    ) => void
+type ConstructSocketIoEventSignatureFromBackroadEvents<
+  T extends BackroadEvents
+> = {
+  [key in T]: (
+    args: BackroadEventsMapping[key]['args'],
+    callback: (callBackArgs: BackroadEventsMapping[key]['response']) => void
   ) => void;
-}
+};
+type ServerToClientEventTypes = 'render';
+export type ClientToServerEvents =
+  ConstructSocketIoEventSignatureFromBackroadEvents<ClientToServerEventTypes>;
+export type ServerToClientEvents =
+  ConstructSocketIoEventSignatureFromBackroadEvents<ServerToClientEventTypes>;
 export type BackroadEventsMapping = {
   get_value: {
     args: { id: string; sessionId: string };
     response: string;
   };
-  // set_value: {
-  //   args: { id: string; sessionId: string; data: string };
-  //   response: { message: 'Success' };
-  // };
   request_render: {
     args: { node: BackroadNode; sessionId: string };
     response: void;
@@ -32,12 +33,16 @@ export type BackroadEventsMapping = {
     response: 'done';
   };
   run_script: {
-    args: never;
-    response: never;
+    args?: void;
+    response?: never;
   };
   set_value_and_re_run: {
     args: { id: string; value: string };
     response: never;
+  };
+  render: {
+    args: { value?: unknown; path: string; type: string; id?: string };
+    response?: void;
   };
 };
 export type BackroadEvents = keyof BackroadEventsMapping;
