@@ -15,6 +15,7 @@ import { setValue } from './server-socket-event-handlers/set_value';
 import { BackroadSession } from './sessions/session';
 import { sessionManager } from './sessions/session-manager';
 import { setValueIfNotExists } from './server-socket-event-handlers/set_value_if_not_exists';
+import { setValueAndReRun } from './server-socket-event-handlers/set_value_and_re_run';
 
 export const startBackroadServer = (options: {
   port?: number;
@@ -38,10 +39,10 @@ export const startBackroadServer = (options: {
     // useful for informing to client app to render a node (when script requests for it through request_render)
     socket.join(backroadSession.id);
     socket.on('get_value', getValue(socket));
-    socket.on('set_value', setValue(socket));
-    // socket.on('init', handleInit(socket));
+    // socket.on('set_value', setValue(socket));
     socket.on('request_render', requestRender(socket));
     socket.on('set_value_if_not_exists', setValueIfNotExists(socket));
+
     socket.on(
       'run_script',
       runScript(socket, {
@@ -50,7 +51,7 @@ export const startBackroadServer = (options: {
         backroadSession,
       })
     );
-
+    socket.on('set_value_and_re_run', setValueAndReRun(socket));
     // account for disconnection
     socket.on('disconnect', () => {
       sessionManager.unregister(backroadSession);

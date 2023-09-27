@@ -59,7 +59,7 @@ export class sessionConnector {
     return new Promise<ComponentPropsMapping[T]['value']>((resolve) => {
       socket.emit(
         'get_value',
-        { key: props.key, sessionId: getSessionInformation().sessionId },
+        { id: props.id, sessionId: getSessionInformation().sessionId },
         (value: string) => {
           resolve(superjson.parse(value));
         }

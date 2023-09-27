@@ -9,7 +9,7 @@ import {
 import { sessionConnector } from './session_connector';
 import { omit } from 'lodash';
 type BackroadComponentFormat<ComponentType extends InbuiltComponentTypes> = {
-  key?: string;
+  id?: string;
   // type: ComponentType;
 } & BackroadComponent<ComponentType>['args'];
 
@@ -24,10 +24,10 @@ class BackroadNodeManager<ContainerType extends InbuiltContainerTypes> {
   ) {
     const nodePath = this.getDescendantKey();
     const componentNode = {
-      key: props.key || nodePath,
+      id: props.id || nodePath,
       path: nodePath,
       args: omit(props, [
-        'key',
+        'id',
         'type',
       ]) as unknown as ComponentPropsMapping[T]['args'],
       type: type,
@@ -42,7 +42,7 @@ class BackroadNodeManager<ContainerType extends InbuiltContainerTypes> {
     console.debug('Adding component', nodeData);
     this.container.children.push(nodeData);
     await sessionConnector.setValueIfNotExists({
-      key: nodeData.key,
+      key: nodeData.id,
       value: nodeData.args.defaultValue,
     });
     await sessionConnector.requestRender(nodeData);

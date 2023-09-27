@@ -1,3 +1,4 @@
+import { ChildProcessWithoutNullStreams } from 'child_process';
 import { Socket } from 'socket.io';
 
 export class BackroadSession {
@@ -25,5 +26,14 @@ export class BackroadSession {
       return;
     }
     this.setValue(key, value);
+  }
+
+  #runnerProcess?: ChildProcessWithoutNullStreams
+
+  setRunnerProcess(process:ChildProcessWithoutNullStreams){
+    if(this.#runnerProcess){
+      this.#runnerProcess.kill()
+    }
+    this.#runnerProcess = process
   }
 }

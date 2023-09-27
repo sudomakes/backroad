@@ -20,6 +20,7 @@ export type ComponentPropsMapping = {
       defaultValue?: _ComponentBasePropsMapping[key]['value'];
     };
     value: _ComponentBasePropsMapping[key]['value'];
+    id: string;
   };
 };
 type ContainerArgsMapping = {
@@ -57,7 +58,7 @@ export interface BackroadComponent<Type extends InbuiltComponentTypes> {
   // : object;
   type: Type;
   path: string;
-  key: string;
+  id: string;
 }
 export interface BackroadContainer<Type extends InbuiltContainerTypes> {
   children: {
@@ -65,7 +66,7 @@ export interface BackroadContainer<Type extends InbuiltContainerTypes> {
     path: string;
     children?: BackroadContainer<Type>['children'];
     args?: any;
-    key?: string;
+    id?: string;
   }[];
   args: Type extends InbuiltContainerTypes
     ? ContainerArgsMapping[Type]['args']
@@ -88,7 +89,7 @@ export type BackroadNode<Type extends InbuiltNodeTypes | unknown = 'unknown'> =
     : {
         path: string;
         type: string;
-        key?: string;
+        id?: string;
       };
 
 export function isBackroadComponent(

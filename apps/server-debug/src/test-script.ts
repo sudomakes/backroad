@@ -8,10 +8,10 @@ console.debug('trying to get value');
   const val = await br.numberInput({
     label: 'Enter Value',
     defaultValue: 5,
-    key: 'numinput',
+    id: 'numinput',
   });
   console.debug('got value', val, 'rendering button');
-  br.button({ label: 'Submit', key: 'submit' });
+  br.button({ label: 'Submit', id: 'submit' });
   console.debug('rendered button, getting double');
   const ans = getDouble(val);
   console.debug('got double', ans, 'writing to backroad');
