@@ -98,6 +98,11 @@ class BackroadNodeManager<ContainerType extends InbuiltContainerTypes> {
       this.constructComponentObject(props, 'markdown')
     );
   }
+  line(props: BackroadComponentFormat<'line_chart'>) {
+    return this.addComponentDescendant(
+      this.constructComponentObject(props, 'line_chart')
+    );
+  }
 }
 export const br = new BackroadNodeManager({
   children: [],

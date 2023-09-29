@@ -1,3 +1,4 @@
+import type { TypedChartComponent } from 'react-chartjs-2/dist/types';
 type _ComponentBasePropsMapping = {
   number_input: {
     args: { label: string };
@@ -13,6 +14,18 @@ type _ComponentBasePropsMapping = {
     };
     value: boolean;
   };
+  line_chart: {
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    args: Parameters<TypedChartComponent<'line'>>[0];
+    value: null;
+  };
+  // chart:{
+  //   args: {
+  //     data: any;
+  //     options: any;
+  //   };
+  //   value: null;
+  // };
 };
 export type ComponentPropsMapping = {
   [key in keyof _ComponentBasePropsMapping]: {
