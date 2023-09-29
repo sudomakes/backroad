@@ -12,5 +12,18 @@ function getDouble(num: number) {
   });
   br.button({ label: 'Submit', id: 'submit' });
   const ans = getDouble(val);
-  br.write({ body: `Function result returned: ${ans}` });
+  br.write({
+    body: `## Function result returned: ${ans}
+### Can make tables too now 😱
+| foo | bar |
+| --- | --- |
+| baz | bim |
+
+### How about rendering some code
+
+~~~python
+print("Hello World")
+~~~
+  `,
+  });
 })();

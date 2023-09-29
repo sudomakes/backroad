@@ -1,11 +1,10 @@
 import type { BackroadNode } from 'backroad-core';
 import { set } from 'lodash';
 import { useEffect, useState } from 'react';
-import { socket } from '../socket';
 import { Footer } from './layout/footer';
 import { Navbar } from './layout/navbar';
-import { TreeRender } from './tree';
 import superjson from 'superjson';
+import { TreeRender, socket } from '@backroad/client-lib';
 // TODO: move all this stuff to a lib
 export function App() {
   const [connected, setConnected] = useState(false);

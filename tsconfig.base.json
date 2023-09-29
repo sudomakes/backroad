@@ -8,9 +8,6 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    // try this for supporting top level awaits
-    // target: "esnext",
-    // module: "esm"
     "target": "es2015",
     "module": "esnext",
     "lib": ["es2020", "dom"],
@@ -18,10 +15,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "backroad-sdk": ["libs/backroad/src/index.ts"],
+      "@backroad/client-lib": ["libs/client-lib/src/index.ts"],
+      "backroad": ["libs/cli/src/index.ts"],
       "backroad-core": ["libs/core/src/index.ts"],
-      "backroad-server": ["libs/server/src/index.ts"],
-      "backroad": ["libs/cli/src/index.ts"]
+      "backroad-sdk": ["libs/backroad/src/index.ts"],
+      "backroad-server": ["libs/server/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

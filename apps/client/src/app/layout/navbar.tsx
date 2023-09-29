@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { socket } from '../../socket';
+import { socket } from '../../../../../libs/client-lib/src/lib/socket';
 
 export const Navbar = (props: { connected: boolean }) => {
   const [running, setRunning] = useState(false);

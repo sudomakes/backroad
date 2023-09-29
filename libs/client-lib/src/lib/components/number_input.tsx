@@ -1,6 +1,6 @@
 import { BackroadComponent } from 'backroad-core';
 import { useState } from 'react';
-import { setValue } from '../../socket';
+import { setValue } from '../socket';
 
 export const NumberInput = (props: BackroadComponent<'number_input', true>) => {
   const [inputValue, setInputValue] = useState(props.value);
