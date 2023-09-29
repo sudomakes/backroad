@@ -7,41 +7,63 @@ function getDouble(num: number) {
 }
 
 (async () => {
-  const val = await br.numberInput({
-    label: 'Enter Value',
-    defaultValue: 5,
-    id: 'numinput',
-  });
-  br.button({ label: 'Submit', id: 'submit' });
-  const ans = getDouble(val);
-  br.write({
-    body: `## Function result returned: ${ans}
-### Can make tables too now 😱
-| foo | bar |
-| --- | --- |
-| baz | bim |
+  //   const val = await br.numberInput({
+  //     label: 'Enter Value',
+  //     defaultValue: 5,
+  //     id: 'numinput',
+  //   });
+  //   br.button({ label: 'Submit', id: 'submit' });
+  //   const ans = getDouble(val);
+  //   br.write({
+  //     body: `## Function result returned: ${ans}
+  // ### Can make tables too now 😱
+  // | foo | bar |
+  // | --- | --- |
+  // | baz | bim |
 
-### How about rendering some code
+  // ### How about rendering some code
 
-~~~python
-print("Hello World")
-~~~
-  `,
-  });
+  // ~~~python
+  // print("Hello World")
+  // ~~~
+  //   `,
+  //   });
 
-  await br.line({
-    data: {
-      labels,
-      datasets: [
-        {
-          label: "Deep's CGPA over time",
-          data: labels.map((_, idx) => 9 - idx),
-        },
-        {
-          label: "Vaibhav's CGPA Over time",
-          data: labels.map(() => 9.5),
-        },
-      ],
-    },
+  const value = await br.select({
+    options: ['Sangeeth', 'Amol', 'Vaibhav'],
+    label: 'Who is the best leetcoder?',
   });
+  if (value) {
+    await br.write({ body: `## You selected ${value}` });
+    if (value === 'Amol') {
+      await br.write({
+        body: `### Makes sense, he has 1000+ problems solved 🚀`,
+      });
+      await br.image({
+        src: 'https://media.tenor.com/-BVQhBulOmAAAAAC/bruce-almighty-morgan-freeman.gif',
+      });
+    } else if (value === 'Sangeeth') {
+      await br.write({
+        body: `### koi SIGKILL bhejdo mereko please!! 😭`,
+      });
+      await br.image({
+        src: 'https://s.keepmeme.com/files/en_posts/20200818/7848c2160135eb558ba3b3429c07a184disappointed-bald-man-standing-disappointed-cricket-fan-meme.jpg',
+      });
+    }
+  }
+  // await br.line({
+  //   data: {
+  //     labels,
+  //     datasets: [
+  //       {
+  //         label: "Deep's CGPA over time",
+  //         data: labels.map((_, idx) => 9 - idx),
+  //       },
+  //       {
+  //         label: "Vaibhav's CGPA Over time",
+  //         data: labels.map(() => 9.5),
+  //       },
+  //     ],
+  //   },
+  // });
 })();

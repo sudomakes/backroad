@@ -103,6 +103,16 @@ class BackroadNodeManager<ContainerType extends InbuiltContainerTypes> {
       this.constructComponentObject(props, 'line_chart')
     );
   }
+  select(props: BackroadComponentFormat<'select'>) {
+    return this.addComponentDescendant(
+      this.constructComponentObject(props, 'select')
+    );
+  }
+  image(props: BackroadComponentFormat<'image'>) {
+    return this.addComponentDescendant(
+      this.constructComponentObject(props, 'image')
+    );
+  }
 }
 export const br = new BackroadNodeManager({
   children: [],

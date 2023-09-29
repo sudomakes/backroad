@@ -19,6 +19,18 @@ type _ComponentBasePropsMapping = {
     args: Parameters<TypedChartComponent<'line'>>[0];
     value: null;
   };
+  select: {
+    args: {
+      options: any[];
+      label?: string;
+      formatOption?: (option: any) => string;
+    };
+    value: any;
+  };
+  image: {
+    args: { src: string };
+    value: null;
+  };
   // chart:{
   //   args: {
   //     data: any;
