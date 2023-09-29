@@ -6,7 +6,7 @@ import {
   InbuiltComponentTypes,
   ServerToClientEvents,
 } from 'backroad-core';
-import { io, Socket } from 'socket.io-client';
+import { Socket, io } from 'socket.io-client';
 import superjson from 'superjson';
 
 const getSessionInformation = () => {
@@ -19,44 +19,32 @@ const getSessionInformation = () => {
     throw new Error('No backroad server connection data found');
   }
 };
+
+let connection: Socket<ServerToClientEvents, ClientToServerEvents> | null =
+  null;
 const getConnection = () => {
-  // if (!socket) {
-  return new Promise<Socket<ServerToClientEvents, ClientToServerEvents>>(
-    (resolve) => {
-      console.log('getting socket', getSessionInformation());
-      const socket = io(
-        `http://localhost:${getSessionInformation().serverPort}`,
+  return new Promise<Omit<typeof connection, null>>((resolve) => {
+    if (connection === null) {
+      connection = io(
+        `http://localhost:${getSessionInformation().serverPort}/${
+          getSessionInformation().sessionId
+        }`,
         {
           path: `/api/socket.io`,
-          // hostname: 'localhost',
-          // host:"",
-          // port: getSessionInformation().serverPort,
         }
       );
-      // socket.connect();
-      // let connected = false;
-      socket.on('connect', () => {
-        // connected = true;
-        resolve(socket);
+      connection.on('connect', () => {
+        resolve(connection);
         console.debug('connected to socket inside backroad package');
       });
-      // socket.on('disconnect', () => {
-      //   console.debug('disconnected from socket inside backroad package');
-      // });
-      // socket.on('connect_error', (err) => {
-      //   console.debug('connection error', err);
-      // });
-      // while (!connected) {
-      // deasync.sleep(100);
-      // }
-      // }
-      // return socket;
+    } else {
+      resolve(connection);
     }
-  );
+  });
 };
 export class sessionConnector {
   static async getValueOf<T extends InbuiltComponentTypes>(
-    props: BackroadComponent<T>
+    props: BackroadComponent<T, false>
   ) {
     const socket = await getConnection();
     return new Promise<ComponentPropsMapping[T]['value']>((resolve) => {
@@ -73,9 +61,14 @@ export class sessionConnector {
     id: string;
     value: ComponentPropsMapping[T]['value'];
   }) {
-    console.debug('setting value if not exists', props);
+    console.debug(
+      'backroad sdk requesting setting value if not exists for id',
+      props.id,
+      'requested value:',
+      props.value
+    );
     const socket = await getConnection();
-    return new Promise<void>((resolve) => {
+    return new Promise<boolean>((resolve) => {
       socket.emit(
         'set_value_if_not_exists',
         {
@@ -84,17 +77,16 @@ export class sessionConnector {
           sessionId: getSessionInformation().sessionId,
         },
         (val) => {
-          console.log('value set successfully for', props.id, val);
-          resolve();
+          console.log(
+            'verdict for setting value if not exists for id:',
+            props.id,
+            'is:',
+            val
+          );
+          resolve(val);
         }
       );
     });
-
-    // while (responseValue === null) {
-    //   // deasync.sleep(100);
-    // }
-    // return new Promise<void>((resolve) => {
-    // });
   }
   static async requestRender(node: BackroadNode) {
     const socket = await getConnection();
@@ -103,7 +95,6 @@ export class sessionConnector {
         'request_render',
         {
           node,
-          sessionId: getSessionInformation().sessionId,
         },
         () => {
           resolve();

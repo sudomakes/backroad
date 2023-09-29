@@ -1,11 +1,11 @@
-import { ContainerPropsMapping, InbuiltContainerTypes } from 'backroad-core';
+import { BackroadContainer, InbuiltContainerTypes } from 'backroad-core';
 import { Base } from './base';
 
 export const backroadClientContainers: {
   [key in InbuiltContainerTypes]: (
-    props: ContainerPropsMapping[key]
+    props: BackroadContainer<key, true>
   ) => JSX.Element;
 } = {
   base: Base,
-  columns: (props: ContainerPropsMapping['columns']) => <div>Columns</div>,
+  columns: (props) => <div>Columns</div>,
 };

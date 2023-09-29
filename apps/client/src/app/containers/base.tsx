@@ -1,7 +1,7 @@
-import { ContainerPropsMapping } from 'backroad-core';
+import { BackroadContainer } from 'backroad-core';
 import { TreeRender } from '../tree';
 
-export const Base = (props: ContainerPropsMapping['base']) => {
+export const Base = (props: BackroadContainer<'base', true>) => {
   return (
     <div className="container mx-auto flex flex-col gap-3 max-w-[600px]">
       {props.children.map((child) => {

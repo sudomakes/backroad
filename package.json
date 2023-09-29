@@ -8,7 +8,9 @@
     "watch": "nx run cli:build --watch",
     "publish": "nx run-many  --targets=publish-package --projects=cli,server,core",
     "cli": "node dist/libs/cli",
-    "dev": "nx run-many --parallel --target=serve --projects=server-debug,client"
+    "dev": "nx run-many --parallel --target=serve --projects=server-debug,client",
+    "server":"nx run server-debug:serve",
+    "client":"nx run client:serve"
   },
   "private": true,
   "devDependencies": {

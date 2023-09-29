@@ -3,6 +3,7 @@ import {
   BackroadComponent,
   BackroadContainer,
   ComponentPropsMapping,
+  GenericBackroadComponent,
   InbuiltComponentTypes,
   InbuiltContainerTypes,
 } from 'backroad-core';
@@ -17,7 +18,7 @@ type BackroadComponentFormat<ComponentType extends InbuiltComponentTypes> = {
  * Manages the addition of nodes to the tree and also returns vaulues where applicable
  */
 class BackroadNodeManager<ContainerType extends InbuiltContainerTypes> {
-  constructor(private container: BackroadContainer<ContainerType>) {}
+  constructor(private container: BackroadContainer<ContainerType, false>) {}
   private constructComponentObject<T extends InbuiltComponentTypes>(
     props: BackroadComponentFormat<T>,
     type: T
@@ -37,15 +38,22 @@ class BackroadNodeManager<ContainerType extends InbuiltContainerTypes> {
   }
 
   async addComponentDescendant<ComponentType extends InbuiltComponentTypes>(
-    nodeData: BackroadComponent<ComponentType>
+    nodeData: BackroadComponent<ComponentType, false>
   ) {
-    console.debug('Adding component', nodeData);
-    this.container.children.push(nodeData);
-    await sessionConnector.setValueIfNotExists({
+    console.debug('Adding component descendent', nodeData);
+    this.container.children.push(nodeData as GenericBackroadComponent);
+    const defaultSetResult = await sessionConnector.setValueIfNotExists({
       id: nodeData.id,
       value: nodeData.args.defaultValue,
     });
-    await sessionConnector.requestRender(nodeData);
+    console.log(
+      'set default value call done for component descendent',
+      nodeData.id,
+      'proceeding to requesting render, (setting was',
+      defaultSetResult ? 'successful' : 'unsuccessful',
+      ')'
+    );
+    await sessionConnector.requestRender(nodeData as GenericBackroadComponent);
     return sessionConnector.getValueOf(nodeData);
   }
   async addContainerDescendant<ContainerType extends InbuiltContainerTypes>(
@@ -53,7 +61,7 @@ class BackroadNodeManager<ContainerType extends InbuiltContainerTypes> {
       BackroadContainer<ContainerType>,
       'path' | 'children'
     > & {
-      children?: BackroadContainer<ContainerType>['children'];
+      children?: BackroadContainer<ContainerType, false>['children'];
     }
   ) {
     const containerNode = {

@@ -1,15 +1,27 @@
-import { sessionManager } from '../sessions/session-manager';
-import { IServerSocketEventHandler } from './base';
 import superjson from 'superjson';
+import { IServerSocketEventHandler } from './base';
 export const setValueIfNotExists: IServerSocketEventHandler<
   'set_value_if_not_exists'
-> = () => (props, callback) => {
-  console.debug('setting value if not exists', props);
-  const session = sessionManager.getSession(props.sessionId);
-  session.setValueIfNotSet(props.id, superjson.parse(props.data));
-  console.log(
-    'checking set value inside set value if not exists',
-    session.valueOf(props.id)
+> = (_, backroadSession) => (props, callback) => {
+  console.debug(
+    'session manager setting value if not exists for id',
+    props.id,
+    'requested value:',
+    props.data
   );
-  callback('done');
+  const operationResult = backroadSession.setValueIfNotSet(
+    props.id,
+    superjson.parse(props.data)
+  );
+  console.log(
+    'verifying value inside set value if not exists for id',
+    props.id,
+    'value is:',
+    backroadSession.valueOf(props.id)
+  );
+  // if () {
+  callback(operationResult);
+  // } else {
+  //   callback('already_set');
+  // }
 };

@@ -42,60 +42,65 @@ export type ContainerPropsMapping = {
 
 export type InbuiltNodeTypes = InbuiltComponentTypes | InbuiltContainerTypes;
 
-// interface BackroadBaseNode<NodeType extends InbuiltNodeTypes> {
-//   path: string;
-//   args: NodeType extends InbuiltComponentTypes
-//     ? ComponentPropsMapping[NodeType]['args']
-//     : NodeType extends InbuiltContainerTypes
-//     ? ContainerArgsMapping[NodeType]['args']
-//     : never;
-//   type: NodeType;
-// }
-
-export interface BackroadComponent<Type extends InbuiltComponentTypes> {
+export type BackroadComponent<
+  Type extends InbuiltComponentTypes,
+  ValuePopulated extends boolean = false
+> = {
   args: //  Type extends InbuiltComponentTypes?
   ComponentPropsMapping[Type]['args'];
-  // : object;
   type: Type;
   path: string;
   id: string;
-}
-export interface BackroadContainer<Type extends InbuiltContainerTypes> {
-  children: {
-    type: InbuiltNodeTypes;
-    path: string;
-    children?: BackroadContainer<Type>['children'];
-    args?: any;
-    id?: string;
-  }[];
+} & (ValuePopulated extends true
+  ? {
+      value: ComponentPropsMapping[Type]['value'];
+    }
+  : // eslint-disable-next-line @typescript-eslint/ban-types
+    {});
+export interface BackroadContainer<
+  Type extends InbuiltContainerTypes,
+  ChildrenValuePopulated extends boolean = false
+> {
+  children: BackroadNode<false, ChildrenValuePopulated>[];
   args: Type extends InbuiltContainerTypes
     ? ContainerArgsMapping[Type]['args']
     : object;
   type: Type;
   path: string;
 }
-// export type BackroadNode<Type extends InbuiltNodeTypes | unknown = 'unknown'> =
-//   Type extends InbuiltComponentTypes
-//     ? BackroadComponent<Type>
-//     : Type extends InbuiltContainerTypes
-//     ? BackroadContainer<Type>
-//     : object;
 
-export type BackroadNode<Type extends InbuiltNodeTypes | unknown = 'unknown'> =
-  Type extends InbuiltComponentTypes
-    ? BackroadComponent<Type>
-    : Type extends InbuiltContainerTypes
-    ? BackroadContainer<Type>
-    : {
-        path: string;
-        type: string;
-        id?: string;
-      };
+export type GenericBackroadComponent<ValuePopulated extends boolean = false> =
+  BackroadComponent<InbuiltComponentTypes, ValuePopulated>;
+// &
+//   (ValuePopulated extends true
+//     ? { value: unknown }
+//     : // eslint-disable-next-line @typescript-eslint/ban-types
+//       {});
+export type GenericBackroadContainer<
+  ChildrenValuePopulated extends boolean = false
+> = BackroadContainer<InbuiltContainerTypes, ChildrenValuePopulated>;
+export type BackroadNode<
+  ValuePopulated extends boolean = false,
+  ChildrenValuePopulated extends boolean = false
+> =
+  | GenericBackroadComponent<ValuePopulated>
+  | GenericBackroadContainer<ChildrenValuePopulated>;
+// Type extends InbuiltComponentTypes
+//   ? BackroadComponent<Type>
+//   : Type extends InbuiltContainerTypes
+//   ? BackroadContainer<Type>
+//   : {
+//       path: string;
+//       type: string;
+//       id?: string;
+//     };
 
-export function isBackroadComponent(
-  element: BackroadNode
-): element is BackroadComponent<InbuiltComponentTypes> & {
-  value: ComponentPropsMapping[InbuiltComponentTypes]['value'];
-} {
-  return !('children' in element);
+export function isBackroadComponent<ValuePopulated extends boolean>(
+  element: BackroadNode,
+  valuePopulated: ValuePopulated
+): element is GenericBackroadComponent<ValuePopulated> {
+  return (
+    !('children' in element) &&
+    (valuePopulated ? 'value' in element : !('value' in element))
+  );
 }

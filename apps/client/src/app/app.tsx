@@ -1,19 +1,15 @@
-import { socket } from '../socket';
-import { useEffect, useState } from 'react';
-import type {
-  BackroadContainer,
-  BackroadNode,
-  InbuiltContainerTypes,
-} from 'backroad-core';
-import { TreeRender } from './tree';
-import { Navbar } from './layout/navbar';
-import { Footer } from './layout/footer';
+import type { BackroadNode } from 'backroad-core';
 import { set } from 'lodash';
+import { useEffect, useState } from 'react';
+import { socket } from '../socket';
+import { Footer } from './layout/footer';
+import { Navbar } from './layout/navbar';
+import { TreeRender } from './tree';
+import superjson from 'superjson';
+// TODO: move all this stuff to a lib
 export function App() {
   const [connected, setConnected] = useState(false);
-  const [treeStruct, setTreeStruct] = useState<
-    BackroadContainer<InbuiltContainerTypes>
-  >({
+  const [treeStruct, setTreeStruct] = useState<BackroadNode<true>>({
     type: 'base',
     path: '',
     args: {},
@@ -31,9 +27,10 @@ export function App() {
   });
 
   useEffect(() => {
-    const onRender = (node: BackroadNode, callback: () => void) => {
-      console.log('received render order for', node);
+    const onRender = (nodeData: string, callback: () => void) => {
+      console.log('received render order for', nodeData);
       setTreeStruct((oldTreeStruct) => {
+        const node = superjson.parse(nodeData) as BackroadNode<true, true>;
         const newTree = set(oldTreeStruct, node.path, node);
         console.log('new tree value', newTree);
         return { ...newTree }; // need to update the object ref by destructuring to trigger a rerender
@@ -51,9 +48,6 @@ export function App() {
     <div className="flex flex-col min-h-screen">
       <Navbar connected={connected} />
       <div className="flex-1">
-        {/* {JSON.stringify(treeStruct)} */}
-        {/*eslint-disable-next-line @typescript-eslint/ban-ts-comment*/}
-        {/* @ts-ignore  */}
         <TreeRender tree={treeStruct} />
       </div>
       <Footer />

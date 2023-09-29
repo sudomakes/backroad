@@ -1,10 +1,10 @@
-import { ComponentPropsMapping } from 'backroad-core';
+import { BackroadComponent } from 'backroad-core';
 import { useState } from 'react';
-import { setAndReRun } from '../../socket';
+import { setValue } from '../../socket';
 
-export const NumberInput = (props: ComponentPropsMapping['number_input']) => {
-  const [value, setValue] = useState(props.value);
-  console.log('num input value', value);
+export const NumberInput = (props: BackroadComponent<'number_input', true>) => {
+  const [inputValue, setInputValue] = useState(props.value);
+  console.log('num input value', inputValue);
   return (
     <div className="form-control w-full max-w-xs">
       <label className="label">
@@ -12,12 +12,15 @@ export const NumberInput = (props: ComponentPropsMapping['number_input']) => {
       </label>
       <input
         type="number"
-        value={value}
-        onChange={(e) => setValue(parseInt(e.target.value))}
+        value={inputValue}
+        onChange={(e) => setInputValue(parseInt(e.target.value))}
         placeholder="Type here"
         onBlur={(e) => {
           console.log('blur setting value');
-          setAndReRun({ id: props.id, value: 10 });
+          setValue({
+            id: props.id,
+            value: parseInt(e.target.value),
+          });
         }}
         className="input input-bordered w-full max-w-xs [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
       />

@@ -1,21 +1,30 @@
-import { sessionManager } from '../sessions/session-manager';
+import { InbuiltComponentTypes, isBackroadComponent } from 'backroad-core';
 import { IServerSocketEventHandler } from './base';
-
+import superjson from 'superjson';
 export const requestRender: IServerSocketEventHandler<'request_render'> =
-  (socket) => (props, callback) => {
-    console.log('sending render request to client', props);
+  (socket, backroadSession) => (props, callback) => {
+    // console.log(
+    //   'sending render request to client',
+    //   props,
+    //   'current value',
+    //   backroadSession.valueOf(props.node.id)
+    // );
     // frontend client will be part of the room with id same as its own session id
-    const toPush = {
-      ...props.node,
-      ...('type' in props.node && props.node.id
-        ? {
-            value: sessionManager
-              .getSession(props.sessionId)
-              .valueOf(props.node.id),
-          }
-        : {}),
-    };
-    socket.to(props.sessionId).emit('render', toPush, () => {
-      callback();
-    });
+    if (isBackroadComponent(props.node, false)) {
+      socket.broadcast.emit(
+        'render',
+        superjson.stringify({
+          ...props.node,
+          value: backroadSession.valueOf<InbuiltComponentTypes>(props.node.id),
+        }),
+        () => {
+          callback();
+        }
+      );
+    } else {
+      socket.broadcast.emit('render', superjson.stringify(props.node), () => {
+        callback();
+      });
+    }
+    // notify everyone (only client listens to this)
   };

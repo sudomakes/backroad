@@ -1,11 +1,11 @@
+import { BackroadComponent, InbuiltComponentTypes } from 'backroad-core';
 import { Button } from './button';
 import { Markdown } from './markdown';
 import { NumberInput } from './number_input';
-import { ComponentPropsMapping, InbuiltComponentTypes } from 'backroad-core';
 
 export const backroadClientComponents: {
   [key in InbuiltComponentTypes]: (
-    props: ComponentPropsMapping[key]
+    props: BackroadComponent<key, true>
   ) => JSX.Element;
 } = {
   number_input: NumberInput,

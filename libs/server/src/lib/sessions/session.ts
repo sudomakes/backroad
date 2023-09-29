@@ -1,5 +1,5 @@
+import { ComponentPropsMapping, InbuiltComponentTypes } from 'backroad-core';
 import { ChildProcessWithoutNullStreams } from 'child_process';
-import { Socket } from 'socket.io';
 import { getBackroadScriptRunner } from '../runner';
 
 export class BackroadSession {
@@ -7,12 +7,15 @@ export class BackroadSession {
   sessionId: string;
   state: { [key: string]: unknown } = {};
 
-  constructor(socket: Socket) {
-    this.sessionId = socket.id;
+  constructor(sessionId: string) {
+    this.sessionId = sessionId;
   }
 
-  valueOf(id: string) {
-    return this.state[id];
+  valueOf<ComponentType extends InbuiltComponentTypes>(id: string) {
+    if (id in this.state) {
+      return this.state[id] as ComponentPropsMapping[ComponentType]['value'];
+    }
+    return undefined;
   }
 
   setValue(id: string, value: unknown) {
@@ -21,9 +24,10 @@ export class BackroadSession {
 
   setValueIfNotSet(id: string, value: unknown) {
     if (id in this.state) {
-      return;
+      return false;
     }
     this.setValue(id, value);
+    return true;
   }
 
   setRunnerProcess(props: { scriptPath: string; serverPort: number }) {

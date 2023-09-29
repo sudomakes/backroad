@@ -1,11 +1,6 @@
-import { sessionManager } from '../sessions/session-manager';
-import { IServerSocketEventHandler } from './base';
 import superjson from 'superjson';
+import { IServerSocketEventHandler } from './base';
 export const getValue: IServerSocketEventHandler<'get_value'> =
-  () => (props, callback) => {
-    callback(
-      superjson.stringify(
-        sessionManager.getSession(props.sessionId)?.valueOf(props.id)
-      )
-    );
+  (_, session) => (props, callback) => {
+    callback(superjson.stringify(session.valueOf(props.id)));
   };

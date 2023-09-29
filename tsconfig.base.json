@@ -8,6 +8,9 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
+    // try this for supporting top level awaits
+    // target: "esnext",
+    // module: "esm"
     "target": "es2015",
     "module": "esnext",
     "lib": ["es2020", "dom"],

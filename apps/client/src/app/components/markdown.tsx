@@ -1,5 +1,5 @@
-import { ComponentPropsMapping } from 'backroad-core';
+import { BackroadComponentRenderer } from '../types/components';
 
-export const Markdown = (props: ComponentPropsMapping['markdown']) => {
+export const Markdown: BackroadComponentRenderer<'markdown'> = (props) => {
   return <div>{props.args.body}</div>;
 };

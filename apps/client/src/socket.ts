@@ -1,12 +1,33 @@
 import { ClientToServerEvents, ServerToClientEvents } from 'backroad-core';
 import { Socket, io } from 'socket.io-client';
-export const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io({
-  path: '/api/socket.io',
-});
+import superjson from 'superjson';
+const tabID = sessionStorage.tabID
+  ? sessionStorage.tabID
+  : (sessionStorage.tabID = `${crypto.randomUUID()}`);
+
+console.log('tab id', tabID);
+export const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
+  `/${tabID}`,
+  {
+    path: '/api/socket.io',
+  }
+);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const setAndReRun = (props: { id: string; value: any }) => {
-  socket.emit('set_value_and_re_run', props, () => {
-    console.log('set and rerun callback');
-  });
+export const setValue = (props: {
+  id: string;
+  value: unknown;
+  triggerRerun?: boolean;
+}) => {
+  socket.emit(
+    'set_value',
+    {
+      id: props.id,
+      value: superjson.stringify(props.value),
+      triggerRerun: props.triggerRerun,
+    },
+    () => {
+      console.log('set and rerun callback');
+    }
+  );
 };
