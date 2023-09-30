@@ -5,6 +5,7 @@ import { NumberInput } from './number_input';
 import { LineChart } from './line';
 import { Select } from './Select';
 import { Image } from './image';
+import { Link } from './link';
 export const backroadClientComponents: {
   [key in InbuiltComponentTypes]: (
     props: BackroadComponent<key, true>
@@ -16,4 +17,5 @@ export const backroadClientComponents: {
   line_chart: LineChart,
   select: Select,
   image: Image,
+  link: Link,
 };

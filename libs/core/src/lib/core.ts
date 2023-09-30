@@ -1,4 +1,5 @@
 import type { TypedChartComponent } from 'react-chartjs-2/dist/types';
+import type { LinkProps } from 'react-router-dom';
 type _ComponentBasePropsMapping = {
   number_input: {
     args: { label: string };
@@ -31,6 +32,10 @@ type _ComponentBasePropsMapping = {
     args: { src: string };
     value: null;
   };
+  link: {
+    args: Omit<LinkProps, 'children'> & { label: string };
+    value: null;
+  };
   // chart:{
   //   args: {
   //     data: any;
@@ -59,6 +64,9 @@ type ContainerArgsMapping = {
   menu: {
     // eslint-disable-next-line @typescript-eslint/ban-types
     args: {};
+  };
+  page: {
+    args: { path: string };
   };
 };
 export type InbuiltComponentTypes = keyof ComponentPropsMapping;

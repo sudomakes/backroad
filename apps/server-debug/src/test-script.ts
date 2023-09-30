@@ -30,10 +30,15 @@ function getDouble(num: number) {
   //   });
 
   const menu = await br.menu({});
+  await br.write({ body: '# This is the main container' });
   menu.write({ body: '## Darkmode works!! 🍰' });
   const value = await menu.select({
     options: ['Sangeeth', 'Amol', 'Vaibhav'],
     label: 'Who is the best leetcoder?',
+  });
+  menu.link({
+    label: 'I am feeling lucky 👀',
+    to: '/hidden',
   });
   if (value) {
     await br.write({ body: `## You selected ${value}` });
@@ -53,6 +58,13 @@ function getDouble(num: number) {
       });
     }
   }
+
+  const hiddenPage = await br.page({ path: '/hidden' });
+  hiddenPage.write({
+    body: `## This page is hidden from everyone 🤫
+  Feel free to [go back](/) though.
+  `,
+  });
   // await br.write({
   //   body: `---`,
   // });

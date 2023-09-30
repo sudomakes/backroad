@@ -3,10 +3,6 @@ import { TreeRender } from '../tree';
 import { BackroadContainerRenderer } from '../types/containers';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-const variants = {
-  open: { opacity: 1, x: 0 },
-  closed: { opacity: 0, x: '-100%' },
-};
 
 export const Menu: BackroadContainerRenderer<'menu'> = (props) => {
   const [open, setOpen] = useState(true);
