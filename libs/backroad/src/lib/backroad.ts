@@ -133,6 +133,16 @@ class BackroadNodeManager<ContainerType extends InbuiltContainerTypes> {
       this.constructContainerObject(props, 'menu')
     );
   }
+  link(props: BackroadComponentFormat<'link'>) {
+    return this.addComponentDescendant(
+      this.constructComponentObject(props, 'link')
+    );
+  }
+  page(props: BackroadContainerFormat<'page'>) {
+    return this.addContainerDescendant(
+      this.constructContainerObject(props, 'page')
+    );
+  }
 }
 export const br = new BackroadNodeManager({
   children: [],
