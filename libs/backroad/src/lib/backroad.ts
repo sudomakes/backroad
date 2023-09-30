@@ -19,7 +19,10 @@ type BackroadContainerFormat<ContainerType extends InbuiltContainerTypes> =
 /**
  * Manages the addition of nodes to the tree and also returns vaulues where applicable
  */
-class BackroadNodeManager<ContainerType extends InbuiltContainerTypes> {
+
+export class BackroadNodeManager<
+  ContainerType extends InbuiltContainerTypes = 'page'
+> {
   constructor(private container: BackroadContainer<ContainerType, false>) {}
   private constructComponentObject<T extends InbuiltComponentTypes>(
     props: BackroadComponentFormat<T>,
@@ -139,14 +142,30 @@ class BackroadNodeManager<ContainerType extends InbuiltContainerTypes> {
     );
   }
   page(props: BackroadContainerFormat<'page'>) {
-    return this.addContainerDescendant(
+    return rootNodeManager.addContainerDescendant(
       this.constructContainerObject(props, 'page')
     );
+    // return this.addContainerDescendant(
+    //   this.constructContainerObject(props, 'page')
+    // );
   }
 }
-export const br = new BackroadNodeManager({
+
+const mainPageContainer: BackroadContainer<'page', false> = {
+  type: 'page',
+  args: {
+    path: '/',
+  },
   children: [],
+  path: 'children.0',
+};
+const rootNodeManager = new BackroadNodeManager({
+  children: [mainPageContainer],
   path: '',
   type: 'base',
   args: {},
 });
+
+// const mainPageManager = rootNodeManager.addContainerDescendant();
+
+export const br = new BackroadNodeManager(mainPageContainer);

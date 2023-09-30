@@ -1,10 +1,6 @@
 import br from 'backroad-sdk';
-
-const labels = ['2020', '2021', '2022', '2023'];
-
-function getDouble(num: number) {
-  return num * 2;
-}
+import { backroadChartsExample } from './pages/charts';
+import { backroadSelectExample } from './pages/select';
 
 (async () => {
   //   const val = await br.numberInput({
@@ -30,57 +26,27 @@ function getDouble(num: number) {
   //   });
 
   const menu = await br.menu({});
-  await br.write({ body: '# This is the main container' });
-  menu.write({ body: '## Darkmode works!! 🍰' });
-  const value = await menu.select({
-    options: ['Sangeeth', 'Amol', 'Vaibhav'],
-    label: 'Who is the best leetcoder?',
+  await br.write({ body: '# Backroad - If JS could HTML' });
+  await br.image({ src: 'https://cdn.wallpapersafari.com/35/30/rmUW4V.png' });
+  menu.write({
+    body: `[Inline Page Example](/inline)
+---
+[Charts Example](/charts)
+---
+[Select Example](/select)`,
   });
-  menu.link({
-    label: 'I am feeling lucky 👀',
-    to: '/hidden',
-  });
-  if (value) {
-    await br.write({ body: `## You selected ${value}` });
-    if (value === 'Amol') {
-      await br.write({
-        body: `### Makes sense, he has 1000+ problems solved 🚀`,
-      });
-      await br.image({
-        src: 'https://media.tenor.com/-BVQhBulOmAAAAAC/bruce-almighty-morgan-freeman.gif',
-      });
-    } else if (value === 'Sangeeth') {
-      await br.write({
-        body: `### koi SIGKILL bhejdo mereko please!! 😭`,
-      });
-      await br.image({
-        src: 'https://s.keepmeme.com/files/en_posts/20200818/7848c2160135eb558ba3b3429c07a184disappointed-bald-man-standing-disappointed-cricket-fan-meme.jpg',
-      });
-    }
-  }
 
-  const hiddenPage = await br.page({ path: '/hidden' });
-  hiddenPage.write({
-    body: `## This page is hidden from everyone 🤫
-  Feel free to [go back](/) though.
+  // you can describe pages inline
+  const inlinePage = await br.page({ path: '/inline' });
+  inlinePage.write({
+    body: `## This page is defined inline 😇
+  Feel free to [go back home](/) though.
   `,
   });
-  // await br.write({
-  //   body: `---`,
-  // });
-  // await br.line({
-  //   data: {
-  //     labels,
-  //     datasets: [
-  //       {
-  //         label: "Deep's CGPA over time",
-  //         data: labels.map((_, idx) => 9 - idx),
-  //       },
-  //       {
-  //         label: "Vaibhav's CGPA Over time",
-  //         data: labels.map(() => 9.5),
-  //       },
-  //     ],
-  //   },
-  // });
+  const hiddenPageSideBar = await inlinePage.menu({});
+  hiddenPageSideBar.write({ body: '### This is the hidden page sidebar' });
+
+  // rendering examples on separate pages (defined in pages folder instead of inline)
+  await backroadChartsExample(await br.page({ path: '/charts' }));
+  await backroadSelectExample(await br.page({ path: '/select' }));
 })();
