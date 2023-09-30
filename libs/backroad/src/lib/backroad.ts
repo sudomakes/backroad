@@ -3,6 +3,7 @@ import {
   BackroadComponent,
   BackroadContainer,
   ComponentPropsMapping,
+  ContainerPropsMapping,
   GenericBackroadComponent,
   InbuiltComponentTypes,
   InbuiltContainerTypes,
@@ -10,10 +11,11 @@ import {
 import { sessionConnector } from './session_connector';
 import { omit } from 'lodash';
 type BackroadComponentFormat<ComponentType extends InbuiltComponentTypes> = {
-  id?: string;
-  // type: ComponentType;
-} & BackroadComponent<ComponentType>['args'];
+  id?: BackroadComponent<ComponentType, false>['id'];
+} & BackroadComponent<ComponentType, false>['args'];
 
+type BackroadContainerFormat<ContainerType extends InbuiltContainerTypes> =
+  BackroadContainer<ContainerType, false>['args'];
 /**
  * Manages the addition of nodes to the tree and also returns vaulues where applicable
  */
@@ -35,6 +37,19 @@ class BackroadNodeManager<ContainerType extends InbuiltContainerTypes> {
     };
 
     return componentNode;
+  }
+  private constructContainerObject<T extends InbuiltContainerTypes>(
+    props: BackroadContainerFormat<T>,
+    type: T
+  ) {
+    const nodePath = this.getDescendantKey();
+    const containerNode = {
+      path: nodePath,
+      args: props as unknown as ContainerPropsMapping[T]['args'],
+      type: type,
+    };
+
+    return containerNode;
   }
 
   async addComponentDescendant<ComponentType extends InbuiltComponentTypes>(
@@ -111,6 +126,11 @@ class BackroadNodeManager<ContainerType extends InbuiltContainerTypes> {
   image(props: BackroadComponentFormat<'image'>) {
     return this.addComponentDescendant(
       this.constructComponentObject(props, 'image')
+    );
+  }
+  menu(props: BackroadContainerFormat<'menu'>) {
+    return this.addContainerDescendant(
+      this.constructContainerObject(props, 'menu')
     );
   }
 }

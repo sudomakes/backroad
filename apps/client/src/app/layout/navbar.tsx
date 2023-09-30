@@ -1,5 +1,5 @@
+import { socket } from '@backroad/client-lib';
 import { useEffect, useState } from 'react';
-import { socket } from '../../../../../libs/client-lib/src/lib/socket';
 
 export const Navbar = (props: { connected: boolean }) => {
   const [running, setRunning] = useState(false);
@@ -14,45 +14,7 @@ export const Navbar = (props: { connected: boolean }) => {
   });
   return (
     <div className="navbar bg-base-100 mb-5">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <label tabIndex={0} className="btn btn-ghost btn-circle">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h7"
-              />
-            </svg>
-          </label>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            {/* <li>
-              <a>Homepage</a>
-            </li>
-            <li>
-              <a>Portfolio</a>
-            </li>
-            <li>
-              <a>About</a>
-            </li> */}
-          </ul>
-        </div>
-      </div>
-      <div className="navbar-center">
-        <a className="btn btn-ghost normal-case text-xl" href="/">
-          Backroad
-        </a>
-      </div>
+      <div className="navbar-start"></div>
       <div className="navbar-end gap-4">
         <div className="flex gap-2 mr-3">
           {running && (
@@ -62,14 +24,6 @@ export const Navbar = (props: { connected: boolean }) => {
             </>
           )}
         </div>
-        {/* <button
-          className="btn btn-outline"
-          onClick={() => {
-            console.log('requesting run');
-            socket.emit('run_script');
-          }}
-        >
-        </button> */}
         <button className="btn btn-outline">
           <div>{props.connected ? 'Connected' : 'Disconnected'}</div>
           <div className="badge badge-primary badge-xs"></div>

@@ -1,10 +1,10 @@
+import { TreeRender, socket } from '@backroad/client-lib';
 import type { BackroadNode } from 'backroad-core';
 import { set } from 'lodash';
 import { useEffect, useState } from 'react';
+import superjson from 'superjson';
 import { Footer } from './layout/footer';
 import { Navbar } from './layout/navbar';
-import superjson from 'superjson';
-import { TreeRender, socket } from '@backroad/client-lib';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 // TODO: move all this stuff to a lib
 export function App() {
@@ -38,26 +38,19 @@ export function App() {
       callback();
     };
     socket.on('render', onRender);
-
     return () => {
       socket.off('render', onRender);
     };
   });
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar connected={connected} />
+    <div className="flex min-h-screen">
+      <div id="menu-portal"></div>
       <div className="flex-1">
+        <Navbar connected={connected} />
         <TreeRender tree={treeStruct} />
+        <Footer />
       </div>
-      {/* <LineChart
-        args={{ defaultValue: undefined }}
-        path=""
-        id=""
-        type="line_chart"
-        value={null}
-      /> */}
-      <Footer />
     </div>
   );
 }

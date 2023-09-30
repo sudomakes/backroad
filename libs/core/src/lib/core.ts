@@ -56,6 +56,10 @@ type ContainerArgsMapping = {
   columns: {
     args: { columnCount: number };
   };
+  menu: {
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    args: {};
+  };
 };
 export type InbuiltComponentTypes = keyof ComponentPropsMapping;
 export type InbuiltContainerTypes = keyof ContainerArgsMapping;

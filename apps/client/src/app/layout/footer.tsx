@@ -1,7 +1,8 @@
-export const Footer = ()=>{
-        return <footer className="footer footer-center p-4 bg-base-300 text-base-content">
-    <aside>
-        <p>Made with <span role="img" aria-label="heart">❤️</span> by <a target="_blank" className="link" rel="noreferrer" href="https://sudomakes.art">sudomakes</a></p>
-    </aside>
-</footer>
-}
+import logo from './BR.svg';
+export const Footer = () => {
+  return (
+    <footer className="fixed bottom-0 right-0 p-5 bg-gradient-to-br from-[#06A261] to-[#047863] rounded-tl-xl">
+      <img src={logo} alt="backroad logo" width={30} />
+    </footer>
+  );
+};

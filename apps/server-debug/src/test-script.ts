@@ -29,7 +29,9 @@ function getDouble(num: number) {
   //   `,
   //   });
 
-  const value = await br.select({
+  const menu = await br.menu({});
+  menu.write({ body: '## Darkmode works!! 🍰' });
+  const value = await menu.select({
     options: ['Sangeeth', 'Amol', 'Vaibhav'],
     label: 'Who is the best leetcoder?',
   });
@@ -51,6 +53,9 @@ function getDouble(num: number) {
       });
     }
   }
+  // await br.write({
+  //   body: `---`,
+  // });
   // await br.line({
   //   data: {
   //     labels,
