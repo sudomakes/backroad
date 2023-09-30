@@ -1,6 +1,6 @@
 import { BackroadComponent } from 'backroad-core';
 import { useState } from 'react';
-import { setValue } from '../socket';
+import { setBackroadValue } from '../socket';
 
 export const NumberInput = (props: BackroadComponent<'number_input', true>) => {
   const [inputValue, setInputValue] = useState(props.value);
@@ -17,7 +17,7 @@ export const NumberInput = (props: BackroadComponent<'number_input', true>) => {
         placeholder="Type here"
         onBlur={(e) => {
           console.log('blur setting value');
-          setValue({
+          setBackroadValue({
             id: props.id,
             value: parseInt(e.target.value),
           });

@@ -14,7 +14,7 @@ export const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
 );
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const setValue = (props: {
+export const setBackroadValue = (props: {
   id: string;
   value: unknown;
   triggerRerun?: boolean;

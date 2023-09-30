@@ -45,7 +45,7 @@ export function App() {
 
   return (
     <div className="flex min-h-screen">
-      <div id="menu-portal"></div>
+      <div id="menu-portal" className="relative"></div>
       <div className="flex-1">
         <Navbar connected={connected} />
         <TreeRender tree={treeStruct} />

@@ -1,7 +1,12 @@
-import { setValue } from '../socket';
+// import { useState } from 'react';
+import { setBackroadValue } from '../socket';
 import { BackroadComponentRenderer } from '../types/components';
 
 export const Select: BackroadComponentRenderer<'select'> = (props) => {
+  // const [value, setValue] = useState(props.value);
+  // const formatter =props.args.formatOption
+  // ? props.args.formatOption
+  // : (v:any)=>v.toString()
   return (
     <div className="form-control w-full max-w-xs">
       <label className="label">
@@ -10,8 +15,10 @@ export const Select: BackroadComponentRenderer<'select'> = (props) => {
       <select
         className="select select-bordered"
         onChange={(e) => {
-          setValue({ id: props.id, value: e.target.value });
+          // setValue(e.target.value);
+          setBackroadValue({ id: props.id, value: e.target.value });
         }}
+        // value={ value}
       >
         <option disabled selected>
           Pick one
