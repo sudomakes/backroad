@@ -1,7 +1,7 @@
 import { InbuiltContainerTypes } from 'backroad-core';
 import { BackroadContainerRenderer } from '../types/containers';
 import { Base } from './base';
-import { Menu } from './menu';
+import { Sidebar } from './sidebar';
 import { _Page } from './page';
 
 export const backroadClientContainers: {
@@ -9,6 +9,6 @@ export const backroadClientContainers: {
 } = {
   base: Base,
   columns: (props) => <div>Columns</div>,
-  menu: Menu,
+  sidebar: Sidebar,
   page: _Page,
 };

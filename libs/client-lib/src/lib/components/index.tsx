@@ -6,6 +6,7 @@ import { LineChart } from './line';
 import { Select } from './Select';
 import { Image } from './image';
 import { Link } from './link';
+import { LinkGroup } from './link_group';
 export const backroadClientComponents: {
   [key in InbuiltComponentTypes]: (
     props: BackroadComponent<key, true>
@@ -18,4 +19,5 @@ export const backroadClientComponents: {
   select: Select,
   image: Image,
   link: Link,
+  link_group: LinkGroup,
 };

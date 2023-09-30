@@ -131,9 +131,9 @@ export class BackroadNodeManager<
       this.constructComponentObject(props, 'image')
     );
   }
-  menu(props: BackroadContainerFormat<'menu'>) {
+  sidebar(props: BackroadContainerFormat<'sidebar'>) {
     return this.addContainerDescendant(
-      this.constructContainerObject(props, 'menu')
+      this.constructContainerObject(props, 'sidebar')
     );
   }
   link(props: BackroadComponentFormat<'link'>) {
@@ -148,6 +148,11 @@ export class BackroadNodeManager<
     // return this.addContainerDescendant(
     //   this.constructContainerObject(props, 'page')
     // );
+  }
+  linkGroup(props: BackroadComponentFormat<'link_group'>) {
+    return this.addComponentDescendant(
+      this.constructComponentObject(props, 'link_group')
+    );
   }
 }
 

@@ -1,8 +1,8 @@
 import { BackroadNodeManager } from 'backroad-sdk';
 
 export const backroadSelectExample = async (br: BackroadNodeManager) => {
-  const menu = await br.menu({});
-  const value = await menu.select({
+  const sidebar = await br.sidebar({});
+  const value = await sidebar.select({
     options: ['Sangeeth', 'Amol', 'Vaibhav'],
     label: 'Who is the best leetcoder?',
   });

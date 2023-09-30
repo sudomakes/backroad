@@ -33,7 +33,17 @@ type _ComponentBasePropsMapping = {
     value: null;
   };
   link: {
-    args: Omit<LinkProps, 'children'> & { label: string };
+    args: { label: string; href: string; target?: string };
+    value: null;
+  };
+  link_group: {
+    args: {
+      items: {
+        label?: string;
+        href: string;
+        target?: string;
+      }[];
+    };
     value: null;
   };
   // chart:{
@@ -61,7 +71,7 @@ type ContainerArgsMapping = {
   columns: {
     args: { columnCount: number };
   };
-  menu: {
+  sidebar: {
     // eslint-disable-next-line @typescript-eslint/ban-types
     args: {};
   };

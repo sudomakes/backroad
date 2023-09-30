@@ -4,7 +4,7 @@ import { BackroadContainerRenderer } from '../types/containers';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
-export const Menu: BackroadContainerRenderer<'menu'> = (props) => {
+export const Sidebar: BackroadContainerRenderer<'sidebar'> = (props) => {
   const [open, setOpen] = useState(true);
 
   return createPortal(
@@ -73,6 +73,6 @@ export const Menu: BackroadContainerRenderer<'menu'> = (props) => {
         )}
       </AnimatePresence>
     </>,
-    document.getElementById('menu-portal') as HTMLElement
+    document.getElementById('sidebar-portal') as HTMLElement
   );
 };
