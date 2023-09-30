@@ -14,7 +14,7 @@ export const getBackroadScriptRunner = (props: {
     {
       shell: true,
       cwd: path.dirname(props.scriptPath),
-      env: props.envVariables,
+      env: { ...process.env, ...props.envVariables },
     }
   );
 
