@@ -1,7 +1,7 @@
 {
-  "name": "client-lib",
+  "name": "backroad-client",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/client-lib/src",
+  "sourceRoot": "libs/backroad-client/src",
   "projectType": "library",
   "tags": [],
   "targets": {
@@ -9,7 +9,7 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/client-lib/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["libs/backroad-client/**/*.{ts,tsx,js,jsx}"]
       }
     }
   }
