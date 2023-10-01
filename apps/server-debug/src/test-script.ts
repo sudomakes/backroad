@@ -1,4 +1,4 @@
-import br from 'backroad-sdk';
+import br from 'backroad';
 import { backroadChartsExample } from './pages/charts';
 import { backroadSelectExample } from './pages/select';
 import { backroadMarkdownExample } from './pages/markdown';

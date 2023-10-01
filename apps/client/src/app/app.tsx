@@ -1,4 +1,4 @@
-import { TreeRender, socket } from '@backroad/client-lib';
+import { TreeRender, socket } from 'backroad-client';
 import type { BackroadContainer, BackroadNode } from 'backroad-core';
 import { set } from 'lodash';
 import { useEffect, useState } from 'react';
@@ -62,6 +62,7 @@ export function App() {
             return (
               <Route
                 path={castedPageContainer.args.path}
+                key={castedPageContainer.args.path}
                 element={
                   <TreeRender
                     tree={{ ...castedPageContainer, type: 'base', args: {} }}

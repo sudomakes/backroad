@@ -1,4 +1,4 @@
-import { socket } from '@backroad/client-lib';
+import { socket } from 'backroad-client';
 import { useEffect, useState } from 'react';
 
 export const Navbar = (props: { connected: boolean }) => {

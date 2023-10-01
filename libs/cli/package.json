@@ -1,8 +1,0 @@
-{
-  "name": "backroad",
-  "version": "0.0.3",
-  "bin": "src/index.js",
-  "scripts": {
-    "publish-package": "npm publish"
-  }
-}

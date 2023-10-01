@@ -1,4 +1,4 @@
-import { BackroadNodeManager } from 'backroad-sdk';
+import { BackroadNodeManager } from 'backroad';
 
 export const backroadSelectExample = async (br: BackroadNodeManager) => {
   const sidebar = await br.sidebar({});

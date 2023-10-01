@@ -15,12 +15,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@backroad/client-lib": ["libs/client-lib/src/index.ts"],
-      "backroad": ["libs/cli/src/index.ts"],
-      "backroad-core": ["libs/core/src/index.ts"],
-      "backroad-sdk": ["libs/backroad/src/index.ts"],
-      "backroad-server": ["libs/server/src/index.ts"]
-    }
+      "backroad": ["libs/backroad/src/index.ts"],
+      "backroad-client": ["libs/backroad-client/src/index.ts"],
+      "backroad-core": ["libs/backroad-core/src/index.ts"],
+    }, 
+    // "rootDirs": [".","libs"]
   },
   "exclude": ["node_modules", "tmp"]
 }
