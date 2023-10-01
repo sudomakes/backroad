@@ -9,8 +9,8 @@ export const getBackroadScriptRunner = (props: {
   };
 }) => {
   const scriptProcess = childProcess.spawn(
-    `npx`,
-    [` -y tsx ${props.scriptPath}`],
+    'npx',
+    ['-y', 'tsx', props.scriptPath],
     {
       shell: true,
       cwd: path.dirname(props.scriptPath),

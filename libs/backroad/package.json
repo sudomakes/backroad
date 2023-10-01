@@ -1,7 +1,8 @@
 {
   "name": "@backroad/backroad",
   "version": "0.0.3",
-  "bin": "src/index.js",
+  "main": "src/index.js",
+  "bin": "src/lib/cli.js",
   "scripts": {
     "publish-package": "npm publish"
   }

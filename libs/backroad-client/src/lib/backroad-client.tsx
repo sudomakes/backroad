@@ -1,4 +1,4 @@
-import styles from './client-lib.module.scss';
+import styles from './backroad-client.module.scss';
 
 /* eslint-disable-next-line */
 export interface ClientLibProps {}
