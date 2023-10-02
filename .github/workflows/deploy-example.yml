@@ -25,7 +25,10 @@ jobs:
           # platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x
           tags: backroad-example:latest
           outputs: type=oci,dest=/tmp/backroad-example.tar
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
     - run: ls -la /tmp
+    - run: whoami
     # - name: Upload artifact
     #   uses: actions/upload-artifact@v2
     #   with:
@@ -38,8 +41,8 @@ jobs:
         username: ${{ secrets.SUDOMAKES_USER }}
         password: ${{ secrets.SUDOMAKES_PASSWORD }}
         port: ${{ secrets.SUDOMAKES_PORT }}
-        source: /tmp/backroad-example.tar
-        target: /tmp/backroad-example.tar
+        source: "/tmp/backroad-example.tar"
+        target: /tmp/
         overwrite: true
 
       #   - name: Checkout 🛎️
