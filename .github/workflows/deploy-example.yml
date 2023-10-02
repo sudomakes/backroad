@@ -42,7 +42,7 @@ jobs:
         password: ${{ secrets.SUDOMAKES_PASSWORD }}
         port: ${{ secrets.SUDOMAKES_PORT }}
         source: "/tmp/backroad-example.tar"
-        target: /tmp/
+        target: "/tmp"
         overwrite: true
 
       #   - name: Checkout 🛎️
