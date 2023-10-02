@@ -12,7 +12,7 @@
         "platform": "node",
         "outputPath": "dist/apps/backroad-example",
         "format": ["cjs"],
-        "bundle": false,
+        "bundle": true,
         "main": "apps/backroad-example/src/main.ts",
         "tsConfig": "apps/backroad-example/tsconfig.app.json",
         "assets": ["apps/backroad-example/src/assets"],
@@ -41,7 +41,8 @@
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "backroad-example:build"
+        "buildTarget": "backroad-example:build",
+        "runBuildTargetDependencies":true
       },
       "configurations": {
         "development": {
@@ -58,10 +59,6 @@
       "options": {
         "lintFilePatterns": ["apps/backroad-example/**/*.ts"]
       }
-    },
-    "docker-build": {
-      "dependsOn": ["build"],
-      "command": "docker build -f apps/backroad-example/Dockerfile . -t backroad-example"
     }
   },
   "tags": []

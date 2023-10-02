@@ -2,6 +2,7 @@ import { BackroadNodeManager } from '../backroad';
 import { startBackroadServer } from '../server';
 import { sessionManager } from '../server/sessions/session-manager';
 import { socketEventHandlers } from '../server/server-socket-event-handlers';
+import { SocketManager } from '../backroad/socket-manager';
 export const run = async (
   executor: (nodeManager: BackroadNodeManager) => void | Promise<void>,
   backroadOptions?: {
@@ -21,10 +22,11 @@ export const run = async (
         upsert: true,
       }
     );
-
-    const runExecutor = async () =>
+    SocketManager.register(backroadSession.sessionId, socket);
+    const runExecutor = async () => {
+      backroadSession.resetTree();
       executor(backroadSession.mainPageNodeManager);
-
+    };
     // execute once to populate defaults and stuff
 
     socket.on(

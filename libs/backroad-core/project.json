@@ -10,6 +10,18 @@
       "options": {
         "lintFilePatterns": ["libs/backroad-core/**/*.ts", "libs/backroad-core/package.json"]
       }
+    },
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/backroad-core",
+        "tsConfig": "libs/backroad-core/tsconfig.lib.json",
+        "packageJson": "libs/backroad-core/package.json",
+        "main": "libs/backroad-core/src/index.ts",
+        "updateBuildableProjectDepsInPackageJson":true,
+        "assets": ["libs/backroad-core/*.md"]
+      }
     }
   },
   "tags": []

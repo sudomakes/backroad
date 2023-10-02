@@ -12,14 +12,12 @@
         "tsConfig": "libs/backroad/tsconfig.lib.json",
         "packageJson": "libs/backroad/package.json",
         "main": "libs/backroad/src/index.ts",
-        "assets": ["libs/backroad/*.md"],
-        "updateBuildableProjectDepsInPackageJson": true,
-        "buildableProjectDepsInPackageJsonType": "dependencies",
-        "rootDir": "libs"
+        "updateBuildableProjectDepsInPackageJson":true,
+        "assets": ["libs/backroad/**/public/*"]
       }
     },
     "publish": {
-      "command": "node tools/scripts/publish.mjs cli {args.ver} {args.tag}",
+      "command": "node tools/scripts/publish.mjs backroad {args.ver} {args.tag}",
       "dependsOn": ["build"]
     },
     "lint": {

@@ -1,0 +1,34 @@
+{
+  "name": "templib",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/templib/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/templib",
+        "tsConfig": "libs/templib/tsconfig.lib.json",
+        "packageJson": "libs/templib/package.json",
+        "main": "libs/templib/src/index.ts",
+        "assets": ["libs/templib/*.md"]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs templib {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/templib/**/*.ts",
+          "libs/templib/package.json"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

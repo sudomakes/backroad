@@ -9,7 +9,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
+    "target": "ESNext",
     "module": "esnext",
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
@@ -18,7 +18,8 @@
     "paths": {
       "backroad": ["libs/backroad/src/index.ts"],
       "backroad-client": ["libs/backroad-client/src/index.ts"],
-      "backroad-core": ["libs/backroad-core/src/index.ts"]
+      "backroad-core": ["libs/backroad-core/src/index.ts"],
+      "templib": ["libs/templib/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

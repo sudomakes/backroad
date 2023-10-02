@@ -4,10 +4,26 @@ import {
   ComponentPropsMapping,
   InbuiltComponentTypes,
 } from 'backroad-core';
-// import { ChildProcessWithoutNullStreams } from 'child_process';
-// import { getBackroadScriptRunner } from '../runner';
 import { BackroadNodeManager } from '../../backroad';
 
+const getInitialTreeStructure = () => {
+  const structure = {
+    children: [
+      {
+        type: 'page' as const,
+        args: {
+          path: '/',
+        },
+        children: [],
+        path: 'children.0',
+      },
+    ],
+    path: '',
+    type: 'base' as const,
+    args: {},
+  };
+  return JSON.parse(JSON.stringify(structure)) as typeof structure;
+};
 export class BackroadSession {
   // #runnerProcess?: ChildProcessWithoutNullStreams;
   sessionId: string;
@@ -16,21 +32,7 @@ export class BackroadSession {
   constructor(sessionId: string) {
     this.sessionId = sessionId;
     this.rootNodeManager = new BackroadNodeManager(
-      {
-        children: [
-          {
-            type: 'page',
-            args: {
-              path: '/',
-            },
-            children: [],
-            path: 'children.0',
-          },
-        ],
-        path: '',
-        type: 'base',
-        args: {},
-      },
+      getInitialTreeStructure(),
       this
     );
   }
@@ -40,6 +42,12 @@ export class BackroadSession {
       this.rootNodeManager.container.children[0] as BackroadContainer<'page'>,
       this
     ); // this should always be the main page
+  }
+  resetTree() {
+    this.rootNodeManager = new BackroadNodeManager(
+      getInitialTreeStructure(),
+      this
+    );
   }
 
   valueOf<ComponentType extends InbuiltComponentTypes>(id: string) {

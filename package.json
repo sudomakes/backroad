@@ -4,9 +4,8 @@
   "license": "MIT",
   "scripts": {
     "backroad": "backroad",
-    "build": "nx run cli:build",
-    "watch": "nx run cli:build --watch",
-    "publish": "nx run-many  --targets=publish-package --projects=cli,server,core",
+    "build-app": "nx build client && nx build backroad-example &&  cp -R ./dist/apps/client ./dist/apps/backroad-example/public && docker build -f ./backroad-example.Dockerfile . -t backroad-example",
+    "publish": "nx run-many  --targets=publish-package --projects=backroad",
     "cli": "node dist/libs/cli",
     "dev": "nx run-many --parallel --target=serve --projects=backroad-example,client",
     "server": "nx run server-debug:serve",
