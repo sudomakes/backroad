@@ -31,6 +31,7 @@ jobs:
     - run: whoami
     - name: scp ssh pipelines
       uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+      
       # env:
       #   LASTSSH: "Doing something after copying"
       with:
@@ -38,10 +39,17 @@ jobs:
         user: ${{ secrets.SUDOMAKES_USER }}
         key: ${{ secrets.SUDOMAKES_KEY }}
         port: ${{ secrets.SUDOMAKES_PORT }}
-        scp: |
-          /tmp/backroad-example.tar => /tmp/
-        last_ssh: |
+        first_ssh: |
           ls -la /tmp
+          echo "removing backroad file if it exists" 
+          rm /tmp/backroad*.tar
+          ls -la /tmp
+        scp: |
+          '/tmp/backroad*.tar' => '/tmp/'
+        last_ssh: |
+          ls -la /tmp/
+          docker load /tmp/backroad-example.tar
+          docker image list 
     # - name: Upload artifact
     #   uses: actions/upload-artifact@v2
     #   with:
