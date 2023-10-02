@@ -17,6 +17,7 @@ jobs:
       uses: actions/checkout@v4
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
+    - run: mkdir -p /tmp/image
     - name: Build and push Docker images
       uses: docker/build-push-action@v2
       with:
@@ -24,31 +25,29 @@ jobs:
           file: ./backroad-example.Dockerfile
           # platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x
           tags: backroad-example:latest
-          outputs: type=oci,dest=/tmp/backroad-example.tar
+          outputs: type=oci,dest=/tmp/image/backroad-example.tar
           cache-from: type=gha
           cache-to: type=gha,mode=max
     - run: ls -la /tmp
     - run: whoami
     - name: scp ssh pipelines
       uses: cross-the-world/ssh-scp-ssh-pipelines@latest
-      
-      # env:
-      #   LASTSSH: "Doing something after copying"
       with:
         host: ${{ secrets.SUDOMAKES_HOSTNAME }}
         user: ${{ secrets.SUDOMAKES_USER }}
         key: ${{ secrets.SUDOMAKES_KEY }}
         port: ${{ secrets.SUDOMAKES_PORT }}
         first_ssh: |
+          whoami
           ls -la /tmp
           echo "removing backroad file if it exists" 
-          rm -f /tmp/backroad*.tar
+          rm -f /tmp/backroad*
           ls -la /tmp
         scp: |
-          '/tmp/backroad*.tar' => '/tmp/'
+          '/tmp/image/*' => '/tmp/'
         last_ssh: |
           ls -la /tmp/
-          docker load /tmp/backroad-example.tar
+          docker load  --input /tmp/backroad-example.tar
           docker image list 
     # - name: Upload artifact
     #   uses: actions/upload-artifact@v2
