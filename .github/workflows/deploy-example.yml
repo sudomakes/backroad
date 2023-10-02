@@ -42,7 +42,7 @@ jobs:
         first_ssh: |
           ls -la /tmp
           echo "removing backroad file if it exists" 
-          rm /tmp/backroad*.tar
+          rm -f /tmp/backroad*.tar
           ls -la /tmp
         scp: |
           '/tmp/backroad*.tar' => '/tmp/'
