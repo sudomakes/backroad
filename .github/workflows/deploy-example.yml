@@ -1,10 +1,4 @@
 name: Build and Deploy
-# env:
-#   CI: false
-#   GITHUB_USERNAME: ${{ github.repository_owner }}
-#   REACT_APP_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This is automatically set by Github Actions
-#   USE_GITHUB_DATA: "true"
-#   MEDIUM_USERNAME: "sudo-vaibhav" # Change this to your medium username
 on:
   push:
     branches:
@@ -25,7 +19,7 @@ jobs:
           file: ./backroad-example.Dockerfile
           # platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x
           tags: backroad-example:latest
-          outputs: type=oci,dest=/tmp/image/backroad-example.tar
+          outputs: type=image,dest=/tmp/image/backroad-example.tar
           cache-from: type=gha
           cache-to: type=gha,mode=max
     - run: ls -la /tmp
@@ -41,57 +35,4 @@ jobs:
         PORT: ${{ secrets.SUDOMAKES_PORT }}
       run: |
         scp -o StrictHostKeyChecking=no -P $PORT /tmp/image/backroad-example.tar $USER@$HOST:/tmp
-        ssh -o StrictHostKeyChecking=no -p $PORT $USER@$HOST 'ls -la /tmp/ && docker load  --input /tmp/backroad-example.tar && docker image list'
-    # - name: scp ssh pipelines
-    #   uses: cross-the-world/ssh-scp-ssh-pipelines@latest
-    #   with:
-    #     host: ${{ secrets.SUDOMAKES_HOSTNAME }}
-    #     user: ${{ secrets.SUDOMAKES_USER }}
-    #     key: ${{ secrets.SUDOMAKES_KEY }}
-    #     port: ${{ secrets.SUDOMAKES_PORT }}
-    #     first_ssh: |
-    #       whoami
-    #       ls -la /tmp
-    #       echo "removing backroad file if it exists" 
-    #       rm -f /tmp/backroad*
-    #       ls -la /tmp
-    #     scp: |
-    #       '/tmp/image/*' => '/tmp/'
-    #     last_ssh: |
-    #       
-    #       
-    #       docker image list
-
-
-
-    # - name: Upload artifact
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: image
-    #     path: /tmp/backroad-example.tar
-    # - name: copy file via ssh
-    #   uses: appleboy/scp-action@v0.1.4
-    #   with:
-    #     host: ${{ secrets.SUDOMAKES_HOSTNAME }}
-    #     username: ${{ secrets.SUDOMAKES_USER }}
-    #     key: ${{ secrets.SUDOMAKES_KEY }}
-    #     port: ${{ secrets.SUDOMAKES_PORT }}
-    #     source: "/tmp/backroad-example.tar"
-    #     target: "/tmp"
-    #     overwrite: true
-
-      #   - name: Checkout 🛎️
-      #   uses: actions/checkout@v2 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
-      #   with:
-      #     persist-credentials: false
-
-      # - name: Install and Build 🔧 # Build the Project
-      #   run: |
-      #     npm install
-      #     npm run build
-      # - name: Deploy 🚀
-      #   uses: JamesIves/github-pages-deploy-action@releases/v3
-      #   with:
-      #     GITHUB_TOKEN : ${{ secrets.GITHUB_TOKEN }} # This is provided by GitHub.
-      #     BRANCH: gh-pages # The branch the action should deploy to.
-      #     FOLDER: build # The folder the action should deploy.
+        ssh -o StrictHostKeyChecking=no -p $PORT $USER@$HOST 'ls -la /tmp/ && docker load  --input /tmp/backroad-example.tar'
