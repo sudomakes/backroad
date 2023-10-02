@@ -1,11 +1,10 @@
-import { BackroadNode } from './core';
-
-type ClientToServerEventTypes =
-  | 'get_value'
-  | 'set_value_if_not_exists'
-  | 'request_render'
-  | 'run_script'
-  | 'set_value';
+import type { Socket } from 'socket.io';
+import { DefaultEventsMap } from 'socket.io/dist/typed-events';
+export type ClientToServerEventTypes = 'get_value' | 'set_value' | 'run_script';
+// | 'get_tree'
+// | 'set_value_if_not_exists'
+// | 'request_render'
+// | 'run_script'
 type ConstructSocketIoEventSignatureFromBackroadEvents<
   T extends BackroadEvents
 > = {
@@ -14,7 +13,7 @@ type ConstructSocketIoEventSignatureFromBackroadEvents<
     callback: (callBackArgs: BackroadEventsMapping[key]['response']) => void
   ) => void;
 };
-type ServerToClientEventTypes = 'render' | 'running';
+export type ServerToClientEventTypes = 'render' | 'running';
 export type ClientToServerEvents =
   ConstructSocketIoEventSignatureFromBackroadEvents<ClientToServerEventTypes>;
 export type ServerToClientEvents =
@@ -23,18 +22,6 @@ export type BackroadEventsMapping = {
   get_value: {
     args: { id: string; sessionId: string };
     response: string;
-  };
-  request_render: {
-    args: { node: BackroadNode<false, false> };
-    response: void;
-  };
-  set_value_if_not_exists: {
-    args: { id: string; sessionId: string; data: string };
-    response: boolean;
-  };
-  run_script: {
-    args?: void;
-    response?: never;
   };
   set_value: {
     args: { id: string; value: string; triggerRerun?: boolean };
@@ -48,5 +35,27 @@ export type BackroadEventsMapping = {
     args: null;
     response?: void;
   };
+  run_script: {
+    args?: void;
+    response?: never;
+  };
+  // request_render: {
+  //   args: { node: BackroadNode<false, false> };
+  //   response: void;
+  // };
+  // get_tree: {
+  //   args: object;
+  //   response: BackroadContainer<'base', true>;
+  // };
+  // set_value_if_not_exists: {
+  //   args: { id: string; sessionId: string; data: string };
+  //   response: boolean;
+  // };
 };
 export type BackroadEvents = keyof BackroadEventsMapping;
+export type ServerSocketType = Socket<
+  ClientToServerEvents,
+  ServerToClientEvents,
+  DefaultEventsMap,
+  any
+>;

@@ -1,16 +1,12 @@
-import { IServerSocketEventHandler } from './base';
+// import { IServerSocketEventHandler } from './types';
+
+import { IServerSocketEventHandler } from './types';
 
 export const runScript: IServerSocketEventHandler<
   'run_script',
-  {
-    serverPort: number;
-    scriptPath: string;
-  }
-> = (socket, backroadSession, options) => () => {
-  backroadSession.setRunnerProcess({
-    scriptPath: options.scriptPath,
-    serverPort: options.serverPort,
-  });
+  () => Promise<void>
+> = (socket, backroadSession, context) => () => {
+  context();
   socket.emit('running', null, () => {
     console.log('running event emitted');
   });

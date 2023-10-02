@@ -1,0 +1,68 @@
+{
+  "name": "backroad-example",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/backroad-example/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/backroad-example",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "apps/backroad-example/src/main.ts",
+        "tsConfig": "apps/backroad-example/tsconfig.app.json",
+        "assets": ["apps/backroad-example/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "generateLockfile": true,
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "backroad-example:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "backroad-example:build:development"
+        },
+        "production": {
+          "buildTarget": "backroad-example:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/backroad-example/**/*.ts"]
+      }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/backroad-example/Dockerfile . -t backroad-example"
+    }
+  },
+  "tags": []
+}

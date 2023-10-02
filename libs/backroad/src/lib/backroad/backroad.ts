@@ -2,14 +2,17 @@
 import {
   BackroadComponent,
   BackroadContainer,
+  BackroadNode,
   ComponentPropsMapping,
   ContainerPropsMapping,
   GenericBackroadComponent,
   InbuiltComponentTypes,
   InbuiltContainerTypes,
 } from 'backroad-core';
-import { sessionConnector } from './session_connector';
 import { omit } from 'lodash';
+import superjson from 'superjson';
+import { BackroadSession } from '../server/sessions/session';
+import { SocketManager } from './socket-manager';
 type BackroadComponentFormat<ComponentType extends InbuiltComponentTypes> = {
   id?: BackroadComponent<ComponentType, false>['id'];
 } & BackroadComponent<ComponentType, false>['args'];
@@ -23,7 +26,10 @@ type BackroadContainerFormat<ContainerType extends InbuiltContainerTypes> =
 export class BackroadNodeManager<
   ContainerType extends InbuiltContainerTypes = 'page'
 > {
-  constructor(private container: BackroadContainer<ContainerType, false>) {}
+  constructor(
+    public container: BackroadContainer<ContainerType, false>,
+    private backroadSession: BackroadSession
+  ) {}
   private constructComponentObject<T extends InbuiltComponentTypes>(
     props: BackroadComponentFormat<T>,
     type: T
@@ -58,21 +64,28 @@ export class BackroadNodeManager<
   async addComponentDescendant<ComponentType extends InbuiltComponentTypes>(
     nodeData: BackroadComponent<ComponentType, false>
   ) {
-    console.debug('Adding component descendent', nodeData);
-    this.container.children.push(nodeData as GenericBackroadComponent);
-    const defaultSetResult = await sessionConnector.setValueIfNotExists({
-      id: nodeData.id,
-      value: nodeData.args.defaultValue,
+    return new Promise((resolve) => {
+      console.debug('Adding component descendent', nodeData);
+      const castedNodeData = nodeData as GenericBackroadComponent;
+      this.container.children.push(castedNodeData);
+      this.backroadSession.setValueIfNotSet(
+        nodeData.id,
+        nodeData.args.defaultValue
+      );
+      console.log(
+        'set default value call done for component descendent',
+        nodeData.id,
+        'proceeding to requesting render'
+      );
+      const socket = SocketManager.getSocket(this.backroadSession.sessionId);
+      socket.emit(
+        'render',
+        this.getRenderPayload(castedNodeData, this.backroadSession),
+        () => {
+          resolve(this.backroadSession.valueOf(nodeData.id));
+        }
+      );
     });
-    console.log(
-      'set default value call done for component descendent',
-      nodeData.id,
-      'proceeding to requesting render, (setting was',
-      defaultSetResult ? 'successful' : 'unsuccessful',
-      ')'
-    );
-    await sessionConnector.requestRender(nodeData as GenericBackroadComponent);
-    return sessionConnector.getValueOf(nodeData);
   }
   async addContainerDescendant<ContainerType extends InbuiltContainerTypes>(
     containerNodeData: Omit<
@@ -90,10 +103,29 @@ export class BackroadNodeManager<
       children: containerNodeData.children || [],
     };
     this.container.children.push(containerNode);
-    await sessionConnector.requestRender(containerNode);
-    return new BackroadNodeManager(
-      containerNode as BackroadContainer<ContainerType>
-    );
+    const socket = SocketManager.getSocket(this.backroadSession.sessionId);
+
+    return new Promise<BackroadNodeManager<ContainerType>>((resolve) => {
+      socket.emit(
+        'render',
+        this.getRenderPayload(containerNode, this.backroadSession),
+        () => {
+          resolve(
+            new BackroadNodeManager(
+              containerNode as BackroadContainer<ContainerType>,
+              this.backroadSession
+            )
+          );
+        }
+      );
+      // const socket = await this.backroadSession.getConnection();
+    });
+  }
+  getRenderPayload(node: BackroadNode<false, false>, session: BackroadSession) {
+    if ('id' in node) {
+      return superjson.stringify({ ...node, value: session.valueOf(node.id) });
+    }
+    return superjson.stringify(node);
   }
   getDescendantKey() {
     return `${this.container.path ? this.container.path + '.' : ''}children.${
@@ -142,7 +174,7 @@ export class BackroadNodeManager<
     );
   }
   page(props: BackroadContainerFormat<'page'>) {
-    return rootNodeManager.addContainerDescendant(
+    return this.backroadSession.rootNodeManager.addContainerDescendant(
       this.constructContainerObject(props, 'page')
     );
     // return this.addContainerDescendant(
@@ -155,22 +187,3 @@ export class BackroadNodeManager<
     );
   }
 }
-
-const mainPageContainer: BackroadContainer<'page', false> = {
-  type: 'page',
-  args: {
-    path: '/',
-  },
-  children: [],
-  path: 'children.0',
-};
-const rootNodeManager = new BackroadNodeManager({
-  children: [mainPageContainer],
-  path: '',
-  type: 'base',
-  args: {},
-});
-
-// const mainPageManager = rootNodeManager.addContainerDescendant();
-
-export const br = new BackroadNodeManager(mainPageContainer);

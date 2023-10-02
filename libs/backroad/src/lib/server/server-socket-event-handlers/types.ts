@@ -1,7 +1,7 @@
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import {
-  BackroadEvents,
   BackroadEventsMapping,
+  ClientToServerEventTypes,
   ClientToServerEvents,
   ServerToClientEvents,
 } from 'backroad-core';
@@ -9,7 +9,7 @@ import { Socket } from 'socket.io';
 import { BackroadSession } from '../sessions/session';
 
 export type IServerSocketEventHandler<
-  EventType extends BackroadEvents,
+  EventType extends ClientToServerEventTypes,
   Context = undefined
 > = (
   socket: Socket<ClientToServerEvents, ServerToClientEvents>,
@@ -18,7 +18,5 @@ export type IServerSocketEventHandler<
 ) => // eslint-disable-next-line @typescript-eslint/no-explicit-any
 (
   args: BackroadEventsMapping[EventType]['args'],
-  callback?: (
-    callbackArgs: BackroadEventsMapping[EventType]['response']
-  ) => void
+  callback: (callbackArgs: BackroadEventsMapping[EventType]['response']) => void
 ) => void;
