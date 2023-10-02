@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 import * as http from 'http';
 import { Namespace, Server } from 'socket.io';
 // import { runScript } from './server-socket-event-handlers/run_script';
@@ -17,7 +18,6 @@ export const startBackroadServer = (options: { port: number }) => {
       path: '/api/socket.io',
       cors: {},
     });
-    app.use(express.static(join(__dirname, 'public')));
     server.listen(options.port, () => {
       // open(`http://localhost:${options.port}/`);
       console.log(
@@ -25,6 +25,11 @@ export const startBackroadServer = (options: { port: number }) => {
       );
       resolve(io.of(/^\/.+$/));
     });
+    app.use(express.static(join(__dirname, 'public')));
+
+    app.get('*', (req, res) =>
+      res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+    );
   });
 
   // .on('connection',

@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  external:
+    container_name: backroad-example
+    image: backroad-example
+    build:
+      args:
+        - cpu-quota=value
+      context: .
+      dockerfile: backroad-example.Dockerfile
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 1000M
+
+    ports:
+      - 3333:3333

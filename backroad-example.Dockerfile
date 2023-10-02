@@ -19,6 +19,6 @@ RUN chown -R backroad-example:backroad-example .
 
 # You can remove this install step if you build with `--bundle` option.
 # The bundled output will include external dependencies.
-RUN npm --prefix backroad-example --omit=dev -f install
+RUN npm --prefix backroad-example --omit=dev -f ci
 EXPOSE 3333
 CMD [ "node", "backroad-example" ]
