@@ -29,21 +29,34 @@ jobs:
           cache-to: type=gha,mode=max
     - run: ls -la /tmp
     - run: whoami
+    - name: scp ssh pipelines
+      uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+      # env:
+      #   LASTSSH: "Doing something after copying"
+      with:
+        host: ${{ secrets.SUDOMAKES_HOSTNAME }}
+        user: ${{ secrets.SUDOMAKES_USER }}
+        key: ${{ secrets.SUDOMAKES_KEY }}
+        port: ${{ secrets.SUDOMAKES_PORT }}
+        scp: |
+          /tmp/backroad-example.tar => /tmp/
+        last_ssh: |
+          ls -la /tmp
     # - name: Upload artifact
     #   uses: actions/upload-artifact@v2
     #   with:
     #     name: image
     #     path: /tmp/backroad-example.tar
-    - name: copy file via ssh
-      uses: appleboy/scp-action@v0.1.4
-      with:
-        host: ${{ secrets.SUDOMAKES_HOSTNAME }}
-        username: ${{ secrets.SUDOMAKES_USER }}
-        key: ${{ secrets.SUDOMAKES_PASSWORD }}
-        port: ${{ secrets.SUDOMAKES_PORT }}
-        source: "/tmp/backroad-example.tar"
-        target: "/tmp"
-        overwrite: true
+    # - name: copy file via ssh
+    #   uses: appleboy/scp-action@v0.1.4
+    #   with:
+    #     host: ${{ secrets.SUDOMAKES_HOSTNAME }}
+    #     username: ${{ secrets.SUDOMAKES_USER }}
+    #     key: ${{ secrets.SUDOMAKES_KEY }}
+    #     port: ${{ secrets.SUDOMAKES_PORT }}
+    #     source: "/tmp/backroad-example.tar"
+    #     target: "/tmp"
+    #     overwrite: true
 
       #   - name: Checkout 🛎️
       #   uses: actions/checkout@v2 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
