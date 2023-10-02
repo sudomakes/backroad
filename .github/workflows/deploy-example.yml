@@ -39,7 +39,7 @@ jobs:
       with:
         host: ${{ secrets.SUDOMAKES_HOSTNAME }}
         username: ${{ secrets.SUDOMAKES_USER }}
-        password: ${{ secrets.SUDOMAKES_PASSWORD }}
+        key: ${{ secrets.SUDOMAKES_PASSWORD }}
         port: ${{ secrets.SUDOMAKES_PORT }}
         source: "/tmp/backroad-example.tar"
         target: "/tmp"
