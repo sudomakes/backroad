@@ -1,0 +1,48 @@
+name: Build and Deploy
+# env:
+#   CI: false
+#   GITHUB_USERNAME: ${{ github.repository_owner }}
+#   REACT_APP_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This is automatically set by Github Actions
+#   USE_GITHUB_DATA: "true"
+#   MEDIUM_USERNAME: "sudo-vaibhav" # Change this to your medium username
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build and push Docker images
+      uses: docker/build-push-action@v5.0.0
+      with:
+          context: .
+          file: ./backroad-example.Dockerfile
+          # platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/ppc64le,linux/s390x
+          tags: backroad-example:latest
+          outputs: type=oci,dest=/tmp/backroad-example.tar 
+    - name: copy file via ssh
+      uses: appleboy/scp-action@v0.1.4
+      with:
+        host: ${{ secrets.SUDOMAKES_HOSTNAME }}
+        username: ${{ secrets.SUDOMAKES_USER }}
+        password: ${{ secrets.SUDOMAKES_PASSWORD }}
+        port: ${{ secrets.SUDOMAKES_PORT }}
+        source: /tmp/backroad-example.tar
+        target: /tmp/backroad-example.tar
+
+      #   - name: Checkout 🛎️
+      #   uses: actions/checkout@v2 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+      #   with:
+      #     persist-credentials: false
+
+      # - name: Install and Build 🔧 # Build the Project
+      #   run: |
+      #     npm install
+      #     npm run build
+      # - name: Deploy 🚀
+      #   uses: JamesIves/github-pages-deploy-action@releases/v3
+      #   with:
+      #     GITHUB_TOKEN : ${{ secrets.GITHUB_TOKEN }} # This is provided by GitHub.
+      #     BRANCH: gh-pages # The branch the action should deploy to.
+      #     FOLDER: build # The folder the action should deploy.
