@@ -2,6 +2,9 @@
 
 Because making wrapper UIs around your software is too much work.
 
+[![semantic-release: backroad](https://img.shields.io/badge/semantic--release-backroad-06A261?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
+
+
 <img src="./docs/assets/backroad.png"/>
 
 A node js equivalent to https://streamlit.io/

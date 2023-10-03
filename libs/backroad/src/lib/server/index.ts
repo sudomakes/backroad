@@ -4,7 +4,7 @@ import * as http from 'http';
 import { Namespace, Server } from 'socket.io';
 // import { runScript } from './server-socket-event-handlers/run_script';
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import { ClientToServerEvents, ServerToClientEvents } from 'backroad-core';
+import type { ClientToServerEvents, ServerToClientEvents } from 'backroad-core';
 // import open from 'open';
 import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 import { join } from 'path';

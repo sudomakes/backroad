@@ -1,5 +1,5 @@
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import {
+import type {
   BackroadComponent,
   BackroadContainer,
   BackroadNode,
