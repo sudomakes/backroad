@@ -35,7 +35,7 @@ export const run = async (
     );
     socket.on(
       'set_value',
-      socketEventHandlers.setValue(socket, backroadSession)
+      socketEventHandlers.setValue(socket, backroadSession, runExecutor)
     );
     socket.on(
       'run_script',

@@ -25,7 +25,7 @@ export type BackroadEventsMapping = {
   };
   set_value: {
     args: { id: string; value: string; triggerRerun?: boolean };
-    response: never;
+    response?: void;
   };
   render: {
     args: string; //BackroadNode<true, false>;
