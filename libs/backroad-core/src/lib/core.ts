@@ -45,6 +45,16 @@ type _ComponentBasePropsMapping = {
     };
     value: null;
   };
+  stats: {
+    args: {
+      items: {
+        label: string;
+        value: string | number;
+        delta?: string | number;
+      }[];
+    };
+    value: null;
+  };
   // chart:{
   //   args: {
   //     data: any;

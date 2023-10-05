@@ -186,4 +186,19 @@ export class BackroadNodeManager<
       this.constructComponentObject(props, 'link_group')
     );
   }
+  stats(props: BackroadComponentFormat<'stats'>) {
+    return this.addComponentDescendant(
+      this.constructComponentObject(props, 'stats')
+    );
+  }
+  async columns(props: BackroadContainerFormat<'columns'>) {
+    const columnsContainer = await this.addContainerDescendant(
+      this.constructContainerObject(props, 'columns')
+    );
+    return Promise.all(
+      [...Array(props.columnCount)].map(() =>
+        columnsContainer.addContainerDescendant({ type: 'base', args: {} })
+      )
+    );
+  }
 }

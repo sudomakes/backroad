@@ -7,6 +7,7 @@ import { Select } from './Select';
 import { Image } from './image';
 import { Link } from './link';
 import { LinkGroup } from './link_group';
+import { Stats } from './stats';
 export const backroadClientComponents: {
   [key in InbuiltComponentTypes]: (
     props: BackroadComponent<key, true>
@@ -20,4 +21,5 @@ export const backroadClientComponents: {
   image: Image,
   link: Link,
   link_group: LinkGroup,
+  stats: Stats,
 };
