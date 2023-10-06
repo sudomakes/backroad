@@ -3,7 +3,10 @@ import { BackroadNodeManager } from 'backroad';
 export const backroadSelectExample = async (br: BackroadNodeManager) => {
   const sidebar = await br.sidebar({});
   const value = await sidebar.select({
-    options: ['Sangeeth', 'Amol', 'Vaibhav'],
+    options: [
+      { value: 'Amol', label: 'Amol' },
+      { value: 'Sangeeth', label: 'Sangeeth' },
+    ],
     label: 'Who is the best leetcoder?',
   });
   if (value) {

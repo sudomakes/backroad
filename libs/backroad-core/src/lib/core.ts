@@ -1,3 +1,5 @@
+import { PropsWithChildren } from 'react';
+import type { Props } from 'react-select';
 import type { TypedChartComponent } from 'react-chartjs-2/dist/types';
 type _ComponentBasePropsMapping = {
   number_input: {
@@ -21,10 +23,10 @@ type _ComponentBasePropsMapping = {
   };
   select: {
     args: {
-      options: any[];
+      // options: any[];
       label?: string;
-      formatOption?: (option: any) => string;
-    };
+      // formatOption?: (option: any) => string;
+    } & Omit<Props<any>, 'onChange'>;
     value: any;
   };
   image: {
