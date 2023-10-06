@@ -27,4 +27,18 @@ export const backroadSelectExample = async (br: BackroadNodeManager) => {
       });
     }
   }
+
+  const multiValue = await br.multiselect({
+    options: [
+      { value: 'Pink', label: 'Pink' },
+      { value: 'Red', label: 'Red' },
+      { value: 'Green', label: 'Green' },
+    ],
+    label: 'Select your favourite colors',
+  });
+
+  br.write({
+    body: `## Multi Select Results
+${JSON.stringify(multiValue)}`,
+  });
 };

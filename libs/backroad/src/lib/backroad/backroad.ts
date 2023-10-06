@@ -201,4 +201,9 @@ export class BackroadNodeManager<
       )
     );
   }
+  multiselect(props: BackroadComponentFormat<'multiselect'>) {
+    return this.addComponentDescendant(
+      this.constructComponentObject(props, 'multiselect')
+    );
+  }
 }

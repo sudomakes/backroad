@@ -3,11 +3,12 @@ import { Button } from './button';
 import { Markdown } from './markdown';
 import { NumberInput } from './number_input';
 import { LineChart } from './line';
-import { Select } from './Select';
+import { Select } from './select';
 import { Image } from './image';
 import { Link } from './link';
 import { LinkGroup } from './link_group';
 import { Stats } from './stats';
+import { Multiselect } from './multiselect';
 export const backroadClientComponents: {
   [key in InbuiltComponentTypes]: (
     props: BackroadComponent<key, true>
@@ -22,4 +23,5 @@ export const backroadClientComponents: {
   link: Link,
   link_group: LinkGroup,
   stats: Stats,
+  multiselect: Multiselect,
 };

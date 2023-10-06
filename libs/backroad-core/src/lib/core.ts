@@ -1,6 +1,12 @@
-import { PropsWithChildren } from 'react';
-import type { Props } from 'react-select';
 import type { TypedChartComponent } from 'react-chartjs-2/dist/types';
+import type { Props } from 'react-select';
+
+export type SelectOptionType = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  value: any;
+  label: string;
+};
+type SelectValueType = SelectOptionType['value'];
 type _ComponentBasePropsMapping = {
   number_input: {
     args: { label: string };
@@ -22,12 +28,20 @@ type _ComponentBasePropsMapping = {
     value: null;
   };
   select: {
+    readonly args: {
+      // options: any[];
+      label?: string;
+      // formatOption?: (option: any) => string;
+    } & Omit<Props<SelectOptionType, false>, 'onChange' | 'isMulti'>;
+    value: SelectValueType | null;
+  };
+  multiselect: {
     args: {
       // options: any[];
       label?: string;
       // formatOption?: (option: any) => string;
-    } & Omit<Props<any>, 'onChange'>;
-    value: any;
+    } & Omit<Props<SelectOptionType, true>, 'onChange'>;
+    value: string[] | null;
   };
   image: {
     args: { src: string };
