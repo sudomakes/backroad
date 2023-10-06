@@ -41,7 +41,7 @@ type _ComponentBasePropsMapping = {
       label?: string;
       // formatOption?: (option: any) => string;
     } & Omit<Props<SelectOptionType, true>, 'onChange'>;
-    value: string[] | null;
+    value: any[];
   };
   image: {
     args: { src: string };
@@ -68,6 +68,12 @@ type _ComponentBasePropsMapping = {
         value: string | number;
         delta?: string | number;
       }[];
+    };
+    value: null;
+  };
+  json: {
+    args: {
+      src: object;
     };
     value: null;
   };

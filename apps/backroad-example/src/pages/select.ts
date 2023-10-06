@@ -37,8 +37,7 @@ export const backroadSelectExample = async (br: BackroadNodeManager) => {
     label: 'Select your favourite colors',
   });
 
-  br.write({
-    body: `## Multi Select Results
-${JSON.stringify(multiValue)}`,
+  br.json({
+    src: multiValue,
   });
 };

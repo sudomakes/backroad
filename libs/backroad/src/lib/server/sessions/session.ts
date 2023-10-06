@@ -54,7 +54,7 @@ export class BackroadSession {
     if (id in this.state) {
       return this.state[id] as ComponentPropsMapping[ComponentType]['value'];
     }
-    return undefined;
+    throw new Error(`No value found for ${id}`);
   }
 
   setValue(id: string, value: unknown) {

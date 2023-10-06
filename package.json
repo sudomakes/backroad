@@ -11,6 +11,10 @@
     "server": "nx run server-debug:serve",
     "client": "nx run client:serve"
   },
+  "overrides": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
   "private": true,
   "devDependencies": {
     "@babel/core": "^7.14.5",
@@ -72,6 +76,7 @@
     "react": "18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0",
+    "react-json-view": "^1.21.3",
     "react-markdown": "^9.0.0",
     "react-router-dom": "6.11.2",
     "react-select": "^5.7.7",

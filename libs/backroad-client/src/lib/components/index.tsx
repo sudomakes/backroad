@@ -9,6 +9,7 @@ import { Link } from './link';
 import { LinkGroup } from './link_group';
 import { Stats } from './stats';
 import { Multiselect } from './multiselect';
+import { Json } from './json';
 export const backroadClientComponents: {
   [key in InbuiltComponentTypes]: (
     props: BackroadComponent<key, true>
@@ -24,4 +25,5 @@ export const backroadClientComponents: {
   link_group: LinkGroup,
   stats: Stats,
   multiselect: Multiselect,
+  json: Json,
 };
