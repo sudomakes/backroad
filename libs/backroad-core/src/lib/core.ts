@@ -9,7 +9,13 @@ export type SelectOptionType = {
 type SelectValueType = SelectOptionType['value'];
 type _ComponentBasePropsMapping = {
   number_input: {
-    args: { label: string };
+    args: {
+      label: string;
+      min?: number;
+      max?: number;
+      step?: number;
+      precision?: number;
+    };
     value: number;
   };
   markdown: {

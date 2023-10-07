@@ -41,5 +41,6 @@ export type ServerSocketType = Socket<
   ClientToServerEvents,
   ServerToClientEvents,
   DefaultEventsMap,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   any
 >;

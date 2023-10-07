@@ -174,14 +174,12 @@ export class BackroadNodeManager<
       this.constructComponentObject(props, 'stats')
     );
   }
-  async columns(props: BackroadContainerFormat<'columns'>) {
-    const columnsContainer = await this.addContainerDescendant(
+  columns(props: BackroadContainerFormat<'columns'>) {
+    const columnsContainer = this.addContainerDescendant(
       this.constructContainerObject(props, 'columns')
     );
-    return Promise.all(
-      [...Array(props.columnCount)].map(() =>
-        columnsContainer.addContainerDescendant({ type: 'base', args: {} })
-      )
+    return [...Array(props.columnCount)].map(() =>
+      columnsContainer.addContainerDescendant({ type: 'base', args: {} })
     );
   }
   multiselect(props: BackroadComponentFormat<'multiselect'>) {

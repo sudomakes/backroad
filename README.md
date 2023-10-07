@@ -17,3 +17,10 @@ A node js equivalent to https://streamlit.io/
 ## Commands 
 
 to run local registry: nx local-registry
+
+## Currently Need to Work On (From highest priority to lowest)
+
+* Diffing algo improvements (absent element accounting)
+* Packaging solution for end user
+* SEO improvements (for blog type pages)
+* generic types for values of certain components (for example select options should be strongly typeable through generics somehow)

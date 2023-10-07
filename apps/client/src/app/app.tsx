@@ -6,11 +6,10 @@ import {
 } from 'backroad-core';
 import { set } from 'lodash';
 import { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import superjson from 'superjson';
 import { Footer } from './layout/footer';
 import { Navbar } from './layout/navbar';
-import { Route, Routes } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 // TODO: move all this stuff to a lib
 export function App() {

@@ -5,7 +5,7 @@ export const Columns: BackroadContainerRenderer<'columns'> = (props) => {
   return (
     <div className="flex">
       {props.children.map((child) => {
-        return <TreeRender tree={child} />;
+        return <TreeRender tree={child} key={child.path} />;
       })}
     </div>
   );
