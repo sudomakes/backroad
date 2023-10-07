@@ -3,7 +3,7 @@ import { Button } from './button';
 import { Markdown } from './markdown';
 import { NumberInput } from './number_input';
 import { LineChart } from './line';
-import { Select } from './select-input';
+import { Select } from './select';
 import { Image } from './image';
 import { Link } from './link';
 import { LinkGroup } from './link_group';
