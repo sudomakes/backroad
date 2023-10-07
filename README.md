@@ -20,7 +20,6 @@ to run local registry: nx local-registry
 
 ## Currently Need to Work On (From highest priority to lowest)
 
-* Diffing algo improvements (absent element accounting)
 * Packaging solution for end user
 * 404 page for routes which dont exist
 * SEO improvements (for blog type pages)
