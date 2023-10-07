@@ -21,12 +21,12 @@ run((br) => {
 
   sidebar.linkGroup({
     items: [
-      { href: '/inline', label: 'Inline Page Example' },
-      { href: '/charts', label: 'Charts Example' },
+      // { href: '/inline', label: 'Inline Page Example' },
+      // { href: '/charts', label: 'Charts Example' },
       { href: '/select', label: 'Select Example' },
-      { href: '/markdown', label: 'Markdown Example' },
-      { href: '/stats', label: 'Stats Example' },
-      { href: '/columns', label: 'Columns Example' },
+      // { href: '/markdown', label: 'Markdown Example' },
+      // { href: '/stats', label: 'Stats Example' },
+      // { href: '/columns', label: 'Columns Example' },
     ],
   });
 

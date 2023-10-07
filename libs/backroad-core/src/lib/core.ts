@@ -50,7 +50,7 @@ type _ComponentBasePropsMapping = {
     value: any[];
   };
   image: {
-    args: { src: string };
+    args: { src: string; alt?: string };
     value: null;
   };
   link: {
