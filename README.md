@@ -22,5 +22,7 @@ to run local registry: nx local-registry
 
 * Diffing algo improvements (absent element accounting)
 * Packaging solution for end user
+* 404 page for routes which dont exist
 * SEO improvements (for blog type pages)
 * generic types for values of certain components (for example select options should be strongly typeable through generics somehow)
+* memoisation constructs for intensive tasks in script

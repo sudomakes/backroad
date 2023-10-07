@@ -3,7 +3,7 @@ import { BackroadComponentRenderer } from '../types/components';
 export const Title: BackroadComponentRenderer<'title'> = (props) => {
   return (
     <Helmet>
-      <title>{props.args.value}</title>
+      <title>{props.args.label}</title>
     </Helmet>
   );
 };

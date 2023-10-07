@@ -85,7 +85,7 @@ type _ComponentBasePropsMapping = {
   };
   title: {
     args: {
-      value: string;
+      label: string;
     };
     value: null;
   };
@@ -99,9 +99,7 @@ type _ComponentBasePropsMapping = {
 };
 export type ComponentPropsMapping = {
   [key in keyof _ComponentBasePropsMapping]: {
-    args: _ComponentBasePropsMapping[key]['args'] & {
-      defaultValue?: _ComponentBasePropsMapping[key]['value'];
-    };
+    args: _ComponentBasePropsMapping[key]['args'];
     value: _ComponentBasePropsMapping[key]['value'];
     id: string;
   };

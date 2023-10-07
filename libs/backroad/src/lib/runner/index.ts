@@ -29,10 +29,10 @@ export const run = async (
     };
     // execute once to populate defaults and stuff
 
-    socket.on(
-      'get_value',
-      socketEventHandlers.getValue(socket, backroadSession)
-    );
+    // socket.on(
+    //   'get_value',
+    //   socketEventHandlers.getValue(socket, backroadSession)
+    // );
     socket.on(
       'set_value',
       socketEventHandlers.setValue(socket, backroadSession, runExecutor)

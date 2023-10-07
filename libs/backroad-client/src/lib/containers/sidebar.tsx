@@ -15,7 +15,7 @@ export const Sidebar: BackroadContainerRenderer<'sidebar'> = (props) => {
             initial={{ opacity: 0, x: '-100%' }}
             animate={{ opacity: 1, x: '0' }}
             exit={{ opacity: 0, x: '-100%' }}
-            className="w-[300px] h-screen bg-base-200 p-5 flex flex-col gap-3 fixed lg:static z-10"
+            className="w-[300px] h-full bg-base-200 p-5 flex flex-col gap-3 fixed lg:static z-10"
           >
             <div className="flex justify-end">
               <div

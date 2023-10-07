@@ -14,7 +14,6 @@ export const NumberInput = (props: BackroadComponent<'number_input', true>) => {
     const formattedValue = (operation(value) || 0).toFixed(precisionValue);
     return operation(formattedValue);
   };
-  console.log('num input value', inputValue);
   return (
     <div className="form-control w-full max-w-xs">
       <label className="label">
