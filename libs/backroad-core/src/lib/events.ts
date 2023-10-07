@@ -1,10 +1,6 @@
 import type { Socket } from 'socket.io';
 import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 export type ClientToServerEventTypes = 'get_value' | 'set_value' | 'run_script';
-// | 'get_tree'
-// | 'set_value_if_not_exists'
-// | 'request_render'
-// | 'run_script'
 type ConstructSocketIoEventSignatureFromBackroadEvents<
   T extends BackroadEvents
 > = {
@@ -28,7 +24,7 @@ export type BackroadEventsMapping = {
     response?: void;
   };
   render: {
-    args: string; //BackroadNode<true, false>;
+    args: string[]; //BackroadNode<true, false>;
     response?: void;
   };
   running: {
@@ -39,18 +35,6 @@ export type BackroadEventsMapping = {
     args?: void;
     response?: never;
   };
-  // request_render: {
-  //   args: { node: BackroadNode<false, false> };
-  //   response: void;
-  // };
-  // get_tree: {
-  //   args: object;
-  //   response: BackroadContainer<'base', true>;
-  // };
-  // set_value_if_not_exists: {
-  //   args: { id: string; sessionId: string; data: string };
-  //   response: boolean;
-  // };
 };
 export type BackroadEvents = keyof BackroadEventsMapping;
 export type ServerSocketType = Socket<

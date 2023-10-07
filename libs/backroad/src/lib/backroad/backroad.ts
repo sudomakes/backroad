@@ -12,13 +12,13 @@ import type {
 import { omit } from 'lodash';
 import superjson from 'superjson';
 import { BackroadSession } from '../server/sessions/session';
-import { SocketManager } from './socket-manager';
 type BackroadComponentFormat<ComponentType extends InbuiltComponentTypes> = {
   id?: BackroadComponent<ComponentType, false>['id'];
 } & BackroadComponent<ComponentType, false>['args'];
 
 type BackroadContainerFormat<ContainerType extends InbuiltContainerTypes> =
   BackroadContainer<ContainerType, false>['args'];
+
 /**
  * Manages the addition of nodes to the tree and also returns vaulues where applicable
  */
@@ -60,36 +60,29 @@ export class BackroadNodeManager<
 
     return containerNode;
   }
-
-  async addComponentDescendant<ComponentType extends InbuiltComponentTypes>(
+  addComponentDescendant<ComponentType extends InbuiltComponentTypes>(
     nodeData: BackroadComponent<ComponentType, false>
   ) {
-    return new Promise<ComponentPropsMapping[ComponentType]['value']>(
-      (resolve) => {
-        console.debug('Adding component descendent', nodeData);
-        const castedNodeData = nodeData as GenericBackroadComponent;
-        this.container.children.push(castedNodeData);
-        this.backroadSession.setValueIfNotSet(
-          nodeData.id,
-          nodeData.args.defaultValue
-        );
-        console.log(
-          'set default value call done for component descendent',
-          nodeData.id,
-          'proceeding to requesting render'
-        );
-        const socket = SocketManager.getSocket(this.backroadSession.sessionId);
-        socket.emit(
-          'render',
-          this.getRenderPayload(castedNodeData, this.backroadSession),
-          () => {
-            resolve(this.backroadSession.valueOf<ComponentType>(nodeData.id));
-          }
-        );
-      }
+    // return new Promise<ComponentPropsMapping[ComponentType]['value']>(
+    //   (resolve) => {
+    // console.debug('Adding component descendent', nodeData);
+    const castedNodeData = nodeData as GenericBackroadComponent;
+    this.container.children.push(castedNodeData);
+    this.backroadSession.setValueIfNotSet(
+      nodeData.id,
+      nodeData.args.defaultValue
     );
+    // console.log(
+    //   'set default value call done for component descendent',
+    //   nodeData.id,
+    //   'proceeding to requesting render'
+    // );
+    this.backroadSession.renderQueue.addToQueue(
+      this.getRenderPayload(castedNodeData, this.backroadSession)
+    );
+    return this.backroadSession.valueOf<ComponentType>(nodeData.id);
   }
-  async addContainerDescendant<ContainerType extends InbuiltContainerTypes>(
+  addContainerDescendant<ContainerType extends InbuiltContainerTypes>(
     containerNodeData: Omit<
       BackroadContainer<ContainerType>,
       'path' | 'children'
@@ -105,23 +98,14 @@ export class BackroadNodeManager<
       children: containerNodeData.children || [],
     };
     this.container.children.push(containerNode);
-    const socket = SocketManager.getSocket(this.backroadSession.sessionId);
-
-    return new Promise<BackroadNodeManager<ContainerType>>((resolve) => {
-      socket.emit(
-        'render',
-        this.getRenderPayload(containerNode, this.backroadSession),
-        () => {
-          resolve(
-            new BackroadNodeManager(
-              containerNode as BackroadContainer<ContainerType>,
-              this.backroadSession
-            )
-          );
-        }
-      );
-      // const socket = await this.backroadSession.getConnection();
-    });
+    // const socket = SocketManager.getSocket(this.backroadSession.sessionId);
+    this.backroadSession.renderQueue.addToQueue(
+      this.getRenderPayload(containerNode, this.backroadSession)
+    );
+    return new BackroadNodeManager(
+      containerNode as BackroadContainer<ContainerType>,
+      this.backroadSession
+    );
   }
   getRenderPayload(node: BackroadNode<false, false>, session: BackroadSession) {
     if ('id' in node) {
@@ -209,6 +193,11 @@ export class BackroadNodeManager<
   json(props: BackroadComponentFormat<'json'>) {
     return this.addComponentDescendant(
       this.constructComponentObject(props, 'json')
+    );
+  }
+  title(props: BackroadComponentFormat<'title'>) {
+    return this.addComponentDescendant(
+      this.constructComponentObject(props, 'title')
     );
   }
 }

@@ -28,12 +28,10 @@ export const Multiselect: BackroadComponentRenderer<'multiselect'> = (
       {/* <ReactSelect options={[{ value: 'abc', label: 'string' }]} /> */}
       <ReactSelect
         {...props.args}
-        // options={}
         defaultValue={value}
         isMulti
         onChange={(newValue) => {
           console.log('got this new value', newValue);
-          //   setValue(newValue.map(option=>option.value)));
           setValue(newValue);
           setBackroadValue({
             id: props.id,

@@ -77,6 +77,12 @@ type _ComponentBasePropsMapping = {
     };
     value: null;
   };
+  title: {
+    args: {
+      value: string;
+    };
+    value: null;
+  };
   // chart:{
   //   args: {
   //     data: any;

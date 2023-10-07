@@ -31,39 +31,4 @@ export const startBackroadServer = (options: { port: number }) => {
       res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
     );
   });
-
-  // .on('connection',
-  // (socket) => {
-  //   console.log('connected to namespace', socket.nsp.name);
-  //   const backroadSession = sessionManager.getSession(
-  //     socket.nsp.name.slice(1),
-  //     {
-  //       upsert: true,
-  //     }
-  //   );
-
-  //   socket.on('get_value', getValue(socket, backroadSession));
-  //   socket.on('request_render', requestRender(socket, backroadSession));
-  //   socket.on(
-  //     'set_value_if_not_exists',
-  //     setValueIfNotExists(socket, backroadSession)
-  //   );
-  //   socket.on(
-  //     'run_script',
-  //     runScript(socket, backroadSession, {
-  //       serverPort,
-  //       scriptPath: options.scriptPath,
-  //     })
-  //   );
-  //   socket.on(
-  //     'set_value',
-  //     setValueAndReRun(socket, backroadSession, {
-  //       serverPort,
-  //       scriptPath: options.scriptPath,
-  //     })
-  //   );
-  //   socket.on('disconnect', () => {
-  //     console.log('user disconnected', backroadSession.sessionId);
-  //   });
-  // });
 };

@@ -6,5 +6,4 @@ export const socketEventHandlers = {
   getValue,
   runScript,
   setValue,
-  // getTree,
 };

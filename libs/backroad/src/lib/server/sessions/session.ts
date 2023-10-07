@@ -1,33 +1,18 @@
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import type {
-  BackroadContainer,
-  ComponentPropsMapping,
-  InbuiltComponentTypes,
+import {
+  getInitialTreeStructure,
+  type BackroadContainer,
+  type ComponentPropsMapping,
+  type InbuiltComponentTypes,
 } from 'backroad-core';
 import { BackroadNodeManager } from '../../backroad';
+import { RenderQueue } from '../../backroad/render-queue';
 
-const getInitialTreeStructure = () => {
-  const structure = {
-    children: [
-      {
-        type: 'page' as const,
-        args: {
-          path: '/',
-        },
-        children: [],
-        path: 'children.0',
-      },
-    ],
-    path: '',
-    type: 'base' as const,
-    args: {},
-  };
-  return JSON.parse(JSON.stringify(structure)) as typeof structure;
-};
 export class BackroadSession {
   // #runnerProcess?: ChildProcessWithoutNullStreams;
   sessionId: string;
   state: { [key: string]: unknown } = {};
+  renderQueue: RenderQueue;
   rootNodeManager: BackroadNodeManager<'base'>;
   constructor(sessionId: string) {
     this.sessionId = sessionId;
@@ -35,6 +20,7 @@ export class BackroadSession {
       getInitialTreeStructure(),
       this
     );
+    this.renderQueue = new RenderQueue(this);
   }
 
   get mainPageNodeManager() {
@@ -44,6 +30,7 @@ export class BackroadSession {
     ); // this should always be the main page
   }
   resetTree() {
+    this.renderQueue.flush(); // get rid of all pending flush commands
     this.rootNodeManager = new BackroadNodeManager(
       getInitialTreeStructure(),
       this

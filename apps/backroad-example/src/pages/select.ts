@@ -36,7 +36,6 @@ export const backroadSelectExample = async (br: BackroadNodeManager) => {
     ],
     label: 'Select your favourite colors',
   });
-
   br.json({
     src: multiValue,
   });

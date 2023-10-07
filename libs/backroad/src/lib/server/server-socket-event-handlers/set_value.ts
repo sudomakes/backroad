@@ -3,7 +3,7 @@ import { IServerSocketEventHandler } from './types';
 export const setValue: IServerSocketEventHandler<
   'set_value',
   () => Promise<void>
-> = (socket, backroadSession, context) => async (props, callback) => {
+> = (socket, backroadSession, runExecutor) => async (props, callback) => {
   console.log(
     'setting value before triggering rerun, new value for ',
     props.id,
@@ -17,7 +17,7 @@ export const setValue: IServerSocketEventHandler<
     //   scriptPath: context.scriptPath,
     //   serverPort: context.serverPort,
     // });
-    await context();
+    await runExecutor();
     callback();
     // socket.emit('running', null, () => {
     //   console.log('running event emitted');
