@@ -29,7 +29,6 @@
     "release": {
       "executor": "nx-release:build-update-publish",
       "options": {
-        "libName": "backroad-core"
       }
     }
   },

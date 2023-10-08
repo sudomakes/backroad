@@ -7,5 +7,4 @@ export const backroadStatsExample = async (br: BackroadNodeManager) => {
       { label: 'My Patience', value: 0, delta: '-50%' },
     ],
   });
-  const num = await br.numberInput({ label: 'a' });
 };
