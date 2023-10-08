@@ -47,6 +47,7 @@ type _ComponentBasePropsMapping = {
       label?: string;
       // formatOption?: (option: any) => string;
     } & Omit<Props<SelectOptionType, true>, 'onChange'>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     value: any[];
   };
   image: {

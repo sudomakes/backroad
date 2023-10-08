@@ -1,7 +1,6 @@
 {
   "name": "backroad-monorepo",
   "version": "1.0.0",
-  "license": "MIT",
   "scripts": {
     "backroad": "backroad",
     "build-example-app": "nx build client && nx build backroad-example &&  cp -R ./dist/apps/client ./dist/apps/backroad-example/public",

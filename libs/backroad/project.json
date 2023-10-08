@@ -13,6 +13,7 @@
         "packageJson": "libs/backroad/package.json",
         "main": "libs/backroad/src/index.ts",
         "updateBuildableProjectDepsInPackageJson": true,
+        "buildableProjectDepsInPackageJsonType": "dependencies",
         "assets": ["libs/backroad/**/public/*"]
       }
     },
