@@ -1,4 +1,4 @@
-import type { ServerSocketType } from 'backroad-core';
+import type { ServerSocketType } from '@backroad/core';
 
 const sessionToSocketMapping: Record<string, ServerSocketType> = {};
 export class SocketManager {

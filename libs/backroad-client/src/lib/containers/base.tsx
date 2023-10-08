@@ -1,4 +1,4 @@
-import { BackroadContainer } from 'backroad-core';
+import { BackroadContainer } from '@backroad/core';
 import { TreeRender } from '../tree';
 
 export const Base = (props: BackroadContainer<'base', true>) => {

@@ -1,4 +1,4 @@
-import { BackroadComponent } from 'backroad-core';
+import { BackroadComponent } from '@backroad/core';
 import { useState } from 'react';
 import { setBackroadValue } from '../socket';
 import { handleKeyUp } from '../helpers/handleKeyUp';

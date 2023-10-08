@@ -1,4 +1,4 @@
-import { BackroadNodeManager } from 'backroad';
+import { BackroadNodeManager } from '@backroad/backroad';
 
 const labels = ['2020', '2021', '2022', '2023'];
 

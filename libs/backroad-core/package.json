@@ -1,5 +1,5 @@
 {
-  "name": "backroad-core",
+  "name": "@backroad/core",
   "version": "0.0.2",
   "dependencies": {
     "tslib": "^2.3.0"
@@ -9,5 +9,8 @@
   "typings": "./src/index.d.ts",
   "scripts": {
     "publish-package": "npm publish"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

@@ -1,4 +1,4 @@
-import { BackroadComponent, InbuiltComponentTypes } from 'backroad-core';
+import { BackroadComponent, InbuiltComponentTypes } from '@backroad/core';
 import { Button } from './button';
 import { Markdown } from './markdown';
 import { NumberInput } from './number_input';

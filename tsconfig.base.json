@@ -16,10 +16,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "backroad": ["libs/backroad/src/index.ts"],
+      "@backroad/backroad": ["libs/backroad/src/index.ts"],
       "backroad-client": ["libs/backroad-client/src/index.ts"],
-      "backroad-core": ["libs/backroad-core/src/index.ts"],
-      "templib": ["libs/templib/src/index.ts"]
+      "@backroad/core": ["libs/backroad-core/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

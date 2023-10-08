@@ -1,15 +1,13 @@
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import {
   getInitialTreeStructure,
   type BackroadContainer,
   type ComponentPropsMapping,
   type InbuiltComponentTypes,
-} from 'backroad-core';
+} from '@backroad/core';
 import { BackroadNodeManager } from '../../backroad';
 import { RenderQueue } from '../../backroad/render-queue';
 
 export class BackroadSession {
-  // #runnerProcess?: ChildProcessWithoutNullStreams;
   sessionId: string;
   state: { [key: string]: unknown } = {};
   renderQueue: RenderQueue;

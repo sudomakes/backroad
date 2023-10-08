@@ -1,4 +1,4 @@
-import { BackroadContainer, InbuiltContainerTypes } from 'backroad-core';
+import { BackroadContainer, InbuiltContainerTypes } from '@backroad/core';
 
 export type BackroadContainerRenderer<
   ContainerType extends InbuiltContainerTypes

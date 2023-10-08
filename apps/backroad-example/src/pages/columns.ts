@@ -1,4 +1,4 @@
-import { BackroadNodeManager } from 'backroad';
+import { BackroadNodeManager } from '@backroad/backroad';
 
 export const backroadColumnsExample = async (br: BackroadNodeManager) => {
   const [col1, col2, col3] = await br.columns({

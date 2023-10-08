@@ -1,4 +1,4 @@
-import { InbuiltContainerTypes } from 'backroad-core';
+import { InbuiltContainerTypes } from '@backroad/core';
 import { BackroadContainerRenderer } from '../types/containers';
 import { Base } from './base';
 import { Sidebar } from './sidebar';

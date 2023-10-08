@@ -1,4 +1,4 @@
-import { BackroadNodeManager } from 'backroad';
+import { BackroadNodeManager } from '@backroad/backroad';
 
 export const backroadStatsExample = async (br: BackroadNodeManager) => {
   br.stats({

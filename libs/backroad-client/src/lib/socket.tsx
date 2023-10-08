@@ -1,4 +1,4 @@
-import { ClientToServerEvents, ServerToClientEvents } from 'backroad-core';
+import { ClientToServerEvents, ServerToClientEvents } from '@backroad/core';
 import { Socket, io } from 'socket.io-client';
 import superjson from 'superjson';
 const tabID = sessionStorage.tabID

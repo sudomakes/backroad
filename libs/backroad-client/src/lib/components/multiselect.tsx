@@ -3,7 +3,7 @@ import { getFlattenedOptions } from '../helpers/select';
 import { setBackroadValue } from '../socket';
 import { BackroadComponentRenderer } from '../types/components';
 import { useState } from 'react';
-import { SelectOptionType } from 'backroad-core';
+import { SelectOptionType } from '@backroad/core';
 export const Multiselect: BackroadComponentRenderer<'multiselect'> = (
   props
 ) => {

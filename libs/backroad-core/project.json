@@ -8,7 +8,10 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/backroad-core/**/*.ts", "libs/backroad-core/package.json"]
+        "lintFilePatterns": [
+          "libs/backroad-core/**/*.ts",
+          "libs/backroad-core/package.json"
+        ]
       }
     },
     "build": {
@@ -19,8 +22,14 @@
         "tsConfig": "libs/backroad-core/tsconfig.lib.json",
         "packageJson": "libs/backroad-core/package.json",
         "main": "libs/backroad-core/src/index.ts",
-        "updateBuildableProjectDepsInPackageJson":true,
+        "updateBuildableProjectDepsInPackageJson": true,
         "assets": ["libs/backroad-core/*.md"]
+      }
+    },
+    "release": {
+      "executor": "nx-release:build-update-publish",
+      "options": {
+        "libName": "backroad-core"
       }
     }
   },
