@@ -1,5 +1,5 @@
 module.exports = {
-  branches: ['main'],
+  branches: ['master'],
   preset: 'conventionalcommits',
   presetConfig: {
     types: [
