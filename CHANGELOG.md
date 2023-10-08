@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/sudomakes/backroad/compare/v1.0.0...v1.0.1) (2023-10-08)
+
+
+### Bug Fixes
+
+* publishing workflow ([77a1a02](https://github.com/sudomakes/backroad/commit/77a1a02d3e1fbf7a86358d3d531c5e8952564616))
+
 ## 1.0.0 (2023-10-08)
 
 
