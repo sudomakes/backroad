@@ -1,0 +1,23 @@
+name: RELEASE
+on: [workflow_dispatch]
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: nrwl/nx-set-shas@v3
+      - name: Install deps
+        run: npm ci
+      - name: Lint
+        run: npx nx run-many -t lint
+      - name: Test
+        run: npx nx run-many -t test --configuration=ci
+      - name: Release
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
+          NPM_TOKEN: ${{ secrets.BACKROAD_ORG_NPM_TOKEN }}

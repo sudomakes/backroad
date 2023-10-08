@@ -1,4 +1,4 @@
-import { BackroadNodeManager, run } from 'backroad';
+import { BackroadNodeManager, run } from '@backroad/backroad';
 import { pages } from './pages';
 
 run((br) => {

@@ -1,4 +1,4 @@
-import { BackroadNodeManager } from 'backroad';
+import { BackroadNodeManager } from '@backroad/backroad';
 
 export const backroadMarkdownExample = async (br: BackroadNodeManager) => {
   br.write({

@@ -8,7 +8,7 @@ import type {
   GenericBackroadComponent,
   InbuiltComponentTypes,
   InbuiltContainerTypes,
-} from 'backroad-core';
+} from '@backroad/core';
 import { omit } from 'lodash';
 import superjson from 'superjson';
 import { BackroadSession } from '../server/sessions/session';

@@ -12,7 +12,7 @@
         "tsConfig": "libs/backroad/tsconfig.lib.json",
         "packageJson": "libs/backroad/package.json",
         "main": "libs/backroad/src/index.ts",
-        "updateBuildableProjectDepsInPackageJson":true,
+        "updateBuildableProjectDepsInPackageJson": true,
         "assets": ["libs/backroad/**/public/*"]
       }
     },
@@ -28,6 +28,11 @@
           "libs/backroad/**/*.ts",
           "libs/backroad/package.json"
         ]
+      }
+    },
+    "release": {
+      "executor": "nx-release:build-update-publish",
+      "options": {
       }
     }
   },

@@ -1,4 +1,4 @@
-import { SelectOptionType } from 'backroad-core';
+import { SelectOptionType } from '@backroad/core';
 import type { GroupBase } from 'react-select';
 
 type OptionsType = SelectOptionType | GroupBase<SelectOptionType>;

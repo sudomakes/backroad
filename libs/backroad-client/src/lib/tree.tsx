@@ -1,4 +1,4 @@
-import { BackroadNode, isBackroadComponent } from 'backroad-core';
+import { BackroadNode, isBackroadComponent } from '@backroad/core';
 import { backroadClientComponents } from './components';
 import { backroadClientContainers } from './containers';
 

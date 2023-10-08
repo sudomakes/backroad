@@ -3,7 +3,7 @@ import {
   getInitialTreeStructure,
   type BackroadContainer,
   type BackroadNode,
-} from 'backroad-core';
+} from '@backroad/core';
 import { set } from 'lodash';
 import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';

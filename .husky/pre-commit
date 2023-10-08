@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+. "$(dirname "$0")/_/husky.sh"
+
+npx nx affected -t=lint --fix
+npx nx affected -t=test
+npx nx affected -t=build

@@ -1,4 +1,4 @@
-import { BackroadContainer } from 'backroad-core';
+import { BackroadContainer } from '@backroad/core';
 // import { TreeRender } from '../tree';
 import { TreeRender } from '../tree';
 

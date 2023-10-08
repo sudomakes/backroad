@@ -4,7 +4,7 @@ import type {
   ClientToServerEventTypes,
   ClientToServerEvents,
   ServerToClientEvents,
-} from 'backroad-core';
+} from '@backroad/core';
 import { Socket } from 'socket.io';
 import { BackroadSession } from '../sessions/session';
 
