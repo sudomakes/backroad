@@ -2,7 +2,10 @@
   "name": "@backroad/core",
   "version": "0.0.3",
   "dependencies": {
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "react-chartjs-2": "^5.2.0",
+    "react-select": "^5.7.7",
+    "socket.io": "^4.7.2"
   },
   "type": "commonjs",
   "main": "./src/index.js",

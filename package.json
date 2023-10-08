@@ -62,7 +62,6 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "husky": "^8.0.3",
     "jsdom": "~22.1.0",
-    "lint-staged": "^14.0.1",
     "nx": "16.9.1",
     "nx-release": "^3.1.6",
     "postcss": "8.4.21",
