@@ -2,13 +2,8 @@
   "name": "backroad-monorepo",
   "version": "1.0.0",
   "scripts": {
-    "backroad": "backroad",
     "build-example-app": "nx build client && nx build backroad-example &&  cp -R ./dist/apps/client ./dist/apps/backroad-example/public",
-    "publish": "nx run-many  --targets=publish-package --projects=backroad",
-    "cli": "node dist/libs/cli",
-    "dev": "nx run-many --parallel --target=serve --projects=backroad-example,client",
-    "server": "nx run server-debug:serve",
-    "client": "nx run client:serve"
+    "dev": "nx run-many --parallel --target=serve --projects=backroad-example,client"
   },
   "overrides": {
     "react": "18.2.0",

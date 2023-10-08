@@ -31,9 +31,6 @@
     },
     "test": {
       "inputs": ["default", "^production"]
-    },
-    "publish-package": {
-      "dependsOn": ["build", "test"]
     }
   },
   "namedInputs": {

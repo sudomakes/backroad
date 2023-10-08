@@ -17,10 +17,6 @@
         "assets": ["libs/backroad/**/public/*"]
       }
     },
-    "publish": {
-      "command": "node tools/scripts/publish.mjs backroad {args.ver} {args.tag}",
-      "dependsOn": ["build"]
-    },
     "lint": {
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
@@ -32,9 +28,24 @@
       }
     },
     "release": {
-      "executor": "nx-release:build-update-publish",
+      "executor": "@nrwl/workspace:run-commands",
       "options": {
+        "commands": [
+          "nx build client",
+          "nx run backroad:update-version",
+          "nx build backroad",
+          "nx run backroad:publish"
+        ],
+        "parallel": false
       }
+    },
+    "publish": {
+      "executor": "nx-release:npm-publish",
+      "options": {}
+    },
+    "update-version": {
+      "executor": "nx-release:update-version",
+      "options": {}
     }
   },
   "tags": []
