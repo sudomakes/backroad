@@ -1,3 +1,11 @@
+## [1.0.2](https://github.com/sudomakes/backroad/compare/v1.0.1...v1.0.2) (2023-10-08)
+
+
+### Bug Fixes
+
+* added client bundling to backroad build ([8a951ce](https://github.com/sudomakes/backroad/commit/8a951ce9a3126f6e0f154e8ad062fe7b3ec85f08))
+* added static asset bundling to backroad ([baad45d](https://github.com/sudomakes/backroad/commit/baad45d1ef12374fea213bd21e2bceaae6355787))
+
 ## [1.0.1](https://github.com/sudomakes/backroad/compare/v1.0.0...v1.0.1) (2023-10-08)
 
 
