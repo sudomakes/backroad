@@ -1,6 +1,6 @@
 {
   "name": "@backroad/backroad",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "src/index.js",
   "bin": "src/lib/cli.js",
   "scripts": {
@@ -9,7 +9,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-
-  }
+  "dependencies": {}
 }
