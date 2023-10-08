@@ -1,6 +1,6 @@
 {
   "name": "@backroad/backroad",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "main": "src/index.js",
   "bin": "src/lib/cli.js",
   "scripts": {
