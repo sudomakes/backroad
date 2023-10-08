@@ -6,7 +6,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-
-  }
+  "dependencies": {}
 }

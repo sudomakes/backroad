@@ -28,16 +28,7 @@
       }
     },
     "release": {
-      "executor": "@nrwl/workspace:run-commands",
-      "options": {
-        "commands": [
-          "nx build client",
-          "nx run backroad:update-version",
-          "nx build backroad",
-          "nx run backroad:publish"
-        ],
-        "parallel": false
-      }
+      "command": "nx build client && nx run backroad:update-version && nx build backroad && shx cp -R ./dist/apps/client/* ./dist/libs/backroad/src/lib/server/public && nx run backroad:publish"
     },
     "publish": {
       "executor": "nx-release:npm-publish",
