@@ -25,7 +25,7 @@ export const Table: BackroadComponentRenderer<'table'> = (props) => {
   });
   return (
     <div>
-      <table>
+      <table className="table">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>

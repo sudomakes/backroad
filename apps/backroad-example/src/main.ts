@@ -1,6 +1,7 @@
 import { BackroadNodeManager, run } from '@backroad/backroad';
 import { pages } from './pages';
-import { tableExampleData } from './data/table-example';
+import { chartData } from './data/charts-examples';
+// import { tableExampleData } from './data/table-example';
 
 run((br) => {
   // const numImages = br.numberInput({
@@ -30,11 +31,12 @@ run((br) => {
       // { href: '/columns', label: 'Columns Example' },
     ],
   });
+  br.bar(chartData.barChart);
 
-  br.table({
-    data: tableExampleData,
-    columns: { firstName: { cell: (info) => info.getValue() } },
-  });
+  // br.table({
+  //   data: tableExampleData,
+  //   columns: { firstName: { cell: (info) => info.getValue() } },
+  // });
 
   // // rendering examples on separate pages (defined in pages folder instead of inline)
   // f(pages.charts, br.page({ path: '/charts' }));

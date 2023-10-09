@@ -70,6 +70,7 @@
     "vitest": "~0.32.0"
   },
   "dependencies": {
+    "@faker-js/faker": "^8.1.0",
     "@heroicons/react": "^2.0.18",
     "@swc/helpers": "0.5.2",
     "@tanstack/react-table": "^8.10.6",

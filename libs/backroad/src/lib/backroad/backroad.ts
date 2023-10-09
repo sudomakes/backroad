@@ -196,4 +196,7 @@ export class BackroadNodeManager<
   table(props: BackroadComponentFormat<'table'>) {
     return this.initialiseAndAddComponentDescendant(props, 'table');
   }
+  bar(props: BackroadComponentFormat<'bar_chart'>) {
+    return this.initialiseAndAddComponentDescendant(props, 'bar_chart');
+  }
 }

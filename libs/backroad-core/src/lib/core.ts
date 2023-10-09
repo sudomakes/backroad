@@ -97,6 +97,10 @@ type _ComponentBasePropsMapping = {
     };
     value: null;
   };
+  bar_chart: {
+    args: Parameters<TypedChartComponent<'bar'>>[0];
+    value: null;
+  };
   // chart:{
   //   args: {
   //     data: any;

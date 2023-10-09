@@ -2,7 +2,7 @@ import { BackroadComponent, InbuiltComponentTypes } from '@backroad/core';
 import { Button } from './button';
 import { Markdown } from './markdown';
 import { NumberInput } from './number_input';
-import { LineChart } from './line';
+import { LineChart } from './line_chart';
 import { Select } from './select';
 import { Image } from './image';
 import { Link } from './link';
@@ -12,6 +12,7 @@ import { Multiselect } from './multiselect';
 import { Json } from './json';
 import { Title } from './title';
 import { Table } from './table';
+import { BarChart } from './bar_chart';
 export const backroadClientComponents: {
   [key in InbuiltComponentTypes]: (
     props: BackroadComponent<key, true>
@@ -30,4 +31,5 @@ export const backroadClientComponents: {
   json: Json,
   title: Title,
   table: Table,
+  bar_chart: BarChart,
 };
