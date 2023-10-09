@@ -1,6 +1,6 @@
 import type { TypedChartComponent } from 'react-chartjs-2/dist/types';
 import type { Props } from 'react-select';
-
+import type { ColumnHelper } from '@tanstack/react-table';
 export type SelectOptionType = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   value: any;
@@ -87,6 +87,13 @@ type _ComponentBasePropsMapping = {
   title: {
     args: {
       label: string;
+    };
+    value: null;
+  };
+  table: {
+    args: {
+      columns: Record<string, Parameters<ColumnHelper<any>['accessor']>[1]>;
+      data: object[];
     };
     value: null;
   };

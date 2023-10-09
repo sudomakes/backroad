@@ -20,7 +20,8 @@ to run local registry: nx local-registry
 
 ## Currently Need to Work On (From highest priority to lowest)
 
-* Packaging solution for end user
+* homepage and tawk integration, google analytics integration
+* Support for remaining components and documentation
 * 404 page for routes which dont exist
 * SEO improvements (for blog type pages)
 * favicon support, default title support, initial container width, initial sidebar state

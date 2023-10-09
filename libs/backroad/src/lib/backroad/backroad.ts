@@ -193,4 +193,7 @@ export class BackroadNodeManager<
   image(props: BackroadComponentFormat<'image'>) {
     return this.initialiseAndAddComponentDescendant(props, 'image');
   }
+  table(props: BackroadComponentFormat<'table'>) {
+    return this.initialiseAndAddComponentDescendant(props, 'table');
+  }
 }

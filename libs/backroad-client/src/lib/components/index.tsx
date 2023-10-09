@@ -11,6 +11,7 @@ import { Stats } from './stats';
 import { Multiselect } from './multiselect';
 import { Json } from './json';
 import { Title } from './title';
+import { Table } from './table';
 export const backroadClientComponents: {
   [key in InbuiltComponentTypes]: (
     props: BackroadComponent<key, true>
@@ -28,4 +29,5 @@ export const backroadClientComponents: {
   multiselect: Multiselect,
   json: Json,
   title: Title,
+  table: Table,
 };
