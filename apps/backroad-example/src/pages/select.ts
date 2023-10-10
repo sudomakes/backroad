@@ -1,8 +1,8 @@
 import { BackroadNodeManager } from '@backroad/backroad';
 
-export const backroadSelectExample = async (br: BackroadNodeManager) => {
-  const sidebar = await br.sidebar({});
-  const value = await sidebar.select({
+export const backroadSelectExample = (br: BackroadNodeManager) => {
+  const sidebar = br.sidebar({});
+  const value = sidebar.select({
     options: [
       { value: 'Amol', label: 'Amol' },
       { value: 'Sangeeth', label: 'Sangeeth' },
@@ -12,25 +12,25 @@ export const backroadSelectExample = async (br: BackroadNodeManager) => {
     label: 'Who is the best leetcoder?',
   });
   if (value) {
-    await br.write({ body: `## You selected ${value}` });
+    br.write({ body: `## You selected ${value}` });
     if (value === 'Amol') {
-      await br.write({
+      br.write({
         body: `### Makes sense, he has 1000+ problems solved 🚀`,
       });
-      await br.image({
+      br.image({
         src: 'https://media.tenor.com/-BVQhBulOmAAAAAC/bruce-almighty-morgan-freeman.gif',
       });
     } else if (value === 'Sangeeth') {
-      await br.write({
+      br.write({
         body: `### koi SIGKILL bhejdo mereko please!! 😭`,
       });
-      await br.image({
+      br.collapse({ label: 'spoiler alert!!' }).image({
         src: 'https://s.keepmeme.com/files/en_posts/20200818/7848c2160135eb558ba3b3429c07a184disappointed-bald-man-standing-disappointed-cricket-fan-meme.jpg',
       });
     }
   }
 
-  const multiValue = await br.multiselect({
+  const multiValue = br.multiselect({
     options: [
       { value: 'Pink', label: 'Pink' },
       { value: 'Red', label: 'Red' },

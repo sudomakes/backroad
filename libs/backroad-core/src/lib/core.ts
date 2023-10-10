@@ -147,6 +147,11 @@ type ContainerArgsMapping = {
   page: {
     args: { path: string };
   };
+  collapse: {
+    args: {
+      label: string;
+    };
+  };
 };
 export type InbuiltComponentTypes = keyof ComponentPropsMapping;
 export type InbuiltContainerTypes = keyof ContainerArgsMapping;

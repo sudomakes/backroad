@@ -153,6 +153,11 @@ export class BackroadNodeManager<
       columnsContainer.addContainerDescendant({ type: 'base', args: {} })
     );
   }
+  collapse(props: BackroadContainerFormat<'collapse'>) {
+    return this.addContainerDescendant(
+      this.constructContainerObject(props, 'collapse')
+    );
+  }
 
   link(props: BackroadComponentFormat<'link'>) {
     return this.initialiseAndAddComponentDescendant(props, 'link');
