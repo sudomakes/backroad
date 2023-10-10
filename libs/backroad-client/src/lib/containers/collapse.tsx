@@ -10,6 +10,7 @@ import {
     AccordionItemPanel,
     AccordionItemState
 } from 'react-accessible-accordion';
+import { Base } from "./base";
 export const Collapse: BackroadContainerRenderer<"collapse"> = (props) => {
     return <ReactAccordion allowZeroExpanded >
         <AccordionItem className="border border-base-300 p-4 rounded-lg">
@@ -31,7 +32,7 @@ export const Collapse: BackroadContainerRenderer<"collapse"> = (props) => {
                 </AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel className="mt-4">
-                {props.children.map(child => <TreeRender tree={child} key={child.path} />)}
+                <Base {...{ ...props, type: "base" }} />
             </AccordionItemPanel>
         </AccordionItem>
     </ReactAccordion>

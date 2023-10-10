@@ -24,6 +24,7 @@ run((br) => {
   });
   f(pages.select, br.page({ path: '/select' }));
   f(pages.charts, br.page({ path: '/charts' }));
+  f(pages.llm, br.page({ path: '/llm' }));
   // f(pages.markdown, br.page({ path: '/markdown' }));
   // f(pages.stats, br.page({ path: '/stats' }));
   // f(pages.columns, br.page({ path: '/columns' }));

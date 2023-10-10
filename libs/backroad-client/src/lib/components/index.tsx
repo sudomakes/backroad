@@ -1,22 +1,23 @@
 import { BackroadComponent, InbuiltComponentTypes } from '@backroad/core';
+import { BarChart } from './bar_chart';
 import { Button } from './button';
-import { Markdown } from './markdown';
-import { NumberInput } from './number_input';
-import { LineChart } from './line_chart';
-import { Select } from './select';
+import { ChatInput } from './chat_input';
+import { DoughnutChart } from './doughnut_chart';
 import { Image } from './image';
+import { Json } from './json';
+import { LineChart } from './line_chart';
 import { Link } from './link';
 import { LinkGroup } from './link_group';
-import { Stats } from './stats';
+import { Markdown } from './markdown';
 import { Multiselect } from './multiselect';
-import { Json } from './json';
-import { Title } from './title';
-import { Table } from './table';
-import { BarChart } from './bar_chart';
+import { NumberInput } from './number_input';
 import { PieChart } from './pie_chart';
-import { DoughnutChart } from './doughnut_chart';
 import { RadarChart } from './radar_chart';
 import { ScatterChart } from './scatter_chart';
+import { Select } from './select';
+import { Stats } from './stats';
+import { Table } from './table';
+import { Title } from './title';
 export const backroadClientComponents: {
   [key in InbuiltComponentTypes]: (
     props: BackroadComponent<key, true>
@@ -39,5 +40,6 @@ export const backroadClientComponents: {
   pie_chart: PieChart,
   doughnut_chart: DoughnutChart,
   radar_chart: RadarChart,
-  scatter_chart: ScatterChart
+  scatter_chart: ScatterChart,
+  chat_input: ChatInput,
 };

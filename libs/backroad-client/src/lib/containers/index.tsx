@@ -6,6 +6,7 @@ import { _Page } from './page';
 import { Columns } from './columns';
 import { Collapse } from './collapse';
 import { Tabs } from './tabs';
+import { ChatMessage } from './chat_message';
 
 export const backroadClientContainers: {
   [key in InbuiltContainerTypes]: BackroadContainerRenderer<key>;
@@ -15,5 +16,6 @@ export const backroadClientContainers: {
   sidebar: Sidebar,
   page: _Page,
   collapse: Collapse,
-  tabs: Tabs
+  tabs: Tabs,
+  chat_message: ChatMessage
 };

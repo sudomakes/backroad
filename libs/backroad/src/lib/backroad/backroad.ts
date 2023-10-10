@@ -166,6 +166,11 @@ export class BackroadNodeManager<
       tabsContainer.addContainerDescendant({ type: 'base', args: {} })
     );
   }
+  chatMessage(props: BackroadContainerFormat<'chat_message'>) {
+    return this.addContainerDescendant(
+      this.constructContainerObject(props, 'chat_message')
+    );
+  }
 
   link(props: BackroadComponentFormat<'link'>) {
     return this.initialiseAndAddComponentDescendant(props, 'link');
@@ -223,5 +228,8 @@ export class BackroadNodeManager<
   }
   scatter(props: BackroadComponentFormat<'scatter_chart'>) {
     return this.initialiseAndAddComponentDescendant(props, 'scatter_chart');
+  }
+  chatInput(props: BackroadComponentFormat<'chat_input'>) {
+    return this.initialiseAndAddComponentDescendant(props, 'chat_input');
   }
 }

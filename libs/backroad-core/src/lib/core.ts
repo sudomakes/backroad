@@ -1,6 +1,7 @@
 import type { TypedChartComponent } from 'react-chartjs-2/dist/types';
 import type { Props } from 'react-select';
 import type { ColumnHelper } from '@tanstack/react-table';
+import { HTMLProps } from 'react';
 export type SelectOptionType = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   value: any;
@@ -51,7 +52,7 @@ type _ComponentBasePropsMapping = {
     value: any[];
   };
   image: {
-    args: { src: string; alt?: string };
+    args: HTMLProps<HTMLImageElement>;
     value: null;
   };
   link: {
@@ -117,13 +118,11 @@ type _ComponentBasePropsMapping = {
     args: Parameters<TypedChartComponent<'scatter'>>[0];
     value: null;
   };
-  // chart:{
-  //   args: {
-  //     data: any;
-  //     options: any;
-  //   };
-  //   value: null;
-  // };
+
+  chat_input: {
+    args: { placeholder?: string };
+    value: string;
+  };
 };
 export type ComponentPropsMapping = {
   [key in keyof _ComponentBasePropsMapping]: {
@@ -156,6 +155,9 @@ type ContainerArgsMapping = {
     args: {
       labels: string[];
     };
+  };
+  chat_message: {
+    args: { name: string; avatar?: string };
   };
 };
 export type InbuiltComponentTypes = keyof ComponentPropsMapping;
