@@ -101,6 +101,22 @@ type _ComponentBasePropsMapping = {
     args: Parameters<TypedChartComponent<'bar'>>[0];
     value: null;
   };
+  pie_chart: {
+    args: Parameters<TypedChartComponent<'pie'>>[0];
+    value: null;
+  };
+  doughnut_chart: {
+    args: Parameters<TypedChartComponent<'doughnut'>>[0];
+    value: null;
+  };
+  radar_chart: {
+    args: Parameters<TypedChartComponent<'radar'>>[0];
+    value: null;
+  };
+  scatter_chart: {
+    args: Parameters<TypedChartComponent<'scatter'>>[0];
+    value: null;
+  };
   // chart:{
   //   args: {
   //     data: any;

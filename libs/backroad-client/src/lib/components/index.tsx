@@ -13,6 +13,10 @@ import { Json } from './json';
 import { Title } from './title';
 import { Table } from './table';
 import { BarChart } from './bar_chart';
+import { PieChart } from './pie_chart';
+import { DoughnutChart } from './doughnut_chart';
+import { RadarChart } from './radar_chart';
+import { ScatterChart } from './scatter_chart';
 export const backroadClientComponents: {
   [key in InbuiltComponentTypes]: (
     props: BackroadComponent<key, true>
@@ -32,4 +36,8 @@ export const backroadClientComponents: {
   title: Title,
   table: Table,
   bar_chart: BarChart,
+  pie_chart: PieChart,
+  doughnut_chart: DoughnutChart,
+  radar_chart: RadarChart,
+  scatter_chart: ScatterChart
 };

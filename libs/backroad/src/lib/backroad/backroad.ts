@@ -199,4 +199,16 @@ export class BackroadNodeManager<
   bar(props: BackroadComponentFormat<'bar_chart'>) {
     return this.initialiseAndAddComponentDescendant(props, 'bar_chart');
   }
+  pie(props: BackroadComponentFormat<'pie_chart'>) {
+    return this.initialiseAndAddComponentDescendant(props, 'pie_chart');
+  }
+  doughnut(props: BackroadComponentFormat<'doughnut_chart'>) {
+    return this.initialiseAndAddComponentDescendant(props, 'doughnut_chart');
+  }
+  radar(props: BackroadComponentFormat<'radar_chart'>) {
+    return this.initialiseAndAddComponentDescendant(props, 'radar_chart');
+  }
+  scatter(props: BackroadComponentFormat<'scatter_chart'>) {
+    return this.initialiseAndAddComponentDescendant(props, 'scatter_chart');
+  }
 }

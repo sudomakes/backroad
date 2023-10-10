@@ -3,11 +3,9 @@ import {
   CategoryScale,
   Chart as ChartJS,
   Legend,
-  LineElement,
   LinearScale,
-  PointElement,
   Title,
-  Tooltip,
+  Tooltip
 } from 'chart.js';
 import autocolors from 'chartjs-plugin-autocolors';
 import { Bar } from 'react-chartjs-2';

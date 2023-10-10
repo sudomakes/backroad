@@ -32,7 +32,10 @@ run((br) => {
     ],
   });
   br.bar(chartData.barChart);
-
+  br.pie(chartData.pieChart);
+  br.doughnut(chartData.doughnutChart);
+  br.radar(chartData.radarChart);
+  br.scatter(chartData.scatterChart);
   // br.table({
   //   data: tableExampleData,
   //   columns: { firstName: { cell: (info) => info.getValue() } },
