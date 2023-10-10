@@ -5,6 +5,7 @@ import { Sidebar } from './sidebar';
 import { _Page } from './page';
 import { Columns } from './columns';
 import { Collapse } from './collapse';
+import { Tabs } from './tabs';
 
 export const backroadClientContainers: {
   [key in InbuiltContainerTypes]: BackroadContainerRenderer<key>;
@@ -13,5 +14,6 @@ export const backroadClientContainers: {
   columns: Columns,
   sidebar: Sidebar,
   page: _Page,
-  collapse: Collapse
+  collapse: Collapse,
+  tabs: Tabs
 };

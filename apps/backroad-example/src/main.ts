@@ -12,13 +12,16 @@ run((br) => {
     ],
   });
 
-  // br.table({
-  //   data: tableExampleData,
-  //   columns: { firstName: { cell: (info) => info.getValue() } },
-  // });
-
-  // // rendering examples on separate pages (defined in pages folder instead of inline)
-  // f(pages.charts, br.page({ path: '/charts' }));
+  const [cat, dog, chicken] = br.tabs({ labels: ['Cat', 'Dog', 'Chicken'] });
+  cat.image({
+    src: 'https://images6.alphacoders.com/337/thumb-1920-337780.jpg',
+  });
+  dog.image({
+    src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Cute_dog.jpg/1024px-Cute_dog.jpg',
+  });
+  chicken.image({
+    src: 'https://cdn.pixabay.com/photo/2016/11/29/05/32/rooster-1867562_1280.jpg',
+  });
   f(pages.select, br.page({ path: '/select' }));
   f(pages.charts, br.page({ path: '/charts' }));
   // f(pages.markdown, br.page({ path: '/markdown' }));

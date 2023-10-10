@@ -1,1 +1,0 @@
-docker save backroad-example:latest | gzip | DOCKER_HOST=ssh://azureuser@4.224.85.41 docker load

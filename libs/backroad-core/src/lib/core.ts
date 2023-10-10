@@ -152,6 +152,11 @@ type ContainerArgsMapping = {
       label: string;
     };
   };
+  tabs: {
+    args: {
+      labels: string[];
+    };
+  };
 };
 export type InbuiltComponentTypes = keyof ComponentPropsMapping;
 export type InbuiltContainerTypes = keyof ContainerArgsMapping;

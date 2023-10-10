@@ -158,6 +158,14 @@ export class BackroadNodeManager<
       this.constructContainerObject(props, 'collapse')
     );
   }
+  tabs(props: BackroadContainerFormat<'tabs'>) {
+    const tabsContainer = this.addContainerDescendant(
+      this.constructContainerObject(props, 'tabs')
+    );
+    return [...Array(props.labels.length)].map(() =>
+      tabsContainer.addContainerDescendant({ type: 'base', args: {} })
+    );
+  }
 
   link(props: BackroadComponentFormat<'link'>) {
     return this.initialiseAndAddComponentDescendant(props, 'link');
