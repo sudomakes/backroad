@@ -25,6 +25,7 @@ run(async (br) => {
   f(pages.select, br.page({ path: '/select' }));
   f(pages.charts, br.page({ path: '/charts' }));
   await f(pages.llm, br.page({ path: '/llm' }));
+  f(pages.form, br.page({ path: '/form' }));
 
   const btn = br.button({ label: 'Get joke' });
   if (btn) {

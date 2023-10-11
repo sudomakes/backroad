@@ -18,6 +18,7 @@ import { Select } from './select';
 import { Stats } from './stats';
 import { Table } from './table';
 import { Title } from './title';
+import { ColorPicker } from './color_picker';
 export const backroadClientComponents: {
   [key in InbuiltComponentTypes]: (
     props: BackroadComponent<key, true>
@@ -42,4 +43,5 @@ export const backroadClientComponents: {
   radar_chart: RadarChart,
   scatter_chart: ScatterChart,
   chat_input: ChatInput,
+  color_picker: ColorPicker
 };

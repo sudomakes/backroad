@@ -1,5 +1,6 @@
 import { backroadChartsExample } from './charts';
 import { backroadColumnsExample } from './columns';
+import { backroadFormExample } from './form';
 import { backroadLLMExample } from './llm';
 import { backroadMarkdownExample } from './markdown';
 import { backroadSelectExample } from './select';
@@ -12,4 +13,5 @@ export const pages = {
   stats: backroadStatsExample,
   columns: backroadColumnsExample,
   llm: backroadLLMExample,
+  form: backroadFormExample,
 };

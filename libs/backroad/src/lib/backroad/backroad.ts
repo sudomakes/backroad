@@ -243,4 +243,7 @@ export class BackroadNodeManager<
   chatInput(props: BackroadComponentFormat<'chat_input'>) {
     return this.initialiseAndAddComponentDescendant(props, 'chat_input');
   }
+  colorPicker(props: BackroadComponentFormat<'color_picker'>) {
+    return this.initialiseAndAddComponentDescendant(props, 'color_picker');
+  }
 }

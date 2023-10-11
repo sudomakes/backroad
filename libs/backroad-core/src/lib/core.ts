@@ -129,6 +129,10 @@ type _ComponentBasePropsMapping = {
     args: { placeholder?: string };
     value: string | null;
   };
+  color_picker: AllowDefaultHelper<{
+    args: { label: string };
+    value: string;
+  }>;
 };
 export type ComponentPropsMapping = {
   [key in keyof _ComponentBasePropsMapping]: {
@@ -245,4 +249,5 @@ export const defaultValueFallbacks: {
 } = {
   chat_input: null,
   button: false,
+  color_picker: '#000000',
 };
