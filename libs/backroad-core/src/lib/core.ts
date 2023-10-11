@@ -244,4 +244,5 @@ export const defaultValueFallbacks: {
   [key in InbuiltComponentTypes]?: ComponentPropsMapping[key]['value'];
 } = {
   chat_input: null,
+  button: false,
 };

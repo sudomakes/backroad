@@ -1,5 +1,8 @@
-import { BackroadComponent } from '@backroad/core';
+import { setRunUnsetBackroadValue } from '../socket';
+import { BackroadComponentRenderer } from '../types/components';
 
-export const Button = (props: BackroadComponent<'button', true>) => {
-  return <button className="btn">{props.args.label}</button>;
+export const Button: BackroadComponentRenderer<"button"> = (props) => {
+  return <button className="btn" onClick={() => {
+    setRunUnsetBackroadValue({ id: props.id, value: true })
+  }}>{props.args.label}</button>;
 };

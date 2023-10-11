@@ -1,5 +1,6 @@
 import { BackroadNodeManager, run } from '@backroad/backroad';
 import { pages } from './pages';
+let joke: null | object = null;
 run(async (br) => {
   br.title({ label: 'Backroad Example' });
   const sidebar = br.sidebar({});
@@ -24,6 +25,19 @@ run(async (br) => {
   f(pages.select, br.page({ path: '/select' }));
   f(pages.charts, br.page({ path: '/charts' }));
   await f(pages.llm, br.page({ path: '/llm' }));
+
+  const btn = br.button({ label: 'Get joke' });
+  if (btn) {
+    const resp = await (
+      await fetch('https://v2.jokeapi.dev/joke/Any?safe-mode')
+    ).json();
+    joke = resp;
+    console.log("here's a joke", joke);
+  }
+  // if (joke) {
+  br.json({ src: joke || {} });
+  // }
+
   // f(pages.markdown, br.page({ path: '/markdown' }));
   // f(pages.stats, br.page({ path: '/stats' }));
   // f(pages.columns, br.page({ path: '/columns' }));
