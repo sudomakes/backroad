@@ -17,17 +17,31 @@ export const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
 export const setBackroadValue = (props: {
   id: string;
   value: unknown;
-  triggerRerun?: boolean;
+  // triggerRerun?: boolean
 }) => {
-  socket.emit(
-    'set_value',
-    {
-      id: props.id,
-      value: superjson.stringify(props.value),
-      triggerRerun: props.triggerRerun,
-    },
-    () => {
-      console.log('set and rerun callback');
-    }
-  );
+  return new Promise<void>((resolve) => {
+
+    socket.emit(
+      'set_value',
+      {
+        id: props.id,
+        value: superjson.stringify(props.value),
+      },
+      () => {
+        resolve()
+      }
+    );
+  })
 };
+
+export const setRunUnsetBackroadValue = (props: Parameters<typeof setBackroadValue>[0]) => {
+  // sets and re-runs in backend
+  return new Promise<void>((resolve) => {
+    setBackroadValue(props).then(() => {
+
+      socket.emit("unset_value", { id: props.id }, () => {
+        resolve()
+      })
+    });
+  })
+}

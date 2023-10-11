@@ -16,6 +16,7 @@ export const Tabs: BackroadContainerRenderer<"tabs"> = (props) => {
                 if (activeLabelIdx === idx) {
                     return <TreeRender tree={child} key={child.path} />
                 }
+                return null;
             })}
         </div>
     </div>

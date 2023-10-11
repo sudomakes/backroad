@@ -1,6 +1,6 @@
 import { DOMAttributes } from 'react';
 
-export const handleKeyUp: DOMAttributes<HTMLInputElement>['onKeyUp'] = (
+export const handleKeyUpBlur: DOMAttributes<HTMLInputElement>['onKeyUp'] = (
   event
 ) => {
   //key code for enter

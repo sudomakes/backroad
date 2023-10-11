@@ -1,25 +1,66 @@
 import { BackroadNodeManager } from '@backroad/backroad';
 
+const messages = [{ by: 'ai', content: 'Hi, how can I help you today? 😀' }];
+
 export const backroadLLMExample = async (br: BackroadNodeManager) => {
   br.write({
     body: `# LLM Example
 ---`,
   });
-
-  const human = br.chatMessage({ name: 'human' });
-  human.write({
-    body: `tell me the output for the following program:
-~~~
-print("hello world!")
-~~~`,
+  const messagesContainer = br.base({});
+  messages.forEach(async (message, idx) => {
+    if (idx === messages.length - 1) await simulatedDelay();
+    messagesContainer
+      .chatMessage({ name: message.by })
+      .write({ body: message.content });
   });
-  const ai = br.chatMessage({ name: 'ai' });
-  ai.write({ body: `I don't know!!` });
-  ai.image({
-    src: 'https://preview.redd.it/a8pg715pv0da1.png?auto=webp&s=54b21a22a57119d13cf68286572a05f1fd471d9e',
-    width: 300,
-    style: {
-      borderRadius: '50%',
-    },
+  const messageFromInput = br.chatInput({
+    placeholder: "Type asking what's 1+1?",
+    id: 'chat-input',
+  });
+  if (messageFromInput) {
+    messages.push({ by: 'human', content: messageFromInput });
+    messages.push({ by: 'ai', content: getGPTResponse(messageFromInput) });
+  }
+  br.collapse({ label: 'Show Code' }).write({
+    body: `
+~~~
+
+const messages: { by: string; content: string }[] = [];
+
+export const backroadLLMExample = async (br: BackroadNodeManager) => {
+  const messagesContainer = br.base({});
+  messages.forEach(async (message, idx) => {
+    if (idx === messages.length - 1) await simulatedDelay();
+    messagesContainer
+      .chatMessage({ name: message.by })
+      .write({ body: message.content });
+  });
+  const messageFromInput = br.chatInput({
+    placeholder: 'Type Something Here',
+    id: 'chat-input',
+  });
+  if (messageFromInput) {
+    messages.push({ by: 'human', content: messageFromInput });
+    messages.push({ by: 'ai', content: getGPTResponse(messageFromInput) });
+  }
+};
+~~~
+`,
+  });
+};
+
+const getGPTResponse = (message: string) => {
+  if (message.includes('1+1')) {
+    return 'Ah, the answer to that is 2!! 😎';
+  } else {
+    return `I don't know...
+    ![i-dont-know](https://t3.ftcdn.net/jpg/05/66/80/74/360_F_566807496_uKCQoOWWdXbFWKluJXo2ilg7B61J0qIe.jpg)`;
+  }
+};
+
+const simulatedDelay = () => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, 1000);
   });
 };

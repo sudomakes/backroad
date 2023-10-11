@@ -25,7 +25,7 @@ export const run = async (
     SocketManager.register(backroadSession.sessionId, socket);
     const runExecutor = async () => {
       backroadSession.resetTree();
-      executor(backroadSession.mainPageNodeManager);
+      await executor(backroadSession.mainPageNodeManager);
     };
     // execute once to populate defaults and stuff
 
@@ -42,6 +42,10 @@ export const run = async (
       socketEventHandlers.runScript(socket, backroadSession, runExecutor)
     );
 
+    socket.on(
+      'unset_value',
+      socketEventHandlers.unsetValue(socket, backroadSession, runExecutor)
+    );
     // socket.on("get_tree", socketEventHandlers.getTree(socket, backroadSession));
   });
 };

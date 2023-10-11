@@ -1,0 +1,9 @@
+// .chat_input {
+//   &:empty:before {
+//     content: attr(placeholder);
+//     pointer-events: none;
+//     display: block; /* For Firefox */
+//     @apply text-base-content;
+//     @apply opacity-40;
+//   }
+// }

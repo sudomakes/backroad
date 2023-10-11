@@ -46,6 +46,9 @@ export class BackroadSession {
     this.state[id] = value;
     // this.onRunRequest()
   }
+  unsetValue(id: string) {
+    delete this.state[id];
+  }
 
   // notify
   setValueIfNotSet(id: string, value: unknown) {

@@ -1,14 +1,13 @@
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
-import { TreeRender } from "../tree";
 import { BackroadContainerRenderer } from "../types/containers";
 
 import {
-    Accordion as ReactAccordion,
     AccordionItem,
-    AccordionItemHeading,
     AccordionItemButton,
+    AccordionItemHeading,
     AccordionItemPanel,
-    AccordionItemState
+    AccordionItemState,
+    Accordion as ReactAccordion
 } from 'react-accessible-accordion';
 import { Base } from "./base";
 export const Collapse: BackroadContainerRenderer<"collapse"> = (props) => {

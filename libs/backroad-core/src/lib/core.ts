@@ -8,8 +8,14 @@ export type SelectOptionType = {
   label: string;
 };
 type SelectValueType = SelectOptionType['value'];
+type AllowDefaultHelper<T> = T extends {
+  args: infer ArgsType;
+  value: infer ValueType;
+}
+  ? { args: ArgsType & { defaultValue?: ValueType }; value: ValueType }
+  : never;
 type _ComponentBasePropsMapping = {
-  number_input: {
+  number_input: AllowDefaultHelper<{
     args: {
       label: string;
       min?: number;
@@ -18,7 +24,7 @@ type _ComponentBasePropsMapping = {
       precision?: number;
     };
     value: number;
-  };
+  }>;
   markdown: {
     args: { body: string | number };
     value: null;
@@ -121,7 +127,7 @@ type _ComponentBasePropsMapping = {
 
   chat_input: {
     args: { placeholder?: string };
-    value: string;
+    value: string | null;
   };
 };
 export type ComponentPropsMapping = {
@@ -232,3 +238,10 @@ export function isBackroadComponent<ValuePopulated extends boolean>(
     (valuePopulated ? 'value' in element : !('value' in element))
   );
 }
+
+// if no default is provided, null will be supplied (by default) by setter
+export const defaultValueFallbacks: {
+  [key in InbuiltComponentTypes]?: ComponentPropsMapping[key]['value'];
+} = {
+  chat_input: null,
+};

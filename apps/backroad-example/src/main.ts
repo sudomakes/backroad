@@ -1,14 +1,13 @@
 import { BackroadNodeManager, run } from '@backroad/backroad';
 import { pages } from './pages';
-// import { tableExampleData } from './data/table-example';
-
-run((br) => {
+run(async (br) => {
   br.title({ label: 'Backroad Example' });
   const sidebar = br.sidebar({});
   sidebar.linkGroup({
     items: [
       { href: '/select', label: 'Select Example' },
       { href: '/charts', label: 'Charts Example' },
+      { href: '/llm', label: 'LLM Example' },
     ],
   });
 
@@ -24,16 +23,16 @@ run((br) => {
   });
   f(pages.select, br.page({ path: '/select' }));
   f(pages.charts, br.page({ path: '/charts' }));
-  f(pages.llm, br.page({ path: '/llm' }));
+  await f(pages.llm, br.page({ path: '/llm' }));
   // f(pages.markdown, br.page({ path: '/markdown' }));
   // f(pages.stats, br.page({ path: '/stats' }));
   // f(pages.columns, br.page({ path: '/columns' }));
 });
 
-const f = (
+const f = async (
   pageContentFunc: (br: BackroadNodeManager<'page'>) => void,
   br: BackroadNodeManager<'page'>
 ) => {
   br.link({ label: 'go home', href: '/' });
-  pageContentFunc(br);
+  await pageContentFunc(br);
 };

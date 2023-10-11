@@ -1,6 +1,5 @@
 import { CpuChipIcon, UserIcon } from "@heroicons/react/24/outline"
 import { BackroadContainerRenderer } from "../types/containers"
-import { TreeRender } from "../tree"
 import { Base } from "./base"
 
 export const ChatMessage: BackroadContainerRenderer<"chat_message"> = (props) => {

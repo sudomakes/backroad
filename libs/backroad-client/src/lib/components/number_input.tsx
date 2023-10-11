@@ -1,7 +1,7 @@
 import { BackroadComponent } from '@backroad/core';
 import { useState } from 'react';
 import { setBackroadValue } from '../socket';
-import { handleKeyUp } from '../helpers/handleKeyUp';
+import { handleKeyUpBlur } from '../helpers/handleKeyUp';
 import { PlusIcon, MinusIcon } from '@heroicons/react/24/outline';
 
 export const NumberInput = (props: BackroadComponent<'number_input', true>) => {
@@ -28,7 +28,7 @@ export const NumberInput = (props: BackroadComponent<'number_input', true>) => {
           value={inputValue}
           onChange={(e) => setInputValue(getFormattedValue(e.target.value))}
           placeholder="Type here"
-          onKeyUp={handleKeyUp}
+          onKeyUp={handleKeyUpBlur}
           onBlur={(e) => {
             console.log('blur setting value');
             setBackroadValue({
