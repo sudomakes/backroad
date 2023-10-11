@@ -1,3 +1,16 @@
+## [1.1.0](https://github.com/sudomakes/backroad/compare/v1.0.2...v1.1.0) (2023-10-11)
+
+
+### Features
+
+* added bar chart ([e270ff4](https://github.com/sudomakes/backroad/commit/e270ff4073c54372967d65702d02f04dd70de04c))
+* added collapse ([55f7a20](https://github.com/sudomakes/backroad/commit/55f7a20397ccdaf50403b52490e79d7d01e90a3b))
+* added llm chat message ([c6bc3a8](https://github.com/sudomakes/backroad/commit/c6bc3a83d86654fd2bea042abbd2c3cb91761b28))
+* added llm example ([ebd4326](https://github.com/sudomakes/backroad/commit/ebd4326988f6e7c78055e2ef62957d744f95849d))
+* added more charts ([dab9f5e](https://github.com/sudomakes/backroad/commit/dab9f5e88ff7b0c244591b38963d565c339e42c0))
+* added table component ([cc810cd](https://github.com/sudomakes/backroad/commit/cc810cde2abf6af6389ddbb0b4ebca0d2d858504))
+* added tabs ([93abdd0](https://github.com/sudomakes/backroad/commit/93abdd0cdd96b0d571a6a5741ed12daf6c99f1f9))
+
 ## [1.0.2](https://github.com/sudomakes/backroad/compare/v1.0.1...v1.0.2) (2023-10-08)
 
 
