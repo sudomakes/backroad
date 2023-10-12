@@ -133,6 +133,33 @@ type _ComponentBasePropsMapping = {
     args: { label: string };
     value: string;
   }>;
+  checkbox: AllowDefaultHelper<{
+    args: {
+      label: string;
+    };
+    value: boolean;
+  }>;
+  toggle: AllowDefaultHelper<{
+    args: {
+      label: string;
+    };
+    value: boolean;
+  }>;
+  radio: AllowDefaultHelper<{
+    args: {
+      options: string[];
+      label: string;
+    };
+    value: string;
+  }>;
+  text_input: AllowDefaultHelper<{
+    args: {
+      label: string;
+      placeholder?: string;
+    };
+    value: string;
+  }>;
+  // date_input: AllowDefaultHelper<{}>
 };
 export type ComponentPropsMapping = {
   [key in keyof _ComponentBasePropsMapping]: {
@@ -245,9 +272,17 @@ export function isBackroadComponent<ValuePopulated extends boolean>(
 
 // if no default is provided, null will be supplied (by default) by setter
 export const defaultValueFallbacks: {
-  [key in InbuiltComponentTypes]?: ComponentPropsMapping[key]['value'];
+  [key in InbuiltComponentTypes]?:
+    | ComponentPropsMapping[key]['value']
+    | ((props: {
+        args: ComponentPropsMapping[key]['args'];
+      }) => ComponentPropsMapping[key]['value']);
 } = {
   chat_input: null,
   button: false,
   color_picker: '#000000',
+  checkbox: false,
+  toggle: false,
+  radio: (props) => props.args.options[0],
+  text_input: '',
 };

@@ -16,7 +16,7 @@ export const NavbarMenu = () => {
           <div className="form-control w-full max-w-xs">
             {' '}
             <label className="label">
-              <span className="label-text">Theme Preference</span>
+              <span className="backroad-label">Theme Preference</span>
             </label>
             <select
               data-choose-theme

@@ -48,7 +48,7 @@ export const ColorPicker: BackroadComponentRenderer<"color_picker"> = (props) =>
     useClickOutside(popover, close);
     return <div className="form-control w-full max-w-xs relative">
         <label className="label">
-            <span className="label-text">{props.args.label}</span>
+            <span className="backroad-label">{props.args.label}</span>
         </label>
         <div className='h-8 w-8 rounded-md cursor-pointer' style={{ backgroundColor: value }} onClick={() => {
             if (!isOpen) { setIsOpen(true) }

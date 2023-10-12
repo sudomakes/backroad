@@ -9,6 +9,7 @@ run(async (br) => {
       { href: '/select', label: 'Select Example' },
       { href: '/charts', label: 'Charts Example' },
       { href: '/llm', label: 'LLM Example' },
+      { href: '/form', label: 'Form Example' },
     ],
   });
 

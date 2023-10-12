@@ -1,8 +1,9 @@
 import { BackroadNodeManager } from '@backroad/backroad';
 
-const messages = [{ by: 'ai', content: 'Hi, how can I help you today? 😀' }];
-
 export const backroadLLMExample = async (br: BackroadNodeManager) => {
+  const messages = br.getOrDefault('messages', [
+    { by: 'ai', content: 'Hi, how can I help you today? 😀' },
+  ]);
   br.write({
     body: `# LLM Example
 ---`,
@@ -21,6 +22,7 @@ export const backroadLLMExample = async (br: BackroadNodeManager) => {
   if (messageFromInput) {
     messages.push({ by: 'human', content: messageFromInput });
     messages.push({ by: 'ai', content: getGPTResponse(messageFromInput) });
+    br.setValue('messages', messages);
   }
   br.collapse({ label: 'Show Code' }).write({
     body: `

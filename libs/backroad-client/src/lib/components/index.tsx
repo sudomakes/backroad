@@ -19,6 +19,10 @@ import { Stats } from './stats';
 import { Table } from './table';
 import { Title } from './title';
 import { ColorPicker } from './color_picker';
+import { Toggle } from './toggle';
+import { Checkbox } from './checkbox';
+import { Radio } from './radio';
+import { TextInput } from './text_input';
 export const backroadClientComponents: {
   [key in InbuiltComponentTypes]: (
     props: BackroadComponent<key, true>
@@ -43,5 +47,9 @@ export const backroadClientComponents: {
   radar_chart: RadarChart,
   scatter_chart: ScatterChart,
   chat_input: ChatInput,
-  color_picker: ColorPicker
+  color_picker: ColorPicker,
+  toggle: Toggle,
+  checkbox: Checkbox,
+  radio: Radio,
+  text_input: TextInput
 };

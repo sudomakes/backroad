@@ -12,7 +12,7 @@ export const Select: BackroadComponentRenderer<'select'> = (props) => {
   return (
     <div className="form-control w-full max-w-xs">
       <label className="label">
-        <span className="label-text">{props.args.label || props.id}</span>
+        <span className="backroad-label">{props.args.label || props.id}</span>
       </label>
       {/* <ReactSelect options={[{ value: 'abc', label: 'string' }]} /> */}
       <ReactSelect
@@ -49,8 +49,8 @@ export const Select: BackroadComponentRenderer<'select'> = (props) => {
         })}
       </select> */}
       {/* <label className="label">
-        <span className="label-text-alt">Alt label</span>
-        <span className="label-text-alt">Alt label</span>
+        <span className="backroad-label-alt">Alt label</span>
+        <span className="backroad-label-alt">Alt label</span>
       </label> */}
     </div>
   );

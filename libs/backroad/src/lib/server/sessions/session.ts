@@ -6,7 +6,7 @@ import {
 } from '@backroad/core';
 import { BackroadNodeManager } from '../../backroad';
 import { RenderQueue } from '../../backroad/render-queue';
-
+import superjson from 'superjson';
 export class BackroadSession {
   sessionId: string;
   state: { [key: string]: unknown } = {};
@@ -43,7 +43,7 @@ export class BackroadSession {
   }
 
   setValue(id: string, value: unknown) {
-    this.state[id] = value;
+    this.state[id] = superjson.parse(superjson.stringify(value));
     // this.onRunRequest()
   }
   unsetValue(id: string) {
