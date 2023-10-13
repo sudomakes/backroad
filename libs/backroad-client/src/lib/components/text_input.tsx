@@ -7,7 +7,7 @@ export const TextInput: BackroadComponentRenderer<"text_input"> = props => {
     const [value, setValue] = useState(props.value)
     return <div className="form-control w-full max-w-xs">
         <label className="label">
-            <span className="label-text">{props.args.label}</span>
+            <span className="backroad-label">{props.args.label}</span>
         </label>
         <input type="text" value={value} onKeyUp={handleKeyUpBlur} onBlur={(e) => {
             setBackroadValue({ id: props.id, value: e.target.value })

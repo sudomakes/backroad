@@ -11,25 +11,28 @@ const baseStyle = {
     padding: '20px',
     borderWidth: 2,
     borderRadius: 2,
-    borderColor: '#eeeeee',
+    borderColor: 'hsl(var(--nc))',
     borderStyle: 'dashed',
-    backgroundColor: '#fafafa',
-    color: '#bdbdbd',
+    backgroundColor: 'hsl(var(--n))',
+    color: 'hsl(var(--nc))',
     outline: 'none',
     cursor: "pointer",
     transition: 'border .24s ease-in-out'
 };
 
 const focusedStyle = {
-    borderColor: '#2196f3'
+    borderColor: 'hsl(var(--p))',
+    color: 'hsl(var(--p))'
 };
 
 const acceptStyle = {
-    borderColor: '#00e676'
+    color: 'hsl(var(--suc))',
+    borderColor: 'hsl(var(--suc))'
 };
 
 const rejectStyle = {
-    borderColor: '#ff1744'
+    color: 'hsl(var(--er))',
+    borderColor: 'hsl(var(--er))'
 };
 
 export const FileUpload: BackroadComponentRenderer<"file_upload"> = (props) => {
@@ -66,10 +69,14 @@ export const FileUpload: BackroadComponentRenderer<"file_upload"> = (props) => {
     ]);
 
     return (
-        <div className="container">
+        <div>
+            <label className="label">
+                <span className="backroad-label">{props.args.label}</span>
+            </label>
+
             <div {...getRootProps({ style: style })}>
                 <input {...getInputProps()} />
-                <p>{acceptedFiles.length ? `${acceptedFiles.length} file(s) selected` : "Drag 'n' drop some files here, or click to select files"} </p>
+                <p>{acceptedFiles.length ? props.args.multiple ? `${acceptedFiles.length} file(s) selected` : `${acceptedFiles[0].name} selected` : "Drag 'n' drop some files here, or click to select files"} </p>
             </div>
         </div>
     );

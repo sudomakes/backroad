@@ -172,6 +172,7 @@ type _ComponentBasePropsMapping = {
     args: {
       multiple?: boolean;
       accept?: string;
+      label: string;
     };
     value: string[];
   };
