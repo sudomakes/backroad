@@ -2,6 +2,15 @@ import type { TypedChartComponent } from 'react-chartjs-2/dist/types';
 import type { Props } from 'react-select';
 import type { ColumnHelper } from '@tanstack/react-table';
 import { HTMLProps } from 'react';
+// import { v4 as uuidv4 } from 'uuid';
+// type FileUploadObject = {
+//   id: string;
+//   // constructor() {
+//   //   this.id = '';
+//   //   // this.id = uuidv4();
+//   // }
+// };
+
 export type SelectOptionType = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   value: any;
@@ -159,6 +168,17 @@ type _ComponentBasePropsMapping = {
     };
     value: string;
   }>;
+  file_upload: {
+    args: {
+      multiple?: boolean;
+      accept?: string;
+    };
+    value: string[];
+  };
+  video: {
+    args: HTMLProps<HTMLVideoElement>;
+    value: null;
+  };
   // date_input: AllowDefaultHelper<{}>
 };
 export type ComponentPropsMapping = {
@@ -285,4 +305,5 @@ export const defaultValueFallbacks: {
   toggle: false,
   radio: (props) => props.args.options[0],
   text_input: '',
+  file_upload: [],
 };

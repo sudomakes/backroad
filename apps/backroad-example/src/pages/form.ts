@@ -1,5 +1,4 @@
 import { BackroadNodeManager } from '@backroad/backroad';
-import { reverse } from 'lodash';
 
 export const backroadFormExample = (br: BackroadNodeManager) => {
   const color = br.colorPicker({
@@ -27,6 +26,11 @@ export const backroadFormExample = (br: BackroadNodeManager) => {
   const str = br.textInput({ label: 'Enter your string' });
   console.log('getting this text input value', str);
   br.write({ body: `double: ${str + str}` });
+
+  //   br.write({
+  //     body: `## Files
+  // ${files.map((file) => `* ${file.originalname}`).join('\n')}`,
+  //   });
 };
 
 function hexToRgb(hex: string) {

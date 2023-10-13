@@ -10,6 +10,7 @@ run(async (br) => {
       { href: '/charts', label: 'Charts Example' },
       { href: '/llm', label: 'LLM Example' },
       { href: '/form', label: 'Form Example' },
+      { href: '/file-upload', label: 'File Upload Example' },
     ],
   });
 
@@ -27,7 +28,7 @@ run(async (br) => {
   f(pages.charts, br.page({ path: '/charts' }));
   await f(pages.llm, br.page({ path: '/llm' }));
   f(pages.form, br.page({ path: '/form' }));
-
+  f(pages.fileUplaod, br.page({ path: '/file-upload' }));
   const btn = br.button({ label: 'Get joke' });
   if (btn) {
     const resp = await (
@@ -39,7 +40,9 @@ run(async (br) => {
   // if (joke) {
   br.json({ src: joke || {} });
   // }
-
+  br.video({
+    src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm',
+  });
   // f(pages.markdown, br.page({ path: '/markdown' }));
   // f(pages.stats, br.page({ path: '/stats' }));
   // f(pages.columns, br.page({ path: '/columns' }));

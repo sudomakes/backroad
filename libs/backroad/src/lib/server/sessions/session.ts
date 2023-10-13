@@ -7,12 +7,15 @@ import {
 import { BackroadNodeManager } from '../../backroad';
 import { RenderQueue } from '../../backroad/render-queue';
 import superjson from 'superjson';
+import { UploadManager } from './upload-manager';
 export class BackroadSession {
   sessionId: string;
   state: { [key: string]: unknown } = {};
   renderQueue: RenderQueue;
   rootNodeManager: BackroadNodeManager<'base'>;
+  uploadManager: UploadManager;
   constructor(sessionId: string) {
+    this.uploadManager = new UploadManager();
     this.sessionId = sessionId;
     this.rootNodeManager = new BackroadNodeManager(
       getInitialTreeStructure(),

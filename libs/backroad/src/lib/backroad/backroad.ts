@@ -89,7 +89,7 @@ export class BackroadNodeManager<
     this.backroadSession.setValue(id, value);
   }
   // you should not have to call this manually
-  // use initialiseAndAddComponentDescendant instead
+  // use initialiseAndAddComponentDescendant instead (exception: fileupload)
   #addComponentDescendant<ComponentType extends InbuiltComponentTypes>(
     nodeData: BackroadComponent<ComponentType, false>
   ) {
@@ -101,7 +101,7 @@ export class BackroadNodeManager<
     return this.backroadSession.valueOf<ComponentType>(nodeData.id);
   }
   // you should not have to call this manually
-  // use initialiseAndAddComponentDescendant instead
+  // use initialiseAndAddComponentDescendant instead (exception: fileupload)
   #initialiseAndConstructComponentObject<T extends InbuiltComponentTypes>(
     props: BackroadComponentFormat<T>,
     type: T
@@ -269,5 +269,16 @@ export class BackroadNodeManager<
   }
   textInput(props: BackroadComponentFormat<'text_input'>) {
     return this.#initialiseAndAddComponentDescendant(props, 'text_input');
+  }
+  fileUpload(props: BackroadComponentFormat<'file_upload'>) {
+    const componentObject = this.#initialiseAndConstructComponentObject(
+      props,
+      'file_upload'
+    );
+    this.#addComponentDescendant(componentObject);
+    return this.backroadSession.uploadManager.getFiles(componentObject.id);
+  }
+  video(props: BackroadComponentFormat<'video'>) {
+    return this.#initialiseAndAddComponentDescendant(props, 'video');
   }
 }

@@ -1,13 +1,13 @@
 import { ClientToServerEvents, ServerToClientEvents } from '@backroad/core';
 import { Socket, io } from 'socket.io-client';
 import superjson from 'superjson';
-const tabID = sessionStorage.tabID
+export const sessionId = sessionStorage.tabID
   ? sessionStorage.tabID
   : (sessionStorage.tabID = `${crypto.randomUUID()}`);
 
-console.log('tab id', tabID);
+console.log('tab id', sessionId);
 export const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
-  `/${tabID}`,
+  `/${sessionId}`,
   {
     path: '/api/socket.io',
   }

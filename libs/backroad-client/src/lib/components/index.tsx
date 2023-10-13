@@ -22,7 +22,10 @@ import { ColorPicker } from './color_picker';
 import { Toggle } from './toggle';
 import { Checkbox } from './checkbox';
 import { Radio } from './radio';
+import { FileUpload } from './file_upload';
 import { TextInput } from './text_input';
+import { Video } from './video';
+
 export const backroadClientComponents: {
   [key in InbuiltComponentTypes]: (
     props: BackroadComponent<key, true>
@@ -51,5 +54,7 @@ export const backroadClientComponents: {
   toggle: Toggle,
   checkbox: Checkbox,
   radio: Radio,
-  text_input: TextInput
+  file_upload: FileUpload,
+  text_input: TextInput,
+  video: Video
 };
