@@ -1,9 +1,7 @@
 import { BackroadNodeManager } from '@backroad/backroad';
 
 export const backroadFormExample = (br: BackroadNodeManager) => {
-  const color = br.colorPicker({
-    label: 'Pick a color',
-  });
+  const color = br.colorPicker({ label: 'Pick a color' });
   const [left, right] = br.columns({ columnCount: 2 });
   const printValue = left.toggle({ label: 'Print the selected value' });
   const showRGB = right.checkbox({ label: 'Show as RGB' });
@@ -24,7 +22,6 @@ export const backroadFormExample = (br: BackroadNodeManager) => {
 
   br.write({ body: `## ${bestOS} is best!!` });
   const str = br.textInput({ label: 'Enter your string' });
-  console.log('getting this text input value', str);
   br.write({ body: `double: ${str + str}` });
 
   //   br.write({

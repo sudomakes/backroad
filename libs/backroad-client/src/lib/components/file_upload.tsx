@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { BackroadComponentRenderer } from "../types/components"
 import { useDropzone } from 'react-dropzone';
 import { sessionId, setBackroadValue } from "../socket";
+import { CloudArrowUpIcon } from "@heroicons/react/24/outline";
 
 const baseStyle = {
     flex: 1,
@@ -11,6 +12,7 @@ const baseStyle = {
     padding: '20px',
     borderWidth: 2,
     borderRadius: 2,
+    maxWidth: 600,
     borderColor: 'hsl(var(--nc))',
     borderStyle: 'dashed',
     backgroundColor: 'hsl(var(--n))',
@@ -76,7 +78,13 @@ export const FileUpload: BackroadComponentRenderer<"file_upload"> = (props) => {
 
             <div {...getRootProps({ style: style })}>
                 <input {...getInputProps()} />
-                <p>{acceptedFiles.length ? props.args.multiple ? `${acceptedFiles.length} file(s) selected` : `${acceptedFiles[0].name} selected` : "Drag 'n' drop some files here, or click to select files"} </p>
+                <div className="flex gap-4 items-center w-full">
+                    <div className="flex-1 flex gap-4 items-center">
+                        <CloudArrowUpIcon width={40} />
+                        <p>{acceptedFiles.length ? props.args.multiple ? `${acceptedFiles.length} file(s) selected` : `${acceptedFiles[0].name} selected` : "Drag 'n' drop some files here, or click to select files"} </p>
+                    </div>
+                    <div className="btn btn-primary">Upload Files</div>
+                </div>
             </div>
         </div>
     );

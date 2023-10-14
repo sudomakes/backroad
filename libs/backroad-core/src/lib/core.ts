@@ -2,6 +2,7 @@ import type { TypedChartComponent } from 'react-chartjs-2/dist/types';
 import type { Props } from 'react-select';
 import type { ColumnHelper } from '@tanstack/react-table';
 import { HTMLProps } from 'react';
+import formidable from 'formidable';
 // import { v4 as uuidv4 } from 'uuid';
 // type FileUploadObject = {
 //   id: string;
@@ -139,7 +140,7 @@ type _ComponentBasePropsMapping = {
     value: string | null;
   };
   color_picker: AllowDefaultHelper<{
-    args: { label: string };
+    args: { label?: string };
     value: string;
   }>;
   checkbox: AllowDefaultHelper<{
@@ -174,7 +175,7 @@ type _ComponentBasePropsMapping = {
       accept?: string;
       label: string;
     };
-    value: string[];
+    value: formidable.File[];
   };
   video: {
     args: HTMLProps<HTMLVideoElement>;
@@ -215,7 +216,7 @@ type ContainerArgsMapping = {
     };
   };
   chat_message: {
-    args: { name: string; avatar?: string };
+    args: { name: string; avatar?: string; avatarPlacement?: 'left' | 'right' };
   };
 };
 export type InbuiltComponentTypes = keyof ComponentPropsMapping;

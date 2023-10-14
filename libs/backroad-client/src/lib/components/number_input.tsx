@@ -44,7 +44,7 @@ export const NumberInput = (props: BackroadComponent<'number_input', true>) => {
             setInputValue(newValue);
             setBackroadValue({ id: props.id, value: newValue });
           }}
-          className="cursor-pointer hover:bg-primary hover:text-primary-content"
+          className="cursor-pointer bg-secondary text-secondary-content hover:bg-primary hover:text-primary-content"
         >
           <MinusIcon width={15} />
         </span>
@@ -54,7 +54,7 @@ export const NumberInput = (props: BackroadComponent<'number_input', true>) => {
             setInputValue(newValue);
             setBackroadValue({ id: props.id, value: newValue });
           }}
-          className="cursor-pointer hover:bg-primary hover:text-primary-content"
+          className="cursor-pointer bg-secondary text-secondary-content hover:bg-primary hover:text-primary-content"
         >
           <PlusIcon width={15} />
         </span>

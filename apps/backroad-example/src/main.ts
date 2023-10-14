@@ -43,6 +43,22 @@ run(async (br) => {
   br.video({
     src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm',
   });
+
+  const dogPerson = br.toggle({
+    defaultValue: true,
+    label: 'Are you a Dog Person?',
+  });
+  if (dogPerson) {
+    br.write({ body: "Of course! They are man's best friend." });
+    br.image({
+      src: 'https://unsplash.com/photos/2l0CWTpcChI/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjk3MjgxNDM0fA&force=true&w=640',
+    });
+  } else {
+    br.write({ body: 'Well how about cats?' });
+    br.image({
+      src: 'https://unsplash.com/photos/yMSecCHsIBc/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjk3MjgzNDc1fA&force=true&w=640',
+    });
+  }
   // f(pages.markdown, br.page({ path: '/markdown' }));
   // f(pages.stats, br.page({ path: '/stats' }));
   // f(pages.columns, br.page({ path: '/columns' }));
@@ -52,6 +68,6 @@ const f = async (
   pageContentFunc: (br: BackroadNodeManager<'page'>) => void,
   br: BackroadNodeManager<'page'>
 ) => {
-  br.link({ label: 'go home', href: '/' });
+  // br.link({ label: 'go home', href: '/' });
   await pageContentFunc(br);
 };

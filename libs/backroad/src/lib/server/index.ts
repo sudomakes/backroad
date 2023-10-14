@@ -1,9 +1,9 @@
 import express from 'express';
+import formidable from 'formidable';
 import * as http from 'http';
 import path from 'path';
 import { Namespace, Server } from 'socket.io';
-import multer from 'multer';
-const upload = multer();
+// const upload = multer();
 import type {
   ClientToServerEvents,
   ServerToClientEvents,
@@ -25,24 +25,43 @@ export const startBackroadServer = (options: { port: number }) => {
 
     app.use(express.static(join(__dirname, 'public')));
 
-    app.post<
-      '/api/uploads',
-      any,
-      any,
-      {
-        sessionId: string;
-        id: string;
-      }
-    >('/api/uploads', upload.array('files'), (req, res) => {
-      const session = sessionManager.getSession(req.body.sessionId);
-      console.log('received file upload request', req.files, req.files?.length);
-      return res.json(
-        session?.uploadManager.setFiles(
-          req.body.id,
-          req.files as Express.Multer.File[]
-        )
-      );
+    app.post('/api/uploads', (req, res) => {
+      const form = formidable({});
+
+      form.parse<'sessionId' | 'id', 'files'>(req, (err, fields, files) => {
+        // if (err) {
+        //   next(err);
+        //   return;
+        // }
+        const sessionId = fields.sessionId?.[0];
+        const id = fields.id?.[0];
+        if (sessionId && id) {
+          // const file = files.files?.[0]
+          const session = sessionManager.getSession(sessionId);
+          const value = files.files || [];
+          session?.setValue(id, value);
+          return res.json(value);
+        }
+      });
     });
+    // app.post<
+    //   '/api/uploads',
+    //   any,
+    //   any,
+    //   {
+    //     sessionId: string;
+    //     id: string;
+    //   }
+    // >('/api/uploads', upload.array('files'), (req, res) => {
+    //   const session = sessionManager.getSession(req.body.sessionId);
+    //   console.log('received file upload request', req.files, req.files?.length);
+    //   return res.json(
+    //     session?.uploadManager.setFiles(
+    //       req.body.id,
+    //       req.files as Express.Multer.File[]
+    //     )
+    //   );
+    // });
 
     app.get('*', (req, res) =>
       res.sendFile(path.resolve(__dirname, 'public', 'index.html'))

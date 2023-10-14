@@ -4,12 +4,12 @@ export const setValue: IServerSocketEventHandler<
   'set_value',
   () => Promise<void>
 > = (socket, backroadSession, runExecutor) => async (props, callback) => {
-  console.log(
-    'setting value before triggering rerun, new value for ',
-    props.id,
-    ' is ',
-    props.value
-  );
+  // console.log(
+  //   'setting value before triggering rerun, new value for ',
+  //   props.id,
+  //   ' is ',
+  //   props.value
+  // );
   backroadSession.setValue(props.id, superjson.parse(props.value));
   // if (props.triggerRerun === true || props.triggerRerun === undefined) {
   // console.log('triggering rerun');

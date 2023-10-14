@@ -4,26 +4,19 @@ export const backroadLLMExample = async (br: BackroadNodeManager) => {
   const messages = br.getOrDefault('messages', [
     { by: 'ai', content: 'Hi, how can I help you today? 😀' },
   ]);
-  br.write({
-    body: `# LLM Example
----`,
+  br.write({ body: `# LLM Example\n---` });
+  messages.forEach((message) => {
+    br.chatMessage({ name: message.by }).write({ body: message.content });
   });
-  const messagesContainer = br.base({});
-  messages.forEach(async (message, idx) => {
-    if (idx === messages.length - 1) await simulatedDelay();
-    messagesContainer
-      .chatMessage({ name: message.by })
-      .write({ body: message.content });
-  });
-  const messageFromInput = br.chatInput({
-    placeholder: "Type asking what's 1+1?",
-    id: 'chat-input',
-  });
-  if (messageFromInput) {
-    messages.push({ by: 'human', content: messageFromInput });
-    messages.push({ by: 'ai', content: getGPTResponse(messageFromInput) });
-    br.setValue('messages', messages);
+  const input = br.chatInput({ id: 'input' });
+  if (input) {
+    br.setValue('messages', [
+      ...messages,
+      { by: 'human', content: input },
+      { by: 'ai', content: getGPTResponse(input) },
+    ]);
   }
+
   br.collapse({ label: 'Show Code' }).write({
     body: `
 ~~~

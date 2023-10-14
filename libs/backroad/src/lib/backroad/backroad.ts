@@ -12,6 +12,7 @@ import {
 } from '@backroad/core';
 import { omit } from 'lodash';
 import superjson from 'superjson';
+// import {File} from "formidable"
 import { BackroadSession } from '../server/sessions/session';
 import { ObjectHasher } from './object-hasher';
 type BackroadComponentFormat<ComponentType extends InbuiltComponentTypes> = {
@@ -271,12 +272,7 @@ export class BackroadNodeManager<
     return this.#initialiseAndAddComponentDescendant(props, 'text_input');
   }
   fileUpload(props: BackroadComponentFormat<'file_upload'>) {
-    const componentObject = this.#initialiseAndConstructComponentObject(
-      props,
-      'file_upload'
-    );
-    this.#addComponentDescendant(componentObject);
-    return this.backroadSession.uploadManager.getFiles(componentObject.id);
+    return this.#initialiseAndAddComponentDescendant(props, 'file_upload');
   }
   video(props: BackroadComponentFormat<'video'>) {
     return this.#initialiseAndAddComponentDescendant(props, 'video');
