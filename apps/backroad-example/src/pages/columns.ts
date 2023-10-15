@@ -2,7 +2,7 @@ import { BackroadNodeManager } from '@backroad/backroad';
 
 export const backroadColumnsExample = async (br: BackroadNodeManager) => {
   const [col1, col2, col3] = await br.columns({
-    columnCount: 3,
+    columns: 3,
   });
 
   col1.write({ body: `## Column 1` });

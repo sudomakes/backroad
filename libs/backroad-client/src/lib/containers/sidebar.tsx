@@ -15,7 +15,7 @@ export const Sidebar: BackroadContainerRenderer<'sidebar'> = (props) => {
             initial={{ opacity: 0, x: '-100%' }}
             animate={{ opacity: 1, x: '0' }}
             exit={{ opacity: 0, x: '-100%' }}
-            className="w-[300px] h-full bg-base-200 p-5 flex flex-col gap-3 fixed lg:static z-10"
+            className="w-screen max-w-[300px] h-full border-r overflow-auto bg-base-200 p-5 flex flex-col gap-3 fixed top-0 left-0 z-10"
           >
             <div className="flex justify-end">
               <div
@@ -45,7 +45,7 @@ export const Sidebar: BackroadContainerRenderer<'sidebar'> = (props) => {
       <AnimatePresence>
         {!open && (
           <motion.div
-            className="btn-primary fixed px-5 mt-2 py-3 rounded-r-xl cursor-pointer"
+            className="btn-primary fixed px-5 mt-2 z-10 py-3 rounded-r-xl cursor-pointer"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

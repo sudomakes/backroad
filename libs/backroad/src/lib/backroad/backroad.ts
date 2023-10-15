@@ -173,7 +173,11 @@ export class BackroadNodeManager<
     const columnsContainer = this.#addContainerDescendant(
       this.#constructContainerObject(props, 'columns')
     );
-    return [...Array(props.columnCount)].map(() =>
+    return (
+      typeof props.columns === 'number'
+        ? [...Array(props.columns)]
+        : props.columns
+    ).map(() =>
       columnsContainer.#addContainerDescendant({ type: 'base', args: {} })
     );
   }

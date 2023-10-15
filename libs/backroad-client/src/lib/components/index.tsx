@@ -31,30 +31,38 @@ export const backroadClientComponents: {
     props: BackroadComponent<key, true>
   ) => JSX.Element;
 } = {
-  number_input: NumberInput,
   markdown: Markdown,
-  button: Button,
-  line_chart: LineChart,
-  select: Select,
-  image: Image,
+
   link: Link,
   link_group: LinkGroup,
+
   stats: Stats,
-  multiselect: Multiselect,
   json: Json,
-  title: Title,
   table: Table,
+
+  title: Title,
+
+  line_chart: LineChart,
   bar_chart: BarChart,
   pie_chart: PieChart,
   doughnut_chart: DoughnutChart,
   radar_chart: RadarChart,
   scatter_chart: ScatterChart,
+
   chat_input: ChatInput,
+
+
   color_picker: ColorPicker,
   toggle: Toggle,
   checkbox: Checkbox,
   radio: Radio,
   file_upload: FileUpload,
   text_input: TextInput,
+  multiselect: Multiselect,
+  select: Select,
+  number_input: NumberInput,
+  button: Button,
+
+  image: Image,
   video: Video
 };

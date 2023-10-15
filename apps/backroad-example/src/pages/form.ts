@@ -2,7 +2,7 @@ import { BackroadNodeManager } from '@backroad/backroad';
 
 export const backroadFormExample = (br: BackroadNodeManager) => {
   const color = br.colorPicker({ label: 'Pick a color' });
-  const [left, right] = br.columns({ columnCount: 2 });
+  const [left, right] = br.columns({ columns: 2 });
   const printValue = left.toggle({ label: 'Print the selected value' });
   const showRGB = right.checkbox({ label: 'Show as RGB' });
   if (printValue) {

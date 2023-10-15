@@ -3,15 +3,15 @@
 @tailwind utilities;
 /* You can add global styles to this file, and also import other style files */
 
-*::-webkit-scrollbar {
-  display: none;
-}
+// *::-webkit-scrollbar {
+//   display: none;
+// }
 
 /* Hide scrollbar for IE, Edge and Firefox */
-* {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
+// * {
+//   -ms-overflow-style: none; /* IE and Edge */
+//   scrollbar-width: none; /* Firefox */
+// }
 
 .backroad-label {
   @apply font-medium label-text;

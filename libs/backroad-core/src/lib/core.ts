@@ -45,11 +45,7 @@ type _ComponentBasePropsMapping = {
     };
     value: boolean;
   };
-  line_chart: {
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    args: Parameters<TypedChartComponent<'line'>>[0];
-    value: null;
-  };
+
   select: {
     readonly args: {
       // options: any[];
@@ -112,6 +108,11 @@ type _ComponentBasePropsMapping = {
       columns: Record<string, Parameters<ColumnHelper<any>['accessor']>[1]>;
       data: object[];
     };
+    value: null;
+  };
+  line_chart: {
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    args: Parameters<TypedChartComponent<'line'>>[0];
     value: null;
   };
   bar_chart: {
@@ -196,7 +197,7 @@ type ContainerArgsMapping = {
     args: {};
   };
   columns: {
-    args: { columnCount: number };
+    args: { columns: number | number[] };
   };
   sidebar: {
     // eslint-disable-next-line @typescript-eslint/ban-types

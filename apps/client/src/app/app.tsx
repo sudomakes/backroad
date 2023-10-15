@@ -54,8 +54,8 @@ export function App() {
   return (
     <div className="flex min-h-screen">
       {/* <Helmet defaultTitle="Backroad App" /> */}
-      <div id="sidebar-portal" className="relative"></div>
-      <div className="flex-1 h-screen flex flex-col overflow-auto">
+      <div id="sidebar-portal" className="relative h-screen"></div>
+      <div className="flex-1 relative flex flex-col">
         <Navbar connected={connected} />
         {/* {JSON.stringify(treeStruct)} */}
         <Routes>
