@@ -1,3 +1,10 @@
+## [1.3.0](https://github.com/sudomakes/backroad/compare/v1.2.1...v1.3.0) (2023-10-15)
+
+
+### Features
+
+* improvements in responsiveness ([a273084](https://github.com/sudomakes/backroad/commit/a273084e8178ac2671f2a6d62736992671e22d27))
+
 ## [1.2.1](https://github.com/sudomakes/backroad/compare/v1.2.0...v1.2.1) (2023-10-15)
 
 
