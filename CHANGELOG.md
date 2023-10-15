@@ -1,3 +1,11 @@
+## [1.2.1](https://github.com/sudomakes/backroad/compare/v1.2.0...v1.2.1) (2023-10-15)
+
+
+### Bug Fixes
+
+* added gaps to column ([e9904b8](https://github.com/sudomakes/backroad/commit/e9904b8b6ee0aa324747f0753a52902817d733d7))
+* changed multer to formidable for types ([25e5a5d](https://github.com/sudomakes/backroad/commit/25e5a5dbc27bcb940c676f48a378106f5475d1ca))
+
 ## [1.2.0](https://github.com/sudomakes/backroad/compare/v1.1.0...v1.2.0) (2023-10-13)
 
 
