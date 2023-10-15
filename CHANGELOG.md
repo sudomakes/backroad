@@ -1,3 +1,18 @@
+## [1.2.0](https://github.com/sudomakes/backroad/compare/v1.1.0...v1.2.0) (2023-10-13)
+
+
+### Features
+
+* added button ([38590fc](https://github.com/sudomakes/backroad/commit/38590fc399178c756d9e4451ec7bc2e9adfae23f))
+* added color picker ([e38936f](https://github.com/sudomakes/backroad/commit/e38936f8e5ac54546a8f912152f56b83c9d56396))
+* added components ([0834983](https://github.com/sudomakes/backroad/commit/0834983d2fd35bc644a73b1383b2becb5ee6c811))
+* added video and file upload ([efd16fd](https://github.com/sudomakes/backroad/commit/efd16fdc3ab47c48df289eb019583cabb2d1737f))
+
+
+### Refactoring
+
+* removed logs ([74ab690](https://github.com/sudomakes/backroad/commit/74ab6905331fdffc2c232738e66a5f717cfb74d3))
+
 ## [1.1.0](https://github.com/sudomakes/backroad/compare/v1.0.2...v1.1.0) (2023-10-11)
 
 
