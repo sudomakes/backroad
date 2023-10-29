@@ -15,10 +15,10 @@ FROM node:20 as runner
 COPY --from=builder /app/dist/apps/backroad-example /app
 WORKDIR /app
 
-RUN addgroup --system backroad-example && \
-    adduser --system -G backroad-example backroad-example
+# RUN addgroup --system backroad-example && \
+#     adduser --system --group backroad-example backroad-example
 
-RUN chown -R backroad-example:backroad-example .
+# RUN chown -R backroad-example:backroad-example .
 
 # You can remove this install step if you build with `--bundle` option.
 # The bundled output will include external dependencies.
