@@ -4,19 +4,19 @@
 # Tip: Modify "docker-build" options in project.json to change docker build args.
 #
 # Run the container with `docker run -p 3000:3000 -t backroad-example`.
-FROM node:lts-alpine as builder
+FROM node:20 as builder
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
 RUN npm run build-example-app
 
-FROM node:lts-alpine as runner
+FROM node:20 as runner
 COPY --from=builder /app/dist/apps/backroad-example /app
 WORKDIR /app
 
 RUN addgroup --system backroad-example && \
-          adduser --system -G backroad-example backroad-example
+    adduser --system -G backroad-example backroad-example
 
 RUN chown -R backroad-example:backroad-example .
 
