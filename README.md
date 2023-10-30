@@ -3,7 +3,7 @@
 Because making wrapper UIs around your software is too much work.
 
 Website & Documentation : [backroad.sudomakes.art](https://backroad.sudomakes.art)
-
+Link to the NPM Package: [NPM](https://www.npmjs.com/package/@backroad/backroad)
 Easiest way to get started with backroad: [sudomakes/trybackroad](https://github.com/sudomakes/trybackroad)
 
 [![semantic-release: backroad](https://img.shields.io/badge/semantic--release-backroad-06A261?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
