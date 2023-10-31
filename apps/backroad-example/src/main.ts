@@ -1,59 +1,17 @@
-import { BackroadNodeManager, run } from '@backroad/backroad';
+import { run } from '@backroad/backroad';
+import { readFileSync } from 'fs';
 
 run(
   async (br) => {
-    const repoData = br.getOrDefault(
-      'repo-data',
-      null as null | { stars: number; latestVersion: string }
-    );
-    br.write({
-      body: `# 🛣️ Welcome to Backroad
-  This is a quick start template to help you get started developing backroad apps. You can also checkout the examples on [stackblitz](https://stackblitz.com/@sudo-vaibhav/collections/backroad)`,
+    const [htmlFile] = br.fileUpload({
+      accept: {
+        'text/html': ['.html', '.htm'],
+      },
+      label: 'Pick an HTML File',
     });
-    br.linkGroup({
-      items: [
-        {
-          label: 'Read the Docs',
-          href: 'https://backroad.sudomakes.art/docs/fundamentals/introduction/',
-          target: '_blank',
-        },
-        {
-          label: 'Learn Backroad in 3 minutes',
-          href: 'https://youtube.com/',
-          target: '_blank',
-        },
-        {
-          label: 'Backroad Github',
-          href: 'https://github.com/sudomakes/backroad',
-          target: '_blank',
-        },
-        {
-          label: 'Backroad Website',
-          href: 'https://backroad.sudomakes.art',
-          target: '_blank',
-        },
-        {
-          label: 'Examples on Stackblitz',
-          href: 'https://stackblitz.com/@sudo-vaibhav/collections/backroad',
-          target: '_blank',
-        },
-      ],
-    });
-    br.write({
-      body: `Backroad presents an unconventional way of **making UI with Node.JS with very minimal code**. In the complexity-ridden world of web technology, **Backroad aims to offer a simpler alternative, a road less travelled**
-  
-  ---
-  Backroad is currently in beta-development phase. If you like the idea behind it and would like to see it develop further. Please [consider starring Backroad on Github](https://github.com/sudomakes/backroad), or tell your developer friends about it. Thanks for trying backroad 💖`,
-    });
-
-    br.columns({ columns: [0.5, 0.5] })[0].stats({
-      items: [
-        { label: 'Backroad Stars', value: 5 },
-        { label: 'Latest Version', value: 'v1.2.1' },
-      ],
-    });
-
-    br.sidebar({}).write({ body: 'hi' });
+    if (htmlFile) {
+      br.write({ body: readFileSync(htmlFile.filepath).toString() });
+    }
   }
   // { port: 3000 }
 );

@@ -3,6 +3,7 @@ import type { Props } from 'react-select';
 import type { ColumnHelper } from '@tanstack/react-table';
 import { HTMLProps } from 'react';
 import formidable from 'formidable';
+import type { DropzoneOptions } from 'react-dropzone';
 // import { v4 as uuidv4 } from 'uuid';
 // type FileUploadObject = {
 //   id: string;
@@ -172,10 +173,8 @@ type _ComponentBasePropsMapping = {
   }>;
   file_upload: {
     args: {
-      multiple?: boolean;
-      accept?: string;
       label: string;
-    };
+    } & Omit<DropzoneOptions, 'onUpload'>;
     value: formidable.File[];
   };
   video: {
