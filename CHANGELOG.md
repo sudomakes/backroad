@@ -1,3 +1,21 @@
+## [1.3.1-alpha.1](https://github.com/sudomakes/backroad/compare/v1.3.0...v1.3.1-alpha.1) (2023-10-31)
+
+
+### Bug Fixes
+
+* supporting all filetypes in upload component ([915adbf](https://github.com/sudomakes/backroad/commit/915adbf05858c703f5b79bb6d238510a3cc747a4))
+
+
+### Chores
+
+* added issue autocleanup ([4df1ba9](https://github.com/sudomakes/backroad/commit/4df1ba9bfeb62ed5c9039e7a6efce6f9d81070ad))
+* added prerelease branch ([18a78a4](https://github.com/sudomakes/backroad/commit/18a78a4ba1f38e6579010ce7124ba6a9915df8e8))
+* arm builds ([5f23147](https://github.com/sudomakes/backroad/commit/5f23147ac8c6195a28de8027a30aa82932cffcef))
+* fixed docker image scp for ubuntu 22.04 ([3a3829b](https://github.com/sudomakes/backroad/commit/3a3829b12716522d5d726eeb415fc209d6b785f6))
+* moved to lts ([0e8a587](https://github.com/sudomakes/backroad/commit/0e8a58770f51752a69a48d4a64ecd63e3cb45e85))
+* multi plat builds ([f18bc7a](https://github.com/sudomakes/backroad/commit/f18bc7a52e0abba4e1016e8f2d684a56c0481f1b))
+* removed group commands ([f192a15](https://github.com/sudomakes/backroad/commit/f192a15d7409ecd1a3464eb9ae4e574ca507a8e7))
+
 ## [1.3.0](https://github.com/sudomakes/backroad/compare/v1.2.1...v1.3.0) (2023-10-15)
 
 
