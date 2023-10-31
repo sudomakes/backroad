@@ -1,3 +1,10 @@
+## [1.3.1-alpha.2](https://github.com/sudomakes/backroad/compare/v1.3.1-alpha.1...v1.3.1-alpha.2) (2023-10-31)
+
+
+### Bug Fixes
+
+* removed commander dependency ([959745d](https://github.com/sudomakes/backroad/commit/959745d70c1469c809d380e0b16e6303565a6323))
+
 ## [1.3.1-alpha.1](https://github.com/sudomakes/backroad/compare/v1.3.0...v1.3.1-alpha.1) (2023-10-31)
 
 
