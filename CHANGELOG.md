@@ -1,3 +1,10 @@
+## [1.3.1-alpha.4](https://github.com/sudomakes/backroad/compare/v1.3.1-alpha.3...v1.3.1-alpha.4) (2023-11-01)
+
+
+### Bug Fixes
+
+* table not updating on value change ([e8063e0](https://github.com/sudomakes/backroad/commit/e8063e0ab8bd712a5e9830913226e7f9138d316a))
+
 ## [1.3.1-alpha.3](https://github.com/sudomakes/backroad/compare/v1.3.1-alpha.2...v1.3.1-alpha.3) (2023-11-01)
 
 
