@@ -1,15 +1,14 @@
+import { BackroadConfig } from '@backroad/core';
 import { BackroadNodeManager } from '../backroad';
-import { startBackroadServer } from '../server';
-import { sessionManager } from '../server/sessions/session-manager';
-import { socketEventHandlers } from '../server/server-socket-event-handlers';
 import { SocketManager } from '../backroad/socket-manager';
+import { startBackroadServer } from '../server';
+import { socketEventHandlers } from '../server/server-socket-event-handlers';
+import { sessionManager } from '../server/sessions/session-manager';
 export const run = async (
   executor: (nodeManager: BackroadNodeManager) => void | Promise<void>,
-  backroadOptions?: {
-    port: number;
-  }
+  backroadOptions?: BackroadConfig
 ) => {
-  const port = backroadOptions?.port || 3333;
+  const port = backroadOptions?.server?.port || 3333;
 
   (
     await startBackroadServer({
@@ -46,6 +45,10 @@ export const run = async (
       'unset_value',
       socketEventHandlers.unsetValue(socket, backroadSession, runExecutor)
     );
+
+    socket.emit('backroad_config', backroadOptions, () => {
+      console.log('sent backroad config to frontend');
+    });
     // socket.on("get_tree", socketEventHandlers.getTree(socket, backroadSession));
   });
 };

@@ -1,23 +1,23 @@
-import { TreeRender, socket } from 'backroad-client';
 import {
+  BackroadConfig,
   getInitialTreeStructure,
   type BackroadContainer,
-  type BackroadNode,
+  type BackroadNode
 } from '@backroad/core';
+import { TreeRender, socket } from 'backroad-client';
 import { set } from 'lodash';
 import { useEffect, useState } from 'react';
+import ReactGA from 'react-ga4';
 import { Route, Routes } from 'react-router-dom';
 import superjson from 'superjson';
 import { Footer } from './layout/footer';
 import { Navbar } from './layout/navbar';
-// eslint-disable-next-line @nx/enforce-module-boundaries
-// TODO: move all this stuff to a lib
 export function App() {
   const [connected, setConnected] = useState(false);
+  // const [] = useState<BackroadConfig>(undefined)
   const [treeStruct, setTreeStruct] = useState<BackroadContainer<'base', true>>(
     getInitialTreeStructure()
   );
-
   useEffect(() => {
     socket.on('connect', () => {
       setConnected(true);
@@ -26,8 +26,21 @@ export function App() {
         console.log('ran script');
       });
     });
+
     socket.on('disconnect', () => setConnected(false));
   });
+  useEffect(() => {
+    const handleConfig = (config: BackroadConfig) => {
+      if (config?.analytics?.google) {
+        console.log('initialising google analytics')
+        ReactGA.initialize(config.analytics.google)
+      }
+    }
+    socket.on("backroad_config", handleConfig)
+    return () => {
+      socket.off("backroad_config", handleConfig)
+    }
+  })
 
   useEffect(() => {
     const onRender = (nodeData: string[], callback: () => void) => {
@@ -53,11 +66,9 @@ export function App() {
   console.log('pages data', treeStruct);
   return (
     <div className="flex min-h-screen">
-      {/* <Helmet defaultTitle="Backroad App" /> */}
       <div id="sidebar-portal" className="relative h-screen"></div>
       <div className="flex-1 relative flex flex-col">
         <Navbar connected={connected} />
-        {/* {JSON.stringify(treeStruct)} */}
         <Routes>
           {treeStruct.children.map((pageContainer) => {
             const castedPageContainer = pageContainer as BackroadContainer<

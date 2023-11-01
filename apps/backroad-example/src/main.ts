@@ -50,6 +50,9 @@ run(
       },
     });
     br.write({ body: writeData[category] });
+  },
+  {
+    analytics: { google: 'G-77B7VHC5Z8' },
   }
   // { port: 3000 }
 );
