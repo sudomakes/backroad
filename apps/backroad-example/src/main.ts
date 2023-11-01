@@ -1,17 +1,55 @@
 import { run } from '@backroad/backroad';
-import { readFileSync } from 'fs';
 
 run(
   async (br) => {
-    const [htmlFile] = br.fileUpload({
-      accept: {
-        'text/html': ['.html', '.htm'],
+    const data = [
+      {
+        id: '1',
+        a: '1234',
+        b: `1234`,
+        category: '1',
       },
-      label: 'Pick an HTML File',
+      {
+        id: '2',
+        a: '5678',
+        b: `5678`,
+        category: '1',
+      },
+      {
+        id: '3',
+        a: '9012',
+        b: `9012`,
+        category: '2',
+      },
+    ];
+
+    const writeData: Record<number, string> = {
+      1: 'This is category 1',
+      2: 'This is category 2',
+    };
+
+    const category = br.select({
+      label: 'category',
+      options: [
+        { value: '1', label: '1' },
+        { value: '2', label: '2' },
+      ],
+      defaultValue: '1',
+      // defaultValue: { value: '1', label: '1' },
     });
-    if (htmlFile) {
-      br.write({ body: readFileSync(htmlFile.filepath).toString() });
-    }
+    const dynamicData = data.filter((x) => x.category === category);
+    br.write({ body: `${JSON.stringify(dynamicData)}` });
+    // category ??= '1';
+    br.table({
+      data: dynamicData,
+      columns: {
+        id: { header: '#' },
+        a: { header: 'a' },
+        b: { header: 'b' },
+        category: { header: 'category' },
+      },
+    });
+    br.write({ body: writeData[category] });
   }
   // { port: 3000 }
 );

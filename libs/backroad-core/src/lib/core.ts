@@ -47,14 +47,18 @@ type _ComponentBasePropsMapping = {
     value: boolean;
   };
 
-  select: {
+  select: AllowDefaultHelper<{
     readonly args: {
       // options: any[];
       label?: string;
       // formatOption?: (option: any) => string;
-    } & Omit<Props<SelectOptionType, false>, 'onChange' | 'isMulti'>;
-    value: SelectValueType | null;
-  };
+    } & Omit<
+      Props<SelectOptionType, false>,
+      'onChange' | 'isMulti' | 'defaultValue'
+    >;
+
+    value: SelectValueType;
+  }>;
   multiselect: {
     args: {
       // options: any[];
