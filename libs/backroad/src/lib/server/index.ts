@@ -68,10 +68,15 @@ export const startBackroadServer = (options: { port: number }) => {
     );
 
     server.listen(options.port, () => {
-      // open(`http://localhost:${options.port}/`);
       console.log(
-        `server started. App can be accessed on http://localhost:${options.port}/`
+        `Server started and can be accessed on http://localhost:${options.port}/`
       );
+      if (process.env.BACKROAD_ENV === 'dev') {
+        console.log(
+          'Backroad is running in development mode. Frontend will be running on a separate address: http://localhost:4200/'
+        );
+      }
+
       resolve(io.of(/^\/.+$/));
     });
   });
