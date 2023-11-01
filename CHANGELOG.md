@@ -1,3 +1,10 @@
+## [1.4.0-alpha.1](https://github.com/sudomakes/backroad/compare/v1.3.1-alpha.4...v1.4.0-alpha.1) (2023-11-01)
+
+
+### Features
+
+* added google analytics ([ad2de41](https://github.com/sudomakes/backroad/commit/ad2de41d1a7c7cc2322638920accf14d2e1982cc))
+
 ## [1.3.1-alpha.4](https://github.com/sudomakes/backroad/compare/v1.3.1-alpha.3...v1.3.1-alpha.4) (2023-11-01)
 
 
