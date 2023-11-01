@@ -1,3 +1,10 @@
+## [1.3.1-alpha.3](https://github.com/sudomakes/backroad/compare/v1.3.1-alpha.2...v1.3.1-alpha.3) (2023-11-01)
+
+
+### Bug Fixes
+
+* added better boot logs for dev ([f0d0dc8](https://github.com/sudomakes/backroad/commit/f0d0dc88bdb075582396d6c284cd4c822bb59efa))
+
 ## [1.3.1-alpha.2](https://github.com/sudomakes/backroad/compare/v1.3.1-alpha.1...v1.3.1-alpha.2) (2023-10-31)
 
 
