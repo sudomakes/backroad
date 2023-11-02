@@ -5,22 +5,14 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { BackroadComponentRenderer } from '../types/components';
-import { useState } from 'react';
 
-// const defaultData =
 export const Table: BackroadComponentRenderer<'table'> = (props) => {
   const columnsHelper = createColumnHelper<any>();
-  const [dataState] = useState(props.args.data);
   const table = useReactTable({
-    data: dataState,
+    data: props.args.data,
     columns: Object.entries(props.args.columns).map(([key, col]) => {
       return columnsHelper.accessor(key, col);
     }),
-    // [
-    //   columnsHelper.accessor('firstName', {
-
-    //   }),
-    // ]
     getCoreRowModel: getCoreRowModel(),
   });
   return (
@@ -34,9 +26,9 @@ export const Table: BackroadComponentRenderer<'table'> = (props) => {
                   {header.isPlaceholder
                     ? null
                     : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
                 </th>
               ))}
             </tr>
@@ -61,9 +53,9 @@ export const Table: BackroadComponentRenderer<'table'> = (props) => {
                   {header.isPlaceholder
                     ? null
                     : flexRender(
-                        header.column.columnDef.footer,
-                        header.getContext()
-                      )}
+                      header.column.columnDef.footer,
+                      header.getContext()
+                    )}
                 </th>
               ))}
             </tr>

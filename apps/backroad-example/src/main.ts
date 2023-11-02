@@ -1,59 +1,55 @@
-import { BackroadNodeManager, run } from '@backroad/backroad';
+import { run } from '@backroad/backroad';
 
 run(
   async (br) => {
-    const repoData = br.getOrDefault(
-      'repo-data',
-      null as null | { stars: number; latestVersion: string }
-    );
-    br.write({
-      body: `# 🛣️ Welcome to Backroad
-  This is a quick start template to help you get started developing backroad apps. You can also checkout the examples on [stackblitz](https://stackblitz.com/@sudo-vaibhav/collections/backroad)`,
-    });
-    br.linkGroup({
-      items: [
-        {
-          label: 'Read the Docs',
-          href: 'https://backroad.sudomakes.art/docs/fundamentals/introduction/',
-          target: '_blank',
-        },
-        {
-          label: 'Learn Backroad in 3 minutes',
-          href: 'https://youtube.com/',
-          target: '_blank',
-        },
-        {
-          label: 'Backroad Github',
-          href: 'https://github.com/sudomakes/backroad',
-          target: '_blank',
-        },
-        {
-          label: 'Backroad Website',
-          href: 'https://backroad.sudomakes.art',
-          target: '_blank',
-        },
-        {
-          label: 'Examples on Stackblitz',
-          href: 'https://stackblitz.com/@sudo-vaibhav/collections/backroad',
-          target: '_blank',
-        },
-      ],
-    });
-    br.write({
-      body: `Backroad presents an unconventional way of **making UI with Node.JS with very minimal code**. In the complexity-ridden world of web technology, **Backroad aims to offer a simpler alternative, a road less travelled**
-  
-  ---
-  Backroad is currently in beta-development phase. If you like the idea behind it and would like to see it develop further. Please [consider starring Backroad on Github](https://github.com/sudomakes/backroad), or tell your developer friends about it. Thanks for trying backroad 💖`,
-    });
+    const data = [
+      {
+        id: '1',
+        a: '1234',
+        b: `1234`,
+        category: '1',
+      },
+      {
+        id: '2',
+        a: '5678',
+        b: `5678`,
+        category: '1',
+      },
+      {
+        id: '3',
+        a: '9012',
+        b: `9012`,
+        category: '2',
+      },
+    ];
 
-    br.columns({ columns: [0.5, 0.5] })[0].stats({
-      items: [
-        { label: 'Backroad Stars', value: 5 },
-        { label: 'Latest Version', value: 'v1.2.1' },
-      ],
-    });
+    const writeData: Record<number, string> = {
+      1: 'This is category 1',
+      2: 'This is category 2',
+    };
 
-    br.sidebar({}).write({ body: 'hi' });
+    const category = br.select({
+      label: 'category',
+      options: [
+        { value: '1', label: '1' },
+        { value: '2', label: '2' },
+      ],
+      defaultValue: '1',
+      // defaultValue: { value: '1', label: '1' },
+    });
+    const dynamicData = data.filter((x) => x.category === category);
+    br.write({ body: `${JSON.stringify(dynamicData)}` });
+    // category ??= '1';
+    br.table({
+      data: dynamicData,
+      columns: {
+        id: { header: '#' },
+        a: { header: 'a' },
+        b: { header: 'b' },
+        category: { header: 'category' },
+      },
+    });
+    br.write({ body: writeData[category] });
   }
   // { port: 3000 }
 );

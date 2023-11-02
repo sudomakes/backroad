@@ -45,7 +45,7 @@ export const FileUpload: BackroadComponentRenderer<"file_upload"> = (props) => {
         isDragAccept,
         isDragReject, acceptedFiles,
     } = useDropzone({
-        accept: { 'image/*': [] }, async onDrop(files, event) {
+        accept: { 'image/*': [] }, ...props.args, async onDrop(files, event) {
             const data = new FormData();
             files.forEach(file => {
 

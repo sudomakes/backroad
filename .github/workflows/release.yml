@@ -1,5 +1,9 @@
 name: RELEASE
-on: [workflow_dispatch]
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - alpha
 jobs:
   main:
     runs-on: ubuntu-latest
