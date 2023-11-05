@@ -79,6 +79,4 @@ Easiest way to get started with backroad: [sudomakes/trybackroad](https://github
 
 ## License
 
-<!--- If you're not sure which open license to use see https://choosealicense.com/--->
-
 This project uses the [Fair Source license](./LICENSE).
