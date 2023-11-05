@@ -1,0 +1,29 @@
+{
+  "projectName": "backroad",
+  "projectOwner": "sudo-vaibhav",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": ["README.md"],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "sudo-vaibhav",
+      "name": "Vaibhav Chopra",
+      "avatar_url": "https://avatars.githubusercontent.com/u/53619134?v=4",
+      "profile": "https://github.com/sudo-vaibhav",
+      "contributions": ["code"]
+    },
+    {
+      "login": "jakusha",
+      "name": "Ebube",
+      "avatar_url": "https://avatars.githubusercontent.com/u/53101939?v=4",
+      "profile": "https://ebube-aaron.vercel.app/",
+      "contributions": ["doc"]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "linkToUsage": false
+}
+
