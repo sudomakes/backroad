@@ -14,7 +14,7 @@
         "main": "libs/backroad/src/index.ts",
         "updateBuildableProjectDepsInPackageJson": true,
         "buildableProjectDepsInPackageJsonType": "dependencies",
-        "assets": ["libs/backroad/**/public/*"]
+        "assets": ["libs/backroad/**/public/*","libs/backroad/**/*.md"]
       }
     },
     "lint": {
