@@ -1,3 +1,11 @@
+## [1.3.2](https://github.com/sudomakes/backroad/compare/v1.3.1...v1.3.2) (2023-12-01)
+
+
+### Bug Fixes
+
+* readme ([c881ccf](https://github.com/sudomakes/backroad/commit/c881ccffbc30a0c768f0d26cbe8b611f8a6eae41))
+* rerender fix for root node ([c37a1ad](https://github.com/sudomakes/backroad/commit/c37a1adc6444fdcba6f8b4eababcd1b66e161ea2))
+
 ## [1.3.1](https://github.com/sudomakes/backroad/compare/v1.3.0...v1.3.1) (2023-11-02)
 
 
