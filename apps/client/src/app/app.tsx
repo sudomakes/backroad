@@ -37,7 +37,12 @@ export function App() {
         ) as BackroadContainer<'base', true>;
         nodeData.forEach((node) => {
           const parsedNode = superjson.parse(node) as BackroadNode<true, true>;
-          newTree = set(newTree, parsedNode.path, parsedNode);
+          if (parsedNode.path == "") {
+            // basically means a full reset
+            newTree = parsedNode as BackroadContainer<'base', true>;
+          } else {
+            newTree = set(newTree, parsedNode.path, parsedNode);
+          }
         });
         console.log('new tree', newTree);
         return newTree; // need to update the object ref by destructuring to trigger a rerender
@@ -57,7 +62,6 @@ export function App() {
       <div id="sidebar-portal" className="relative h-screen"></div>
       <div className="flex-1 relative flex flex-col">
         <Navbar connected={connected} />
-        {/* {JSON.stringify(treeStruct)} */}
         <Routes>
           {treeStruct.children.map((pageContainer) => {
             const castedPageContainer = pageContainer as BackroadContainer<

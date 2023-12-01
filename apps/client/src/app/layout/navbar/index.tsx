@@ -17,7 +17,6 @@ export const Navbar = (props: { connected: boolean }) => {
 
 
   const handleScroll = () => {
-    console.log("window", window.scrollY)
     if (window.scrollY !== 0) {
       setScrolled(true);
     }

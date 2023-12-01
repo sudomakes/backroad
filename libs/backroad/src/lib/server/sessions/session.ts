@@ -32,10 +32,7 @@ export class BackroadSession {
   }
   resetTree() {
     this.renderQueue.flush(); // get rid of all pending flush commands
-    this.rootNodeManager = new BackroadNodeManager(
-      getInitialTreeStructure(),
-      this
-    );
+    this.rootNodeManager.reset(getInitialTreeStructure());
   }
 
   valueOf<ComponentType extends InbuiltComponentTypes>(id: string) {
@@ -61,17 +58,4 @@ export class BackroadSession {
     this.setValue(id, value);
     return true;
   }
-
-  // setRunnerProcess(props: { scriptPath: string; serverPort: number }) {
-  //   if (this.#runnerProcess) {
-  //     this.#runnerProcess.kill();
-  //   }
-  //   this.#runnerProcess = getBackroadScriptRunner({
-  //     scriptPath: props.scriptPath,
-  //     envVariables: {
-  //       BACKROAD_SESSION: this.sessionId,
-  //       BACKROAD_SERVER_PORT: props.serverPort.toString(),
-  //     },
-  //   });
-  // }
 }
