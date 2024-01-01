@@ -77,6 +77,20 @@ Link to the NPM Package: [@backroad/backroad](https://www.npmjs.com/package/@bac
 
 Easiest way to get started with backroad: [sudomakes/trybackroad](https://github.com/sudomakes/trybackroad)
 
+## Roadmap
+
+### Proposals
+
+🔏 <b>Adding authentication</b> - use auth.js to allow per page auth granularity.
+
+🌐 <b>SEO improvements</b> - google crawlers can render and crawl react, but websockets are presenting an issue in achieving SEO.
+
+☁️ <b>One Click Deploy</b> - something similar to streamlit's community cloud to help easy deployments and promote adoption.
+
+### In Progress
+📋 <b>Improving file upload UX</b> - allow copy pasting from clipboard instead of having to read from fs
+
+
 ## License
 
 This project uses the [Fair Source license](./LICENSE).
