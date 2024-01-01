@@ -81,14 +81,14 @@ Easiest way to get started with backroad: [sudomakes/trybackroad](https://github
 
 ### Proposals
 
-🔏 <b>Adding authentication</b> - use auth.js to allow per page auth granularity.
+🔏 <b>Adding authentication</b> (by Feb 2024)- use auth.js to allow per page auth granularity.
 
-🌐 <b>SEO improvements</b> - google crawlers can render and crawl react, but websockets are presenting an issue in achieving SEO.
+🌐 <b>SEO improvements</b> (TBD) - google crawlers can render and crawl react, but websockets are presenting an issue in achieving SEO.
 
-☁️ <b>One Click Deploy</b> - something similar to streamlit's community cloud to help easy deployments and promote adoption.
+☁️ <b>One Click Deploy</b> (by June 2024) - something similar to streamlit's community cloud to help easy deployments and promote adoption.
 
 ### In Progress
-📋 <b>Improving file upload UX</b> - allow copy pasting from clipboard instead of having to read from fs
+📋 <b>Improving file upload UX</b> (by Jan 2024) - allow copy pasting from clipboard instead of having to read from fs
 
 
 ## License
