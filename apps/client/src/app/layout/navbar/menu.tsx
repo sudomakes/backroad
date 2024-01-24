@@ -1,12 +1,25 @@
+import { socket, ThemeOptions } from 'backroad-client';
 import { useEffect, useRef } from 'react';
 import { themeChange } from 'theme-change';
 import { WrenchIcon } from '@heroicons/react/24/outline';
+
+const THEME_KEY = 'backroad-theme';
+
 export const NavbarMenu = () => {
   const settingModalRef = useRef<HTMLDialogElement>(null);
+
+  const themeOptionsToTypes: Record<ThemeOptions, string> = {
+    light: 'light',
+    dark: 'dracula',
+  };
 
   const SettingsModal = () => {
     useEffect(() => {
       themeChange(false);
+      socket.on('theme', (theme, callback) => {
+        localStorage.setItem(THEME_KEY, themeOptionsToTypes[theme]);
+        callback();
+      });
     }, []);
     // <button className="btn" onClick={()=>document.getElementById('my_modal_1').showModal()}>open modal</button>
     return (
@@ -20,8 +33,11 @@ export const NavbarMenu = () => {
             </label>
             <select
               data-choose-theme
-              data-key="backroad-theme"
+              data-key={THEME_KEY}
               className="select select-bordered w-full"
+              onChange={(e) => {
+                console.log('changed to', e.target.value);
+              }}
             >
               <option value="light">Light</option>
               <option value="dracula">Dark</option>

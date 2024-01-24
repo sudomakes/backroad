@@ -6,10 +6,12 @@ import { SocketManager } from '../backroad/socket-manager';
 export const run = async (
   executor: (nodeManager: BackroadNodeManager) => void | Promise<void>,
   backroadOptions?: {
-    port: number;
+    port?: number;
+    theme?: 'light' | 'dark';
   }
 ) => {
   const port = backroadOptions?.port || 3333;
+  const theme = backroadOptions?.theme || 'light';
 
   (
     await startBackroadServer({
@@ -46,6 +48,12 @@ export const run = async (
       'unset_value',
       socketEventHandlers.unsetValue(socket, backroadSession, runExecutor)
     );
+    // Only fire if user explicitly passed in a theme option
+    if (backroadOptions?.theme) {
+      socket.emit('theme', theme, () => {
+        console.log(`"${theme}" theme selected for frontend`);
+      });
+    }
     // socket.on("get_tree", socketEventHandlers.getTree(socket, backroadSession));
   });
 };

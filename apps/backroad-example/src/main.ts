@@ -4,28 +4,30 @@ const initialMessages = [
   { by: 'ai', content: 'Hi, how can I help you today? 😀' },
 ];
 run((br) => {
-  const page2 = br.page({ path: '/page-2' });
-  page2.write({ body: 'hello from page 2' });
-  // const br = brBase.base({});
-  const messages = br.getOrDefault('messages', initialMessages);
-  br.write({ body: `# Backroad LLM Example\n---` });
-  const button = br.button({ label: 'Reset' });
-  messages.forEach((message) => {
-    br.chatMessage({ name: message.by }).write({ body: message.content });
-  });
-  const input = br.chatInput({ id: 'input' });
-  if (input) {
-    br.setValue('messages', [
-      ...messages,
-      { by: 'human', content: input },
-      { by: 'ai', content: getGPTResponse(input) },
-    ]);
-  }
+    const page2 = br.page({ path: '/page-2' });
+    page2.write({ body: 'hello from page 2' });
+    // const br = brBase.base({});
+    const messages = br.getOrDefault('messages', initialMessages);
+    br.write({ body: `# Backroad LLM Example\n---` });
+    const button = br.button({ label: 'Reset' });
+    messages.forEach((message) => {
+      br.chatMessage({ name: message.by }).write({ body: message.content });
+    });
+    const input = br.chatInput({ id: 'input' });
+    if (input) {
+      br.setValue('messages', [
+        ...messages,
+        { by: 'human', content: input },
+        { by: 'ai', content: getGPTResponse(input) },
+      ]);
+    }
 
-  if (button) {
-    br.setValue('messages', initialMessages);
-  }
-});
+    if (button) {
+      br.setValue('messages', initialMessages);
+    }
+  },
+  { theme: 'dark' }
+);
 
 const getGPTResponse = (message: string) => {
   if (message.includes('1+1')) {

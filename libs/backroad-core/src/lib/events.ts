@@ -13,7 +13,7 @@ type ConstructSocketIoEventSignatureFromBackroadEvents<
     callback: (callBackArgs: BackroadEventsMapping[key]['response']) => void
   ) => void;
 };
-export type ServerToClientEventTypes = 'render' | 'running';
+export type ServerToClientEventTypes = 'render' | 'running' | 'theme';
 export type ClientToServerEvents =
   ConstructSocketIoEventSignatureFromBackroadEvents<ClientToServerEventTypes>;
 export type ServerToClientEvents =
@@ -37,6 +37,10 @@ export type BackroadEventsMapping = {
   };
   running: {
     args: null;
+    response?: void;
+  };
+  theme: {
+    args: 'light' | 'dark';
     response?: void;
   };
   run_script: {
