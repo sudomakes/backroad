@@ -41,7 +41,7 @@ export type BackroadEventsMapping = {
     response?: void;
   };
   config: {
-    args: { theme?: 'light' | 'dark' };
+    args: { theme?: 'light' | 'dark' | undefined };
     response?: void;
   };
   run_script: {
