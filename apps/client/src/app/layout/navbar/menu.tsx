@@ -16,10 +16,10 @@ export const NavbarMenu = () => {
   const SettingsModal = () => {
     useEffect(() => {
       themeChange(false);
-      socket.on('theme', (theme, callback) => {
-        localStorage.setItem(THEME_KEY, themeOptionsToTypes[theme]);
-        callback();
-      });
+      // socket.on('config', (theme, callback) => {
+      //   localStorage.setItem(THEME_KEY, themeOptionsToTypes[theme]);
+      //   callback();
+      // });
     }, []);
     // <button className="btn" onClick={()=>document.getElementById('my_modal_1').showModal()}>open modal</button>
     return (
@@ -35,9 +35,6 @@ export const NavbarMenu = () => {
               data-choose-theme
               data-key={THEME_KEY}
               className="select select-bordered w-full"
-              onChange={(e) => {
-                console.log('changed to', e.target.value);
-              }}
             >
               <option value="light">Light</option>
               <option value="dracula">Dark</option>

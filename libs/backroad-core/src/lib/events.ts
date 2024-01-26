@@ -4,7 +4,8 @@ export type ClientToServerEventTypes =
   | 'get_value'
   | 'set_value'
   | 'run_script'
-  | 'unset_value';
+  | 'unset_value'
+  | 'get_config';
 type ConstructSocketIoEventSignatureFromBackroadEvents<
   T extends BackroadEvents
 > = {
@@ -13,7 +14,7 @@ type ConstructSocketIoEventSignatureFromBackroadEvents<
     callback: (callBackArgs: BackroadEventsMapping[key]['response']) => void
   ) => void;
 };
-export type ServerToClientEventTypes = 'render' | 'running' | 'theme';
+export type ServerToClientEventTypes = 'render' | 'running' | 'config';
 export type ClientToServerEvents =
   ConstructSocketIoEventSignatureFromBackroadEvents<ClientToServerEventTypes>;
 export type ServerToClientEvents =
@@ -39,8 +40,8 @@ export type BackroadEventsMapping = {
     args: null;
     response?: void;
   };
-  theme: {
-    args: 'light' | 'dark';
+  config: {
+    args: { theme?: 'light' | 'dark' };
     response?: void;
   };
   run_script: {
@@ -50,6 +51,10 @@ export type BackroadEventsMapping = {
   unset_value: {
     args: { id: string };
     response?: void;
+  };
+  get_config: {
+    args?: void;
+    response?: never;
   };
 };
 export type BackroadEvents = keyof BackroadEventsMapping;

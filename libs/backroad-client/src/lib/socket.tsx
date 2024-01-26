@@ -20,7 +20,6 @@ export const setBackroadValue = (props: {
   // triggerRerun?: boolean
 }) => {
   return new Promise<void>((resolve) => {
-
     socket.emit(
       'set_value',
       {
@@ -28,20 +27,29 @@ export const setBackroadValue = (props: {
         value: superjson.stringify(props.value),
       },
       () => {
-        resolve()
+        resolve();
       }
     );
-  })
+  });
 };
 
-export const setRunUnsetBackroadValue = (props: Parameters<typeof setBackroadValue>[0]) => {
+export const setRunUnsetBackroadValue = (
+  props: Parameters<typeof setBackroadValue>[0]
+) => {
   // sets and re-runs in backend
   return new Promise<void>((resolve) => {
     setBackroadValue(props).then(() => {
-
-      socket.emit("unset_value", { id: props.id }, () => {
-        resolve()
-      })
+      socket.emit('unset_value', { id: props.id }, () => {
+        resolve();
+      });
     });
-  })
-}
+  });
+};
+
+export const getBackroadConfig = () => {
+  return new Promise<void>((resolve) => {
+    socket.emit('get_config', undefined, () => {
+      resolve();
+    });
+  });
+};

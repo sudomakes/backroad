@@ -11,7 +11,9 @@ export const run = async (
   }
 ) => {
   const port = backroadOptions?.port || 3333;
-  const theme = backroadOptions?.theme || 'light';
+  const config = {
+    theme: backroadOptions?.theme,
+  };
 
   (
     await startBackroadServer({
@@ -49,11 +51,10 @@ export const run = async (
       socketEventHandlers.unsetValue(socket, backroadSession, runExecutor)
     );
     // Only fire if user explicitly passed in a theme option
-    if (backroadOptions?.theme) {
-      socket.emit('theme', theme, () => {
-        console.log(`"${theme}" theme selected for frontend`);
-      });
-    }
+    socket.on(
+      'get_config',
+      socketEventHandlers.getConfig(socket, config, runExecutor)
+    );
     // socket.on("get_tree", socketEventHandlers.getTree(socket, backroadSession));
   });
 };
