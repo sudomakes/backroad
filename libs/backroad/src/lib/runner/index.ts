@@ -3,6 +3,7 @@ import { startBackroadServer } from '../server';
 import { sessionManager } from '../server/sessions/session-manager';
 import { socketEventHandlers } from '../server/server-socket-event-handlers';
 import { SocketManager } from '../backroad/socket-manager';
+import { Config } from '../server/server-socket-event-handlers/types';
 export const run = async (
   executor: (nodeManager: BackroadNodeManager) => void | Promise<void>,
   backroadOptions?: {
@@ -11,7 +12,7 @@ export const run = async (
   }
 ) => {
   const port = backroadOptions?.port || 3333;
-  const config = {
+  const config: Config = {
     theme: backroadOptions?.theme,
   };
 

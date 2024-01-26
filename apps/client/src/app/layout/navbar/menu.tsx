@@ -1,26 +1,39 @@
-import { socket, ThemeOptions } from 'backroad-client';
 import { useEffect, useRef } from 'react';
 import { themeChange } from 'theme-change';
 import { WrenchIcon } from '@heroicons/react/24/outline';
+import { Config } from '@backroad/backroad';
+import useBackroadConfig from '../../hooks/useBackroadConfig';
 
 const THEME_KEY = 'backroad-theme';
 
 export const NavbarMenu = () => {
   const settingModalRef = useRef<HTMLDialogElement>(null);
 
-  const themeOptionsToTypes: Record<ThemeOptions, string> = {
+  const backroadConfig = useBackroadConfig();
+
+  const themeOptionsToTypes: Record<Required<Config>['theme'], string> = {
     light: 'light',
     dark: 'dracula',
   };
 
-  const SettingsModal = () => {
+  const SettingsModal = ({
+    backroadConfig,
+  }: {
+    backroadConfig: Config | undefined;
+  }) => {
     useEffect(() => {
       themeChange(false);
-      // socket.on('config', (theme, callback) => {
-      //   localStorage.setItem(THEME_KEY, themeOptionsToTypes[theme]);
-      //   callback();
-      // });
     }, []);
+
+    useEffect(() => {
+      if (backroadConfig?.theme) {
+        localStorage.setItem(
+          THEME_KEY,
+          themeOptionsToTypes[backroadConfig.theme]
+        );
+      }
+    }, [backroadConfig]);
+
     // <button className="btn" onClick={()=>document.getElementById('my_modal_1').showModal()}>open modal</button>
     return (
       <dialog className="modal" ref={settingModalRef}>
@@ -82,7 +95,7 @@ export const NavbarMenu = () => {
           </span>
         </li>
       </ul>
-      <SettingsModal />
+      <SettingsModal backroadConfig={backroadConfig} />
     </div>
   );
 };
