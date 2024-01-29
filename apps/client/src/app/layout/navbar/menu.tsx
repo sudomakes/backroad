@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { themeChange } from 'theme-change';
-import { WrenchIcon } from '@heroicons/react/24/outline';
+import { InformationCircleIcon, WrenchIcon } from '@heroicons/react/24/outline';
 import { Config } from '@backroad/backroad';
 import useBackroadConfig from '../../hooks/useBackroadConfig';
 
@@ -11,7 +11,7 @@ export const NavbarMenu = () => {
 
   const backroadConfig = useBackroadConfig();
 
-  const themeOptionsToTypes: Record<Required<Config>['theme'], string> = {
+  const themeNameMapping = {
     light: 'light',
     dark: 'dracula',
   };
@@ -29,12 +29,12 @@ export const NavbarMenu = () => {
       if (backroadConfig?.theme) {
         localStorage.setItem(
           THEME_KEY,
-          themeOptionsToTypes[backroadConfig.theme]
+          themeNameMapping[backroadConfig.theme]
         );
       }
-    }, [backroadConfig]);
+    }, [backroadConfig?.theme]);
 
-    // <button className="btn" onClick={()=>document.getElementById('my_modal_1').showModal()}>open modal</button>
+    const isThemeSet = !!backroadConfig?.theme;
     return (
       <dialog className="modal" ref={settingModalRef}>
         <div className="modal-box">
@@ -44,14 +44,23 @@ export const NavbarMenu = () => {
             <label className="label">
               <span className="backroad-label">Theme Preference</span>
             </label>
-            <select
-              data-choose-theme
-              data-key={THEME_KEY}
-              className="select select-bordered w-full"
-            >
-              <option value="light">Light</option>
-              <option value="dracula">Dark</option>
-            </select>
+            <div className='flex items-center gap-4'>
+
+              <select
+                disabled={isThemeSet}
+                data-choose-theme
+                data-key={THEME_KEY}
+                className="select select-bordered w-full"
+              >
+                <option value="light">Light</option>
+                <option value="dracula">Dark</option>
+              </select>
+              {isThemeSet && (
+                <div className='tooltip' data-tip="Cannot change theme as it is set by app publisher">
+
+                  <InformationCircleIcon width={20} />
+                </div>)}
+            </div>
           </div>
           <div className="modal-action">
             <form method="dialog">

@@ -27,7 +27,12 @@ run(
       br.setValue('messages', initialMessages);
     }
   },
-  { theme: 'dark' }
+  {
+    theme: 'dark',
+    analytics: {
+      google: 'G-77B7VHC5Z8',
+    },
+  }
 );
 
 const getGPTResponse = (message: string) => {

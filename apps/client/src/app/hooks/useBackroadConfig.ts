@@ -1,18 +1,18 @@
+import { BackroadConfig } from '@backroad/core';
+import { socket } from 'backroad-client';
 import { useEffect, useState } from 'react';
-import { Config } from '@backroad/backroad';
-import { getBackroadConfig, socket } from 'backroad-client';
 
 export default function useBackroadConfig() {
-  const [config, setConfig] = useState<Config>();
+  const [config, setConfig] = useState<BackroadConfig>();
 
   useEffect(() => {
-    socket.on('config', (backroadConfig, callback) => {
-      setConfig(backroadConfig);
-      callback();
-    });
-    getBackroadConfig().then(() => {
-      console.log('Socket emitted get_config event');
-    });
+    const handleConfig = (config: BackroadConfig) => {
+      setConfig(config);
+    };
+    socket.on('backroad_config', handleConfig);
+    return () => {
+      socket.off('backroad_config', handleConfig);
+    };
   }, []);
 
   return config;

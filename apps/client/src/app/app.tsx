@@ -1,23 +1,22 @@
-import { TreeRender, socket } from 'backroad-client';
 import {
   getInitialTreeStructure,
   type BackroadContainer,
-  type BackroadNode,
+  type BackroadNode
 } from '@backroad/core';
+import { TreeRender, socket } from 'backroad-client';
 import { set } from 'lodash';
 import { useEffect, useState } from 'react';
+import ReactGA from 'react-ga4';
 import { Route, Routes } from 'react-router-dom';
 import superjson from 'superjson';
 import { Footer } from './layout/footer';
 import { Navbar } from './layout/navbar';
-// eslint-disable-next-line @nx/enforce-module-boundaries
-// TODO: move all this stuff to a lib
+import useBackroadConfig from './hooks/useBackroadConfig';
 export function App() {
   const [connected, setConnected] = useState(false);
   const [treeStruct, setTreeStruct] = useState<BackroadContainer<'base', true>>(
     getInitialTreeStructure()
   );
-
   useEffect(() => {
     socket.on('connect', () => {
       setConnected(true);
@@ -26,8 +25,16 @@ export function App() {
         console.log('ran script');
       });
     });
+
     socket.on('disconnect', () => setConnected(false));
   });
+
+  const config = useBackroadConfig();
+  useEffect(() => {
+    if (config?.analytics?.google) {
+      ReactGA.initialize(config.analytics.google);
+    }
+  }, [config?.analytics?.google]);
 
   useEffect(() => {
     const onRender = (nodeData: string[], callback: () => void) => {
@@ -58,7 +65,6 @@ export function App() {
   console.log('pages data', treeStruct);
   return (
     <div className="flex min-h-screen">
-      {/* <Helmet defaultTitle="Backroad App" /> */}
       <div id="sidebar-portal" className="relative h-screen"></div>
       <div className="flex-1 relative flex flex-col">
         <Navbar connected={connected} />

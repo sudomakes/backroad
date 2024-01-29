@@ -1,6 +1,6 @@
 {
   "name": "@backroad/core",
-  "version": "1.3.2",
+  "version": "1.4.0-alpha.1",
   "dependencies": {
     "tslib": "^2.3.0",
     "react-chartjs-2": "^5.2.0",

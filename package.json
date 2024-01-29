@@ -1,6 +1,6 @@
 {
   "name": "backroad-monorepo",
-  "version": "1.3.2",
+  "version": "1.4.0-alpha.1",
   "scripts": {
     "build-example-app": "nx build client && nx build backroad-example &&  cp -R ./dist/apps/client ./dist/apps/backroad-example/public",
     "dev": "cross-env BACKROAD_ENV=dev nx run-many --parallel --target=serve --projects=backroad-example,client",
@@ -92,6 +92,7 @@
     "react-colorful": "^5.6.1",
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.3",
+    "react-ga4": "^2.1.0",
     "react-helmet": "^6.1.0",
     "react-json-view": "^1.21.3",
     "react-markdown": "^9.0.0",

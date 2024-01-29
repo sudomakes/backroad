@@ -1,11 +1,22 @@
 import type { Socket } from 'socket.io';
 import { DefaultEventsMap } from 'socket.io/dist/typed-events';
+import { InitOptions } from 'react-ga4/types/ga4';
+export type BackroadConfig =
+  | undefined
+  | {
+      analytics?: {
+        google?: string | InitOptions[];
+      };
+      theme?: 'light' | 'dark';
+      server?: {
+        port?: number;
+      };
+    };
 export type ClientToServerEventTypes =
   | 'get_value'
   | 'set_value'
   | 'run_script'
-  | 'unset_value'
-  | 'get_config';
+  | 'unset_value';
 type ConstructSocketIoEventSignatureFromBackroadEvents<
   T extends BackroadEvents
 > = {
@@ -14,7 +25,7 @@ type ConstructSocketIoEventSignatureFromBackroadEvents<
     callback: (callBackArgs: BackroadEventsMapping[key]['response']) => void
   ) => void;
 };
-export type ServerToClientEventTypes = 'render' | 'running' | 'config';
+export type ServerToClientEventTypes = 'render' | 'running' | 'backroad_config';
 export type ClientToServerEvents =
   ConstructSocketIoEventSignatureFromBackroadEvents<ClientToServerEventTypes>;
 export type ServerToClientEvents =
@@ -52,8 +63,8 @@ export type BackroadEventsMapping = {
     args: { id: string };
     response?: void;
   };
-  get_config: {
-    args?: void;
+  backroad_config: {
+    args: BackroadConfig;
     response?: never;
   };
 };

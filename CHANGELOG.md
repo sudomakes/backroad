@@ -1,37 +1,9 @@
-## [1.3.2](https://github.com/sudomakes/backroad/compare/v1.3.1...v1.3.2) (2023-12-01)
+## [1.4.0-alpha.1](https://github.com/sudomakes/backroad/compare/v1.3.1-alpha.4...v1.4.0-alpha.1) (2023-11-01)
 
 
-### Bug Fixes
+### Features
 
-* readme ([c881ccf](https://github.com/sudomakes/backroad/commit/c881ccffbc30a0c768f0d26cbe8b611f8a6eae41))
-* rerender fix for root node ([c37a1ad](https://github.com/sudomakes/backroad/commit/c37a1adc6444fdcba6f8b4eababcd1b66e161ea2))
-
-## [1.3.1](https://github.com/sudomakes/backroad/compare/v1.3.0...v1.3.1) (2023-11-02)
-
-
-### Bug Fixes
-
-* added better boot logs for dev ([f0d0dc8](https://github.com/sudomakes/backroad/commit/f0d0dc88bdb075582396d6c284cd4c822bb59efa))
-* removed commander dependency ([959745d](https://github.com/sudomakes/backroad/commit/959745d70c1469c809d380e0b16e6303565a6323))
-* supporting all filetypes in upload component ([915adbf](https://github.com/sudomakes/backroad/commit/915adbf05858c703f5b79bb6d238510a3cc747a4))
-* table not updating on value change ([e8063e0](https://github.com/sudomakes/backroad/commit/e8063e0ab8bd712a5e9830913226e7f9138d316a))
-* tables, fileupload and better logs ([401956d](https://github.com/sudomakes/backroad/commit/401956d555077145f32004fc7c214a52a0ffd860))
-
-
-### Chores
-
-* added issue autocleanup ([4df1ba9](https://github.com/sudomakes/backroad/commit/4df1ba9bfeb62ed5c9039e7a6efce6f9d81070ad))
-* added prerelease branch ([18a78a4](https://github.com/sudomakes/backroad/commit/18a78a4ba1f38e6579010ce7124ba6a9915df8e8))
-* arm builds ([5f23147](https://github.com/sudomakes/backroad/commit/5f23147ac8c6195a28de8027a30aa82932cffcef))
-* fixed docker image scp for ubuntu 22.04 ([3a3829b](https://github.com/sudomakes/backroad/commit/3a3829b12716522d5d726eeb415fc209d6b785f6))
-* moved to lts ([0e8a587](https://github.com/sudomakes/backroad/commit/0e8a58770f51752a69a48d4a64ecd63e3cb45e85))
-* multi plat builds ([f18bc7a](https://github.com/sudomakes/backroad/commit/f18bc7a52e0abba4e1016e8f2d684a56c0481f1b))
-* **release:** -v1.3.1-alpha.1 [skip ci] ([133c700](https://github.com/sudomakes/backroad/commit/133c700f68e21b9c35f10e7c9c8b50fe88adfd08))
-* **release:** -v1.3.1-alpha.2 [skip ci] ([ef8ee5f](https://github.com/sudomakes/backroad/commit/ef8ee5f1f00a368fe09c226351ca2a04b9c99a1b))
-* **release:** -v1.3.1-alpha.3 [skip ci] ([034d2bf](https://github.com/sudomakes/backroad/commit/034d2bf68255cb2c41694c637136e6e1f5be7d5c))
-* **release:** -v1.3.1-alpha.4 [skip ci] ([15e1149](https://github.com/sudomakes/backroad/commit/15e1149ce7332f7780c7ed6807c69539ad279244))
-* removed group commands ([f192a15](https://github.com/sudomakes/backroad/commit/f192a15d7409ecd1a3464eb9ae4e574ca507a8e7))
-* upgraded deploy workflow ([4596d6c](https://github.com/sudomakes/backroad/commit/4596d6c3d8b58552c5f290e83d6a8fc9c5726036))
+* added google analytics ([ad2de41](https://github.com/sudomakes/backroad/commit/ad2de41d1a7c7cc2322638920accf14d2e1982cc))
 
 ## [1.3.1-alpha.4](https://github.com/sudomakes/backroad/compare/v1.3.1-alpha.3...v1.3.1-alpha.4) (2023-11-01)
 

@@ -45,11 +45,3 @@ export const setRunUnsetBackroadValue = (
     });
   });
 };
-
-export const getBackroadConfig = () => {
-  return new Promise<void>((resolve) => {
-    socket.emit('get_config', undefined, () => {
-      resolve();
-    });
-  });
-};
