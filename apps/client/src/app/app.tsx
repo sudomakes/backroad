@@ -40,7 +40,7 @@ export function App() {
     return () => {
       socket.off("backroad_config", handleConfig)
     }
-  })
+  }, [])
 
   useEffect(() => {
     const onRender = (nodeData: string[], callback: () => void) => {
