@@ -15,5 +15,5 @@ export const pages = {
   columns: backroadColumnsExample,
   llm: backroadLLMExample,
   form: backroadFormExample,
-  fileUplaod: backroadFileUploadExample,
+  fileUpload: backroadFileUploadExample,
 };

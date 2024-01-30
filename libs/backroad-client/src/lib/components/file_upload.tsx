@@ -1,8 +1,9 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { BackroadComponentRenderer } from "../types/components"
 import { useDropzone } from 'react-dropzone';
 import { sessionId, setBackroadValue } from "../socket";
-import { CloudArrowUpIcon } from "@heroicons/react/24/outline";
+import { ClipboardDocumentIcon, CloudArrowUpIcon } from "@heroicons/react/24/outline";
+import { minimatch } from 'minimatch'
 
 const baseStyle = {
     flex: 1,
@@ -38,6 +39,19 @@ const rejectStyle = {
 };
 
 export const FileUpload: BackroadComponentRenderer<"file_upload"> = (props) => {
+    const handleFiles = async (files: Blob[] | File[]) => {
+        const data = new FormData();
+        files.forEach(file => {
+
+            data.append('files', file);
+        })
+        data.append('sessionId', sessionId);
+        data.append('id', props.id);
+        const resp = await (await fetch("/api/uploads", { method: "POST", body: data })).json()
+        console.log("upload response", resp)
+        setBackroadValue({ id: props.id, value: resp })
+    }
+    const acceptObject = props.args.accept || { "image/*": [] }
     const {
         getRootProps,
         getInputProps,
@@ -45,18 +59,8 @@ export const FileUpload: BackroadComponentRenderer<"file_upload"> = (props) => {
         isDragAccept,
         isDragReject, acceptedFiles,
     } = useDropzone({
-        accept: { 'image/*': [] }, ...props.args, async onDrop(files, event) {
-            const data = new FormData();
-            files.forEach(file => {
 
-                data.append('files', file);
-            })
-            data.append('sessionId', sessionId);
-            data.append('id', props.id);
-            const resp = await (await fetch("/api/uploads", { method: "POST", body: data })).json()
-            console.log("upload response", resp)
-            setBackroadValue({ id: props.id, value: resp })
-        },
+        ...props.args, onDrop: handleFiles, accept: acceptObject
     });
 
     const style = useMemo(() => ({
@@ -69,6 +73,48 @@ export const FileUpload: BackroadComponentRenderer<"file_upload"> = (props) => {
         isDragAccept,
         isDragReject
     ]);
+
+    const handlePaste = async () => {
+        // if (!navigator.clipboard) {
+        //     console.log('Clipboard API not available');
+        //     return;
+        // }
+        const files: Blob[] = [];
+
+        try {
+            const items = await navigator.clipboard.read();
+            // console.log("clipboard items", items)
+            // for (let i = 0; i < items.length; i++) {
+            //     const item = items[i];
+            //     // if (item. === 'file') {
+            //     //     const blob = item.getAsFile();
+            //     //     if (blob) files.push(blob);
+            //     //     console.log('Pasted file:', blob);
+            //     // }
+            //     files.push(await item.getAs())
+            // }
+            for (const clipboardItem of items) {
+                for (const type of clipboardItem.types) {
+                    if (Object.keys(acceptObject).some((pattern) => minimatch(type, pattern))) {
+                        const blob = await clipboardItem.getType(type);
+                        files.push(blob);
+                    }
+                }
+            }
+            handleFiles(files)
+        } catch (err) {
+            console.log('Failed to read clipboard contents: ', err);
+        }
+    };
+
+    // const { getRootProps, getInputProps, isDragActive } = useDropzone();
+
+    useEffect(() => {
+        document.addEventListener('paste', handlePaste);
+        return () => {
+            document.removeEventListener('paste', handlePaste);
+        };
+    }, []);
 
     return (
         <div>
@@ -84,9 +130,21 @@ export const FileUpload: BackroadComponentRenderer<"file_upload"> = (props) => {
                         <p>{acceptedFiles.length ? props.args.multiple ? `${acceptedFiles.length} file(s) selected` : `${acceptedFiles[0].name} selected` : "Drag 'n' drop some files here, or click to select files"} </p>
                     </div>
                     <div className="btn btn-primary">Upload Files</div>
+                    <div>
+
+                        <ClipboardDocumentIcon width={40} onClick={(e) => {
+                            handlePaste()
+                            e.stopPropagation()
+                        }} />
+                    </div>
                 </div>
             </div>
-        </div>
+            {/* <button className="cursor-pointer btn btn-primary" >
+                hi
+            </button> */}
+
+
+        </div >
     );
 }
 
