@@ -1,3 +1,10 @@
+## [1.4.0-alpha.3](https://github.com/sudomakes/backroad/compare/v1.4.0-alpha.2...v1.4.0-alpha.3) (2024-01-30)
+
+
+### Features
+
+* added clipboard upload ([539f63d](https://github.com/sudomakes/backroad/commit/539f63d93ef6f9d1da02b65aa1e5b7282020b6f2))
+
 ## [1.4.0-alpha.2](https://github.com/sudomakes/backroad/compare/v1.4.0-alpha.1...v1.4.0-alpha.2) (2024-01-30)
 
 
