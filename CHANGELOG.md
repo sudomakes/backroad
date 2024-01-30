@@ -1,3 +1,30 @@
+## [1.4.0-alpha.2](https://github.com/sudomakes/backroad/compare/v1.4.0-alpha.1...v1.4.0-alpha.2) (2024-01-30)
+
+
+### Features
+
+* **config:** keep types consistent for config type ([8205e9b](https://github.com/sudomakes/backroad/commit/8205e9b3e2a4dd4746d2c7871524f406676e8d29))
+* **config:** setup an event just for config and add it to socket.tsx ([e2d1547](https://github.com/sudomakes/backroad/commit/e2d1547eb66ce5893b9ef5983975c4f387595988))
+* **config:** wire up config events to frontend via a hook ([7322652](https://github.com/sudomakes/backroad/commit/73226522d8d9554ef772304c6b5ac529dc1ac253))
+* npMerge branch 'alpha' into feat/permanent-theme ([67d9942](https://github.com/sudomakes/backroad/commit/67d9942cc2265d6119fcc29601e793db435a855f))
+* **theme:** fix formatting on example app run function ([e0e33be](https://github.com/sudomakes/backroad/commit/e0e33bee149f85af228996b0c264c7c62e97524b))
+* **theme:** implement choose theme at runtime ([8eb02f7](https://github.com/sudomakes/backroad/commit/8eb02f7a7eeeef7ffa6b67c4f083047d6bc35ad5))
+
+
+### Bug Fixes
+
+* ga-4 added empty deps array in useeffect ([597aa04](https://github.com/sudomakes/backroad/commit/597aa0469c3634bd262891f0c3295b1e988e11cd))
+* readme ([c881ccf](https://github.com/sudomakes/backroad/commit/c881ccffbc30a0c768f0d26cbe8b611f8a6eae41))
+* rerender fix for root node ([c37a1ad](https://github.com/sudomakes/backroad/commit/c37a1adc6444fdcba6f8b4eababcd1b66e161ea2))
+* tables, fileupload and better logs ([401956d](https://github.com/sudomakes/backroad/commit/401956d555077145f32004fc7c214a52a0ffd860))
+
+
+### Chores
+
+* **release:** -v1.3.1 [skip ci] ([aa8d941](https://github.com/sudomakes/backroad/commit/aa8d941da3ac538702a9650479c0a3eae390cb48))
+* **release:** -v1.3.2 [skip ci] ([faffbff](https://github.com/sudomakes/backroad/commit/faffbff0e7d6bb6d92c29c24dbb3c931dc003547))
+* upgraded deploy workflow ([4596d6c](https://github.com/sudomakes/backroad/commit/4596d6c3d8b58552c5f290e83d6a8fc9c5726036))
+
 ## [1.4.0-alpha.1](https://github.com/sudomakes/backroad/compare/v1.3.1-alpha.4...v1.4.0-alpha.1) (2023-11-01)
 
 
