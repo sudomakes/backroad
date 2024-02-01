@@ -1,3 +1,10 @@
+## [1.4.0-alpha.4](https://github.com/sudomakes/backroad/compare/v1.4.0-alpha.3...v1.4.0-alpha.4) (2024-02-01)
+
+
+### Bug Fixes
+
+* added ack on config receipt ([e47233f](https://github.com/sudomakes/backroad/commit/e47233fbe7e9c05488f590a237de7f55b0cca9a6))
+
 ## [1.4.0-alpha.3](https://github.com/sudomakes/backroad/compare/v1.4.0-alpha.2...v1.4.0-alpha.3) (2024-01-30)
 
 
