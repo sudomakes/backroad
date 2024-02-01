@@ -6,8 +6,12 @@ export default function useBackroadConfig() {
   const [config, setConfig] = useState<BackroadConfig>();
 
   useEffect(() => {
-    const handleConfig = (config: BackroadConfig) => {
+    const handleConfig = (
+      config: BackroadConfig,
+      callback: (args: undefined) => void
+    ) => {
       setConfig(config);
+      callback(undefined);
     };
     socket.on('backroad_config', handleConfig);
     return () => {
