@@ -1,6 +1,6 @@
 {
   "name": "backroad-monorepo",
-  "version": "1.4.0-alpha.4",
+  "version": "1.4.0",
   "scripts": {
     "build-example-app": "nx build client && nx build backroad-example &&  cp -R ./dist/apps/client ./dist/apps/backroad-example/public",
     "dev": "cross-env BACKROAD_ENV=dev nx run-many --parallel --target=serve --projects=backroad-example,client",

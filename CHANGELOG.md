@@ -1,3 +1,31 @@
+## [1.4.0](https://github.com/sudomakes/backroad/compare/v1.3.2...v1.4.0) (2024-02-04)
+
+
+### Features
+
+* added clipboard upload ([539f63d](https://github.com/sudomakes/backroad/commit/539f63d93ef6f9d1da02b65aa1e5b7282020b6f2))
+* added google analytics ([ad2de41](https://github.com/sudomakes/backroad/commit/ad2de41d1a7c7cc2322638920accf14d2e1982cc))
+* **config:** keep types consistent for config type ([8205e9b](https://github.com/sudomakes/backroad/commit/8205e9b3e2a4dd4746d2c7871524f406676e8d29))
+* **config:** setup an event just for config and add it to socket.tsx ([e2d1547](https://github.com/sudomakes/backroad/commit/e2d1547eb66ce5893b9ef5983975c4f387595988))
+* **config:** wire up config events to frontend via a hook ([7322652](https://github.com/sudomakes/backroad/commit/73226522d8d9554ef772304c6b5ac529dc1ac253))
+* npMerge branch 'alpha' into feat/permanent-theme ([67d9942](https://github.com/sudomakes/backroad/commit/67d9942cc2265d6119fcc29601e793db435a855f))
+* **theme:** fix formatting on example app run function ([e0e33be](https://github.com/sudomakes/backroad/commit/e0e33bee149f85af228996b0c264c7c62e97524b))
+* **theme:** implement choose theme at runtime ([8eb02f7](https://github.com/sudomakes/backroad/commit/8eb02f7a7eeeef7ffa6b67c4f083047d6bc35ad5))
+
+
+### Bug Fixes
+
+* added ack on config receipt ([e47233f](https://github.com/sudomakes/backroad/commit/e47233fbe7e9c05488f590a237de7f55b0cca9a6))
+* ga-4 added empty deps array in useeffect ([597aa04](https://github.com/sudomakes/backroad/commit/597aa0469c3634bd262891f0c3295b1e988e11cd))
+
+
+### Chores
+
+* **release:** -v1.4.0-alpha.1 [skip ci] ([3f75cbb](https://github.com/sudomakes/backroad/commit/3f75cbb529531344624ab567bb7d68e3677f7365))
+* **release:** -v1.4.0-alpha.2 [skip ci] ([7b3699a](https://github.com/sudomakes/backroad/commit/7b3699a5743e406b193960d98854390d1a617d03))
+* **release:** -v1.4.0-alpha.3 [skip ci] ([25c7afc](https://github.com/sudomakes/backroad/commit/25c7afcb74d146c4ee30a337fd402a47a124438f))
+* **release:** -v1.4.0-alpha.4 [skip ci] ([c6a14e4](https://github.com/sudomakes/backroad/commit/c6a14e41baa42d2372b3ea1a91beb50c9cad242f))
+
 ## [1.4.0-alpha.4](https://github.com/sudomakes/backroad/compare/v1.4.0-alpha.3...v1.4.0-alpha.4) (2024-02-01)
 
 
