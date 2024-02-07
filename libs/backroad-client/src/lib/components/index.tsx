@@ -25,6 +25,7 @@ import { Radio } from './radio';
 import { FileUpload } from './file_upload';
 import { TextInput } from './text_input';
 import { Video } from './video';
+import { LoadingSpinner } from './loading_spinner';
 
 export const backroadClientComponents: {
   [key in InbuiltComponentTypes]: (
@@ -51,7 +52,6 @@ export const backroadClientComponents: {
 
   chat_input: ChatInput,
 
-
   color_picker: ColorPicker,
   toggle: Toggle,
   checkbox: Checkbox,
@@ -64,5 +64,6 @@ export const backroadClientComponents: {
   button: Button,
 
   image: Image,
-  video: Video
+  video: Video,
+  loading_spinner: LoadingSpinner,
 };
