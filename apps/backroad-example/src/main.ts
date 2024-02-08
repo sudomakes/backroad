@@ -5,7 +5,7 @@ const initialMessages = [
   { by: 'ai', content: 'Hi, how can I help you today? 😀' },
 ];
 run(
-  async (br) => {
+  (br) => {
     pages.fileUpload(br.page({ path: '/file-upload' }));
     const page2 = br.page({ path: '/page-2' });
     page2.write({ body: 'hello from page 2' });
