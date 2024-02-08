@@ -29,4 +29,10 @@ export class RenderQueue {
       console.log('batched render request acked by frontend');
     });
   }
+  updateProps(props: any) {
+    const socket = SocketManager.getSocket(this.backroadSession.sessionId);
+    socket.emit('props_change', props, () => {
+      console.log('props change request acked by frontend');
+    });
+  }
 }

@@ -201,6 +201,11 @@ export class BackroadNodeManager<
     );
   }
   chatMessage(props: BackroadContainerFormat<'chat_message'>) {
+    props.loadingPromise?.then(() => {
+      this.backroadSession.renderQueue.updateProps({
+        loadingPromise: undefined,
+      });
+    });
     return this.#addContainerDescendant(
       this.#constructContainerObject(props, 'chat_message')
     );
@@ -211,6 +216,9 @@ export class BackroadNodeManager<
   }
   linkGroup(props: BackroadComponentFormat<'link_group'>) {
     return this.#initialiseAndAddComponentDescendant(props, 'link_group');
+  }
+  loading(props: BackroadComponentFormat<'loading_spinner'>) {
+    return this.#initialiseAndAddComponentDescendant(props, 'loading_spinner');
   }
   stats(props: BackroadComponentFormat<'stats'>) {
     return this.#initialiseAndAddComponentDescendant(props, 'stats');

@@ -1,4 +1,4 @@
-import { run } from '@backroad/backroad';
+import { run, ChatManager } from '@backroad/backroad';
 import { pages } from './pages';
 
 const initialMessages = [
@@ -10,19 +10,20 @@ run(
     const page2 = br.page({ path: '/page-2' });
     page2.write({ body: 'hello from page 2' });
     // const br = brBase.base({});
-    const messages = br.getOrDefault('messages', initialMessages);
     br.write({ body: `# Backroad LLM Example\n---` });
     const button = br.button({ label: 'Reset' });
-    messages.forEach((message) => {
-      br.chatMessage({ name: message.by }).write({ body: message.content });
+    const chatManager = new ChatManager({
+      br,
+      messagesStateName: 'messages',
+      initialMessages,
+      inputId: 'input',
     });
-    const input = br.chatInput({ id: 'input' });
-    if (input) {
-      br.setValue('messages', [
-        ...messages,
-        { by: 'human', content: input },
-        { by: 'ai', content: getGPTResponse(input) },
-      ]);
+
+    if (chatManager.userInputComplete) {
+      const gptResponsePromise = getGPTResponse(
+        chatManager.userInput as string
+      );
+      chatManager.addAIMessage({ by: 'ai', content: gptResponsePromise });
     }
 
     if (button) {
@@ -37,11 +38,18 @@ run(
   }
 );
 
-const getGPTResponse = (message: string) => {
+const getGPTResponse = async (message: string) => {
+  await simulatedDelay();
   if (message.includes('1+1')) {
     return 'Ah, the answer to that is 2!! 😎';
   } else {
     return `I don't know...
     ![i-dont-know](https://t3.ftcdn.net/jpg/05/66/80/74/360_F_566807496_uKCQoOWWdXbFWKluJXo2ilg7B61J0qIe.jpg)`;
   }
+};
+
+const simulatedDelay = () => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, 3000);
+  });
 };

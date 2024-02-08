@@ -185,6 +185,14 @@ type _ComponentBasePropsMapping = {
     args: HTMLProps<HTMLVideoElement>;
     value: null;
   };
+  loading_spinner: {
+    args: {
+      fontSize: number;
+      top?: number;
+      left?: number;
+    };
+    value: null;
+  };
   // date_input: AllowDefaultHelper<{}>
 };
 export type ComponentPropsMapping = {
@@ -220,7 +228,21 @@ type ContainerArgsMapping = {
     };
   };
   chat_message: {
-    args: { name: string; avatar?: string; avatarPlacement?: 'left' | 'right' };
+    args: {
+      by: string;
+      avatar?: string;
+      avatarPlacement?: 'left' | 'right';
+      loadingPromise?: Promise<string>;
+    };
+  };
+};
+export type ManagerArgsMapping = {
+  chat_manager: {
+    args: {
+      messages: (ContainerArgsMapping['chat_message']['args'] & {
+        content: string | Promise<string>;
+      })[];
+    };
   };
 };
 export type InbuiltComponentTypes = keyof ComponentPropsMapping;
