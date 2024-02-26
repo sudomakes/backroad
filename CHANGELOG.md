@@ -1,3 +1,11 @@
+## [1.4.0-alpha.5](https://github.com/sudomakes/backroad/compare/v1.4.0-alpha.4...v1.4.0-alpha.5) (2024-02-26)
+
+
+### Features
+
+* **async-llm-response:** loading state implemented ([3418b77](https://github.com/sudomakes/backroad/commit/3418b779e4f35bf0747d10839fc81c8cc4b2c4db))
+* **async-llm-response:** remove unused async in the example app run function ([4095d1f](https://github.com/sudomakes/backroad/commit/4095d1f69cbad223bbd131467132fee1068dc098))
+
 ## [1.4.0-alpha.4](https://github.com/sudomakes/backroad/compare/v1.4.0-alpha.3...v1.4.0-alpha.4) (2024-02-01)
 
 
