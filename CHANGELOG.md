@@ -1,3 +1,10 @@
+## [1.5.0](https://github.com/sudomakes/backroad/compare/v1.4.0...v1.5.0) (2024-08-03)
+
+
+### Features
+
+* added local images support ([79f7063](https://github.com/sudomakes/backroad/commit/79f70639f988ab5e6f3d5ffcacd3ab2573653e13))
+
 ## [1.4.0](https://github.com/sudomakes/backroad/compare/v1.3.2...v1.4.0) (2024-02-04)
 
 
