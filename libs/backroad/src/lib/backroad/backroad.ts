@@ -1,4 +1,6 @@
 // eslint-disable-next-line @nx/enforce-module-boundaries
+import path from 'path';
+import fs from 'fs';
 import {
   defaultValueFallbacks,
   type BackroadComponent,
@@ -15,6 +17,8 @@ import superjson from 'superjson';
 // import {File} from "formidable"
 import { BackroadSession } from '../server/sessions/session';
 import { ObjectHasher } from './object-hasher';
+import mime from 'mime-types';
+
 type BackroadComponentFormat<ComponentType extends InbuiltComponentTypes> = {
   id?: BackroadComponent<ComponentType, false>['id'];
 } & BackroadComponent<ComponentType, false>['args'];
@@ -243,7 +247,21 @@ export class BackroadNodeManager<
     return this.#initialiseAndAddComponentDescendant(props, 'select');
   }
   image(props: BackroadComponentFormat<'image'>) {
-    return this.#initialiseAndAddComponentDescendant(props, 'image');
+    const { src, ...restOfArgs } = props;
+    let finalSrc = src;
+    if (src && !src.startsWith('http')) {
+      const localPath = path.join(process.cwd(), src);
+      if (fs.existsSync(localPath)) {
+        // convert to base 64 url string
+        finalSrc =
+          `data:${mime.lookup(localPath)};base64,` +
+          fs.readFileSync(localPath, { encoding: 'base64' });
+      }
+    }
+    return this.#initialiseAndAddComponentDescendant(
+      { ...restOfArgs, src: finalSrc },
+      'image'
+    );
   }
   table(props: BackroadComponentFormat<'table'>) {
     return this.#initialiseAndAddComponentDescendant(props, 'table');

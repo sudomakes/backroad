@@ -13,7 +13,6 @@ export const ChatMessage: BackroadContainerRenderer<"chat_message"> = (props) =>
         </div>
         <div className="flex-1">
             <Base {...{ ...props, type: "base" }} />
-            {/* {props.children.map(child => <TreeRender tree={child} key={child.path} />)} */}
         </div>
     </div>
 }

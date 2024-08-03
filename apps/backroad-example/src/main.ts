@@ -1,47 +1,50 @@
 import { run } from '@backroad/backroad';
-import { pages } from './pages';
 
-const initialMessages = [
-  { by: 'ai', content: 'Hi, how can I help you today? 😀' },
-];
-run(
-  (br) => {
-    pages.fileUpload(br.page({ path: '/file-upload' }));
-    const page2 = br.page({ path: '/page-2' });
-    page2.write({ body: 'hello from page 2' });
-    // const br = brBase.base({});
-    const messages = br.getOrDefault('messages', initialMessages);
-    br.write({ body: `# Backroad LLM Example\n---` });
-    const button = br.button({ label: 'Reset' });
-    messages.forEach((message) => {
-      br.chatMessage({ name: message.by }).write({ body: message.content });
-    });
-    const input = br.chatInput({ id: 'input' });
-    if (input) {
-      br.setValue('messages', [
-        ...messages,
-        { by: 'human', content: input },
-        { by: 'ai', content: getGPTResponse(input) },
-      ]);
-    }
+// import dotenv from 'dotenv';
+// dotenv.config();
+// import OpenAI from 'openai';
+// import process from 'process';
+// const client = new OpenAI({
+//   apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+// });
+// const messages = br.getOrDefault<
+//     {
+//       name: 'human' | 'ai';
+//       content: string;
+//     }[]
+//   >('messages', []);
 
-    if (button) {
-      br.setValue('messages', initialMessages);
-    }
-  },
-  {
-    theme: 'dark',
-    analytics: {
-      google: 'G-77B7VHC5Z8',
-    },
-  }
-);
+//   const chatInput = br.chatInput({
+//     placeholder: 'Type here',
+//   });
 
-const getGPTResponse = (message: string) => {
-  if (message.includes('1+1')) {
-    return 'Ah, the answer to that is 2!! 😎';
-  } else {
-    return `I don't know...
-    ![i-dont-know](https://t3.ftcdn.net/jpg/05/66/80/74/360_F_566807496_uKCQoOWWdXbFWKluJXo2ilg7B61J0qIe.jpg)`;
-  }
-};
+//   if (chatInput) {
+//     messages.push({ content: chatInput, name: 'human' });
+//     const chatCompletion = await client.chat.completions.create({
+//       messages: messages.map((message) => ({
+//         role: message.name == 'human' ? 'user' : 'assistant',
+//         content: message.content,
+//       })),
+//       model: 'gpt-3.5-turbo',
+//     });
+//     chatCompletion.choices.forEach((choice) => {
+//       messages.push({ content: choice.message.content || '', name: 'ai' });
+//     });
+//     br.setValue('messages', messages);
+//   }
+//   messages.forEach((message) => {
+//     br.chatMessage({
+//       name: message.name,
+//     }).write({ body: message.content });
+//   });
+run(async (br) => {
+  br.write({
+    body: '## Calculator App',
+  });
+  const [col1, col2] = br.columns({ columns: 2 });
+  const num1 = col1.numberInput({ label: 'Number Input 1', defaultValue: 5 });
+  const num2 = col1.numberInput({ label: 'Number Input 2', defaultValue: 6 });
+  const sum = num1 + num2;
+  col2.write({ body: `The sum of ${num1} and ${num2} is ${sum}` });
+  // col2.image({ src: './calculator.png' });
+});
