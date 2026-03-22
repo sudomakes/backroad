@@ -75,7 +75,7 @@
   },
   "dependencies": {
     "@faker-js/faker": "^8.1.0",
-    "@heroicons/react": "^2.0.18",
+    "@heroicons/react": "^2.2.0",
     "@swc/helpers": "0.5.2",
     "@tanstack/react-table": "^8.10.6",
     "@types/formidable": "^3.4.3",
