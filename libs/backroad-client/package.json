@@ -8,7 +8,7 @@
   "dependencies": {
     "@backroad/core": "workspace:*",
     "@heroicons/react": "^2.0.18",
-    "@tanstack/react-table": "^8.10.6",
+    "@tanstack/react-table": "^8.21.3",
     "chart.js": "^4.4.0",
     "chartjs-plugin-autocolors": "^0.2.2",
     "framer-motion": "^10.16.4",

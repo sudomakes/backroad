@@ -6,7 +6,7 @@
     "lint": "eslint \"src/**/*.ts\""
   },
   "dependencies": {
-    "@tanstack/react-table": "^8.10.6",
+    "@tanstack/react-table": "^8.21.3",
     "formidable": "^3.5.4",
     "react": "18.2.0",
     "tslib": "^2.3.0",
