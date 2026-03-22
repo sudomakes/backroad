@@ -1,0 +1,96 @@
+apps/client/tailwind.config.js
+  baef35314328a26d 10-13,18-20
+.github/workflows/ci.yml
+  baef35314328a26d 26-31
+libs/backroad-client/tsconfig.lib.json
+  baef35314328a26d 5,18-24
+pnpm-workspace.yaml
+  baef35314328a26d 5-6
+apps/backroad-example/package.json
+  baef35314328a26d 1-16
+libs/backroad-client/README.md
+  baef35314328a26d 3
+.github/workflows/release.yml
+  baef35314328a26d 27,29
+libs/backroad-client/.eslintrc.json
+  baef35314328a26d 2-3
+tools/scripts/build-library.mjs
+  baef35314328a26d 1-104
+libs/backroad/package.json
+  baef35314328a26d 4-9,13-22
+libs/backroad/README.md
+  baef35314328a26d 9
+apps/client/vite.config.ts
+  baef35314328a26d 4,8-11,16-21,29
+release.config.js
+  baef35314328a26d 38
+lefthook.yml
+  baef35314328a26d 3-9
+tools/scripts/release.mjs
+  baef35314328a26d 1-49
+libs/backroad-core/package.json
+  baef35314328a26d 4-7,9-11,14,16-17
+package.json
+  baef35314328a26d 6-9,12-18,73
+README.md
+  baef35314328a26d 8,91
+types/assets.d.ts
+  baef35314328a26d 1-14
+backroad-example.Dockerfile
+  baef35314328a26d 1-2,23-24
+libs/backroad-core/README.md
+  baef35314328a26d 1,3
+libs/backroad-core/.eslintrc.json
+  baef35314328a26d 3
+.eslintrc.json
+  baef35314328a26d 3-45,48,50,54-57
+apps/backroad-example/.eslintrc.json
+  baef35314328a26d 3
+apps/client/.eslintrc.json
+  baef35314328a26d 2-3
+apps/client/tsconfig.app.json
+  baef35314328a26d 5,17-23
+libs/backroad-client/package.json
+  baef35314328a26d 1-31
+tools/scripts/dev-backroad-example.mjs
+  baef35314328a26d 1-76
+apps/client/tsconfig.spec.json
+  baef35314328a26d 8,19
+tools/scripts/publish-package.mjs
+  baef35314328a26d 1-20
+ladle-vite.config.ts
+  baef35314328a26d 6
+apps/client/package.json
+  baef35314328a26d 1-24
+libs/backroad/.eslintrc.json
+  baef35314328a26d 3
+.eslintignore
+  baef35314328a26d 1-2,4
+.lintstagedrc
+  baef35314328a26d 2-3
+tools/scripts/build-backroad-example.mjs
+  baef35314328a26d 1-72
+tools/scripts/helpers.mjs
+  baef35314328a26d 1-156
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.17",
+  "base_commit_sha": "18ee48b44ca03365a76ea4dcfbe8bf6a3947463b",
+  "prompts": {
+    "baef35314328a26d": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019d15bd-8649-7f50-a974-29c529ba1129",
+        "model": "gpt-5.4"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 732,
+      "total_deletions": 628,
+      "accepted_lines": 729,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/cc9e9efec50b27a74461b47382a6059b2d8b7b46215df59d3c49818b7d4ad8ea"
+    }
+  }
+}
