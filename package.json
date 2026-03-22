@@ -67,7 +67,7 @@
     "jsdom": "~22.1.0",
     "lefthook": "^2.1.4",
     "nx": "16.9.1",
-    "nx-release": "^3.1.6",
+    "nx-release": "^3.4.0",
     "postcss": "8.5.8",
     "prettier": "^2.6.2",
     "replace-json-property": "^1.9.0",
