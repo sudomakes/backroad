@@ -6,7 +6,7 @@
 ![https://backroad.sudomakes.art](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
 ![https://backroad.sudomakes.art](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![https://react.dev/](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![NX Workspace](https://img.shields.io/badge/workspace-143157?style=for-the-badge&logo=NX&logoColor=white)
+[![pnpm workspace](https://img.shields.io/badge/workspace-pnpm-F69220?logo=pnpm&logoColor=white)](https://pnpm.io/workspaces)
 [![semantic-release: backroad](https://img.shields.io/badge/semantic--release-backroad-06A261?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 
 <img src="../../docs/assets/banner.png">

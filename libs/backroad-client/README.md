@@ -1,7 +1,3 @@
 # backroad-client
 
-This library was generated with [Nx](https://nx.dev).
-
-## Running unit tests
-
-Run `nx test backroad-client` to execute the unit tests via [Jest](https://jestjs.io).
+Private workspace package for the Backroad React client components used by the local example app and Ladle stories.

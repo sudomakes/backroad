@@ -21,13 +21,12 @@ jobs:
         with:
           node-version: 20
           cache: pnpm
-      - uses: nrwl/nx-set-shas@v3
       - name: Install deps
         run: pnpm install --frozen-lockfile
       - name: Lint
-        run: pnpm exec nx run-many -t lint
+        run: pnpm -r --if-present run lint
       - name: Test
-        run: pnpm exec nx run-many -t test --configuration=ci
+        run: pnpm -r --if-present run test
       - name: Release
         run: pnpm exec semantic-release
         env:

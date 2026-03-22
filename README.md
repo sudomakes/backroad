@@ -5,7 +5,7 @@
 ![https://backroad.sudomakes.art](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
 ![https://backroad.sudomakes.art](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![https://react.dev/](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![NX Workspace](https://img.shields.io/badge/workspace-143157?style=for-the-badge&logo=NX&logoColor=white)
+[![pnpm workspace](https://img.shields.io/badge/workspace-pnpm-F69220?logo=pnpm&logoColor=white)](https://pnpm.io/workspaces)
 [![semantic-release: backroad](https://img.shields.io/badge/semantic--release-backroad-06A261?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 
 <img src="./docs/assets/banner.png">
@@ -87,8 +87,8 @@ Easiest way to get started with backroad: [sudomakes/trybackroad](https://github
 ☁️ <b>One Click Deploy</b> (by June 2024) - something similar to streamlit's community cloud to help easy deployments and promote adoption.
 
 ### In Progress
-📋 <b>Improving file upload UX</b> (by Jan 2024) - allow copy pasting from clipboard instead of having to read from fs
 
+📋 <b>Improving file upload UX</b> (by Jan 2024) - allow copy pasting from clipboard instead of having to read from fs
 
 ## License
 

@@ -1,18 +1,21 @@
 import path from 'node:path';
 import autoprefixer from 'autoprefixer';
 import react from '@vitejs/plugin-react';
-import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import tailwindcss from 'tailwindcss';
 import { defineConfig } from 'vite';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
-const mockSocketPath = path.resolve(__dirname, '.ladle/mocks/backroad-socket.ts');
+const mockSocketPath = path.resolve(
+  __dirname,
+  '.ladle/mocks/backroad-socket.ts'
+);
 
 const normalizePath = (value: string) => value.replace(/\\/g, '/');
 
 export default defineConfig({
   plugins: [
     react(),
-    nxViteTsPaths(),
+    tsconfigPaths(),
     {
       name: 'backroad-ladle-socket-mock',
       resolveId(source, importer) {

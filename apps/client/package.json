@@ -1,0 +1,24 @@
+{
+  "name": "client",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "lint": "eslint \"src/**/*.{ts,tsx,js,jsx}\" \"*.{js,ts}\"",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@backroad/core": "workspace:*",
+    "@heroicons/react": "^2.0.18",
+    "backroad-client": "workspace:*",
+    "lodash": "^4.17.23",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-ga4": "^2.1.0",
+    "react-router-dom": "6.30.3",
+    "superjson": "^1.13.1",
+    "theme-change": "^2.5.0"
+  }
+}

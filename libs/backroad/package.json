@@ -1,9 +1,23 @@
 {
   "name": "@backroad/backroad",
   "version": "1.4.0-alpha.5",
-  "main": "src/index.js",
+  "main": "./src/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "build": "node ../../tools/scripts/build-library.mjs backroad",
+    "lint": "eslint \"src/**/*.ts\""
+  },
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@backroad/core": "workspace:*",
+    "express": "^4.22.1",
+    "fast-json-stable-stringify": "^2.1.0",
+    "formidable": "^3.5.4",
+    "lodash": "^4.17.23",
+    "socket.io": "^4.8.3",
+    "superjson": "^1.13.1",
+    "tslib": "^2.3.0"
+  }
 }

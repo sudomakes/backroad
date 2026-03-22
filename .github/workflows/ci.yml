@@ -21,12 +21,11 @@ jobs:
         with:
           node-version: 20
           cache: pnpm
-      - uses: nrwl/nx-set-shas@v3
       - name: Install deps
         run: pnpm install --frozen-lockfile
-      - name: Lint affected
-        run: pnpm exec nx affected -t=lint --base=origin/master
-      - name: Test affected
-        run: pnpm exec nx affected -t=test --base=origin/master --configuration=ci
-      - name: Build affected
-        run: pnpm exec nx affected -t=build --base=origin/master
+      - name: Lint changed workspaces
+        run: pnpm -r --filter "...[origin/master]" --if-present run lint
+      - name: Test changed workspaces
+        run: pnpm -r --filter "...[origin/master]" --if-present run test
+      - name: Build changed workspaces
+        run: pnpm -r --filter "...[origin/master]" --if-present run build
