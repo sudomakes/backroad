@@ -5,7 +5,6 @@
   "scripts": {
     "build-example-app": "nx build client && nx build backroad-example &&  cp -R ./dist/apps/client ./dist/apps/backroad-example/public",
     "dev": "cross-env BACKROAD_ENV=dev nx run-many --parallel --target=serve --projects=backroad-example,client",
-    "prepare": "husky install",
     "ladle": "ladle serve",
     "ladle:build": "ladle build",
     "ladle:preview": "ladle preview"
@@ -65,8 +64,8 @@
     "eslint-plugin-jsx-a11y": "6.7.1",
     "eslint-plugin-react": "7.32.2",
     "eslint-plugin-react-hooks": "4.6.0",
-    "husky": "^8.0.0",
     "jsdom": "~22.1.0",
+    "lefthook": "^2.1.4",
     "nx": "16.9.1",
     "nx-release": "^3.1.6",
     "postcss": "8.5.8",
@@ -108,9 +107,9 @@
     "react-router-dom": "6.30.3",
     "react-select": "^5.7.7",
     "remark-gfm": "^4.0.0",
+    "sharp": "^0.34.5",
     "socket.io": "^4.8.3",
     "socket.io-client": "^4.8.3",
-    "sharp": "^0.34.5",
     "superjson": "^1.13.1",
     "theme-change": "^2.5.0",
     "tslib": "^2.3.0"

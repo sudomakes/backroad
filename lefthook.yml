@@ -1,0 +1,13 @@
+pre-commit:
+  jobs:
+    - name: lint
+      run: pnpm exec nx affected -t=lint --fix
+    - name: test
+      run: pnpm exec nx affected -t=test
+    - name: build
+      run: pnpm exec nx affected -t=build
+
+commit-msg:
+  jobs:
+    - name: commitlint
+      run: pnpm exec commitlint --edit {1}
