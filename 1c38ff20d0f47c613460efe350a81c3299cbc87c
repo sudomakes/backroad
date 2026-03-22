@@ -1,0 +1,128 @@
+.agents/skills/frontend-design/reference/typography.md
+  d9a358aa7ca742cf 1-133
+.agents/skills/adapt/SKILL.md
+  d9a358aa7ca742cf 1-204
+.agents/skills/harden/SKILL.md
+  d9a358aa7ca742cf 1-354
+.agents/skills/animate/SKILL.md
+  d9a358aa7ca742cf 1-174
+.gitignore
+  5d99deefb97ac2c1 43-44
+.agents/skills/audit/SKILL.md
+  d9a358aa7ca742cf 1-125
+libs/backroad-core/package.json
+  9434563e3ebf7b6d 8
+.agents/skills/clarify/SKILL.md
+  d9a358aa7ca742cf 1-182
+.agents/skills/colorize/SKILL.md
+  d9a358aa7ca742cf 1-142
+skills-lock.json
+  d9a358aa7ca742cf 1-110
+.agents/skills/quieter/SKILL.md
+  d9a358aa7ca742cf 1-102
+.agents/skills/typeset/SKILL.md
+  d9a358aa7ca742cf 1-115
+.agents/skills/frontend-design/reference/interaction-design.md
+  d9a358aa7ca742cf 1-123
+.agents/skills/frontend-design/reference/color-and-contrast.md
+  d9a358aa7ca742cf 1-132
+.agents/skills/frontend-design/reference/ux-writing.md
+  d9a358aa7ca742cf 1-107
+.agents/skills/distill/SKILL.md
+  d9a358aa7ca742cf 1-121
+.agents/skills/normalize/SKILL.md
+  d9a358aa7ca742cf 1-70
+.agents/skills/frontend-design/reference/spatial-design.md
+  d9a358aa7ca742cf 1-100
+.agents/skills/teach-impeccable/SKILL.md
+  d9a358aa7ca742cf 1-71
+.agents/skills/critique/SKILL.md
+  d9a358aa7ca742cf 1-119
+.agents/skills/arrange/SKILL.md
+  d9a358aa7ca742cf 1-124
+.agents/skills/onboard/SKILL.md
+  d9a358aa7ca742cf 1-245
+.agents/skills/polish/SKILL.md
+  d9a358aa7ca742cf 1-202
+.agents/skills/overdrive/SKILL.md
+  d9a358aa7ca742cf 1-141
+.agents/skills/frontend-design/reference/responsive-design.md
+  d9a358aa7ca742cf 1-114
+package.json
+  430107c021d0d128 7-10,26
+  9434563e3ebf7b6d 13-14,16-18,53,71,79,91,93,95-96,107,110-112
+.agents/skills/optimize/SKILL.md
+  d9a358aa7ca742cf 1-265
+.agents/skills/bolder/SKILL.md
+  d9a358aa7ca742cf 1-116
+.agents/skills/frontend-design/reference/motion-design.md
+  d9a358aa7ca742cf 1-99
+.agents/skills/frontend-design/SKILL.md
+  d9a358aa7ca742cf 1-146
+.agents/skills/delight/SKILL.md
+  d9a358aa7ca742cf 1-303
+.agents/skills/extract/SKILL.md
+  d9a358aa7ca742cf 1-91
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.17",
+  "base_commit_sha": "1c38ff20d0f47c613460efe350a81c3299cbc87c",
+  "prompts": {
+    "430107c021d0d128": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019d11ad-4245-7912-a552-3e1582551144",
+        "model": "gpt-5.4"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 6,
+      "total_deletions": 2,
+      "accepted_lines": 6,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/30bcf66ed6f9ad482058ab08387f520b08f8e3776d7aeaa73cba90784fd26f52"
+    },
+    "5d99deefb97ac2c1": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019cddc4-cba9-7760-b9b2-2d1a11d8e5b7",
+        "model": "gpt-5.4"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 5,
+      "total_deletions": 2,
+      "accepted_lines": 2,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/c7edbf4995259a8e8580d83e7b96705d6ae86b256d27319be73a8ee7068386e2"
+    },
+    "9434563e3ebf7b6d": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019d11b1-bc62-7570-891b-f24a6a452afc",
+        "model": "gpt-5.4"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 17,
+      "total_deletions": 13,
+      "accepted_lines": 17,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/55c86702c4f728053e153572e1f343162538b0072327c06bc4aeca67c0c94af4"
+    },
+    "d9a358aa7ca742cf": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019d11b2-8097-7242-81d3-40a555ab9f55",
+        "model": "unknown"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 4333,
+      "total_deletions": 4,
+      "accepted_lines": 4332,
+      "overriden_lines": 0
+    }
+  }
+}
