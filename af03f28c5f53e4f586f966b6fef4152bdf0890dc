@@ -1,0 +1,44 @@
+tools/scripts/publish.mjs
+  99655b449908ef3f 59-62
+Contribution.md
+  99655b449908ef3f 16-17
+.github/workflows/ci.yml
+  99655b449908ef3f 16-23,26,28,30,32
+README.md
+  99655b449908ef3f 29-30
+libs/backroad/README.md
+  99655b449908ef3f 30-31
+package.json
+  99655b449908ef3f 4
+release.config.js
+  99655b449908ef3f 38
+backroad-example.Dockerfile
+  99655b449908ef3f 3,9-11,13,18,27
+.github/dependabot.yml
+  99655b449908ef3f 7
+pnpm-workspace.yaml
+  99655b449908ef3f 1-11
+.github/workflows/release.yml
+  99655b449908ef3f 16-23,26,28,30,32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.17",
+  "base_commit_sha": "af03f28c5f53e4f586f966b6fef4152bdf0890dc",
+  "prompts": {
+    "99655b449908ef3f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019d1533-a842-7631-83dc-be555b9bc73a",
+        "model": "gpt-5.4"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 55,
+      "total_deletions": 23,
+      "accepted_lines": 55,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/ad31700636db9415d506ab47e364872abeb3650df016de4e9b9ed19332772d06"
+    }
+  }
+}
