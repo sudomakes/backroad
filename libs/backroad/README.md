@@ -27,8 +27,8 @@ To install Backroad, follow these steps:
 ```bash
 npx degit sudomakes/trybackroad trybackroad
 cd trybackroad
-npm i
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 ## Backroad Example

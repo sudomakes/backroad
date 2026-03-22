@@ -1,0 +1,11 @@
+packages:
+  - apps/*
+  - libs/*
+allowBuilds:
+  "@parcel/watcher": true
+  "@swc/core": true
+  core-js: true
+  esbuild: true
+  msw: true
+  nx: true
+  sharp: true

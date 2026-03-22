@@ -56,5 +56,7 @@ try {
   console.error(`Error reading package.json file from library build output.`);
 }
 
-// Execute "npm publish" to publish
-execSync(`npm publish --access public --tag ${tag}`);
+// Execute "pnpm publish" to publish using the workspace package manager.
+execSync(`pnpm publish --access public --tag ${tag} --no-git-checks`, {
+  stdio: 'inherit',
+});

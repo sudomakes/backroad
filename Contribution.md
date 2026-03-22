@@ -13,7 +13,7 @@ This guide contains how to set up your machine for contribution to Backroad.
 
 ## Running Backroad
 
-- run the command "npm install" to download and install all required packages.
-- run the command "npm run dev". The frontend and backend server are spun by this script.
+- run the command "pnpm install" to download and install all required packages.
+- run the command "pnpm dev". The frontend and backend server are spun by this script.
 - Head over to "http://localhost:4200/" to see Backroad running🚀.
 - The url "http://localhost:3333/" is the backends url, it is required by the frontend to function, you can ignore it.
