@@ -1,12 +1,12 @@
 import { BackroadNodeManager } from '@backroad/backroad';
-import Jimp from 'jimp';
+import sharp from 'sharp';
 export const backroadFileUploadExample = async (br: BackroadNodeManager) => {
   const [photo] = br.fileUpload({ label: 'Pick Image' });
   if (photo) {
     br.write({ body: '# Greyscale image' });
-    const image = await Jimp.read(photo.filepath);
-    image.greyscale().getBase64(Jimp.AUTO, (err, res) => {
-      br.image({ src: res, width: 600 });
-    });
+    const buffer = await sharp(photo.filepath).grayscale().png().toBuffer();
+    const src = `data:image/png;base64,${buffer.toString('base64')}`;
+
+    br.image({ src, width: 600 });
   }
 };
