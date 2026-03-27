@@ -1,0 +1,60 @@
+.planning/alpha-v1.5-design.md
+  6262ddc32ea38a25 1-341
+.planning/plan-llms-txt.md
+  6262ddc32ea38a25 1-329
+solo.yml
+  af553eefb9d4482f 1-18
+.planning/tanstack-start-docs.md
+  b9757fa23f5fde84 1-1171
+.planning/plan-playwright-e2e.md
+  6262ddc32ea38a25 1-234
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.20",
+  "base_commit_sha": "06cecb0fe9dbd2c7db73e35372bdbc5b3f5c62ec",
+  "prompts": {
+    "6262ddc32ea38a25": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "47570cce-cbcf-4f65-a9a5-397c24f0ac8b",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 1012,
+      "total_deletions": 105,
+      "accepted_lines": 907,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/90972224195739dfe5b7abbee59e2dfa004ea687f61b3c70cacc36e9ffcab35a"
+    },
+    "af553eefb9d4482f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019d2db8-9269-74a2-a904-3673c441afd8",
+        "model": "gpt-5-codex"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 18,
+      "total_deletions": 0,
+      "accepted_lines": 18,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/9742ae5b57790a214dd3a2ffe226aad62e83e1c623bf7a12fcbe080cb924326a"
+    },
+    "b9757fa23f5fde84": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8db6f380-3394-48c0-9ba1-62fd5f684613",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>",
+      "messages": [],
+      "total_additions": 1179,
+      "total_deletions": 0,
+      "accepted_lines": 1179,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/e937dcfaf74a39bd2e8aa595f00ce9893bd76d3fb64ca3923b1c3e07a71eb7b3"
+    }
+  }
+}
