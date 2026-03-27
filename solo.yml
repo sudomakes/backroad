@@ -1,0 +1,18 @@
+# Visit https://soloterm.com to learn more
+name: backroad
+icon: null
+processes:
+  Vitest:
+    command: pnpm dlx vitest --ui
+    working_dir: null
+    auto_start: false
+    auto_restart: false
+    restart_when_changed: []
+    env: {}
+  'pnpm: dev':
+    command: pnpm run dev
+    working_dir: null
+    auto_start: true
+    auto_restart: false
+    restart_when_changed: []
+    env: {}
