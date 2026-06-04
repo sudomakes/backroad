@@ -15,7 +15,8 @@
     "pre-push-check": "$npm_execpath exec node .lefthook/pre-push/run.mjs --manual",
     "prepare": "lefthook install",
     "release": "node tools/scripts/release.mjs",
-    "test": "pnpm -r --if-present run test"
+    "test": "pnpm -r --if-present run test",
+    "typecheck": "pnpm -r --if-present run typecheck"
   },
   "overrides": {
     "@babel/runtime": "7.29.2",
