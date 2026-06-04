@@ -1,0 +1,19 @@
+release.config.js
+  s_eb51dd256aed12::t_1bb0763711c435 37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "3f3afd532ed33b57060bb738443d072604de3d31",
+  "prompts": {},
+  "sessions": {
+    "s_eb51dd256aed12": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3d54dce1-d480-4530-9a20-190a30eac8e8",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
