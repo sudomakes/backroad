@@ -1,0 +1,19 @@
+package.json
+  s_f1c2864af0cd51::t_4158960e46847e 69
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "31ad55d2a18978f1a862de98a435928281104f0b",
+  "prompts": {},
+  "sessions": {
+    "s_f1c2864af0cd51": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "71f29b35-a457-48e4-a356-1a69ee98ea6c",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
