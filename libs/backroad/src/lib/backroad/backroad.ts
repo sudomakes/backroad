@@ -9,11 +9,12 @@ import {
   type InbuiltComponentTypes,
   type InbuiltContainerTypes,
 } from '@backroad/core';
-import { omit } from 'lodash';
+import omit from 'lodash/omit';
 import superjson from 'superjson';
 // import {File} from "formidable"
 import { BackroadSession } from '../server/sessions/session';
 import { ObjectHasher } from './object-hasher';
+
 type BackroadComponentFormat<ComponentType extends InbuiltComponentTypes> = {
   id?: BackroadComponent<ComponentType, false>['id'];
 } & BackroadComponent<ComponentType, false>['args'];

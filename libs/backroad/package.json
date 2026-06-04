@@ -5,7 +5,8 @@
   "type": "commonjs",
   "scripts": {
     "build": "node ../../tools/scripts/build-library.mjs backroad",
-    "lint": "eslint \"src/**/*.ts\""
+    "lint": "eslint \"src/**/*.ts\"",
+    "typecheck": "tsc -p tsconfig.lib.json --noEmit"
   },
   "publishConfig": {
     "access": "public"

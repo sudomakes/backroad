@@ -6,7 +6,8 @@
     "build": "node ../../tools/scripts/build-backroad-example.mjs",
     "dev": "node ../../tools/scripts/dev-backroad-example.mjs",
     "lint": "eslint \"src/**/*.ts\"",
-    "start": "node ../../dist/apps/backroad-example/main.js"
+    "start": "node ../../dist/apps/backroad-example/main.js",
+    "typecheck": "tsc -p tsconfig.app.json --noEmit"
   },
   "dependencies": {
     "@backroad/backroad": "workspace:*",
