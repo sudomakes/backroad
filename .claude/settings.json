@@ -1,0 +1,5 @@
+{
+  "permissions": {
+    "allow": ["Bash(chub:*)", "Skill(get-api-docs)"]
+  }
+}

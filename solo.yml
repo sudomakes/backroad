@@ -1,4 +1,3 @@
-# Visit https://soloterm.com to learn more
 name: backroad
 icon: null
 processes:
@@ -12,7 +11,7 @@ processes:
   'pnpm: dev':
     command: pnpm run dev
     working_dir: null
-    auto_start: true
+    auto_start: false
     auto_restart: false
     restart_when_changed: []
     env: {}
