@@ -5,7 +5,7 @@ on:
       - '*'
       - '*/*'
       - '**'
-      - '!master'
+      - '!main'
 jobs:
   main:
     runs-on: ubuntu-latest
@@ -24,8 +24,8 @@ jobs:
       - name: Install deps
         run: pnpm install --frozen-lockfile
       - name: Lint changed workspaces
-        run: pnpm -r --filter "...[origin/master]" --if-present run lint
+        run: pnpm -r --filter "...[origin/main]" --if-present run lint
       - name: Test changed workspaces
-        run: pnpm -r --filter "...[origin/master]" --if-present run test
+        run: pnpm -r --filter "...[origin/main]" --if-present run test
       - name: Build changed workspaces
-        run: pnpm -r --filter "...[origin/master]" --if-present run build
+        run: pnpm -r --filter "...[origin/main]" --if-present run build

@@ -1,14 +1,5 @@
 module.exports = {
-  branches: [
-    {
-      name: 'master',
-    },
-    {
-      name: 'alpha',
-      channel: 'alpha',
-      prerelease: true,
-    },
-  ],
+  branches: ['main'],
   preset: 'conventionalcommits',
   presetConfig: {
     types: [
