@@ -7,7 +7,8 @@
     "dev": "vite",
     "lint": "eslint \"src/**/*.{ts,tsx,js,jsx}\" \"*.{js,ts}\"",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.app.json --noEmit && tsc -p tsconfig.spec.json --noEmit"
   },
   "dependencies": {
     "@backroad/core": "workspace:*",

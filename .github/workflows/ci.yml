@@ -25,6 +25,8 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Lint changed workspaces
         run: pnpm -r --filter "...[origin/main]" --if-present run lint
+      - name: Typecheck changed workspaces
+        run: pnpm -r --filter "...[origin/main]" --if-present run typecheck
       - name: Test changed workspaces
         run: pnpm -r --filter "...[origin/main]" --if-present run test
       - name: Build changed workspaces

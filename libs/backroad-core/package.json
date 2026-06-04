@@ -3,7 +3,8 @@
   "version": "1.4.0-alpha.5",
   "scripts": {
     "build": "node ../../tools/scripts/build-library.mjs backroad-core",
-    "lint": "eslint \"src/**/*.ts\""
+    "lint": "eslint \"src/**/*.ts\"",
+    "typecheck": "tsc -p tsconfig.lib.json --noEmit"
   },
   "dependencies": {
     "@tanstack/react-table": "^8.10.6",
