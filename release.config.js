@@ -34,7 +34,7 @@ module.exports = {
       {
         assets: [`libs/**/package.json`, `package.json`, `CHANGELOG.md`],
         message:
-          'chore(release): -v${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
+          'chore(release): v${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
       },
     ],
   ],
