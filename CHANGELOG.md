@@ -1,3 +1,13 @@
+## [1.7.0](https://github.com/sudomakes/backroad/compare/v1.6.0...v1.7.0) (2026-06-07)
+
+### Features
+
+- docs site, landing page, auth UI, e2e suites ([447c59a](https://github.com/sudomakes/backroad/commit/447c59a469ab01847f38d535eb69f595dfe648aa))
+
+### Bug Fixes
+
+- **docs:** unbreak writing-and-markdown MDX ([aca76a5](https://github.com/sudomakes/backroad/commit/aca76a5c73613f8f9dd90f1476ed663549512fbe))
+
 ## [1.6.0](https://github.com/sudomakes/backroad/compare/v1.5.4...v1.6.0) (2026-06-07)
 
 ### Features
