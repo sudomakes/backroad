@@ -1,0 +1,19 @@
+apps/docs/docs/components/writing-and-markdown.mdx
+  s_eb51dd256aed12::t_373053f9510295 106-111
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "aca76a5c73613f8f9dd90f1476ed663549512fbe",
+  "prompts": {},
+  "sessions": {
+    "s_eb51dd256aed12": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3d54dce1-d480-4530-9a20-190a30eac8e8",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
