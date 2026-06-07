@@ -1,0 +1,238 @@
+libs/backroad-core/src/lib/events.ts
+  s_eb51dd256aed12::t_3b02b4598b1a91 38-39
+  s_eb51dd256aed12::t_a19529a71b8235 89-92
+libs/backroad/src/lib/server/index.ts
+  s_eb51dd256aed12::t_6f7dcf22ee5f1b 44-49
+  s_eb51dd256aed12::t_02c1e6af926f2b 33-36,41
+libs/backroad-frontend/vite.config.ts
+  s_eb51dd256aed12::t_5f892255c98a01 19-22
+apps/docs/tsconfig.json
+  s_eb51dd256aed12::t_ad4234b52776ed 1-12
+.gitignore
+  s_eb51dd256aed12::t_a236a468ffbcdc 3-7,11-15,18-20,22-27,29-48,62-66,70-71,74
+  s_eb51dd256aed12::t_b866e6a1ec0ad4 16-17
+apps/docs/docs/fundamentals/containers.mdx
+  s_eb51dd256aed12::t_d4dc5b98735a5e 1-8,10-15,17,19-22,24-124
+libs/backroad-components/src/lib/socket/value-setters.ts
+  s_eb51dd256aed12::t_492d943a4f6adc 1,3
+package.json
+  s_eb51dd256aed12::t_042faa12532466 26-28
+  s_eb51dd256aed12::t_cf3108732bdbef 29-32
+apps/landing/src/components/Hero.tsx
+  s_eb51dd256aed12::t_9d83b56c3b90f5 1-57,59-111
+apps/landing/tsconfig.json
+  s_eb51dd256aed12::t_3d34df3b662b9b 1-2,16,18
+libs/backroad-components/src/lib/socket/index.ts
+  s_eb51dd256aed12::t_77fc0eedb5d548 1-8
+apps/landing/src/components/Hosting.tsx
+  s_eb51dd256aed12::t_47056b5ebfda0c 1-49
+apps/docs/docs/fundamentals/components.mdx
+  s_eb51dd256aed12::t_c0033c9d7e498f 1-37,39-51,53-61,63-88,91-97
+apps/landing/src/components/Features.tsx
+  s_eb51dd256aed12::t_2af691a0fe21d7 1-11,15-58
+  s_eb51dd256aed12::t_e16fb78e8fc78d 12-14
+apps/landing/package.json
+  s_eb51dd256aed12::t_fda076518ce9c5 7-12,15-16,21-25
+  s_eb51dd256aed12::t_22fe50ea720d8e 1-6,13-14,17-20,26-27
+apps/landing/src/main.tsx
+  s_eb51dd256aed12::t_3e030533fcab14 1-10
+apps/landing/src/components/Manifesto.css
+  s_eb51dd256aed12::t_b2855457b21a62 1-70
+.github/CODEOWNERS
+  s_eb51dd256aed12::t_94beff644da702 20-23
+apps/landing/src/components/Gallery.css
+  s_eb51dd256aed12::t_63908862ae2173 1-185
+apps/landing/src/components/CtaStrip.css
+  s_eb51dd256aed12::t_361311fc23c143 1-27
+knip-baseline.json
+  s_eb51dd256aed12::t_c6457074e966c4 6,8-9,12-14
+apps/landing/vite.config.ts
+  s_eb51dd256aed12::t_fd62ae5901924e 1-20
+apps/docs/docs/components/layout.mdx
+  s_eb51dd256aed12::t_38b51840ee7d74 1-94
+apps/docs/docs/advanced/render-paths.md
+  s_eb51dd256aed12::t_f48b1c75bb2934 1-6
+  s_eb51dd256aed12::t_b6ce71b9d4d645 7-52,54-64
+apps/docs/docs/components/inputs.mdx
+  s_eb51dd256aed12::t_f77f650ab751d6 1-143,147-152
+apps/landing/src/components/Nav.tsx
+  s_eb51dd256aed12::t_c0dd4799a11340 1-34
+libs/backroad-frontend/src/lib/auth-client.ts
+  s_eb51dd256aed12::t_5cc8e67e41caac 1-13
+apps/landing/src/components/Footer.css
+  s_eb51dd256aed12::t_0176f70f6b7431 1-60
+apps/docs/docs/components/multimedia.mdx
+  s_eb51dd256aed12::t_7ab8dd363ee04a 1-74
+apps/landing/src/App.tsx
+  s_eb51dd256aed12::t_c5e0ba29c1b68f 1-27
+libs/backroad-frontend/src/app/auth/signin.tsx
+  s_eb51dd256aed12::t_527499adb2d935 40-56,58
+  s_eb51dd256aed12::t_1aa5949e484533 18-33,37-38
+  s_eb51dd256aed12::t_8539f21a53dd91 4-6,14-16,34,66-69
+  s_eb51dd256aed12::t_5e3a40e7f96027 57,59-60
+  s_eb51dd256aed12::t_97aa264ecb1fff 63
+  s_eb51dd256aed12::t_c25c8e94fe9d8a 1-3,7-13,17,35-36,39,61-62,64-65
+apps/landing/index.html
+  s_eb51dd256aed12::t_774db580236a8b 2-39
+apps/docs/static/CNAME
+  s_eb51dd256aed12::t_94ddc1d4b2c7fc 1
+apps/landing/src/components/Manifesto.tsx
+  s_eb51dd256aed12::t_2d5d2fb00ebe7a 8
+  s_eb51dd256aed12::t_88874f187faa08 1-7,9-26,28-45
+  s_eb51dd256aed12::t_dc228dc6f3715b 27
+apps/landing/src/components/CtaStrip.tsx
+  s_eb51dd256aed12::t_5501f22b4b9760 1-12,14-28
+libs/backroad-frontend/src/styles.scss
+  s_eb51dd256aed12::t_5cd23a64c4acaa 5-8
+  s_eb51dd256aed12::t_ac3f27f1a1fec2 74-81,83-89,99-103,107-111,114-118,121-125,128-132,135-139,142-146,149-153,156-160
+  s_eb51dd256aed12::t_8d6b3e2f769d4f 4,9-58
+apps/docs/src/pages/index.module.css
+  s_eb51dd256aed12::t_ad4234b52776ed 1-23
+e2e/docs.spec.ts
+  s_eb51dd256aed12::t_9f29f13ce9a899 71-101
+  s_eb51dd256aed12::t_c7de6ca2938c35 1-53,56-59,61-70,102
+  s_eb51dd256aed12::t_355dca436e92f7 54-55,60
+apps/docs/docs/auth.md
+  s_eb51dd256aed12::t_dbc35b867833f9 1-77,79-152,154-159
+apps/landing/src/components/Features.css
+  s_eb51dd256aed12::t_bf894da04c6aee 1-109,111-130
+apps/landing/src/components/Footer.tsx
+  s_eb51dd256aed12::t_fc660e9298b974 1-70
+libs/backroad/src/lib/backroad/backroad.test.ts
+  s_eb51dd256aed12::t_ed3808de15bc0b 52
+  s_eb51dd256aed12::t_19e597d48f9a92 79,83-84
+apps/docs/docs/advanced/component-ids.md
+  s_eb51dd256aed12::t_704dcf1d837069 7-59,61-83
+  s_eb51dd256aed12::t_f48b1c75bb2934 1-6
+libs/backroad-frontend/src/lib/utils.ts
+  s_eb51dd256aed12::t_2e712fabeddbf6 1-7
+apps/docs/src/css/custom.css
+  s_eb51dd256aed12::t_ad4234b52776ed 1-30
+apps/docs/docs/intro.md
+  s_eb51dd256aed12::t_f1f045770d9b8a 1-8,10-56
+apps/docs/docs/configuration/themes.mdx
+  s_eb51dd256aed12::t_25ec8438923d6a 1-66
+apps/landing/src/components/Hero.css
+  s_eb51dd256aed12::t_364a0b03bf0779 1-110,112-139,141-268
+apps/docs/package.json
+  s_eb51dd256aed12::t_5f0d7f9c3a60c5 2,7-8,14,17-18,21-23,28-29,32-36
+  s_eb51dd256aed12::t_ad4234b52776ed 1,3-6,9,11-13,15-16,19-20,24,26-27,30-31,37-53
+  s_eb51dd256aed12::t_85bab9bb7ad3bd 10
+  s_eb51dd256aed12::t_992f92cd92cab1 25
+.size-limit.json
+  s_eb51dd256aed12::t_077d95b0b8326a 3,9,13-17
+libs/backroad-components/src/lib/socket/client.ts
+  s_eb51dd256aed12::t_e92f678ec944d6 1-11
+apps/docs/docs/components/llm.mdx
+  s_eb51dd256aed12::t_6934697e4bcfdd 1-115,118-120
+apps/docs/docs/hosting.md
+  s_eb51dd256aed12::t_dbe5541d63ae57 1-102
+apps/docs/docs/try-it.mdx
+  s_eb51dd256aed12::t_a3d1401e1cef06 1-26,29-55
+libs/backroad-frontend/src/app/app.tsx
+  s_eb51dd256aed12::t_dfa5e408dca956 27-32,34-36,42-50
+  s_eb51dd256aed12::t_1659e9f809b996 92-93,96,104
+  s_eb51dd256aed12::t_fd2ce5fd1501e6 94-95,97-103,105-110
+  s_eb51dd256aed12::t_4d7854a4de038e 8,15-20
+  s_eb51dd256aed12::t_a93ca7de7ae4eb 33
+libs/backroad-components/src/lib/socket/auth-synchronizers.ts
+  s_eb51dd256aed12::t_be80ac5f6e051e 1-24
+apps/docs/docs/components/writing-and-markdown.mdx
+  s_eb51dd256aed12::t_6d8fb574b9c223 1-64,66-95,98-102,104-107
+apps/landing/src/components/Hosting.css
+  s_eb51dd256aed12::t_1ce1ccaea2dfb5 1-67,69-121
+apps/landing/src/components/GridMark.tsx
+  s_eb51dd256aed12::t_5190527abea810 1-39
+apps/landing/src/components/Compare.tsx
+  s_eb51dd256aed12::t_6bf31a3b401bdd 1-79
+apps/landing/src/styles/global.css
+  s_eb51dd256aed12::t_7951a5e8d137ac 1-153,192-238
+  s_eb51dd256aed12::t_547589890b89ee 154-191
+libs/backroad-frontend/tailwind.config.js
+  s_eb51dd256aed12::t_297c021e25bbde 5-8,18-21,24-86,88-92
+apps/docs/docusaurus.config.ts
+  s_eb51dd256aed12::t_e3d03250301784 26-40
+  s_eb51dd256aed12::t_2df2a5300edca1 48-50
+  s_eb51dd256aed12::t_ad4234b52776ed 3-5,8-9,12,17-18,20-25,41-46,54-61,63-66,68-70,72,74-75,77-87,91-93,95-96,99-100,103-104,107-110,112-115,117-121
+  s_eb51dd256aed12::t_09934506e111b3 88-90
+  s_eb51dd256aed12::t_e04e17da7fd13d 1-2,6-7,13-14,19,47,51-53,67,71,73,76,94,97-98,101-102,105-106,111,116
+  s_eb51dd256aed12::t_f6d0f33532b5c1 10-11,15-16
+  s_eb51dd256aed12::t_e167231880ced2 62
+e2e/smoke.spec.ts
+  s_eb51dd256aed12::t_9ce6ba42cc96e3 1,5-6,8-13,15-18,21-23,32-41,49,56,65-69,80,87-89,92,100-102
+  s_eb51dd256aed12::t_02d93753a4a2f5 3-4,7,14,19-20,24-31,43,46-48,50-53,57-64,71-77,81-86,93-98,103-106
+apps/landing/src/components/Gallery.tsx
+  s_eb51dd256aed12::t_25ed49a9af74f2 1-131
+apps/landing/public/favicon.svg
+  s_eb51dd256aed12::t_1828a99b228261 1-4
+apps/docs/docs/components/data.mdx
+  s_eb51dd256aed12::t_e7c2a6389b6ff6 1-101
+playwright.config.ts
+  s_eb51dd256aed12::t_016f2d932fbd33 42-45
+  s_eb51dd256aed12::t_5d22c85996eef4 6
+  s_eb51dd256aed12::t_dfd0e41a3d4e92 55-58,60
+  s_eb51dd256aed12::t_e320c0d52458ae 1,7-12
+  s_eb51dd256aed12::t_997aa7b5f84cfc 37
+  s_eb51dd256aed12::t_6660f5d73fb95e 59,61-66
+apps/docs/.gitignore
+  s_eb51dd256aed12::t_ad4234b52776ed 1-20
+libs/backroad-frontend/src/vite-env.d.ts
+  s_eb51dd256aed12::t_ac5c8a4f0b8242 8-11
+knip.json
+  s_eb51dd256aed12::t_8c0585c48b3279 16,18
+  s_eb51dd256aed12::t_0f646598f0d33f 17
+pnpm-workspace.yaml
+  s_eb51dd256aed12::t_a90b07bac14b21 28-30
+  s_eb51dd256aed12::t_c0a602731bb6c9 10-11
+apps/docs/docs/getting-started.md
+  s_eb51dd256aed12::t_22d4eb80031233 44
+  s_eb51dd256aed12::t_83b81a96093c5b 1-43,45-68,70-80
+libs/backroad-frontend/package.json
+  s_eb51dd256aed12::t_13ebb30c52ad43 19,22-24,26,32-33
+apps/docs/src/components/CopyMarkdownButton.tsx
+  s_eb51dd256aed12::t_a9ba79ee9ea904 1-67
+apps/docs/src/pages/index.tsx
+  s_eb51dd256aed12::t_b385eb64c8a0ed 22,29
+  s_eb51dd256aed12::t_ad4234b52776ed 2-10,12-21,25,33-39,41-42,46,72-75
+  s_eb51dd256aed12::t_3bd4222b661917 1,11,23-24,26-28,30-32,40,43-45,47-71
+apps/docs/docs/components/charts.mdx
+  s_eb51dd256aed12::t_a8cf99fb10bac9 1-13,15-58,60-76,78-138,143-148,150-158
+libs/backroad-components/src/lib/socket/session.ts
+  s_eb51dd256aed12::t_d6c9792b9960e4 1-4
+apps/landing/src/components/Compare.css
+  s_eb51dd256aed12::t_62b1b860b17565 1-121
+apps/docs/sidebars.ts
+  s_eb51dd256aed12::t_ad4234b52776ed 2-3,5,33-34,37-41
+  s_eb51dd256aed12::t_6447525b810f6b 1,4,6,8-32,35-36
+  s_eb51dd256aed12::t_5f559994b6b686 7
+.github/workflows/deploy-site.yml
+  s_eb51dd256aed12::t_5a2772261457b8 1-79
+libs/backroad/src/lib/backroad/backroad.ts
+  s_eb51dd256aed12::t_dfb148290c2557 307-308,320-322,324-325
+  s_eb51dd256aed12::t_a470e9c826faac 306,311
+apps/docs/src/theme/DocItem/Content/index.tsx
+  s_eb51dd256aed12::t_a4b519e66952ad 1-20
+apps/docs/README.md
+  s_eb51dd256aed12::t_ad4234b52776ed 1-41
+apps/docs/src/components/BackroadSandbox.tsx
+  s_eb51dd256aed12::t_602e7bb476894d 40,47
+  s_eb51dd256aed12::t_8a052ab05b37f4 1-39,41-46,48-146
+apps/landing/src/components/Nav.css
+  s_eb51dd256aed12::t_51883f45021872 1-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "447c59a469ab01847f38d535eb69f595dfe648aa",
+  "prompts": {},
+  "sessions": {
+    "s_eb51dd256aed12": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3d54dce1-d480-4530-9a20-190a30eac8e8",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
