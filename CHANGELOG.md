@@ -1,3 +1,9 @@
+## [1.6.0](https://github.com/sudomakes/backroad/compare/v1.5.4...v1.6.0) (2026-06-07)
+
+### Features
+
+- update pnpm workspace and add examples directory ([74f5829](https://github.com/sudomakes/backroad/commit/74f582934e6a3a021314f172afdf7b407e282ac5))
+
 ## [1.5.4](https://github.com/sudomakes/backroad/compare/v1.5.3...v1.5.4) (2026-06-04)
 
 ### Bug Fixes
