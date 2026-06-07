@@ -1,0 +1,21 @@
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--space-6);
+  border-bottom: 1px solid var(--border);
+}
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-size: var(--fs-lg);
+}
+.nav-links {
+  display: flex;
+  gap: var(--space-6);
+  font-size: var(--fs-base);
+  color: var(--text-muted);
+}

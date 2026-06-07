@@ -1,0 +1,55 @@
+---
+title: Try it live
+sidebar_position: 3
+---
+
+import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
+
+# Try Backroad live in your browser
+
+This page runs a real Backroad server inside your browser (via Sandpack's
+WebContainer-class runtime). Tweak the code on the left, the right
+re-renders.
+
+<BackroadSandbox
+  height={520}
+  code={`import { run } from '@backroad/backroad';
+
+run((br) => {
+br.write({ body: '# Hello, Backroad' });
+
+const name = br.textInput({
+label: 'Your name',
+defaultValue: 'world',
+});
+
+if (name) {
+br.write({ body: \`Hello, **\${name}**!\` });
+}
+
+if (br.button({ label: 'Click me' })) {
+br.write({ body: 'Clicked!' });
+}
+});
+`}
+/>
+
+## What works in the sandbox
+
+- The full `@backroad/backroad` runtime (Express + Socket.IO).
+- Almost every built-in component (`br.write`, `br.button`, `br.textInput`,
+  `br.checkbox`, charts, tables, …).
+- File uploads (in-memory).
+- Markdown rendering, themes, layout primitives.
+
+## What doesn't work in the sandbox
+
+- **Native deps**: `better-sqlite3`, `sharp`, etc. — the WebContainer
+  runtime can't compile native modules. If you want to demo auth, use
+  better-auth's memory adapter instead of SQLite.
+- **Local file persistence** — the sandbox VM resets on reload.
+- **OAuth callbacks** — the sandbox runs on a temporary URL that
+  external providers can't reach.
+
+For everything else, see [Getting started](./getting-started) to install
+the package locally.

@@ -1,23 +1,7 @@
-import { ClientToServerEvents, ServerToClientEvents } from '@backroad/core';
-import { Socket, io } from 'socket.io-client';
+/** Promise-based helpers for pushing component values back to the backroad server. */
 import superjson from 'superjson';
-export const sessionId = sessionStorage.tabID
-  ? sessionStorage.tabID
-  : (sessionStorage.tabID = `${crypto.randomUUID()}`);
+import { socket } from './client';
 
-console.log('tab id', sessionId);
-export const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
-  `/${sessionId}`,
-  {
-    path: '/api/socket.io',
-  }
-);
-
-socket.on('auth_redirect', ({ url }) => {
-  window.location.assign(url);
-});
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const setBackroadValue = (props: {
   id: string;
   value: unknown;

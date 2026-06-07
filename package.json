@@ -23,7 +23,13 @@
     "size:why": "size-limit --why",
     "storybook": "pnpm --filter backroad-frontend run storybook",
     "sb": "pnpm --filter backroad-frontend run storybook",
-    "storybook:build": "pnpm --filter backroad-frontend run storybook:build"
+    "storybook:build": "pnpm --filter backroad-frontend run storybook:build",
+    "docs": "pnpm --filter @backroad-examples/docs run dev",
+    "docs:build": "pnpm --filter @backroad-examples/docs run build",
+    "docs:serve": "pnpm --filter @backroad-examples/docs run build-and-serve",
+    "landing": "pnpm --filter @backroad-examples/landing run dev",
+    "landing:build": "pnpm --filter @backroad-examples/landing run build",
+    "site:build": "pnpm --filter @backroad-examples/landing run build && pnpm --filter @backroad-examples/docs run build"
   },
   "private": true,
   "devDependencies": {

@@ -1,0 +1,158 @@
+---
+title: Charts
+---
+
+import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
+
+# Charts
+
+Backroad wraps [Chart.js](https://www.chartjs.org/) via
+[react-chartjs-2](https://react-chartjs-2.js.org/). Every chart method
+takes the same `{ data, options? }` shape Chart.js expects.
+
+| Method        | Chart.js type |
+| ------------- | ------------- |
+| `br.line`     | `'line'`      |
+| `br.bar`      | `'bar'`       |
+| `br.pie`      | `'pie'`       |
+| `br.doughnut` | `'doughnut'`  |
+| `br.radar`    | `'radar'`     |
+| `br.scatter`  | `'scatter'`   |
+
+## A line chart
+
+```ts
+br.line({
+  data: {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+    datasets: [
+      {
+        label: 'Sign-ups',
+        data: [12, 19, 8, 15, 22],
+        borderColor: '#3b82f6',
+      },
+    ],
+  },
+});
+```
+
+## A bar chart
+
+```ts
+br.bar({
+  data: {
+    labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+    datasets: [
+      { label: 'Revenue', data: [120, 145, 180, 220] },
+      { label: 'Cost', data: [80, 90, 100, 130] },
+    ],
+  },
+});
+```
+
+## Pie / doughnut
+
+```ts
+br.pie({
+  data: {
+    labels: ['Apple', 'Banana', 'Cherry'],
+    datasets: [{ data: [30, 45, 25] }],
+  },
+});
+
+br.doughnut({
+  data: {
+    labels: ['Used', 'Free'],
+    datasets: [{ data: [73, 27] }],
+  },
+});
+```
+
+## Radar
+
+```ts
+br.radar({
+  data: {
+    labels: ['Speed', 'Reliability', 'DX', 'Docs', 'Community'],
+    datasets: [{ label: 'Backroad', data: [9, 8, 9, 7, 6] }],
+  },
+});
+```
+
+## Scatter
+
+```ts
+br.scatter({
+  data: {
+    datasets: [
+      {
+        label: 'Points',
+        data: [
+          { x: 1, y: 2 },
+          { x: 2, y: 4 },
+          { x: 3, y: 1 },
+          { x: 4, y: 5 },
+        ],
+      },
+    ],
+  },
+});
+```
+
+## Reacting to input
+
+Charts re-render on every script run, so wiring them to an input is
+trivial:
+
+```ts
+const period = br.select({
+  label: 'Period',
+  options: [
+    { value: 'q1', label: 'Q1' },
+    { value: 'q2', label: 'Q2' },
+  ],
+});
+
+br.bar({
+  data: {
+    labels: period === 'q1' ? ['Jan', 'Feb', 'Mar'] : ['Apr', 'May', 'Jun'],
+    datasets: [{ label: 'Revenue', data: [10, 20, 30] }],
+  },
+});
+```
+
+## Try it
+
+<BackroadSandbox
+  height={560}
+  code={`import { run } from '@backroad/backroad';
+
+run((br) => {
+br.write({ body: '# Charts' });
+
+const points = br.numberInput({
+label: 'Number of points',
+defaultValue: 5,
+min: 2,
+max: 12,
+});
+
+const labels = Array.from({ length: points }, (\_, i) => \`P\${i + 1}\`);
+const data = labels.map(() => Math.round(Math.random() \* 100));
+
+br.line({
+data: {
+labels,
+datasets: [{ label: 'Random walk', data, borderColor: '#3b82f6' }],
+},
+});
+
+br.bar({
+data: {
+labels,
+datasets: [{ label: 'Bars', data }],
+},
+});
+});
+`}
+/>

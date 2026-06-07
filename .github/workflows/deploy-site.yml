@@ -1,0 +1,79 @@
+name: Deploy site
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/docs/**'
+      - 'apps/landing/**'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/deploy-site.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Sequential — finish in-flight deploys instead of cancelling, so Pages
+# never lands half-uploaded artefacts.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - name: Setup pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        with:
+          version: 11.5.2
+          run_install: false
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+          cache: pnpm
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+      - name: Configure Pages
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
+
+      # Build both apps in parallel via pnpm filter, then merge into a
+      # single output dir. Landing serves at /, docs at /docs/.
+      - name: Build landing
+        run: pnpm --filter @backroad-examples/landing run build
+      - name: Build docs
+        run: pnpm --filter @backroad-examples/docs run build
+
+      - name: Assemble Pages artifact
+        run: |
+          set -euo pipefail
+          rm -rf dist/site
+          mkdir -p dist/site
+          cp -R dist/apps/landing/. dist/site/
+          mkdir -p dist/site/docs
+          cp -R apps/docs/build/. dist/site/docs/
+          # Both apps include a CNAME; keep the landing's at the root.
+          ls dist/site
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
+        with:
+          path: dist/site
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    timeout-minutes: 5
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5

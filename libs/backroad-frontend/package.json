@@ -16,14 +16,21 @@
   },
   "dependencies": {
     "@backroad/core": "workspace:*",
+    "@daveyplate/better-auth-ui": "^3.4.0",
     "@heroicons/react": "^2.0.18",
     "backroad-components": "workspace:*",
+    "better-auth": "^1.6.14",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "lodash": "^4.17.23",
+    "lucide-react": "^1.17.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-ga4": "^2.1.0",
     "react-router-dom": "^6.30.4",
     "superjson": "^1.13.1",
+    "tailwind-merge": "^3.6.0",
+    "tailwindcss-animate": "^1.0.7",
     "theme-change": "^2.5.0"
   },
   "devDependencies": {

@@ -1,0 +1,152 @@
+---
+title: Inputs
+---
+
+import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
+
+# Inputs
+
+Input components return the **current value** so you can use it
+immediately in the same run:
+
+```ts
+const count = br.numberInput({ label: 'Count', defaultValue: 5 });
+br.write({ body: `You picked ${count}.` });
+```
+
+When the user changes the value, Backroad re-runs your script with the
+new value bound to the same call site.
+
+## Buttons
+
+Returns `true` exactly on the run after the click.
+
+```ts
+if (br.button({ label: 'Compute' })) {
+  // runs once after the user clicks
+}
+```
+
+## Text input
+
+```ts
+const name = br.textInput({
+  label: 'Name',
+  placeholder: 'Type here',
+  defaultValue: '',
+});
+```
+
+## Number input
+
+```ts
+const age = br.numberInput({
+  label: 'Age',
+  min: 0,
+  max: 120,
+  step: 1,
+  precision: 0,
+  defaultValue: 18,
+});
+```
+
+## Checkbox / toggle
+
+Two flavors of the same boolean: `br.checkbox` renders a square check,
+`br.toggle` renders a switch.
+
+```ts
+const agreed = br.checkbox({ label: 'I agree', defaultValue: false });
+const dark = br.toggle({ label: 'Dark mode' });
+```
+
+## Radio
+
+```ts
+const size = br.radio({
+  label: 'Shirt size',
+  options: ['S', 'M', 'L', 'XL'],
+  defaultValue: 'M',
+});
+```
+
+## Select / multiselect
+
+Powered by `react-select` under the hood — `options` is an array of
+`{ value, label }`:
+
+```ts
+const fruit = br.select({
+  label: 'Fruit',
+  options: [
+    { value: 'apple', label: 'Apple' },
+    { value: 'banana', label: 'Banana' },
+    { value: 'cherry', label: 'Cherry' },
+  ],
+});
+
+const toppings = br.multiselect({
+  label: 'Toppings',
+  options: [
+    { value: 'cheese', label: 'Cheese' },
+    { value: 'mushrooms', label: 'Mushrooms' },
+    { value: 'pepperoni', label: 'Pepperoni' },
+  ],
+});
+// toppings is an array of selected values
+```
+
+## Color picker
+
+```ts
+const color = br.colorPicker({ label: 'Brand color', defaultValue: '#ff7a59' });
+```
+
+## File upload
+
+Returns an array of [`formidable.File`](https://github.com/node-formidable/formidable)
+objects — already saved to a temp location on the server, ready to read.
+
+```ts
+const files = br.fileUpload({
+  label: 'Upload CSVs',
+  accept: { 'text/csv': ['.csv'] },
+  multiple: true,
+});
+
+for (const f of files) {
+  // f.filepath, f.originalFilename, f.mimetype, f.size …
+}
+```
+
+## Try it
+
+<BackroadSandbox
+  height={560}
+  code={`import { run } from '@backroad/backroad';
+
+run((br) => {
+br.write({ body: '# Inputs sampler' });
+
+const name = br.textInput({ label: 'Name', defaultValue: 'Ada' });
+const age = br.numberInput({ label: 'Age', defaultValue: 30, min: 0 });
+const fav = br.select({
+label: 'Favourite colour',
+options: [
+{ value: 'red', label: 'Red' },
+{ value: 'green', label: 'Green' },
+{ value: 'blue', label: 'Blue' },
+],
+});
+const dark = br.toggle({ label: 'Dark mode' });
+
+br.write({
+body: \`Hello **\${name}** (\${age}). You like \${fav ?? '—'}. Dark: \${dark}.\`,
+});
+
+if (br.button({ label: 'Submit' })) {
+br.write({ body: 'Submitted!' });
+}
+});
+`}
+/>

@@ -35,7 +35,8 @@ export type ServerToClientEventTypes =
   | 'running'
   | 'backroad_config'
   | 'props_change'
-  | 'auth_redirect';
+  | 'auth_redirect'
+  | 'auth_signout';
 export type ClientToServerEvents =
   ConstructSocketIoEventSignatureFromBackroadEvents<ClientToServerEventTypes>;
 export type ServerToClientEvents =
@@ -83,6 +84,10 @@ export type BackroadEventsMapping = {
   };
   auth_redirect: {
     args: { url: string };
+    response?: void;
+  };
+  auth_signout: {
+    args: undefined;
     response?: void;
   };
 };

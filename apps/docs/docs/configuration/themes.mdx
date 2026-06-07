@@ -1,0 +1,66 @@
+---
+title: Themes
+---
+
+import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
+
+# Themes
+
+Backroad's UI is themed with [daisyUI](https://daisyui.com/), which
+sits on top of Tailwind. Out of the box you get two themes — `light`
+and `dark` — and a navbar toggle for end users to flip between them.
+
+## Setting the initial theme
+
+```ts
+run(
+  (br) => {
+    // …
+  },
+  {
+    theme: 'dark',
+  }
+);
+```
+
+Valid values: `'light'` (default) and `'dark'`. The user's last choice
+is persisted in `localStorage`, so subsequent visits respect their
+override.
+
+## Reacting to the theme in your script
+
+The theme is purely client-side — your script doesn't observe it. If
+you need to render a chart with theme-appropriate colors, drive that
+off a `br.toggle({ label: 'Dark mode' })` in your script instead, and
+let the user pick.
+
+## Brand color
+
+Backroad re-uses daisyUI's `primary`, `secondary`, `accent`, and
+semantic (`success`, `warning`, `error`) tokens. If you fork the
+frontend and want a custom palette, swap the daisyUI plugin config in
+`apps/client/tailwind.config.ts`. There's no run-time override at the
+moment.
+
+## Try it
+
+<BackroadSandbox
+  height={520}
+  code={`import { run } from '@backroad/backroad';
+
+run(
+(br) => {
+br.write({ body: '# Themed sandbox' });
+br.write({
+body: 'Use the navbar toggle (top-right) to flip between light and dark.',
+});
+
+    if (br.button({ label: 'Primary action' })) {
+      br.write({ body: 'Clicked.' });
+    }
+
+},
+{ theme: 'dark' }
+);
+`}
+/>

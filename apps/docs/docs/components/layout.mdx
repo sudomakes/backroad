@@ -1,0 +1,94 @@
+---
+title: Layout
+---
+
+import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
+
+# Layout
+
+Layout in Backroad is done with **container methods**: `br.columns`,
+`br.tabs`, `br.collapse`, `br.sidebar`. Each returns a manager (or an
+array of them) scoped to the new container, and any subsequent
+component calls happen inside that scope.
+
+For the full container model, see
+[Fundamentals: Containers](../fundamentals/containers).
+
+## Columns
+
+```ts
+const [left, right] = br.columns({ columns: 2 });
+left.write({ body: '## Left' });
+right.write({ body: '## Right' });
+```
+
+Pass ratios for uneven columns:
+
+```ts
+const [narrow, wide] = br.columns({ columns: [1, 3] }); // 25 / 75
+```
+
+## Tabs
+
+```ts
+const [a, b] = br.tabs({ labels: ['Overview', 'Details'] });
+a.write({ body: 'Overview content' });
+b.write({ body: 'Details content' });
+```
+
+## Collapse
+
+```ts
+const advanced = br.collapse({ label: 'Advanced options' });
+advanced.toggle({ label: 'Verbose mode' });
+advanced.numberInput({ label: 'Retries', defaultValue: 3 });
+```
+
+## Sidebar
+
+```ts
+const sidebar = br.sidebar({});
+sidebar.write({ body: '## Filters' });
+sidebar.select({
+  label: 'Region',
+  options: [
+    { value: 'eu', label: 'EU' },
+    { value: 'us', label: 'US' },
+  ],
+});
+```
+
+## Nesting
+
+Containers nest freely:
+
+```ts
+const [left, right] = br.columns({ columns: 2 });
+
+const [topA, topB] = left.tabs({ labels: ['A', 'B'] });
+topA.write({ body: 'Tab A inside the left column.' });
+topB.write({ body: 'Tab B inside the left column.' });
+
+const moreRight = right.collapse({ label: 'More on the right' });
+moreRight.write({ body: 'Hidden content.' });
+```
+
+## Try it
+
+<BackroadSandbox
+  height={560}
+  code={`import { run } from '@backroad/backroad';
+
+run((br) => {
+br.write({ body: '# Layout' });
+
+const [left, right] = br.columns({ columns: [1, 2] });
+left.write({ body: '## Narrow' });
+left.toggle({ label: 'Switch' });
+
+const [a, b] = right.tabs({ labels: ['Tab A', 'Tab B'] });
+a.write({ body: 'Hello from **Tab A**.' });
+b.write({ body: 'Hello from **Tab B**.' });
+});
+`}
+/>

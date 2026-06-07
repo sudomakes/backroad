@@ -1,14 +1,51 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# compiled output
+# ── Dependencies ─────────────────────────────────────────────────────────
+node_modules
+.pnpm-store
+
+# ── Build / cache output ─────────────────────────────────────────────────
 dist
 tmp
 /out-tsc
+.cache
+.turbo
+.nx
+.next
+.vite
+.docusaurus
+apps/docs/build
+*.tsbuildinfo
+coverage
+/.sass-cache
 
-# dependencies
-node_modules
+# ── Test artifacts ───────────────────────────────────────────────────────
+# Playwright HTML report + per-test screenshots/traces/videos.
+playwright-report/
+test-results/
+# Vitest UI / Storybook test-runner snapshot diffs.
+__screenshots__/
 
-# IDEs and editors
+# ── Secrets / local state ────────────────────────────────────────────────
+# All env files except committable templates.
+.env
+.env.*
+!.env.example
+!.env.sample
+# Local SQLite databases (better-auth dev DB, etc.).
+*.sqlite
+*.sqlite-journal
+*.db
+# Backup / temporary copies.
+.npmrc.bak
+*.bak
+
+# ── Docker / deploy artifacts ────────────────────────────────────────────
+# Image tarballs from `docker save` / `docker build --output=type=docker`.
+*.tar
+*.tar.gz
+
+# ── IDE + editor state ───────────────────────────────────────────────────
 /.idea
 .project
 .classpath
@@ -16,31 +53,24 @@ node_modules
 *.launch
 .settings/
 *.sublime-workspace
-
-# IDE - VSCode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# misc
-/.sass-cache
-/connect.lock
-/coverage
-/libpeerconnection.log
+# ── Per-user dev tool state ──────────────────────────────────────────────
+.gstack/
+
+# ── Logs ─────────────────────────────────────────────────────────────────
+*.log
 npm-debug.log
 yarn-error.log
 testem.log
+/connect.lock
+/libpeerconnection.log
 /typings
 
-# System Files
+# ── OS files ─────────────────────────────────────────────────────────────
 .DS_Store
 Thumbs.db
-
-# Next.js
-.next
-
-.nx
-.gstack/
-*.sqlite

@@ -1,0 +1,74 @@
+---
+title: Multimedia
+---
+
+import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
+
+# Multimedia
+
+Embed images and video. Both components are thin wrappers around the
+native HTML elements — every prop you'd pass to `<img>` or `<video>` is
+accepted.
+
+## `br.image`
+
+```ts
+br.image({
+  src: 'https://placekitten.com/600/400',
+  alt: 'A kitten',
+  width: 600,
+  height: 400,
+});
+```
+
+`src` can be:
+
+- An absolute URL.
+- A local file served from your app's static dir.
+- A `data:` URL (handy for in-memory thumbnails).
+
+## `br.video`
+
+```ts
+br.video({
+  src: '/clip.mp4',
+  controls: true,
+  autoPlay: false,
+  loop: true,
+  muted: true,
+});
+```
+
+## Combining with file upload
+
+```ts
+const files = br.fileUpload({
+  label: 'Pick an image',
+  accept: { 'image/*': [] },
+});
+
+if (files.length > 0) {
+  br.image({ src: files[0].filepath, width: 320 });
+}
+```
+
+## Try it
+
+<BackroadSandbox
+  height={520}
+  code={`import { run } from '@backroad/backroad';
+
+run((br) => {
+br.write({ body: '# Multimedia' });
+
+const url = br.textInput({
+label: 'Image URL',
+defaultValue: 'https://placekitten.com/640/360',
+});
+
+if (url) {
+br.image({ src: url, alt: 'preview', width: 480 });
+}
+});
+`}
+/>

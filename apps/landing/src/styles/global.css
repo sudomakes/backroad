@@ -1,0 +1,238 @@
+/* ─────────────────────────────────────────────────────────────────────
+ * Backroad landing — bespoke CSS.
+ *
+ * Design tokens: warm off-white surface, near-black text, a single
+ * burnt-orange accent. No gradients. No shadows beyond a single soft
+ * page-level one. OKLCH so light + dark stay perceptually balanced.
+ * ───────────────────────────────────────────────────────────────────── */
+
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/geist-mono';
+
+:root {
+  /* Palette */
+  --bg: oklch(98.5% 0.005 250);
+  --bg-elevated: oklch(100% 0 0);
+  --text: oklch(18% 0.015 50);
+  --text-muted: oklch(48% 0.012 50);
+  --text-subtle: oklch(62% 0.01 50);
+  --border: oklch(91% 0.006 250);
+  --border-strong: oklch(82% 0.008 250);
+  --accent: oklch(58% 0.18 38);
+  --accent-text: oklch(98% 0.01 38);
+  --code-bg: oklch(96.5% 0.004 250);
+  --code-border: oklch(89% 0.006 250);
+
+  /* Type */
+  --font-sans: 'Geist Variable', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Fluid type scale (modular 1.25 with clamp) */
+  --fs-sm: clamp(0.82rem, 0.78rem + 0.18vw, 0.92rem);
+  --fs-base: clamp(0.95rem, 0.88rem + 0.32vw, 1.05rem);
+  --fs-lg: clamp(1.1rem, 0.95rem + 0.6vw, 1.35rem);
+  --fs-xl: clamp(1.45rem, 1.2rem + 1.1vw, 1.9rem);
+  --fs-2xl: clamp(2rem, 1.5rem + 2.4vw, 3rem);
+  --fs-3xl: clamp(2.8rem, 1.8rem + 4.8vw, 5rem);
+  --fs-hero: clamp(3rem, 2rem + 6vw, 6.4rem);
+
+  /* Rhythm */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  --radius: 6px;
+  --radius-lg: 10px;
+
+  --measure: 62ch;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: oklch(13% 0.015 250);
+    --bg-elevated: oklch(16% 0.015 250);
+    --text: oklch(96% 0.005 50);
+    --text-muted: oklch(72% 0.01 50);
+    --text-subtle: oklch(55% 0.012 50);
+    --border: oklch(22% 0.01 250);
+    --border-strong: oklch(30% 0.012 250);
+    --accent: oklch(72% 0.16 38);
+    --accent-text: oklch(15% 0.02 38);
+    --code-bg: oklch(17% 0.012 250);
+    --code-border: oklch(24% 0.01 250);
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-feature-settings: 'ss03', 'cv11'; /* Geist's stylistic alts */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  background: var(--bg);
+  color: var(--text);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100dvh;
+  line-height: 1.5;
+  font-size: var(--fs-base);
+  letter-spacing: -0.011em;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color 180ms ease, color 180ms ease;
+}
+a:hover {
+  text-decoration-color: var(--accent);
+  color: var(--accent);
+}
+
+a.no-underline {
+  text-decoration: none;
+}
+a.no-underline:hover {
+  text-decoration: none;
+  color: var(--accent);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+/* ── Layout primitives ──────────────────────────────────────────────── */
+
+.shell {
+  max-width: 78rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-subtle);
+  font-weight: 500;
+}
+
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin-block: var(--space-24);
+}
+
+/* ── Backgrounds (subtle, never decorative) ─────────────────────── */
+
+/* Faded dot grid — sized to 24px so it reads as texture, not pattern. */
+.bg-dots {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    var(--border-strong) 1px,
+    transparent 0
+  );
+  background-size: 24px 24px;
+  background-position: -12px -12px;
+}
+
+/* Faint vertical hairlines — used as ruled-page texture. */
+.bg-rules {
+  background-image: linear-gradient(
+    to right,
+    transparent calc(100% - 1px),
+    var(--border) calc(100% - 1px)
+  );
+  background-size: 96px 100%;
+}
+
+/* Fade-from-edges mask. Apply on top of a textured element so the
+   texture dissolves at the section boundaries instead of clipping. */
+.mask-fade {
+  -webkit-mask-image: radial-gradient(
+    ellipse 90% 65% at 50% 40%,
+    #000 50%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 90% 65% at 50% 40%,
+    #000 50%,
+    transparent 100%
+  );
+}
+
+/* ── Buttons ────────────────────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.2rem;
+  font-size: var(--fs-base);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 180ms ease, color 180ms ease, border-color 180ms ease;
+  text-decoration: none;
+}
+.btn:hover {
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-primary {
+  background: var(--text);
+  color: var(--bg);
+}
+.btn-primary:hover {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+.btn-ghost {
+  border-color: var(--border-strong);
+  background: transparent;
+}
+.btn-ghost:hover {
+  border-color: var(--text);
+}
+
+.btn .arrow {
+  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.btn:hover .arrow {
+  transform: translateX(3px);
+}

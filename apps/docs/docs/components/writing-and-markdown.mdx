@@ -1,0 +1,112 @@
+---
+title: Writing & markdown
+---
+
+import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
+
+# Writing & markdown
+
+Backroad has three primitives for emitting text into the page:
+`br.write`, `br.title`, and `br.link` / `br.linkGroup`.
+
+## `br.write` — markdown
+
+The workhorse. Pass any markdown string and Backroad renders it with
+GitHub-flavored markdown (headings, bold, lists, code fences, tables,
+blockquotes, inline HTML).
+
+```ts
+br.write({
+  body: `
+# Hello
+
+This is **bold**, *italic*, and \`inline code\`.
+
+- one
+- two
+- three
+
+\`\`\`ts
+const greeting = 'hi';
+\`\`\`
+`,
+});
+```
+
+`body` can also be a number, in which case it renders as a plain string.
+
+## `br.title` — quick page heading
+
+A shortcut for `br.write({ body: '# ...' })` that's slightly less noisy
+when you just want a top-of-page title:
+
+```ts
+br.title({ label: 'Dashboard' });
+```
+
+## `br.link` and `br.linkGroup`
+
+For one link:
+
+```ts
+br.link({ label: 'Docs', href: '/docs', target: '_blank' });
+```
+
+For a nav-style row:
+
+```ts
+br.linkGroup({
+  items: [
+    { label: 'Home', href: '/' },
+    { label: 'Docs', href: '/docs' },
+    {
+      label: 'GitHub',
+      href: 'https://github.com/sudomakes/backroad',
+      target: '_blank',
+    },
+  ],
+});
+```
+
+## Building markdown from values
+
+Because `body` is just a string, you can interpolate any state from
+earlier in the script:
+
+```ts
+const name = br.textInput({ label: 'Name', defaultValue: 'world' });
+br.write({ body: `Hello, **${name}**!` });
+```
+
+## Try it
+
+<BackroadSandbox
+  height={520}
+  code={`import { run } from '@backroad/backroad';
+
+run((br) => {
+br.title({ label: 'Markdown demo' });
+
+const name = br.textInput({
+label: 'Your name',
+defaultValue: 'Ada',
+});
+
+br.write({
+body: \`
+
+## Hello, **\${name}**!
+
+Backroad renders **GFM markdown**:
+
+- lists
+- _italic_
+- \\\`inline code\\\`
+- tables, blockquotes, fenced code blocks
+
+> Tip: re-runs are cheap. Type freely.
+> \`,
+> });
+> });
+> `}
+> />

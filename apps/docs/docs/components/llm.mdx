@@ -1,0 +1,120 @@
+---
+title: LLM components
+---
+
+import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
+
+# LLM components
+
+Backroad ships components tuned for chat-style LLM frontends:
+`br.chatInput`, `br.chatMessage`, and `br.loading`.
+
+## `br.chatInput`
+
+A bottom-of-page text input that returns the submitted message on the
+run after the user hits enter, then `null` on subsequent runs until the
+next submit.
+
+```ts
+const message = br.chatInput({ placeholder: 'Ask me anything…' });
+
+if (message) {
+  // run an LLM call, store it in your message log, …
+}
+```
+
+## `br.chatMessage`
+
+A speech-bubble container. Like other containers, it returns a manager
+you can call `.write` / `.image` / etc. on:
+
+```ts
+const msg = br.chatMessage({
+  by: 'Assistant',
+  avatar: '/bot.png',
+  avatarPlacement: 'left',
+});
+msg.write({ body: 'Hello, human.' });
+```
+
+### Async assistant replies
+
+When the response is a `Promise<string>`, pass it as `loadingPromise`
+and Backroad will render a spinner that swaps to the message once the
+promise resolves:
+
+```ts
+const reply = openai.responses
+  .create({
+    /* … */
+  })
+  .then((r) => r.output_text);
+
+const bubble = br.chatMessage({
+  by: 'Assistant',
+  loadingPromise: reply,
+});
+reply.then((text) => bubble.write({ body: text }));
+```
+
+## `br.loading`
+
+A standalone spinner — handy outside of chat:
+
+```ts
+br.loading({ fontSize: 24 });
+```
+
+## Putting it together
+
+```ts
+import { run } from '@backroad/backroad';
+
+const history: { role: 'user' | 'assistant'; text: string }[] = [];
+
+run((br) => {
+  for (const m of history) {
+    const bubble = br.chatMessage({
+      by: m.role === 'user' ? 'You' : 'Assistant',
+      avatarPlacement: m.role === 'user' ? 'right' : 'left',
+    });
+    bubble.write({ body: m.text });
+  }
+
+  const next = br.chatInput({ placeholder: 'Say something…' });
+  if (next) {
+    history.push({ role: 'user', text: next });
+    history.push({ role: 'assistant', text: `You said: ${next}` });
+  }
+});
+```
+
+## Try it
+
+<BackroadSandbox
+  height={560}
+  code={`import { run } from '@backroad/backroad';
+
+const history: { role: 'user' | 'bot'; text: string }[] = [
+{ role: 'bot', text: 'Hi! Type something and I will echo it back.' },
+];
+
+run((br) => {
+br.write({ body: '# Mini chat' });
+
+for (const m of history) {
+const bubble = br.chatMessage({
+by: m.role === 'user' ? 'You' : 'Bot',
+avatarPlacement: m.role === 'user' ? 'right' : 'left',
+});
+bubble.write({ body: m.text });
+}
+
+const next = br.chatInput({ placeholder: 'Say something…' });
+if (next) {
+history.push({ role: 'user', text: next });
+history.push({ role: 'bot', text: \`Echo: \${next}\` });
+}
+});
+`}
+/>

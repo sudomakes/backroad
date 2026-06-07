@@ -1,0 +1,27 @@
+{
+  "name": "@backroad-examples/landing",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 3002",
+    "start": "vite --port 3002",
+    "build": "vite build",
+    "preview": "vite preview --port 3002",
+    "typecheck": "tsc --noEmit",
+    "lint": "echo 'landing: lint handled by tsc'"
+  },
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "@fontsource-variable/geist": "^5.2.6",
+    "@fontsource-variable/geist-mono": "^5.2.6"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "@vitejs/plugin-react": "^5.0.5",
+    "typescript": "~6.0.3",
+    "vite": "^6.0.0"
+  }
+}

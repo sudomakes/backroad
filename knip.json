@@ -13,6 +13,9 @@
       "entry": ["src/main.ts"],
       "project": ["src/**/*.ts"]
     },
+    "apps/landing": {
+      "project": ["src/**/*.{ts,tsx,css}"]
+    },
     "libs/backroad-frontend": {
       "entry": [
         "src/main.tsx",

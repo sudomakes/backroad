@@ -49,7 +49,7 @@ describe('br.login', () => {
     session.rootNodeManager.login();
     expect(emit).toHaveBeenCalledWith(
       'auth_redirect',
-      { url: '/api/signin' },
+      { url: '/auth/signin' },
       expect.any(Function)
     );
   });
@@ -76,12 +76,12 @@ describe('br.login', () => {
 });
 
 describe('br.logout', () => {
-  it('redirects to /api/signout', () => {
+  it('emits auth_signout for the client to clear the cookie', () => {
     const { session, emit } = makeSession('logout');
     session.rootNodeManager.logout();
     expect(emit).toHaveBeenCalledWith(
-      'auth_redirect',
-      { url: '/api/signout' },
+      'auth_signout',
+      undefined,
       expect.any(Function)
     );
   });

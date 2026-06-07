@@ -1,0 +1,60 @@
+.footer {
+  display: grid;
+  grid-template-columns: 1.2fr 2fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  padding-block: clamp(4rem, 6vw, 6rem) var(--space-12);
+  border-top: 1px solid var(--border);
+  align-items: start;
+}
+@media (max-width: 720px) {
+  .footer {
+    grid-template-columns: 1fr;
+  }
+}
+
+.footer .wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-size: var(--fs-lg);
+}
+.footer .tagline {
+  color: var(--text-muted);
+  margin-top: var(--space-3);
+  max-width: 30ch;
+  font-size: var(--fs-base);
+}
+.footer .links {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(2rem, 4vw, 4rem);
+}
+.footer .links > div {
+  display: grid;
+  gap: var(--space-2);
+}
+.footer .col-head {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-subtle);
+  margin-bottom: var(--space-2);
+}
+.footer .links a {
+  color: var(--text-muted);
+  font-size: var(--fs-base);
+}
+.footer .links a:hover {
+  color: var(--accent);
+}
+.footer .copyright {
+  grid-column: 1 / -1;
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-6);
+  color: var(--text-subtle);
+  font-size: var(--fs-sm);
+  font-family: var(--font-mono);
+}

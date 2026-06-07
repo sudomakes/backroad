@@ -1,0 +1,124 @@
+---
+title: Containers
+---
+
+import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
+
+# Containers
+
+Containers are nodes in the Backroad tree that can hold _other_ nodes —
+components or further containers. Every Backroad app is a tree of
+containers with leaf components hanging off them.
+
+When your script first runs, `br` is bound to the implicit root container
+for the current page. Calling a container method (`br.columns`,
+`br.tabs`, `br.collapse`, `br.sidebar`, `br.chatMessage`) returns a
+_new_ `br`-like manager scoped to that child container. Any
+`br.write`/`br.button`/etc. calls on the returned manager add children
+_inside_ that container.
+
+## The container methods
+
+| Method                                                               | What it makes                                                                                          |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `br.page({ path })`                                                  | A separate route. Calling `br.page` always starts a new top-level page tree.                           |
+| `br.sidebar({})`                                                     | A persistent left rail rendered on every page.                                                         |
+| `br.columns({ columns })`                                            | A row split into N equal columns, or into ratios given as `[1, 2, 1]`. Returns one manager per column. |
+| `br.tabs({ labels })`                                                | A tab strip. Returns one manager per tab body.                                                         |
+| `br.collapse({ label })`                                             | A click-to-expand panel.                                                                               |
+| `br.chatMessage({ by, avatar?, avatarPlacement?, loadingPromise? })` | A single chat bubble — used by the LLM components.                                                     |
+| `br.base({})`                                                        | A bare grouping container. Rarely used directly.                                                       |
+
+## Columns
+
+`br.columns` returns an array of managers — one per column. Iterate it,
+or destructure when you know the count:
+
+```ts
+import { run } from '@backroad/backroad';
+
+run((br) => {
+  const [left, right] = br.columns({ columns: 2 });
+  left.write({ body: '## Left' });
+  left.button({ label: 'Left button' });
+
+  right.write({ body: '## Right' });
+  right.button({ label: 'Right button' });
+});
+```
+
+Pass an array of numbers to control the ratio:
+
+```ts
+const [narrow, wide] = br.columns({ columns: [1, 3] }); // 25% / 75%
+```
+
+## Tabs
+
+```ts
+const [overview, details] = br.tabs({ labels: ['Overview', 'Details'] });
+overview.write({ body: 'Top-level summary lives here.' });
+details.write({ body: 'Drill-down content lives here.' });
+```
+
+The returned array's length always matches `labels.length`.
+
+## Collapse
+
+```ts
+const advanced = br.collapse({ label: 'Advanced options' });
+advanced.numberInput({ label: 'Retry count', defaultValue: 3 });
+advanced.toggle({ label: 'Verbose logging' });
+```
+
+## Sidebar
+
+```ts
+const sidebar = br.sidebar({});
+sidebar.write({ body: '## Filters' });
+const region = sidebar.select({
+  label: 'Region',
+  options: [
+    { label: 'EU', value: 'eu' },
+    { label: 'US', value: 'us' },
+  ],
+});
+```
+
+## Pages
+
+`br.page({ path })` always anchors to the root, regardless of which
+manager you call it on. It defines a new route that the navbar will
+expose:
+
+```ts
+run((br) => {
+  const home = br.page({ path: '/' });
+  home.write({ body: '# Home' });
+
+  const settings = br.page({ path: '/settings' });
+  settings.toggle({ label: 'Dark mode' });
+});
+```
+
+## Try it
+
+<BackroadSandbox
+  height={520}
+  code={`import { run } from '@backroad/backroad';
+
+run((br) => {
+br.write({ body: '# Containers demo' });
+
+const [left, right] = br.columns({ columns: 2 });
+left.write({ body: '## Left column' });
+if (left.button({ label: 'Left' })) {
+left.write({ body: 'Left clicked!' });
+}
+
+right.write({ body: '## Right column' });
+const more = right.collapse({ label: 'Show more' });
+more.write({ body: 'Hidden until you expand the panel.' });
+});
+`}
+/>

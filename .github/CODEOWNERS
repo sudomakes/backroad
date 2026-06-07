@@ -17,3 +17,7 @@
 
 # Demo app — the e2e target. Mirrors what consumers of @backroad/backroad write.
 /examples/                   @sudo-vaibhav
+
+# Marketing site + docs site (both deployed to backroad.sudomakes.art).
+/apps/landing/               @sudo-vaibhav
+/apps/docs/                  @sudo-vaibhav

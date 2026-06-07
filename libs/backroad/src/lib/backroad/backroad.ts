@@ -303,9 +303,12 @@ export class BackroadNodeManager<
   }
 
   login(provider?: string) {
+    // Send the user to the React /auth/signin route (handled by
+    // @daveyplate/better-auth-ui's AuthView). For social providers we
+    // can deep-link straight to the better-auth social sign-in endpoint.
     const url = provider
       ? `/api/auth/sign-in/social?provider=${encodeURIComponent(provider)}`
-      : '/api/signin';
+      : '/auth/signin';
     SocketManager.getSocket(this.backroadSession.sessionId).emit(
       'auth_redirect',
       { url },
@@ -314,9 +317,12 @@ export class BackroadNodeManager<
   }
 
   logout() {
+    // The client listens for `auth_signout` and calls
+    // `authClient.signOut()` (better-auth/react) which clears the cookie,
+    // then redirects to /signin.
     SocketManager.getSocket(this.backroadSession.sessionId).emit(
-      'auth_redirect',
-      { url: '/api/signout' },
+      'auth_signout',
+      undefined,
       () => undefined
     );
   }

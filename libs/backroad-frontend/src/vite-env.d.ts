@@ -5,6 +5,10 @@
 // shape declared explicitly under TS 6 strict module resolution.
 declare module '*.scss';
 declare module '*.css';
+
+// Package subpath that's a stylesheet — TS subpath resolution doesn't
+// match it via the generic '*.css' glob above.
+declare module '@daveyplate/better-auth-ui/css';
 declare module '*.sass';
 declare module '*.less';
 declare module '*.svg' {

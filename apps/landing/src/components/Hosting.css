@@ -1,0 +1,121 @@
+.hosting {
+  padding-block: clamp(4rem, 6vw, 7rem);
+}
+.hosting .grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: center;
+}
+@media (max-width: 880px) {
+  .hosting .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hosting .text h2 {
+  font-size: var(--fs-2xl);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-block: var(--space-4) var(--space-6);
+}
+.hosting .text p {
+  color: var(--text-muted);
+  font-size: var(--fs-lg);
+  line-height: 1.55;
+}
+.hosting .bullets {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-6) 0;
+  display: grid;
+  gap: var(--space-3);
+}
+.hosting .bullets li {
+  position: relative;
+  padding-left: 1.5rem;
+  color: var(--text);
+  line-height: 1.5;
+}
+.hosting .bullets li::before {
+  content: '·';
+  position: absolute;
+  left: 0.4rem;
+  top: -0.2em;
+  font-size: 1.8em;
+  line-height: 1;
+  color: var(--accent);
+}
+.hosting .bullets code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+}
+.hosting .link-arrow {
+  display: inline-flex;
+  gap: 0.4rem;
+  color: var(--accent);
+  font-weight: 500;
+  text-decoration: none;
+}
+.hosting .link-arrow span {
+  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hosting .link-arrow:hover span {
+  transform: translateX(3px);
+}
+
+.hosting .terminal {
+  background: oklch(15% 0.012 250);
+  color: oklch(92% 0.005 50);
+  border: 1px solid oklch(22% 0.012 250);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  box-shadow: 0 20px 50px -28px oklch(15% 0.02 250 / 0.4);
+}
+.hosting .terminal-head {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid oklch(22% 0.012 250);
+  background: oklch(18% 0.012 250);
+}
+.hosting .terminal-title {
+  margin-left: auto;
+  font-size: 0.72rem;
+  color: oklch(60% 0.012 50);
+}
+.hosting .terminal-body {
+  padding: 1.1rem 1.25rem 1.3rem;
+  overflow-x: auto;
+  margin: 0;
+}
+.hosting .terminal-body .t-prompt {
+  color: oklch(72% 0.16 38);
+  user-select: none;
+  padding-right: 0.4em;
+}
+.hosting .terminal-body .t-flag {
+  color: oklch(72% 0.14 230);
+}
+.hosting .terminal-body .t-string {
+  color: oklch(78% 0.14 145);
+}
+.hosting .terminal-body .t-punc {
+  color: oklch(60% 0.012 50);
+}
+.hosting .terminal-body .t-comment {
+  color: oklch(48% 0.012 50);
+  font-style: italic;
+}
+.hosting .terminal-body .t-out {
+  color: oklch(72% 0.14 145);
+}

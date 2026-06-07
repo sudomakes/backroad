@@ -1,0 +1,121 @@
+.compare {
+  padding-block: clamp(4rem, 6vw, 7rem);
+  position: relative;
+  isolation: isolate;
+}
+.compare-head {
+  max-width: 38ch;
+  margin-bottom: var(--space-16);
+}
+.compare-head h2 {
+  font-size: var(--fs-2xl);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  margin-block: var(--space-4) var(--space-4);
+}
+.compare-head .sub {
+  color: var(--text-muted);
+  font-size: var(--fs-lg);
+}
+
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: clamp(1rem, 2vw, 2rem);
+  align-items: stretch;
+}
+@media (max-width: 900px) {
+  .compare-grid {
+    grid-template-columns: 1fr;
+  }
+  .compare .vs {
+    display: none;
+  }
+}
+
+.compare .col {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.col-backroad {
+  border-color: oklch(58% 0.18 38 / 0.4);
+  box-shadow: 0 24px 60px -36px oklch(58% 0.18 38 / 0.35);
+}
+.compare .col header {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+.compare .tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+.tag-muted {
+  color: var(--text-subtle);
+}
+.tag-accent {
+  color: var(--accent);
+}
+
+.compare .code {
+  padding: 1.1rem 1.25rem;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.7;
+  overflow-x: auto;
+  color: var(--text);
+  background: var(--code-bg);
+  flex: 1;
+}
+
+.compare .vs {
+  display: grid;
+  place-items: center;
+  color: var(--text-subtle);
+  padding-block: 2rem;
+}
+
+.compare .code .t-keyword {
+  color: oklch(48% 0.16 280);
+}
+.compare .code .t-string {
+  color: oklch(50% 0.14 145);
+}
+.compare .code .t-fn {
+  color: oklch(52% 0.16 230);
+}
+.compare .code .t-num {
+  color: oklch(58% 0.18 38);
+}
+.compare .code .t-var {
+  color: var(--text);
+}
+.compare .code .t-punc {
+  color: var(--text-muted);
+}
+.compare .code .t-comment {
+  color: var(--text-subtle);
+  font-style: italic;
+}
+@media (prefers-color-scheme: dark) {
+  .compare .code .t-keyword {
+    color: oklch(70% 0.16 280);
+  }
+  .compare .code .t-string {
+    color: oklch(72% 0.14 145);
+  }
+  .compare .code .t-fn {
+    color: oklch(72% 0.16 230);
+  }
+  .compare .code .t-num {
+    color: oklch(75% 0.16 38);
+  }
+}

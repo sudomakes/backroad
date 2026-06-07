@@ -1,0 +1,27 @@
+.cta {
+  padding-block: clamp(5rem, 8vw, 9rem);
+}
+.cta-inner {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding-block: clamp(3rem, 5vw, 5rem);
+}
+.cta h2 {
+  font-size: var(--fs-3xl);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  margin-block: var(--space-4) var(--space-8);
+  max-width: 16ch;
+}
+.cta h2 code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  font-weight: 500;
+  color: var(--accent);
+}
+.cta .ctas {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}

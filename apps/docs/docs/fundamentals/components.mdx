@@ -1,0 +1,97 @@
+---
+title: Components
+---
+
+import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
+
+# Components
+
+A **component** is a leaf in the Backroad tree — a node that renders to
+the browser but cannot hold children. Examples: `br.write`,
+`br.button`, `br.textInput`, `br.line` (a chart), `br.table`.
+
+A **container** is an internal node — it groups children, but does not
+itself emit pixels. See [Containers](./containers).
+
+## The call shape
+
+Every component method takes a single options object and (for input
+components) returns the current value:
+
+```ts
+const name = br.textInput({
+  label: 'Your name',
+  placeholder: 'Type here',
+  defaultValue: 'world',
+});
+```
+
+For non-input components (markdown, images, charts, tables) the call
+returns `null`:
+
+```ts
+br.write({ body: '# Hello' }); // returns null
+br.image({ src: '/logo.png' }); // returns null
+```
+
+For buttons, the return value is a `boolean` that's `true` on the run
+_after_ the click — this is the basis of every interaction:
+
+```ts
+if (br.button({ label: 'Compute' })) {
+  // executes once, after a click
+}
+```
+
+## The re-run loop
+
+When any input changes (or a button is clicked), Backroad re-runs your
+entire callback from the top. Two things make this fast and predictable:
+
+1. The framework remembers the value of each input across runs, keyed by
+   the component's _id_ (see [Component IDs](../advanced/component-ids)).
+2. The React client patches the DOM only where the tree actually
+   changed, so re-runs are cheap.
+
+You write your app as if it ran once, top to bottom. Backroad takes care
+of state preservation.
+
+## Built-in components — the catalog
+
+| Category | Methods                                                                                                                                                 |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Writing  | `br.write`, `br.title`, `br.link`, `br.linkGroup`, `br.json`                                                                                            |
+| Inputs   | `br.textInput`, `br.numberInput`, `br.checkbox`, `br.toggle`, `br.radio`, `br.select`, `br.multiselect`, `br.colorPicker`, `br.fileUpload`, `br.button` |
+| Data     | `br.table`, `br.stats`, `br.json`                                                                                                                       |
+| Charts   | `br.line`, `br.bar`, `br.pie`, `br.doughnut`, `br.radar`, `br.scatter`                                                                                  |
+| Media    | `br.image`, `br.video`                                                                                                                                  |
+| LLM      | `br.chatInput`, `br.chatMessage`, `br.loading`                                                                                                          |
+
+Each is documented under [Components](../components/writing-and-markdown).
+
+## Try it
+
+<BackroadSandbox
+  height={520}
+  code={`import { run } from '@backroad/backroad';
+
+run((br) => {
+br.title({ label: 'Components in one place' });
+
+const name = br.textInput({
+label: 'Name',
+defaultValue: 'Ada',
+});
+
+const excited = br.toggle({ label: 'Excited?' });
+
+br.write({
+body: \`Hello, **\${name}**\${excited ? '!!!' : '.'}\`,
+});
+
+if (br.button({ label: 'Click me' })) {
+br.write({ body: 'Button was clicked.' });
+}
+});
+`}
+/>

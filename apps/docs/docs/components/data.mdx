@@ -1,0 +1,101 @@
+---
+title: Data components
+---
+
+import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
+
+# Data components
+
+Components for showing structured data — tables, KPI cards, and raw
+JSON.
+
+## `br.table`
+
+Powered by [TanStack Table](https://tanstack.com/table). `data` is an
+array of objects; `columns` is a record keyed by field name, with
+TanStack's `ColumnHelper.accessor()` options as the value.
+
+```ts
+br.table({
+  data: [
+    { name: 'Ada', team: 'Eng', joined: '2024-01-10' },
+    { name: 'Linus', team: 'Kernel', joined: '1991-09-17' },
+    { name: 'Grace', team: 'Compiler', joined: '1959-04-01' },
+  ],
+  columns: {
+    name: { header: 'Name' },
+    team: { header: 'Team' },
+    joined: { header: 'Joined' },
+  },
+});
+```
+
+The column key is also the field path read from each row.
+
+## `br.stats`
+
+A row of KPI cards:
+
+```ts
+br.stats({
+  items: [
+    { label: 'MRR', value: '$12,430', delta: '+8.2%' },
+    { label: 'Active users', value: 1842, delta: '+143' },
+    { label: 'Churn', value: '1.1%', delta: '-0.3%' },
+  ],
+});
+```
+
+`delta` is optional — render the percentage change or absolute delta
+since the last period.
+
+## `br.json`
+
+A collapsible tree view of any JSON-serializable value — useful for
+debugging the data feeding the rest of the page.
+
+```ts
+br.json({
+  src: {
+    user: { id: 1, name: 'Ada' },
+    flags: ['admin', 'beta'],
+  },
+});
+```
+
+## Try it
+
+<BackroadSandbox
+  height={560}
+  code={`import { run } from '@backroad/backroad';
+
+run((br) => {
+br.write({ body: '# Data components' });
+
+br.stats({
+items: [
+{ label: 'MRR', value: '$12,430', delta: '+8.2%' },
+{ label: 'Users', value: 1842, delta: '+143' },
+{ label: 'Churn', value: '1.1%', delta: '-0.3%' },
+],
+});
+
+br.table({
+data: [
+{ name: 'Ada', team: 'Eng', joined: '2024-01-10' },
+{ name: 'Linus', team: 'Kernel', joined: '1991-09-17' },
+{ name: 'Grace', team: 'Compiler', joined: '1959-04-01' },
+],
+columns: {
+name: { header: 'Name' },
+team: { header: 'Team' },
+joined: { header: 'Joined' },
+},
+});
+
+br.json({
+src: { hello: 'world', nested: { count: 3, tags: ['a', 'b'] } },
+});
+});
+`}
+/>

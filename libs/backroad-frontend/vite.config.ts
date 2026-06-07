@@ -16,6 +16,10 @@ export default defineConfig({
       '/api': {
         target: 'http://localhost:3333',
         secure: false,
+        // Required: Socket.IO upgrades from HTTP polling to WebSocket;
+        // without this the socket stays in polling mode at best and
+        // typically fails the upgrade with a 426.
+        ws: true,
       },
     },
   },
