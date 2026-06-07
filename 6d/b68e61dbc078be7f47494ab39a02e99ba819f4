@@ -1,0 +1,184 @@
+libs/backroad-core/src/lib/events.ts
+  s_eb51dd256aed12::t_8f5d60974df0b7 37-38
+  s_eb51dd256aed12::t_b5b87f9faf3877 5,16-17
+  s_eb51dd256aed12::t_907dfae5a01ce8 4
+  s_eb51dd256aed12::t_7cc86a0187b6f1 84-87
+e2e/smoke.spec.ts
+  s_eb51dd256aed12::t_0dba0195c504b3 1,3-9,11-14,16-17,19-23,25-27,29
+.size-limit.json
+  s_eb51dd256aed12::t_56c4123e8dd8e8 1-2,5-8,11-14
+  s_eb51dd256aed12::t_93a08abd51ba73 3-4,9-10
+libs/backroad/vitest.config.ts
+  s_eb51dd256aed12::t_e645711abd52f2 1-5,8-10
+  s_eb51dd256aed12::t_3c8538dc040baf 6-7
+libs/backroad-frontend/tsconfig.storybook.json
+  s_eb51dd256aed12::t_2b7c99a072c4ba 1-5,9-17
+  s_eb51dd256aed12::t_27718560c8d4f3 6-8
+.github/workflows/cancel-on-merge.yml
+  s_eb51dd256aed12::t_c1e3bd60f4e7c8 1-32
+tools/scripts/release.mjs
+  s_eb51dd256aed12::t_aef5182aef83c8 29,38
+libs/backroad-frontend/tsconfig.json
+  s_eb51dd256aed12::t_b950a09f5cca79 18-20
+  s_eb51dd256aed12::t_d38a83d23acd77 17
+libs/backroad-frontend/package.json
+  s_eb51dd256aed12::t_dcdcf97d2245c1 15
+  s_eb51dd256aed12::t_0234bb828ea777 2
+  s_eb51dd256aed12::t_80d50dcee4b1c4 20
+  s_eb51dd256aed12::t_42e2ef324ffe08 25
+package.json
+  s_eb51dd256aed12::t_2d38cdd26a4ab6 23-26
+  s_eb51dd256aed12::t_1a385891cc61de 22
+  s_eb51dd256aed12::t_94b82edb0b0a6f 40,70
+  s_eb51dd256aed12::t_0a866eebe3cacc 16-19
+  s_eb51dd256aed12::t_bcb88cdcad4f63 34,63
+  s_eb51dd256aed12::t_0977a1035ac111 72
+  s_eb51dd256aed12::t_dd7ab3d5ca9646 45
+  s_eb51dd256aed12::t_42e2ef324ffe08 102
+  s_eb51dd256aed12::t_668a80489508f1 55
+  s_eb51dd256aed12::t_3acf0a495ac98d 4
+  s_eb51dd256aed12::t_a09bc765b51fa1 50
+  s_eb51dd256aed12::t_70aaeaa7ff06e0 65
+  s_eb51dd256aed12::t_b129e61a2b1e3b 20
+  s_eb51dd256aed12::t_76f5800cd231b3 21
+  s_eb51dd256aed12::t_0259765303f444 7-8
+  s_eb51dd256aed12::t_ef6162ae19fb05 73-75
+.github/workflows/release.yml
+  s_eb51dd256aed12::t_de821ad1324cc2 18,22
+examples/demo/package.json
+  s_eb51dd256aed12::t_e3146d255ec32b 2,6-7,9
+libs/backroad-frontend/src/stories/Tabs.stories.tsx
+  s_eb51dd256aed12::t_910bea57f9c288 1-2,4-41,43-44
+.github/workflows/pr-checks.yml
+  s_eb51dd256aed12::t_910bea57f9c288 239,241,244-246,248
+  s_eb51dd256aed12::t_eca27a3c9aff8d 54-62,65-67,69
+  s_eb51dd256aed12::t_397b9471a30eea 83,106,129,152,177,229,260,293
+  s_eb51dd256aed12::t_bd9d51d94d4005 63-64
+  s_eb51dd256aed12::t_2a9e2c54cab29c 1-15,17-22,25,28-29,31-44,53,70-75,80-82,84-87,89-91,94-100,103-105,107-110,112-114,117-123,126-128,130-133,135-137,140-146,149-151,153-156,158-160,163,307-313,315-318,323-329,331-334,339,350-355
+  s_eb51dd256aed12::t_b72a77026431f4 24,45-52,76-79,92-93,101-102,115-116,124-125,138-139,147-148,161-162,166-167,187-188,190-214,280-292,294-297,299-305,322,338,348-349
+  s_eb51dd256aed12::t_f912b4ae2ef0ec 164-165,168-176,178-181,183-186,189,215-228,230-233,235-238,240,242-243,247,249-259,261-264,266-279,306,314,319-321,330,335-337,340-347
+  s_eb51dd256aed12::t_728385fabd55e5 16,23,26-27,30
+  s_eb51dd256aed12::t_738589c5f42da8 88,111,134,157,182,234,265,298
+libs/backroad-core/src/index.ts
+  s_eb51dd256aed12::t_6a43f751df80d2 1
+pnpm-workspace.yaml
+  s_eb51dd256aed12::t_b52fb62f7936fe 4
+  s_eb51dd256aed12::t_6bd8ed347e676b 15-30
+  s_eb51dd256aed12::t_4eb74ddb55adf4 31
+  s_eb51dd256aed12::t_e8ddd0014892f8 8
+  s_eb51dd256aed12::t_e91e9fc023b931 14
+libs/backroad/package.json
+  s_eb51dd256aed12::t_ee7008e5bf559c 9
+  s_eb51dd256aed12::t_feaa82b99a8e9a 27-34
+  s_eb51dd256aed12::t_c258d0f1e5dd99 24-26
+  s_eb51dd256aed12::t_5a65e38a4c29dc 10
+libs/backroad/src/lib/runner/index.ts
+  s_eb51dd256aed12::t_8f5db555436f37 12,17,27-57
+tools/scripts/knip-check.mjs
+  s_eb51dd256aed12::t_870709cd8ac0c9 90-93,109-122
+  s_eb51dd256aed12::t_ebfa6bd306548b 2-10,35-38,40-42,48-51,53,65-70,73,78-83,94-108
+  s_eb51dd256aed12::t_4ee956d4f5a0dc 1,11-34,39,43-47,52,54-64,71-72,74-77,84-89,123-134
+ARCHITECTURE.md
+  s_eb51dd256aed12::t_91882f5d5ae52e 1-3,5-23,29-32,34-106,108-124,126-129
+.dockerignore
+  s_eb51dd256aed12::t_33e2e98cddec48 1-19
+libs/backroad/tsconfig.lib.json
+  s_eb51dd256aed12::t_375592a4a1e8e7 9
+libs/backroad-frontend/tailwind.config.js
+  s_eb51dd256aed12::t_e5a878178adb60 12
+examples/demo/Dockerfile
+  s_eb51dd256aed12::t_b7ce03b998a748 1-17,19-25,27-40,42-68
+  s_eb51dd256aed12::t_957a15bec034c3 26
+  s_eb51dd256aed12::t_c23d698cc80a12 18,41
+.github/pull_request_template.md
+  s_eb51dd256aed12::t_0884194b73710c 1-2,5-38
+libs/backroad/src/lib/backroad/backroad.ts
+  s_eb51dd256aed12::t_bafc9ae5fb8def 6,18
+  s_eb51dd256aed12::t_0036142f730de6 300-307,309-310,313-318,321-322
+  s_eb51dd256aed12::t_b07098c0f65ea7 311-312
+  s_eb51dd256aed12::t_7bafdade2d3998 320
+  s_eb51dd256aed12::t_579b96b08896e9 308,319
+libs/backroad-frontend/src/app/layout/navbar/index.tsx
+  s_eb51dd256aed12::t_a93ca7de7ae4eb 1-6,8-23,25-27,30-31,35-59
+playwright.config.ts
+  s_eb51dd256aed12::t_823e1f89c44dbe 3-4,19,24-27,29-35,37-43
+  s_eb51dd256aed12::t_dea6ddf9e5285d 8-10
+  s_eb51dd256aed12::t_81b129b58ddf72 1-2,5-7,11-18,20-23,44-50
+  s_eb51dd256aed12::t_f234d747dbd7f9 36
+  s_eb51dd256aed12::t_4e71eeb24da37b 28
+knip-baseline.json
+  s_eb51dd256aed12::t_ea749662d7d13b 1,3,6-8,10-11,13-16
+  s_eb51dd256aed12::t_2c3de3d469d53b 4,9
+  s_eb51dd256aed12::t_dd28ac73ec939d 2
+  s_eb51dd256aed12::t_f4a102a1c8c1f1 5,12
+tools/scripts/dev-demo.mjs
+  s_eb51dd256aed12::t_d1d14899f76c16 2,21-27,29-36,40,43,51-52,54,58,61
+  s_eb51dd256aed12::t_2146c092d30075 57
+libs/backroad-frontend/src/vite-env.d.ts
+  s_eb51dd256aed12::t_3dab1e5283b34d 1-33
+libs/backroad/tsconfig.test.json
+  s_eb51dd256aed12::t_000fbc5dcd85b1 8
+libs/backroad/src/lib/server/index.ts
+  s_eb51dd256aed12::t_a531583a915895 137,142-145,148-149,151,153-158
+  s_eb51dd256aed12::t_7dbe2bdfc32f2a 146-147,150
+  s_eb51dd256aed12::t_40cd360914947a 130-131,135-136
+  s_eb51dd256aed12::t_e288965ef0a398 8,15-109,121-129,159
+  s_eb51dd256aed12::t_8bd4dca8368e03 152
+  s_eb51dd256aed12::t_2e233a91c93248 132-134,138-141
+libs/backroad/tsconfig.json
+  s_eb51dd256aed12::t_5938954434119d 15
+  s_eb51dd256aed12::t_47c85507d03b2b 13-14
+libs/backroad/src/lib/server/sessions/session.ts
+  s_eb51dd256aed12::t_8eaf290cb53f2a 4,17
+tsconfig.base.json
+  s_eb51dd256aed12::t_6a24a2fad015b3 17
+  s_eb51dd256aed12::t_b945f186842351 18
+  s_eb51dd256aed12::t_7481a2e58b30ef 22
+libs/backroad-components/package.json
+  s_eb51dd256aed12::t_42e2ef324ffe08 26
+  s_eb51dd256aed12::t_814e0cdda990cb 2
+libs/backroad-frontend/src/app/hooks/useBackroadConfig.ts
+  s_eb51dd256aed12::t_a93ca7de7ae4eb 1-23
+libs/backroad-core/src/lib/auth.ts
+  s_eb51dd256aed12::t_1fc8727ecd8ef0 1-35
+examples/demo/README.md
+  s_eb51dd256aed12::t_07e62bf5646df1 1-55,57-66
+tools/scripts/build-demo.mjs
+  s_eb51dd256aed12::t_d1d14899f76c16 16,18,22-23,25,29,34-35,38-44,49,52,57,71
+  s_eb51dd256aed12::t_2146c092d30075 28
+knip.json
+  s_eb51dd256aed12::t_df57974e989460 1-11,13-15,17-33,35-40
+  s_eb51dd256aed12::t_45d977f79dbebd 12,16,34
+tsconfig.json
+  s_eb51dd256aed12::t_db8e45da9e4b1b 7
+  s_eb51dd256aed12::t_d9082985f77477 1-6,8-10
+tools/scripts/helpers.mjs
+  s_eb51dd256aed12::t_63e90890b46936 22-23,26
+.github/CODEOWNERS
+  s_eb51dd256aed12::t_2356ac98655b6b 1-11
+  s_eb51dd256aed12::t_f645c625da33ab 12-19
+.gitleaks.toml
+  s_eb51dd256aed12::t_c43cda9f91eaad 1-22,24-32
+  s_eb51dd256aed12::t_578afb54c9c809 23
+libs/backroad-frontend/src/app/app.tsx
+  s_eb51dd256aed12::t_a93ca7de7ae4eb 1-3,5-10,12-27,29,32-46,48-55,57-62,64-97
+libs/backroad-frontend/vite.config.ts
+  s_eb51dd256aed12::t_47e4af8ad15f36 6,8
+  s_eb51dd256aed12::t_50f259836d9eea 36-37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "6db68e61dbc078be7f47494ab39a02e99ba819f4",
+  "prompts": {},
+  "sessions": {
+    "s_eb51dd256aed12": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3d54dce1-d480-4530-9a20-190a30eac8e8",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
