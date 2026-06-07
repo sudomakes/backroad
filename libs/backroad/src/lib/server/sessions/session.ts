@@ -1,6 +1,7 @@
 import {
   getInitialTreeStructure,
   type BackroadContainer,
+  type BackroadUser,
   type ComponentPropsMapping,
   type InbuiltComponentTypes,
 } from '@backroad/core';
@@ -13,6 +14,7 @@ export class BackroadSession {
   state: { [key: string]: unknown } = {};
   renderQueue: RenderQueue;
   rootNodeManager: BackroadNodeManager<'base'>;
+  user: BackroadUser = { isLoggedIn: false };
   // uploadManager: UploadManager;
   constructor(sessionId: string) {
     // this.uploadManager = new UploadManager();

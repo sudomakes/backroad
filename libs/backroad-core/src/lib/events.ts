@@ -1,6 +1,8 @@
 import type { Socket } from 'socket.io';
 import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 import { InitOptions } from 'react-ga4/types/ga4';
+import type { BackroadAuthInstance } from './auth';
+
 export type BackroadConfig =
   | undefined
   | {
@@ -10,6 +12,9 @@ export type BackroadConfig =
       theme?: 'light' | 'dark';
       server?: {
         port?: number;
+      };
+      auth?: {
+        instance: BackroadAuthInstance;
       };
     };
 export type ClientToServerEventTypes =
@@ -29,7 +34,8 @@ export type ServerToClientEventTypes =
   | 'render'
   | 'running'
   | 'backroad_config'
-  | 'props_change';
+  | 'props_change'
+  | 'auth_redirect';
 export type ClientToServerEvents =
   ConstructSocketIoEventSignatureFromBackroadEvents<ClientToServerEventTypes>;
 export type ServerToClientEvents =
@@ -74,6 +80,10 @@ export type BackroadEventsMapping = {
   backroad_config: {
     args: BackroadConfig;
     response?: never;
+  };
+  auth_redirect: {
+    args: { url: string };
+    response?: void;
   };
 };
 export type BackroadEvents = keyof BackroadEventsMapping;

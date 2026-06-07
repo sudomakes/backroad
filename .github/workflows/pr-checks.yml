@@ -1,0 +1,355 @@
+name: PR Checks
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, reopened]
+    # Doc-only PRs skip the whole workflow. The list mirrors the source
+    # roots and the toolchain files that can change build/test behaviour;
+    # README/MD updates and anything under .planning/, .claude/, .github/
+    # (except this file) is excluded.
+    paths:
+      - 'apps/**'
+      - 'libs/**'
+      - 'tools/**'
+      - 'e2e/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
+      - 'tsconfig*.json'
+      - '.npmrc'
+      - '.eslintrc*'
+      - '.gitleaks.toml'
+      - '.size-limit.json'
+      - 'commitlint.config.*'
+      - 'knip.json'
+      - 'knip-baseline.json'
+      - 'lefthook.yml'
+      - 'release.config.js'
+      - 'playwright.config.ts'
+      - '.github/workflows/pr-checks.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+  statuses: write
+
+# Cancel superseded runs on the same PR. Keeps the queue clean when you
+# push a fixup right after a green run starts.
+concurrency:
+  group: pr-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+# Resolved per-job from github.base_ref. In PR context this is the merge
+# target ("main"); in workflow_dispatch it's empty and we just run
+# everything. The double quotes around the filter pattern protect
+# `[`/`]` from shell glob expansion.
+env:
+  AFFECTED_FILTER: >-
+    ${{ github.base_ref && format('--filter "...[origin/{0}]"', github.base_ref) || '' }}
+
+jobs:
+  secret-scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          fetch-depth: 0
+      - name: Scan for secrets (gitleaks)
+        # Pin to a specific SHA once you've verified the published v2 tag.
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_CONFIG: .gitleaks.toml
+          GITLEAKS_NOTIFY_USER_LIST: ''
+
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          # Full history so pnpm's `--filter "...[origin/main]"` can
+          # diff against the base ref.
+          fetch-depth: 0
+      - name: Setup pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        with:
+          version: 11.5.2
+          run_install: false
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+          cache: pnpm
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+      - name: Lint (affected packages)
+        run: pnpm -r ${{ env.AFFECTED_FILTER }} --if-present run lint
+
+  typecheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          fetch-depth: 0
+      - name: Setup pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        with:
+          version: 11.5.2
+          run_install: false
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+          cache: pnpm
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+      - name: Typecheck (affected packages)
+        run: pnpm -r ${{ env.AFFECTED_FILTER }} --if-present run typecheck
+
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          fetch-depth: 0
+      - name: Setup pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        with:
+          version: 11.5.2
+          run_install: false
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+          cache: pnpm
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+      - name: Test (affected packages)
+        run: pnpm -r ${{ env.AFFECTED_FILTER }} --if-present run test
+
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          fetch-depth: 0
+      - name: Setup pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        with:
+          version: 11.5.2
+          run_install: false
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+          cache: pnpm
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+      - name: Build (affected packages)
+        run: pnpm -r ${{ env.AFFECTED_FILTER }} --if-present run build
+
+  # Dead-code gate. Fails only when any knip category goes above the
+  # committed baseline (knip-baseline.json) — a ratchet that tolerates
+  # the existing backlog and prevents new dead code. Posts a sticky PR
+  # comment with the per-category counts on every run, pass or fail.
+  knip:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - name: Setup pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        with:
+          version: 11.5.2
+          run_install: false
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+          cache: pnpm
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+      - name: Knip baseline check
+        env:
+          KNIP_REPORT_FILE: ${{ runner.temp }}/knip-report.md
+        run: pnpm run knip:ci
+      - name: Post knip report (sticky PR comment)
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
+        with:
+          script: |
+            const fs = require('fs');
+            const marker = '<!-- knip-report -->';
+            let body;
+            try {
+              body = fs.readFileSync(`${process.env.RUNNER_TEMP}/knip-report.md`, 'utf8');
+            } catch {
+              core.info('No knip report file produced; skipping comment.');
+              return;
+            }
+            const { owner, repo } = context.repo;
+            const issue_number = context.payload.pull_request.number;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner, repo, issue_number, per_page: 100,
+            });
+            const existing = comments.find((c) => (c.body ?? '').includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number, body });
+            }
+
+  # Storybook + axe accessibility scan. Builds storybook, serves it
+  # statically, then runs @storybook/test-runner with axe-playwright on
+  # every story. Fails if axe reports any violations on the configured
+  # ruleset.
+  storybook-a11y:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - name: Setup pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        with:
+          version: 11.5.2
+          run_install: false
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+          cache: pnpm
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+      - name: Install Playwright chromium
+        run: pnpm --filter backroad-frontend exec playwright install --with-deps chromium
+      - name: Build storybook
+        run: pnpm --filter backroad-frontend run storybook:build
+      - name: Serve storybook + run axe
+        run: |
+          pnpm --filter backroad-frontend exec http-server ../../dist/storybook --port 6006 --silent &
+          pnpm --filter backroad-frontend exec wait-on tcp:6006 --timeout 30000
+          pnpm --filter backroad-frontend run storybook:test
+
+  # End-to-end smoke tests against the examples/demo app.
+  # Boots backend (express on :3333) + vite frontend (on :4200) via
+  # playwright.config.ts webServer array.
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - name: Setup pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        with:
+          version: 11.5.2
+          run_install: false
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+          cache: pnpm
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+      - name: Install Playwright chromium
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Run E2E
+        run: pnpm run e2e
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: playwright-report
+          path: playwright-report
+          retention-days: 7
+
+  # Bundle-size gate against main. Fails the PR when any published lib
+  # grows past the budget in .size-limit.json. The size-limit-action
+  # posts a sticky comment with the diff on every run.
+  bundle-size:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - name: Setup pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        with:
+          version: 11.5.2
+          run_install: false
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+          cache: pnpm
+      - name: Size diff vs main
+        uses: andresz1/size-limit-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          package_manager: pnpm
+          skip_step: install
+
+  # Aggregator that branch protection should require. Stays green only
+  # when every individual check above did. Add this single status to the
+  # required-checks list and you're covered if you add/remove jobs later.
+  pr-check-summary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs:
+      - secret-scan
+      - lint
+      - typecheck
+      - test
+      - build
+      - knip
+      - storybook-a11y
+      - e2e
+      - bundle-size
+    if: always()
+    steps:
+      - name: Summarise
+        run: |
+          {
+            echo '### PR Checks'
+            echo ''
+            echo '- Secret scan: ${{ needs.secret-scan.result }}'
+            echo '- Lint: ${{ needs.lint.result }}'
+            echo '- Typecheck: ${{ needs.typecheck.result }}'
+            echo '- Test: ${{ needs.test.result }}'
+            echo '- Build: ${{ needs.build.result }}'
+            echo '- Knip: ${{ needs.knip.result }}'
+            echo '- Storybook a11y: ${{ needs.storybook-a11y.result }}'
+            echo '- E2E: ${{ needs.e2e.result }}'
+            echo '- Bundle size: ${{ needs.bundle-size.result }}'
+          } >> "$GITHUB_STEP_SUMMARY"
+          for r in \
+            '${{ needs.secret-scan.result }}' \
+            '${{ needs.lint.result }}' \
+            '${{ needs.typecheck.result }}' \
+            '${{ needs.test.result }}' \
+            '${{ needs.build.result }}' \
+            '${{ needs.knip.result }}' \
+            '${{ needs.storybook-a11y.result }}' \
+            '${{ needs.e2e.result }}' \
+            '${{ needs.bundle-size.result }}'; do
+            if [ "$r" != "success" ]; then
+              echo "One or more checks failed."
+              exit 1
+            fi
+          done
+          echo "All checks passed."

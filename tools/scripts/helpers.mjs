@@ -19,11 +19,11 @@ const scriptsDir = path.dirname(fileURLToPath(import.meta.url));
 export const workspaceRoot = path.resolve(scriptsDir, '../..');
 
 const workspacePackageFiles = [
-  'apps/client/package.json',
-  'apps/backroad-example/package.json',
-  'libs/backroad-client/package.json',
+  'libs/backroad-frontend/package.json',
+  'libs/backroad-components/package.json',
   'libs/backroad/package.json',
   'libs/backroad-core/package.json',
+  'examples/demo/package.json',
 ];
 
 export function run(command, args, options = {}) {

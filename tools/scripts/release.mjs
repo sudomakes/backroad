@@ -26,7 +26,7 @@ for (const packageFile of packageFiles) {
   await writeJson(packageFile, packageJson);
 }
 
-run('pnpm', ['--filter', 'client', 'run', 'build']);
+run('pnpm', ['--filter', 'backroad-frontend', 'run', 'build']);
 run('pnpm', ['--filter', '@backroad/core', 'run', 'build']);
 run('pnpm', ['--filter', '@backroad/backroad', 'run', 'build']);
 
@@ -35,7 +35,7 @@ await rm(path.join(workspaceRoot, 'dist/libs/backroad/src/lib/server/public'), {
   recursive: true,
 });
 await copyDirectoryContents(
-  'dist/apps/client',
+  'dist/libs/backroad-frontend',
   'dist/libs/backroad/src/lib/server/public'
 );
 

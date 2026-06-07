@@ -1,0 +1,37 @@
+{
+  "name": "backroad-frontend",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "lint": "eslint \"src/**/*.{ts,tsx,js,jsx}\" \"*.{js,ts}\"",
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "storybook:build": "storybook build -o ../../dist/storybook --quiet",
+    "storybook:serve": "http-server ../../dist/storybook --port 6006 --silent",
+    "storybook:test": "test-storybook --config-dir .storybook --url http://127.0.0.1:6006",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.app.json --noEmit && tsc -p tsconfig.test.json --noEmit && tsc -p tsconfig.storybook.json --noEmit"
+  },
+  "dependencies": {
+    "@backroad/core": "workspace:*",
+    "@heroicons/react": "^2.0.18",
+    "backroad-components": "workspace:*",
+    "lodash": "^4.17.23",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-ga4": "^2.1.0",
+    "react-router-dom": "^6.30.4",
+    "superjson": "^1.13.1",
+    "theme-change": "^2.5.0"
+  },
+  "devDependencies": {
+    "@storybook/react-vite": "^10.4.2",
+    "@storybook/test-runner": "^0.24.4",
+    "axe-playwright": "^2.2.2",
+    "http-server": "^14.1.1",
+    "storybook": "^10.4.2",
+    "wait-on": "^9.0.10"
+  }
+}

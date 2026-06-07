@@ -14,10 +14,12 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "esModuleInterop": true,
+    "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
       "@backroad/backroad": ["libs/backroad/src/index.ts"],
-      "backroad-client": ["libs/backroad-client/src/index.ts"],
+      "backroad-components": ["libs/backroad-components/src/index.ts"],
       "@backroad/core": ["libs/backroad-core/src/index.ts"]
     }
   },

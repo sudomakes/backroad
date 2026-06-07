@@ -1,0 +1,32 @@
+name: Cancel PR runs on merge
+
+on:
+  pull_request:
+    types: [closed]
+
+# Once a PR closes (merged or not), any still-running PR-checks runs on
+# its source branch are wasted CI minutes. Cancel them.
+jobs:
+  cancel:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Cancel in-flight runs for this PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_BRANCH: ${{ github.event.pull_request.head.ref }}
+          REPO: ${{ github.repository }}
+        run: |
+          for status in in_progress queued; do
+            gh run list \
+              --repo "$REPO" \
+              --branch "$PR_BRANCH" \
+              --status "$status" \
+              --json databaseId \
+              --jq '.[].databaseId' \
+            | while read -r run_id; do
+                echo "Cancelling $status run $run_id"
+                gh run cancel "$run_id" --repo "$REPO" || true
+              done
+          done

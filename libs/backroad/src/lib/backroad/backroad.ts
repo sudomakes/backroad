@@ -3,6 +3,7 @@ import {
   type BackroadComponent,
   type BackroadContainer,
   type BackroadNode,
+  type BackroadUser,
   type ComponentPropsMapping,
   type ContainerPropsMapping,
   type GenericBackroadComponent,
@@ -14,6 +15,7 @@ import superjson from 'superjson';
 // import {File} from "formidable"
 import { BackroadSession } from '../server/sessions/session';
 import { ObjectHasher } from './object-hasher';
+import { SocketManager } from './socket-manager';
 
 type BackroadComponentFormat<ComponentType extends InbuiltComponentTypes> = {
   id?: BackroadComponent<ComponentType, false>['id'];
@@ -294,5 +296,28 @@ export class BackroadNodeManager<
   }
   video(props: BackroadComponentFormat<'video'>) {
     return this.#initialiseAndAddComponentDescendant(props, 'video');
+  }
+
+  get user(): BackroadUser {
+    return this.backroadSession.user;
+  }
+
+  login(provider?: string) {
+    const url = provider
+      ? `/api/auth/sign-in/social?provider=${encodeURIComponent(provider)}`
+      : '/api/signin';
+    SocketManager.getSocket(this.backroadSession.sessionId).emit(
+      'auth_redirect',
+      { url },
+      () => undefined
+    );
+  }
+
+  logout() {
+    SocketManager.getSocket(this.backroadSession.sessionId).emit(
+      'auth_redirect',
+      { url: '/api/signout' },
+      () => undefined
+    );
   }
 }

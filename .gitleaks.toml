@@ -1,0 +1,32 @@
+# gitleaks config for Backroad.
+# The default ruleset catches common credential shapes (AWS, GCP, GitHub,
+# generic-API-key heuristics, JWT, npm tokens, etc.). We extend rather than
+# replace it.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Repo-wide allowlist"
+# Skip files that legitimately contain key-shaped data (lockfiles,
+# checksums, build artefacts) — anything actually leaked here would
+# already be tracked elsewhere.
+paths = [
+  '''^pnpm-lock\.yaml$''',
+  '''^dist/''',
+  '''^node_modules/''',
+  '''^\.git/''',
+  '''^.*\.lock$''',
+  '''^.*\.min\.js$''',
+  '''^.*\.snap$''',
+  # Test placeholders — these are obviously fake credentials embedded in
+  # docs or examples. Real tokens never land in these paths.
+  '''^examples/demo/src/auth\.ts$''',
+  '''^\.planning/''',
+]
+# Common dummy/example secrets we deliberately commit.
+regexes = [
+  '''dummy''',
+  '''placeholder''',
+  '''example''',
+  '''xxxxxxxx''',
+]

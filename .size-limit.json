@@ -1,0 +1,14 @@
+[
+  {
+    "name": "backroad-frontend — JS bundle",
+    "path": "dist/libs/backroad-frontend/assets/index-*.js",
+    "limit": "400 KB",
+    "gzip": true
+  },
+  {
+    "name": "backroad-frontend — CSS bundle",
+    "path": "dist/libs/backroad-frontend/assets/index-*.css",
+    "limit": "20 KB",
+    "gzip": true
+  }
+]

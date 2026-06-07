@@ -9,10 +9,12 @@ export const run = async (
   backroadOptions?: BackroadConfig
 ) => {
   const port = backroadOptions?.server?.port || 3333;
+  const authConfig = backroadOptions?.auth;
 
   (
     await startBackroadServer({
       port: port,
+      auth: authConfig,
     })
   ).on('connection', async (socket) => {
     const backroadSession = sessionManager.getSession(
@@ -22,6 +24,37 @@ export const run = async (
       }
     );
     SocketManager.register(backroadSession.sessionId, socket);
+
+    // Resolve the better-auth session once per WS connection from the upgrade
+    // headers, then cache it on the BackroadSession. The session is NOT
+    // re-checked per-message in v1 — if a user signs out in another tab, this
+    // connection will keep its old user object until it reconnects.
+    if (authConfig) {
+      try {
+        const { fromNodeHeaders } =
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
+          require('better-auth/node') as typeof import('better-auth/node');
+        const resolved = await authConfig.instance.api.getSession({
+          headers: fromNodeHeaders(socket.request.headers),
+        });
+        if (resolved?.user?.id) {
+          backroadSession.user = {
+            isLoggedIn: true,
+            id: resolved.user.id,
+            name: resolved.user.name ?? '',
+            email: resolved.user.email ?? '',
+            image: resolved.user.image ?? undefined,
+            raw: resolved,
+          };
+        } else {
+          backroadSession.user = { isLoggedIn: false };
+        }
+      } catch (err) {
+        console.error('Failed to resolve auth session for WS connection', err);
+        backroadSession.user = { isLoggedIn: false };
+      }
+    }
+
     const runExecutor = async () => {
       backroadSession.resetTree();
       await executor(backroadSession.mainPageNodeManager);

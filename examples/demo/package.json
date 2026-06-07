@@ -1,0 +1,22 @@
+{
+  "name": "@backroad-examples/demo",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "build": "node ../../tools/scripts/build-demo.mjs",
+    "dev": "node ../../tools/scripts/dev-demo.mjs",
+    "lint": "eslint \"src/**/*.ts\"",
+    "start": "node ../../dist/examples/demo/main.js",
+    "typecheck": "tsc -p tsconfig.app.json --noEmit"
+  },
+  "dependencies": {
+    "@backroad/backroad": "workspace:*",
+    "@faker-js/faker": "^8.1.0",
+    "better-auth": "^1.6.14",
+    "better-sqlite3": "^12.10.0",
+    "sharp": "^0.34.5"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13"
+  }
+}

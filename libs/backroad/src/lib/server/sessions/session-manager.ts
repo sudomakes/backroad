@@ -8,14 +8,12 @@ export const sessionManager = {
     if (!sessions[sessionId]) {
       if (props && props.upsert) {
         sessions[sessionId] = new BackroadSession(sessionId);
-        // @ts-expect-error - this is fine
         return sessions[sessionId];
       } else {
         // @ts-expect-error - this is fine
         return null;
       }
     }
-    // @ts-expect-error - this is fine
     return sessions[sessionId];
   },
   // register: (session: BackroadSession) => {

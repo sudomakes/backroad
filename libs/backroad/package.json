@@ -6,7 +6,8 @@
   "scripts": {
     "build": "node ../../tools/scripts/build-library.mjs backroad",
     "lint": "eslint \"src/**/*.ts\"",
-    "typecheck": "tsc -p tsconfig.lib.json --noEmit"
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.lib.json --noEmit && tsc -p tsconfig.test.json --noEmit"
   },
   "publishConfig": {
     "access": "public"
@@ -20,5 +21,16 @@
     "socket.io": "^4.8.3",
     "superjson": "^1.13.1",
     "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "better-auth": "^1.6.14"
+  },
+  "peerDependencies": {
+    "better-auth": "^1.6.14"
+  },
+  "peerDependenciesMeta": {
+    "better-auth": {
+      "optional": true
+    }
   }
 }

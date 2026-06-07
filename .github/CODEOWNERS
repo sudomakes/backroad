@@ -1,0 +1,19 @@
+# Default owner for everything not matched below. Last match wins, so
+# more-specific patterns lower in the file override this fallback.
+*  @sudo-vaibhav
+
+# CI / release wiring — anything that touches how things get built,
+# tested, or shipped needs explicit attention.
+/.github/                @sudo-vaibhav
+/tools/scripts/          @sudo-vaibhav
+/release.config.js       @sudo-vaibhav
+/playwright.config.ts    @sudo-vaibhav
+
+# Published library surfaces (assembled into @backroad/backroad on release).
+/libs/backroad/              @sudo-vaibhav
+/libs/backroad-core/         @sudo-vaibhav
+/libs/backroad-components/   @sudo-vaibhav
+/libs/backroad-frontend/     @sudo-vaibhav
+
+# Demo app — the e2e target. Mirrors what consumers of @backroad/backroad write.
+/examples/                   @sudo-vaibhav

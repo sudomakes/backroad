@@ -1,2 +1,19 @@
-node_modules
-dist
+# Anything excluded here is invisible to `docker build .` regardless of where
+# the Dockerfile lives. Keeps build context small and prevents host-only state
+# leaking into the image layer.
+**/node_modules
+**/dist
+**/.nx
+**/coverage
+**/.turbo
+.git
+.github
+.vscode
+.idea
+e2e
+test-results
+playwright-report
+*.log
+*.tar
+*.tar.gz
+.DS_Store
