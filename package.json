@@ -1,6 +1,6 @@
 {
   "name": "backroad-monorepo",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "packageManager": "pnpm@11.5.2",
   "scripts": {
     "build": "pnpm -r --if-present run build",

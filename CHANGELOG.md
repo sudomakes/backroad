@@ -1,3 +1,9 @@
+## [1.7.1](https://github.com/sudomakes/backroad/compare/v1.7.0...v1.7.1) (2026-06-09)
+
+### Bug Fixes
+
+- **deploy:** move CNAME to landing so it lands at site root ([7664f00](https://github.com/sudomakes/backroad/commit/7664f00dc207568f19b8c066ea56a92f19f4d89c))
+
 ## [1.7.0](https://github.com/sudomakes/backroad/compare/v1.6.0...v1.7.0) (2026-06-07)
 
 ### Features
