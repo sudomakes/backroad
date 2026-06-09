@@ -1,0 +1,19 @@
+apps/landing/src/components/Hosting.css
+  s_d33855c4880cd3::t_a327dc1d37bf68 100-107,115,118,121,124,128
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "32ca0f093f9a062d6628c987d085dbb69c704218",
+  "prompts": {},
+  "sessions": {
+    "s_d33855c4880cd3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "44cc01ac-afac-4f6a-a9f2-5931983f25d1",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
