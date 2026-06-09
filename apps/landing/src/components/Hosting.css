@@ -97,6 +97,14 @@
   padding: 1.1rem 1.25rem 1.3rem;
   overflow-x: auto;
   margin: 0;
+  color: oklch(92% 0.005 50);
+}
+.hosting .terminal-body code {
+  color: inherit;
+  font-family: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
 }
 .hosting .terminal-body .t-prompt {
   color: oklch(72% 0.16 38);
@@ -104,18 +112,18 @@
   padding-right: 0.4em;
 }
 .hosting .terminal-body .t-flag {
-  color: oklch(72% 0.14 230);
+  color: oklch(78% 0.14 230);
 }
 .hosting .terminal-body .t-string {
-  color: oklch(78% 0.14 145);
+  color: oklch(80% 0.14 145);
 }
 .hosting .terminal-body .t-punc {
-  color: oklch(60% 0.012 50);
+  color: oklch(78% 0.01 50);
 }
 .hosting .terminal-body .t-comment {
-  color: oklch(48% 0.012 50);
+  color: oklch(62% 0.012 50);
   font-style: italic;
 }
 .hosting .terminal-body .t-out {
-  color: oklch(72% 0.14 145);
+  color: oklch(78% 0.14 145);
 }
