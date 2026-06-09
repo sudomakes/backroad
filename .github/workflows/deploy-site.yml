@@ -59,7 +59,7 @@ jobs:
           cp -R dist/apps/landing/. dist/site/
           mkdir -p dist/site/docs
           cp -R apps/docs/build/. dist/site/docs/
-          # Both apps include a CNAME; keep the landing's at the root.
+          # Landing carries the CNAME at the site root for the custom domain.
           ls dist/site
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
