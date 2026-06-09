@@ -1,3 +1,9 @@
+## [1.7.2](https://github.com/sudomakes/backroad/compare/v1.7.1...v1.7.2) (2026-06-09)
+
+### Bug Fixes
+
+- **landing:** make terminal command text readable ([6f35380](https://github.com/sudomakes/backroad/commit/6f3538029e9984a32e33aa676c51187075d6ba19))
+
 ## [1.7.1](https://github.com/sudomakes/backroad/compare/v1.7.0...v1.7.1) (2026-06-09)
 
 ### Bug Fixes
