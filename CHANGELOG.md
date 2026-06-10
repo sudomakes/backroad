@@ -1,3 +1,9 @@
+## [1.7.3](https://github.com/sudomakes/backroad/compare/v1.7.2...v1.7.3) (2026-06-10)
+
+### Bug Fixes
+
+- update baseUrl for root deployment ([c3e527d](https://github.com/sudomakes/backroad/commit/c3e527d22f50a371963440ac33903f2ea126a94c))
+
 ## [1.7.2](https://github.com/sudomakes/backroad/compare/v1.7.1...v1.7.2) (2026-06-09)
 
 ### Bug Fixes
