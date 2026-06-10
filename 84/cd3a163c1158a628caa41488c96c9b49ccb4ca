@@ -1,0 +1,19 @@
+apps/docs/docs/try-it.mdx
+  s_6eb1c1e1c76ffc::t_c4d6cdeaa5e53b 10-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "84cd3a163c1158a628caa41488c96c9b49ccb4ca",
+  "prompts": {},
+  "sessions": {
+    "s_6eb1c1e1c76ffc": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1521971a1ffeWaGQ64KrNeUnZN",
+        "model": "nemotron-3-ultra-free"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
