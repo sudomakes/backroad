@@ -1,0 +1,21 @@
+apps/docs/src/components/BackroadSandbox.tsx
+  s_6eb1c1e1c76ffc::t_313ff0e65aa137 123,125,129,135-138,143-144,149-150,152,161,165
+  s_6eb1c1e1c76ffc::t_c27f6c6460b1fd 66-70,72-75
+  s_6eb1c1e1c76ffc::t_7ab1313125d44e 71,139-142,151
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "fac7f0e8163d01efe34911317f8d53011e522d4c",
+  "prompts": {},
+  "sessions": {
+    "s_6eb1c1e1c76ffc": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1521971a1ffeWaGQ64KrNeUnZN",
+        "model": "nemotron-3-ultra-free"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
