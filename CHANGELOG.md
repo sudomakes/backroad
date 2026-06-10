@@ -1,3 +1,9 @@
+## [1.7.10](https://github.com/sudomakes/backroad/compare/v1.7.9...v1.7.10) (2026-06-10)
+
+### Bug Fixes
+
+- copy \_headers to root for Cloudflare Pages ([b4327cb](https://github.com/sudomakes/backroad/commit/b4327cbdc60ff01ea7ba50212be23fa2ab482cd3))
+
 ## [1.7.9](https://github.com/sudomakes/backroad/compare/v1.7.8...v1.7.9) (2026-06-10)
 
 ### Bug Fixes
