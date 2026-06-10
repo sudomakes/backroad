@@ -63,6 +63,16 @@ function WebContainerSandbox({ code, dependencies, height }: Props) {
     abortRef.current = false;
 
     try {
+      // Sanity check: WebContainer needs crossOriginIsolated
+      if (!window.crossOriginIsolated) {
+        setStatus('error');
+        setStatusMessage(
+          'This page is not cross-origin isolated.\n' +
+            'WebContainer requires COOP/COEP headers.'
+        );
+        return;
+      }
+
       // Dynamic import so WebContainer code only ships on pages with a sandbox
       const { WebContainer } = await import('@webcontainer/api');
 
@@ -110,22 +120,36 @@ function WebContainerSandbox({ code, dependencies, height }: Props) {
         setStatusMessage('Server ready');
       });
 
-      // Stream install logs
+      // Stream install logs with a timeout so the UI doesn't freeze silently
       const install = await wc.spawn('npm', ['install']);
+      const installLogs: string[] = [];
       install.output.pipeTo(
         new WritableStream({
           write(data: string) {
+            installLogs.push(data);
             setLogs((prev) => [...prev, data]);
           },
         })
       );
 
-      const installExit = await install.exit;
+      // Race npm install against a 3-minute timeout
+      const installExit = await Promise.race([
+        install.exit,
+        new Promise<number>((_, reject) =>
+          setTimeout(
+            () => reject(new Error('npm install timed out after 3 minutes')),
+            180_000
+          )
+        ),
+      ]);
       if (abortRef.current) return;
 
       if (installExit !== 0) {
         setStatus('error');
-        setStatusMessage('npm install failed');
+        setStatusMessage(
+          `npm install failed (exit ${installExit}).\n` +
+            installLogs.slice(-10).join('')
+        );
         return;
       }
 
@@ -134,9 +158,11 @@ function WebContainerSandbox({ code, dependencies, height }: Props) {
 
       // Start the app
       const start = await wc.spawn('npm', ['start']);
+      const startLogs: string[] = [];
       start.output.pipeTo(
         new WritableStream({
           write(data: string) {
+            startLogs.push(data);
             setLogs((prev) => [...prev, data]);
           },
         })
