@@ -10,7 +10,7 @@ import BrowserOnly from '@docusaurus/BrowserOnly';
  * Caveats inherited from the WebContainer runtime:
  *  - No native deps: better-sqlite3 etc. won't work. Use better-auth's
  *    memory adapter if you want to demo auth.
- *  - First boot is ~5–10s (downloads + installs the dep tree).
+ *  - First boot is ~30–60s (downloads + installs the dep tree).
  *  - Requires COOP/COEP headers on the hosting page.
  */
 type Props = {
@@ -92,8 +92,8 @@ function WebContainerSandbox({ code, dependencies, height }: Props) {
         type: 'module',
         scripts: { start: 'tsx app.ts' },
         dependencies: {
-          '@backroad/backroad': 'latest',
-          tsx: 'latest',
+          '@backroad/backroad': '1.7.6',
+          tsx: '4.22.4',
           ...dependencies,
         },
       };
