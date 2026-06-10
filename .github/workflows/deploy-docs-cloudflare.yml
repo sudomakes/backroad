@@ -52,6 +52,8 @@ jobs:
           cp -R dist/apps/landing/. dist/site/
           mkdir -p dist/site/docs
           cp -R apps/docs/build/. dist/site/docs/
+          # Copy _headers to root so Cloudflare Pages reads COOP/COEP headers
+          cp apps/docs/public/_headers dist/site/_headers
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@1
