@@ -1,0 +1,19 @@
+apps/docs/docusaurus.config.ts
+  s_6eb1c1e1c76ffc::t_869244b17d379e 11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "c3e527d22f50a371963440ac33903f2ea126a94c",
+  "prompts": {},
+  "sessions": {
+    "s_6eb1c1e1c76ffc": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1521971a1ffeWaGQ64KrNeUnZN",
+        "model": "nemotron-3-ultra-free"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
