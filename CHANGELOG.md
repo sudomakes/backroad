@@ -1,3 +1,9 @@
+## [1.7.8](https://github.com/sudomakes/backroad/compare/v1.7.7...v1.7.8) (2026-06-10)
+
+### Bug Fixes
+
+- **sandbox:** remove crossOriginIsolated check to test if headers are needed ([163cfc7](https://github.com/sudomakes/backroad/commit/163cfc77539ab81908fb7b92b91b49a9c82b10ff))
+
 ## [1.7.7](https://github.com/sudomakes/backroad/compare/v1.7.6...v1.7.7) (2026-06-10)
 
 ### Bug Fixes
