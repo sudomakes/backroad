@@ -36,6 +36,7 @@ const config: Config = {
           'an Express + Socket.IO runtime with a pre-built React frontend.',
       },
     ],
+    './plugins/webcontainer-webpack-plugin.ts',
   ],
 
   presets: [
