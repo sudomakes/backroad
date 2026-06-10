@@ -1,3 +1,13 @@
+## [1.7.5](https://github.com/sudomakes/backroad/compare/v1.7.4...v1.7.5) (2026-06-10)
+
+### Bug Fixes
+
+- **docs:** replace Sandpack with WebContainer API ([58704fa](https://github.com/sudomakes/backroad/commit/58704fa112bb2d6264f875c7dac607dcd34a4b9b)), closes [codesandbox/sandpack#1108](https://github.com/codesandbox/sandpack/issues/1108)
+
+### Chores
+
+- **deps:** update pnpm-lock.yaml for WebContainer API ([b607543](https://github.com/sudomakes/backroad/commit/b6075435777659c93eece968862869f176e5ab7a))
+
 ## [1.7.4](https://github.com/sudomakes/backroad/compare/v1.7.3...v1.7.4) (2026-06-10)
 
 ### Bug Fixes
