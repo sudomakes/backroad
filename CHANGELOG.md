@@ -1,3 +1,9 @@
+## [1.7.9](https://github.com/sudomakes/backroad/compare/v1.7.8...v1.7.9) (2026-06-10)
+
+### Bug Fixes
+
+- move docs to /docs/, landing at root, remove GitHub Pages workflow ([bfd0fe8](https://github.com/sudomakes/backroad/commit/bfd0fe8734a56bb426db804700f2d34fd7fd6207))
+
 ## [1.7.8](https://github.com/sudomakes/backroad/compare/v1.7.7...v1.7.8) (2026-06-10)
 
 ### Bug Fixes
