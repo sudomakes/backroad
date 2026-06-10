@@ -1,0 +1,25 @@
+apps/docs/package.json
+  s_6eb1c1e1c76ffc::t_da08e53cb9944e 25
+apps/docs/docusaurus.config.ts
+  s_6eb1c1e1c76ffc::t_7f23ebced9ac0a 39
+apps/docs/plugins/webcontainer-webpack-plugin.ts
+  s_6eb1c1e1c76ffc::t_58e97ed0751f61 1-15
+apps/docs/src/components/BackroadSandbox.tsx
+  s_6eb1c1e1c76ffc::t_5c455b5b3477fc 1,6-8,10,14,36-40,48-174,198,208-216,219-271,273-379
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "58704fa112bb2d6264f875c7dac607dcd34a4b9b",
+  "prompts": {},
+  "sessions": {
+    "s_6eb1c1e1c76ffc": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1521971a1ffeWaGQ64KrNeUnZN",
+        "model": "nemotron-3-ultra-free"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
