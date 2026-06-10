@@ -1,3 +1,9 @@
+## [1.7.7](https://github.com/sudomakes/backroad/compare/v1.7.6...v1.7.7) (2026-06-10)
+
+### Bug Fixes
+
+- **sandbox:** pin @backroad/backroad and tsx versions ([7c5ca42](https://github.com/sudomakes/backroad/commit/7c5ca421d64bde2a7a0e8100824d4d9a9a1b9465))
+
 ## [1.7.6](https://github.com/sudomakes/backroad/compare/v1.7.5...v1.7.6) (2026-06-10)
 
 ### Bug Fixes
