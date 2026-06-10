@@ -1,3 +1,9 @@
+## [1.7.4](https://github.com/sudomakes/backroad/compare/v1.7.3...v1.7.4) (2026-06-10)
+
+### Bug Fixes
+
+- copy \_headers to build output for COOP/COEP ([de20cb7](https://github.com/sudomakes/backroad/commit/de20cb766cf11668dca71ab2f714ce3b7ef606b7))
+
 ## [1.7.3](https://github.com/sudomakes/backroad/compare/v1.7.2...v1.7.3) (2026-06-10)
 
 ### Bug Fixes
