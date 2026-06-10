@@ -63,16 +63,6 @@ function WebContainerSandbox({ code, dependencies, height }: Props) {
     abortRef.current = false;
 
     try {
-      // Sanity check: WebContainer needs crossOriginIsolated
-      if (!window.crossOriginIsolated) {
-        setStatus('error');
-        setStatusMessage(
-          'This page is not cross-origin isolated.\n' +
-            'WebContainer requires COOP/COEP headers.'
-        );
-        return;
-      }
-
       // Dynamic import so WebContainer code only ships on pages with a sandbox
       const { WebContainer } = await import('@webcontainer/api');
 
