@@ -8,7 +8,7 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   url: 'https://backroad.sudomakes.art',
-  baseUrl: '/docs/',
+  baseUrl: '/',
 
   organizationName: 'sudomakes',
   projectName: 'backroad',
