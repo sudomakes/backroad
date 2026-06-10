@@ -1,4 +1,4 @@
-name: Deploy Docs to Cloudflare Pages
+name: Deploy to Cloudflare Pages
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'apps/docs/**'
+      - 'apps/landing/**'
       - 'pnpm-lock.yaml'
       - '.github/workflows/deploy-docs-cloudflare.yml'
   workflow_dispatch:
@@ -37,8 +38,20 @@ jobs:
       - name: Install deps
         run: pnpm install --frozen-lockfile
 
+      - name: Build landing
+        run: pnpm --filter @backroad-examples/landing run build
+
       - name: Build docs
         run: pnpm --filter @backroad-examples/docs run build
+
+      - name: Assemble site
+        run: |
+          set -euo pipefail
+          rm -rf dist/site
+          mkdir -p dist/site
+          cp -R dist/apps/landing/. dist/site/
+          mkdir -p dist/site/docs
+          cp -R apps/docs/build/. dist/site/docs/
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@1
@@ -46,5 +59,5 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: backroad-docs
-          directory: apps/docs/build
+          directory: dist/site
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
