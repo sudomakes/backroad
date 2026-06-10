@@ -1,3 +1,9 @@
+## [1.7.6](https://github.com/sudomakes/backroad/compare/v1.7.5...v1.7.6) (2026-06-10)
+
+### Bug Fixes
+
+- **sandbox:** add timeout and crossOriginIsolated check ([fac7f0e](https://github.com/sudomakes/backroad/commit/fac7f0e8163d01efe34911317f8d53011e522d4c))
+
 ## [1.7.5](https://github.com/sudomakes/backroad/compare/v1.7.4...v1.7.5) (2026-06-10)
 
 ### Bug Fixes
