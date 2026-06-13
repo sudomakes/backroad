@@ -1,0 +1,20 @@
+e2e/docs/docs.spec.ts
+  s_6a5e0488967b01::t_18aae8c53d0894 92-93,107-110
+  s_6a5e0488967b01::t_fd1db963ff179f 70-91,94-106,111-119
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "4c859d0ed5fbe897dbbe670296e60d782b1b0aa5",
+  "prompts": {},
+  "sessions": {
+    "s_6a5e0488967b01": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019ec041-3bb2-71aa-ae5b-6295a1ae6679",
+        "model": "mimo-v2.5-free"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
