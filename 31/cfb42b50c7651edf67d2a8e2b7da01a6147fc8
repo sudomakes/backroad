@@ -1,0 +1,21 @@
+.lefthook/pre-commit/run.mjs
+  s_bcf18689802c0e::t_258b7c1abf9be7 16,205-261
+.lefthook/lib/gitleaks-runner.mjs
+  s_bcf18689802c0e::t_258b7c1abf9be7 1-209
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "31cfb42b50c7651edf67d2a8e2b7da01a6147fc8",
+  "prompts": {},
+  "sessions": {
+    "s_bcf18689802c0e": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019ec00e-5eaf-7820-a782-fd2775ff4caf",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
