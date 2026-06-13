@@ -1,0 +1,22 @@
+libs/backroad-components/src/lib/containers/sidebar.tsx
+  s_6a5e0488967b01::t_51704e24d08522 1,8,29-34,36-44,46-56,59,63,65,67-100
+  s_6a5e0488967b01::t_a0b9950b171b6c 57
+pnpm-lock.yaml
+  s_6a5e0488967b01::t_a0b9950b171b6c 450,453,459,23136-23151,25968-25971,32641-32652,32679-32696,32802-32818,32848-32856,34562-34567,34574-34579,34587-34592
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "c59fc19debea3ea20f5b226fa0b075bb9b554052",
+  "prompts": {},
+  "sessions": {
+    "s_6a5e0488967b01": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019ec041-3bb2-71aa-ae5b-6295a1ae6679",
+        "model": "mimo-v2.5-free"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
