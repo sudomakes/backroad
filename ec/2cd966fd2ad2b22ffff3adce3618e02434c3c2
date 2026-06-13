@@ -1,0 +1,27 @@
+apps/docs/docs/components/sidebar.mdx
+  s_6a5e0488967b01::t_4586e24f2bdfdc 1-102
+apps/docs/docusaurus.config.ts
+  s_6a5e0488967b01::t_fcd249e56f4035 42
+  s_6a5e0488967b01::t_7eb0f8274e1c8d 40-41
+apps/docs/sidebars.ts
+  s_6a5e0488967b01::t_032d237368d126 24
+apps/docs/package.json
+  s_6a5e0488967b01::t_5ef96a93383cf7 27
+  s_6a5e0488967b01::t_b7ab3d7d7b8545 28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "ec2cd966fd2ad2b22ffff3adce3618e02434c3c2",
+  "prompts": {},
+  "sessions": {
+    "s_6a5e0488967b01": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019ec041-3bb2-71aa-ae5b-6295a1ae6679",
+        "model": "mimo-v2.5-free"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
