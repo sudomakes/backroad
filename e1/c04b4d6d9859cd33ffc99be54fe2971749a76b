@@ -1,0 +1,29 @@
+libs/backroad/src/lib/backroad/backroad.ts
+  s_6a5e0488967b01::t_227a0198839c11 166,169-186
+libs/backroad-core/src/lib/core.ts
+  s_6a5e0488967b01::t_30f1b073e41892 221-224
+libs/backroad/src/lib/backroad/sidebar.test.ts
+  s_6a5e0488967b01::t_2cf4fb8bb6eb01 1-129
+apps/docs/docs/components/sidebar.mdx
+  s_6a5e0488967b01::t_38feac2f3e263e 18-21,36-51,56-57,59-67,113-119
+  s_6a5e0488967b01::t_3a057fb68737c4 52-55,58
+libs/backroad-components/src/lib/containers/sidebar.tsx
+  s_6a5e0488967b01::t_a08e33b4e7ff35 1,6,9-15,20-28
+  s_6a5e0488967b01::t_d9b20ab19de516 16-19,32-44,48,57,80
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "e1c04b4d6d9859cd33ffc99be54fe2971749a76b",
+  "prompts": {},
+  "sessions": {
+    "s_6a5e0488967b01": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019ec041-3bb2-71aa-ae5b-6295a1ae6679",
+        "model": "mimo-v2.5-free"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
