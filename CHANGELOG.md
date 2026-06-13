@@ -1,3 +1,14 @@
+## [1.9.0](https://github.com/sudomakes/backroad/compare/v1.8.0...v1.9.0) (2026-06-13)
+
+### Features
+
+- add a11y testing to storybook and wire into PR checks ([33d7b4b](https://github.com/sudomakes/backroad/commit/33d7b4b032d1ada311aec5d712778d5315b6ceb2))
+
+### Bug Fixes
+
+- **e2e:** run against production build instead of dev servers ([2e6b13c](https://github.com/sudomakes/backroad/commit/2e6b13cef19d97f18ed621af85c0bf4c06b94b10))
+- fix a11y violations and knip baseline ([1f46ee0](https://github.com/sudomakes/backroad/commit/1f46ee02ec1f7e0f4b8c629788eaad6cf2c3ef75))
+
 ## [1.8.0](https://github.com/sudomakes/backroad/compare/v1.7.10...v1.8.0) (2026-06-13)
 
 ### Features
