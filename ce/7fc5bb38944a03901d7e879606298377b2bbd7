@@ -1,0 +1,19 @@
+.size-limit.json
+  s_6a5e0488967b01::t_6928eb5179a692 5,11,17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "ce7fc5bb38944a03901d7e879606298377b2bbd7",
+  "prompts": {},
+  "sessions": {
+    "s_6a5e0488967b01": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019ec041-3bb2-71aa-ae5b-6295a1ae6679",
+        "model": "mimo-v2.5-free"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
