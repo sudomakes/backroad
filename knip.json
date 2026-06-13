@@ -39,5 +39,11 @@
       "project": ["src/**/*.{ts,tsx}"]
     }
   },
-  "ignoreBinaries": ["lefthook"]
+  "ignoreBinaries": ["lefthook"],
+  "ignoreDependencies": [
+    // Docusaurus plugins are loaded by name from the config, not imported.
+    "docusaurus-lunr-search",
+    "lunr",
+    "@docusaurus/plugin-content-docs"
+  ]
 }
