@@ -1,11 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { TreeRender } from '../tree';
 import { BackroadContainerRenderer } from '../types/containers';
+import { createPortal } from 'react-dom';
 import { socket } from '../socket';
 
 export const Sidebar: BackroadContainerRenderer<'sidebar'> = (props) => {
   const [open, setOpen] = useState(props.args.defaultOpen ?? true);
   const sheetRef = useRef<HTMLElement>(null);
+  const portalTarget =
+    typeof document !== 'undefined'
+      ? document.getElementById('sidebar-portal')
+      : null;
 
   useEffect(() => {
     const handlePropsChange = (
@@ -31,7 +36,7 @@ export const Sidebar: BackroadContainerRenderer<'sidebar'> = (props) => {
     if (open) sheetRef.current?.focus();
   }, [open]);
 
-  return (
+  const content = (
     <>
       {/* Backdrop */}
       <div
@@ -99,4 +104,7 @@ export const Sidebar: BackroadContainerRenderer<'sidebar'> = (props) => {
       )}
     </>
   );
+
+  // Portal to #sidebar-portal if available (app shell), otherwise render inline.
+  return portalTarget ? createPortal(content, portalTarget) : content;
 };
