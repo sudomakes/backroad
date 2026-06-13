@@ -545,6 +545,9 @@ importers:
       '@storybook/addon-a11y':
         specifier: 10.4.2
         version: 10.4.2(storybook@10.4.2(@testing-library/dom@9.3.4)(@types/react@18.2.14)(prettier@2.8.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+      '@storybook/addon-themes':
+        specifier: ^10.4.4
+        version: 10.4.4(storybook@10.4.2(@testing-library/dom@9.3.4)(@types/react@18.2.14)(prettier@2.8.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@storybook/react-vite':
         specifier: ^10.4.2
         version: 10.4.2(@types/react-dom@18.2.6)(@types/react@18.2.14)(esbuild@0.25.12)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(rollup@4.61.1)(storybook@10.4.2(@testing-library/dom@9.3.4)(@types/react@18.2.14)(prettier@2.8.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(typescript@6.0.3)(vite@6.4.3(@types/node@20.5.1)(jiti@2.7.0)(lightningcss@1.32.0)(sass@1.100.0)(terser@5.48.0)(yaml@2.9.0))(webpack@5.107.2(@swc/core@1.15.40(@swc/helpers@0.5.2))(esbuild@0.25.12)(lightningcss@1.32.0)(postcss@8.5.15))
@@ -6232,6 +6235,14 @@ packages:
       }
     peerDependencies:
       storybook: ^10.4.2
+
+  '@storybook/addon-themes@10.4.4':
+    resolution:
+      {
+        integrity: sha512-VH443z7o/JO5K9QFVuB9IzwaMu0jEiq4ybpzTlAmt0ZUEqNBuM+ESBvkVMkZ5QeNghKrs/J9yvum2g2t94YR4Q==,
+      }
+    peerDependencies:
+      storybook: ^10.4.4
 
   '@storybook/builder-vite@10.4.2':
     resolution:
@@ -24791,6 +24802,11 @@ snapshots:
       '@storybook/global': 5.0.0
       axe-core: 4.12.0
       storybook: 10.4.2(@testing-library/dom@9.3.4)(@types/react@18.2.14)(prettier@2.8.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+
+  '@storybook/addon-themes@10.4.4(storybook@10.4.2(@testing-library/dom@9.3.4)(@types/react@18.2.14)(prettier@2.8.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
+    dependencies:
+      storybook: 10.4.2(@testing-library/dom@9.3.4)(@types/react@18.2.14)(prettier@2.8.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      ts-dedent: 2.2.0
 
   '@storybook/builder-vite@10.4.2(esbuild@0.25.12)(rollup@4.61.1)(storybook@10.4.2(@testing-library/dom@9.3.4)(@types/react@18.2.14)(prettier@2.8.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(vite@6.4.3(@types/node@20.5.1)(jiti@2.7.0)(lightningcss@1.32.0)(sass@1.100.0)(terser@5.48.0)(yaml@2.9.0))(webpack@5.107.2(@swc/core@1.15.40(@swc/helpers@0.5.2))(esbuild@0.25.12)(lightningcss@1.32.0)(postcss@8.5.15))':
     dependencies:
