@@ -1,12 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { TreeRender } from '../tree';
 import { BackroadContainerRenderer } from '../types/containers';
-import { createPortal } from 'react-dom';
-import { AnimatePresence, motion } from 'framer-motion';
 import { socket } from '../socket';
 
 export const Sidebar: BackroadContainerRenderer<'sidebar'> = (props) => {
   const [open, setOpen] = useState(props.args.defaultOpen ?? true);
+  const sheetRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const handlePropsChange = (
@@ -27,84 +26,77 @@ export const Sidebar: BackroadContainerRenderer<'sidebar'> = (props) => {
     };
   }, [props.path]);
 
-  return createPortal(
-    <>
-      {/* Backdrop — only visible when sidebar is open */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            key="sidebar-backdrop"
-            className="fixed inset-0 z-[9] bg-black/30"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setOpen(false)}
-          />
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {open && (
-          <motion.nav
-            key={`sidebar-${props.path}`}
-            initial={{ opacity: 0, x: '-100%' }}
-            animate={{ opacity: 1, x: '0' }}
-            exit={{ opacity: 0, x: '-100%' }}
-            className="w-screen max-w-[300px] h-full border-r overflow-auto bg-base-200 p-5 flex flex-col gap-3 fixed top-0 left-0 z-10"
-          >
-            <div className="flex justify-end">
-              <div
-                className="cursor-pointer mb-4"
-                onClick={() => setOpen(false)}
-              >
-                <svg
-                  className="fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 512 512"
-                >
-                  <polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" />
-                </svg>
-              </div>
-            </div>
+  // When opening, move focus into the sheet for keyboard users.
+  useEffect(() => {
+    if (open) sheetRef.current?.focus();
+  }, [open]);
 
-            {props.children.map((child) => {
-              return <TreeRender tree={child} key={child.path} />;
-            })}
-          </motion.nav>
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {!open && (
-          <motion.div
-            key="sidebar-tab"
-            className="btn-primary fixed px-5 mt-2 z-10 py-3 rounded-r-xl cursor-pointer"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setOpen(true)}
-          >
+  return (
+    <>
+      {/* Backdrop */}
+      <div
+        className="fixed inset-0 z-[9] bg-black/30 transition-opacity duration-300"
+        style={{
+          opacity: open ? 1 : 0,
+          pointerEvents: open ? 'auto' : 'none',
+        }}
+        onClick={() => setOpen(false)}
+      />
+
+      {/* Sheet */}
+      <nav
+        ref={sheetRef}
+        tabIndex={-1}
+        aria-label="Sidebar"
+        className="fixed top-0 left-0 z-10 h-full w-screen max-w-[300px] border-r overflow-auto bg-base-200 p-5 flex flex-col gap-3 transition-transform duration-300 ease-in-out outline-none"
+        style={{
+          transform: open ? 'translateX(0)' : 'translateX(-100%)',
+        }}
+      >
+        <div className="flex justify-end">
+          <div className="cursor-pointer mb-4" onClick={() => setOpen(false)}>
             <svg
+              className="fill-current"
               xmlns="http://www.w3.org/2000/svg"
               width="20"
               height="20"
-              fill="currentColor"
-              className="fill-current"
-              viewBox="0 0 16 16"
+              viewBox="0 0 512 512"
             >
-              <path
-                fillRule="evenodd"
-                d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"
-              />
-              <path
-                fillRule="evenodd"
-                d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"
-              />
+              <polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" />
             </svg>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>,
-    document.getElementById('sidebar-portal') as HTMLElement
+          </div>
+        </div>
+
+        {props.children.map((child) => (
+          <TreeRender tree={child} key={child.path} />
+        ))}
+      </nav>
+
+      {/* Closed-state tab */}
+      {!open && (
+        <div
+          className="btn-primary fixed px-5 mt-2 z-10 py-3 rounded-r-xl cursor-pointer"
+          onClick={() => setOpen(true)}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="currentColor"
+            className="fill-current"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fillRule="evenodd"
+              d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"
+            />
+            <path
+              fillRule="evenodd"
+              d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"
+            />
+          </svg>
+        </div>
+      )}
+    </>
   );
 };
