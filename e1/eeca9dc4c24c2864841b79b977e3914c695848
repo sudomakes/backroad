@@ -1,0 +1,19 @@
+.github/workflows/pr-checks.yml
+  s_bcf18689802c0e::t_9592d66ffeb3db 64
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "e1eeca9dc4c24c2864841b79b977e3914c695848",
+  "prompts": {},
+  "sessions": {
+    "s_bcf18689802c0e": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019ec00e-5eaf-7820-a782-fd2775ff4caf",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
