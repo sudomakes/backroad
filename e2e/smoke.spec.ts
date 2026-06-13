@@ -69,7 +69,7 @@ test.describe('auth flow', () => {
     // autoSignIn=true in examples/demo/src/auth.ts; navigate() in
     // AuthRoute hard-reloads to / so the new socket connection picks
     // up the just-set cookie.
-    await expect(page).toHaveURL(/^http:\/\/localhost:4200\/?$/, {
+    await expect(page).toHaveURL(/^http:\/\/localhost:3333\/?$/, {
       timeout: 15_000,
     });
     await expect(
@@ -101,7 +101,7 @@ test.describe('auth flow', () => {
       .fill(user.password);
     await page.getByRole('button', { name: /^login$/i }).click();
 
-    await expect(page).toHaveURL(/^http:\/\/localhost:4200\/?$/, {
+    await expect(page).toHaveURL(/^http:\/\/localhost:3333\/?$/, {
       timeout: 15_000,
     });
     await expect(

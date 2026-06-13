@@ -1,8 +1,7 @@
 import { randomBytes } from 'node:crypto';
 import { defineConfig, devices } from '@playwright/test';
 
-const FRONTEND_URL = 'http://localhost:4200/';
-const BACKEND_URL = 'http://localhost:3333/';
+const APP_URL = 'http://localhost:3333/';
 
 // One ephemeral secret per `pnpm e2e` run — keeps the in-memory
 // better-auth instance happy and ensures the auth gate is active so
@@ -24,33 +23,26 @@ export default defineConfig({
   workers: 1,
   reporter: process.env.CI ? [['list'], ['html', { open: 'never' }]] : 'list',
   use: {
-    baseURL: FRONTEND_URL,
+    baseURL: APP_URL,
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'off',
   },
-  // Backend (express + socket.io) on 3333; Vite frontend on 4200 with
-  // /api proxied to 3333. Tests hit the frontend.
+  // Production-like build: frontend is built and served by the same
+  // express server on :3333 (no Vite dev server / proxy split).
+  // pnpm build-demo handles the full build pipeline.
   webServer: [
     {
-      command: 'pnpm --filter @backroad-examples/demo run dev',
-      url: `${BACKEND_URL}api/health`,
+      command: 'pnpm build-demo && node dist/examples/demo/main.js',
+      url: `${APP_URL}api/health`,
       reuseExistingServer: !process.env.CI,
-      timeout: 120_000,
+      timeout: 180_000,
       stdout: 'pipe',
       stderr: 'pipe',
       env: {
         BETTER_AUTH_SECRET,
-        BETTER_AUTH_URL: FRONTEND_URL.replace(/\/$/, ''),
+        NODE_PATH: 'examples/demo/node_modules',
       },
-    },
-    {
-      command: 'pnpm --filter backroad-frontend run dev',
-      url: FRONTEND_URL,
-      reuseExistingServer: !process.env.CI,
-      timeout: 120_000,
-      stdout: 'pipe',
-      stderr: 'pipe',
     },
   ],
   projects: [
