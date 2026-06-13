@@ -6,10 +6,10 @@ import { expect, test, type Page } from '@playwright/test';
 // full journey:
 //
 //   1. Visit /        → gate shows "Log in"
-//   2. Click Log in   → redirects to /auth/signin
+//   2. Click Log in   → redirects to /api/signin
 //   3. /auth/signup   → create a fresh account (autoSignIn lands at /)
 //   4. /              → gated content renders, "Hello, <name>" visible
-//   5. Log out        → cookie cleared, browser at /auth/signin
+//   5. Log out        → cookie cleared, browser at /api/signin
 //   6. Sign in again  → same credentials get back into the app
 //
 // All steps share ONE `page` so cookies survive between assertions.
@@ -50,7 +50,7 @@ test.describe('auth flow', () => {
     ).toHaveCount(0);
   });
 
-  test('clicking Log in redirects to /auth/signin', async () => {
+  test('clicking Log in redirects to /api/signin', async () => {
     await page.goto('/');
     await page.getByRole('button', { name: /^log in$/i }).click();
     await expect(page).toHaveURL(/\/auth\/signin\b/);
@@ -81,10 +81,10 @@ test.describe('auth flow', () => {
     ).toBeVisible();
   });
 
-  test('log out clears the session and returns to /auth/signin', async () => {
+  test('log out clears the session and returns to /api/signin', async () => {
     await page.goto('/');
     await page.getByRole('button', { name: /^log out$/i }).click();
-    await expect(page).toHaveURL(/\/auth\/signin\b/, { timeout: 10_000 });
+    await expect(page).toHaveURL(/\/api\/signin\b/, { timeout: 10_000 });
     // Visiting / again must show the gate, not the app.
     await page.goto('/');
     await expect(page.getByRole('button', { name: /^log in$/i })).toBeVisible();
@@ -94,7 +94,7 @@ test.describe('auth flow', () => {
   });
 
   test('sign in with the just-created credentials gets back into the app', async () => {
-    await page.goto('/auth/signin');
+    await page.goto('/api/signin');
     await page.getByRole('textbox', { name: /^email$/i }).fill(user.email);
     await page
       .getByRole('textbox', { name: /^password$/i })
