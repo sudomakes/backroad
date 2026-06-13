@@ -57,15 +57,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
-        with:
-          fetch-depth: 0
       - name: Scan for secrets (gitleaks)
-        # Pin to a specific SHA once you've verified the published v2 tag.
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITLEAKS_CONFIG: .gitleaks.toml
-          GITLEAKS_NOTIFY_USER_LIST: ''
+        run: |
+          curl -sSfL https://github.com/gitleaks/gitleaks/releases/download/v8.24.3/gitleaks_8.24.3_linux_x64.tar.gz |
+            tar xz -C /usr/local/bin gitleaks
+          gitleaks detect --config .gitleaks.toml --source . --verbose --no-git
 
   lint:
     runs-on: ubuntu-latest
