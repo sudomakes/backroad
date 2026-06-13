@@ -1,0 +1,20 @@
+libs/backroad-core/src/lib/core.ts
+  s_6a5e0488967b01::t_c9ba0eaa6e0e3a 75-81
+  s_6a5e0488967b01::t_fcb26fac4c69aa 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "8c80c19d77963d60b6a5fa1766541a0c0573b411",
+  "prompts": {},
+  "sessions": {
+    "s_6a5e0488967b01": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019ec041-3bb2-71aa-ae5b-6295a1ae6679",
+        "model": "mimo-v2.5-free"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
