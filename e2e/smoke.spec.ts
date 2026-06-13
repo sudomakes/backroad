@@ -13,8 +13,11 @@ import { expect, test, type Page } from '@playwright/test';
 //   6. Sign in again  → same credentials get back into the app
 //
 // All steps share ONE `page` so cookies survive between assertions.
-// Default playwright behaviour gives each test a fresh context (no
-// cookies), which would break a multi-step flow like this.
+//
+// This spec runs under the `chromium` project which loads the shared
+// auth state from the setup project. We create a *fresh* context here
+// (without storageState) so the auth gate tests start cleanly logged
+// out, while the signup/re-login steps manage cookies themselves.
 
 test.describe.configure({ mode: 'serial' });
 
@@ -32,10 +35,11 @@ test.describe('auth flow', () => {
   let page: Page;
 
   test.beforeAll(async ({ browser }) => {
-    page = await browser.newPage();
+    const context = await browser.newContext({ storageState: undefined });
+    page = await context.newPage();
   });
   test.afterAll(async () => {
-    await page.close();
+    await page.context()?.close();
   });
 
   test('home shows the login gate when logged out', async () => {

@@ -13,6 +13,7 @@ import {
   toPosixPath,
 } from '../lib/output.mjs';
 import { createRuleResult, runCommandStep } from '../lib/runner.mjs';
+import { ensureGitleaks, runGitleaks } from '../lib/gitleaks-runner.mjs';
 
 const ESLINT_FILE_PATTERN = /\.(cjs|cts|js|jsx|mjs|mts|ts|tsx)$/i;
 const TS_FILE_PATTERN = /\.(ts|tsx)$/i;
@@ -199,6 +200,65 @@ async function main() {
 
   if (!prettierWrite.success) {
     failures.push(prettierWrite);
+  }
+
+  // gitleaks secret scan against staged changes (following the same
+  // pattern as ~/code/vantage's .lefthook/pre-commit/gitleaks.mjs).
+  try {
+    const gitleaksBinary = await ensureGitleaks(cwd);
+    const configPath = path.join(cwd, '.gitleaks.toml');
+    const gitleaksResult = await runGitleaks(
+      gitleaksBinary,
+      [
+        'git',
+        '--staged',
+        '--config',
+        configPath,
+        '--redact',
+        '--no-banner',
+        '--verbose',
+      ],
+      cwd
+    );
+
+    if (gitleaksResult.stdout) {
+      process.stdout.write(gitleaksResult.stdout);
+    }
+    if (gitleaksResult.stderr) {
+      process.stderr.write(gitleaksResult.stderr);
+    }
+
+    if (!gitleaksResult.success) {
+      const gitleaksRule = createRuleResult({
+        name: 'gitleaks secret scan',
+        purpose: 'Detect secrets in staged changes before they reach the repo.',
+        command: 'gitleaks git --staged',
+        affectedFiles: stagedFiles,
+        stdout: gitleaksResult.stdout,
+        stderr:
+          gitleaksResult.stderr +
+          '\nSecret(s) detected in staged changes. ' +
+          'Rotate the credential, remove it from the diff, and re-stage.\n' +
+          'If this is a confirmed false positive, add a surgical ' +
+          'allowlist entry (path + ruleId) in .gitleaks.toml.\n',
+        exitCode: gitleaksResult.exitCode,
+      });
+      failures.push(gitleaksRule);
+    }
+  } catch (gitleaksError) {
+    process.stderr.write(
+      `[gitleaks] unexpected error: ${gitleaksError.message}\n`
+    );
+    const gitleaksRule = createRuleResult({
+      name: 'gitleaks secret scan',
+      purpose: 'Detect secrets in staged changes before they reach the repo.',
+      command: 'gitleaks git --staged',
+      affectedFiles: stagedFiles,
+      stdout: '',
+      stderr: `[gitleaks] failed: ${gitleaksError.message}\n`,
+      exitCode: 1,
+    });
+    failures.push(gitleaksRule);
   }
 
   if (failures.length > 0) {

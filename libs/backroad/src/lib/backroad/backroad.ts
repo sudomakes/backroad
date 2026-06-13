@@ -255,6 +255,9 @@ export class BackroadNodeManager<
   image(props: BackroadComponentFormat<'image'>) {
     return this.#initialiseAndAddComponentDescendant(props, 'image');
   }
+  iframe(props: BackroadComponentFormat<'iframe'>) {
+    return this.#initialiseAndAddComponentDescendant(props, 'iframe');
+  }
   table(props: BackroadComponentFormat<'table'>) {
     return this.#initialiseAndAddComponentDescendant(props, 'table');
   }

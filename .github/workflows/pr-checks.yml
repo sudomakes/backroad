@@ -57,15 +57,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
-        with:
-          fetch-depth: 0
       - name: Scan for secrets (gitleaks)
-        # Pin to a specific SHA once you've verified the published v2 tag.
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITLEAKS_CONFIG: .gitleaks.toml
-          GITLEAKS_NOTIFY_USER_LIST: ''
+        run: |
+          curl -sSfL https://github.com/gitleaks/gitleaks/releases/download/v8.24.3/gitleaks_8.24.3_linux_x64.tar.gz |
+            tar xz -C /usr/local/bin gitleaks
+          gitleaks detect --config .gitleaks.toml --source . --verbose --no-git
 
   lint:
     runs-on: ubuntu-latest
@@ -245,7 +241,7 @@ jobs:
           pnpm --filter backroad-frontend exec wait-on tcp:6006 --timeout 30000
           pnpm --filter backroad-frontend run storybook:test
 
-  # End-to-end smoke tests against the examples/demo app.
+  # End-to-end tests against the examples/demo app.
   # Boots backend (express on :3333) + vite frontend (on :4200) via
   # playwright.config.ts webServer array.
   e2e:
@@ -275,6 +271,38 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: playwright-report
+          path: playwright-report
+          retention-days: 7
+
+  # End-to-end tests against the Docusaurus docs site.
+  # Builds + serves the docs site on :3001 via its own playwright config.
+  e2e-docs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - name: Setup pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        with:
+          version: 11.5.2
+          run_install: false
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+          cache: pnpm
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+      - name: Install Playwright chromium
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Run E2E (docs)
+        run: pnpm run e2e:docs
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: playwright-report-docs
           path: playwright-report
           retention-days: 7
 
@@ -319,6 +347,7 @@ jobs:
       - knip
       - storybook-a11y
       - e2e
+      - e2e-docs
       - bundle-size
     if: always()
     steps:
@@ -335,6 +364,7 @@ jobs:
             echo '- Knip: ${{ needs.knip.result }}'
             echo '- Storybook a11y: ${{ needs.storybook-a11y.result }}'
             echo '- E2E: ${{ needs.e2e.result }}'
+            echo '- E2E (docs): ${{ needs.e2e-docs.result }}'
             echo '- Bundle size: ${{ needs.bundle-size.result }}'
           } >> "$GITHUB_STEP_SUMMARY"
           for r in \
@@ -346,6 +376,7 @@ jobs:
             '${{ needs.knip.result }}' \
             '${{ needs.storybook-a11y.result }}' \
             '${{ needs.e2e.result }}' \
+            '${{ needs.e2e-docs.result }}' \
             '${{ needs.bundle-size.result }}'; do
             if [ "$r" != "success" ]; then
               echo "One or more checks failed."
