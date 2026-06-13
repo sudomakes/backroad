@@ -6,9 +6,9 @@ import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
 
 # Multimedia
 
-Embed images and video. Both components are thin wrappers around the
-native HTML elements — every prop you'd pass to `<img>` or `<video>` is
-accepted.
+Embed images, video, and iframes. These components are thin wrappers around the
+native HTML elements — every prop you'd pass to `<img>`, `<video>`, or
+`<iframe>` is accepted.
 
 ## `br.image`
 
@@ -38,6 +38,27 @@ br.video({
   muted: true,
 });
 ```
+
+## `br.iframe`
+
+Use iframes for trusted embeds such as dashboards, maps, forms, or sandboxed
+previews. Backroad requires a `title` so assistive technologies can identify the
+embedded content.
+
+```ts
+br.iframe({
+  title: 'Backroad website',
+  src: 'https://backroad.sudomakes.art',
+  width: '100%',
+  height: 480,
+  loading: 'lazy',
+  referrerPolicy: 'strict-origin-when-cross-origin',
+  sandbox: 'allow-scripts allow-same-origin',
+});
+```
+
+Use the `allow` prop when delegating browser features to the embedded page, for
+example `allow: 'fullscreen'`.
 
 ## Combining with file upload
 

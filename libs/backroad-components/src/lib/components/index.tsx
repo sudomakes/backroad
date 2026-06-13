@@ -4,6 +4,7 @@ import { Button } from './button';
 import { ChatInput } from './chat_input';
 import { DoughnutChart } from './doughnut_chart';
 import { Image } from './image';
+import { Iframe } from './iframe';
 import { Json } from './json';
 import { LineChart } from './line_chart';
 import { Link } from './link';
@@ -64,6 +65,7 @@ export const backroadClientComponents: {
   button: Button,
 
   image: Image,
+  iframe: Iframe,
   video: Video,
   loading_spinner: LoadingSpinner,
 };

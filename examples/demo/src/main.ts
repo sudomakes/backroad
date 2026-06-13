@@ -30,6 +30,7 @@ run(
     }
 
     pages.fileUpload(br.page({ path: '/file-upload' }));
+    pages.iframe(br.page({ path: '/iframe' }));
     pages.form(br.page({ path: '/form' }));
     pages.markdown(br.page({ path: '/markdown' }));
     pages.select(br.page({ path: '/select' }));

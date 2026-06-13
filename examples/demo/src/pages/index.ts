@@ -2,6 +2,7 @@ import { backroadChartsExample } from './charts';
 import { backroadColumnsExample } from './columns';
 import { backroadFileUploadExample } from './fileUpload';
 import { backroadFormExample } from './form';
+import { backroadIframeExample } from './iframe';
 import { backroadLLMExample } from './llm';
 import { backroadMarkdownExample } from './markdown';
 import { backroadSelectExample } from './select';
@@ -16,4 +17,5 @@ export const pages = {
   llm: backroadLLMExample,
   form: backroadFormExample,
   fileUpload: backroadFileUploadExample,
+  iframe: backroadIframeExample,
 };
