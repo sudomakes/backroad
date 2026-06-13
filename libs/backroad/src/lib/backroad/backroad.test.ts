@@ -86,3 +86,29 @@ describe('br.logout', () => {
     );
   });
 });
+
+describe('components', () => {
+  it('adds iframe nodes as a first-class component', () => {
+    const { session } = makeSession('component-iframe');
+    const value = session.mainPageNodeManager.iframe({
+      id: 'docs-embed',
+      title: 'Docs embed',
+      src: 'https://example.com/docs',
+      loading: 'lazy',
+      referrerPolicy: 'strict-origin-when-cross-origin',
+    });
+
+    expect(value).toBeNull();
+    expect(session.mainPageNodeManager.container.children[0]).toMatchObject({
+      id: 'docs-embed',
+      type: 'iframe',
+      args: {
+        title: 'Docs embed',
+        src: 'https://example.com/docs',
+        loading: 'lazy',
+        referrerPolicy: 'strict-origin-when-cross-origin',
+      },
+    });
+    session.renderQueue.flush();
+  });
+});
