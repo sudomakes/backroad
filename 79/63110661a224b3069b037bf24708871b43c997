@@ -1,0 +1,19 @@
+libs/backroad-components/src/lib/containers/sidebar.tsx
+  s_6a5e0488967b01::t_77bebad5c08080 4,10-13,39,107-109
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "7963110661a224b3069b037bf24708871b43c997",
+  "prompts": {},
+  "sessions": {
+    "s_6a5e0488967b01": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019ec041-3bb2-71aa-ae5b-6295a1ae6679",
+        "model": "mimo-v2.5-free"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
