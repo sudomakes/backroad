@@ -1,0 +1,19 @@
+libs/backroad/src/lib/backroad/backroad.test.ts
+  s_6a5e0488967b01::t_9f10fb5e62ac21 52,79,83-84
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "20534d110d99c2db454ea0e4b50b58e5c1f4c488",
+  "prompts": {},
+  "sessions": {
+    "s_6a5e0488967b01": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019ec041-3bb2-71aa-ae5b-6295a1ae6679",
+        "model": "mimo-v2.5-free"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
