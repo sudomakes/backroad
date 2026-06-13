@@ -1,7 +1,18 @@
+import { withThemeByClassName } from '@storybook/addon-themes';
 import type { Preview } from '@storybook/react-vite';
 import '../src/styles.scss';
 
 const preview: Preview = {
+  decorators: [
+    withThemeByClassName({
+      themes: {
+        light: '',
+        dark: 'dark',
+      },
+      defaultTheme: 'dark',
+      parentSelector: 'html',
+    }),
+  ],
   parameters: {
     controls: { matchers: { color: /(background|color)$/i, date: /Date$/i } },
     backgrounds: {
@@ -10,6 +21,13 @@ const preview: Preview = {
         { name: 'light', value: '#ffffff' },
         { name: 'dark', value: '#1f2937' },
       ],
+    },
+    a11y: {
+      context: '#storybook-root',
+      test: 'error',
+      options: {
+        rules: { 'color-contrast': { enabled: true } },
+      },
     },
   },
 };

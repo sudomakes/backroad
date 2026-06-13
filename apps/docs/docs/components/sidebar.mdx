@@ -1,0 +1,102 @@
+---
+title: Sidebar
+---
+
+import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
+
+# Sidebar
+
+`br.sidebar` creates a **persistent left rail** that renders on every
+page. It's a container — anything you can do inside the root `br`
+(write, inputs, selects, charts) you can do inside the sidebar.
+
+Because the sidebar is shared across all pages, filter state set once
+stays visible as the user navigates. This makes it the natural home for
+global controls: search boxes, region pickers, date-range selectors, or
+any input that should survive page changes.
+
+## Basic usage
+
+```ts
+const sidebar = br.sidebar({});
+sidebar.write({ body: '## Filters' });
+const region = sidebar.select({
+  label: 'Region',
+  options: [
+    { value: 'eu', label: 'EU' },
+    { value: 'us', label: 'US' },
+  ],
+});
+```
+
+## Nesting inputs
+
+The sidebar is a full container — nest any components inside it:
+
+```ts
+const sidebar = br.sidebar({});
+
+sidebar.write({ body: '## Controls' });
+
+const search = sidebar.textInput({
+  label: 'Search',
+  placeholder: 'Type to filter…',
+});
+
+const dark = sidebar.toggle({ label: 'Dark mode' });
+
+const count = sidebar.numberInput({
+  label: 'Items per page',
+  defaultValue: 25,
+  min: 5,
+  max: 100,
+});
+```
+
+## Combining with pages
+
+The sidebar renders on **every** page. Use `br.page` for the main
+content and let the sidebar provide shared controls:
+
+```ts
+run((br) => {
+  const sidebar = br.sidebar({});
+  sidebar.write({ body: '## Navigation' });
+  sidebar.toggle({ label: 'Show details' });
+
+  const home = br.page({ path: '/' });
+  home.write({ body: '# Home' });
+
+  const settings = br.page({ path: '/settings' });
+  settings.write({ body: '# Settings' });
+});
+```
+
+The toggle state set on the sidebar page is visible from both routes.
+
+## Try it
+
+<BackroadSandbox
+  height={560}
+  code={`import { run } from '@backroad/backroad';
+
+run((br) => {
+const sidebar = br.sidebar({});
+sidebar.write({ body: '## Sidebar' });
+const region = sidebar.select({
+label: 'Region',
+options: [
+{ value: 'all', label: 'All regions' },
+{ value: 'eu', label: 'EU' },
+{ value: 'us', label: 'US' },
+{ value: 'apac', label: 'APAC' },
+],
+defaultValue: 'all',
+});
+sidebar.toggle({ label: 'Include archived' });
+
+br.write({ body: '# Dashboard' });
+br.write({ body: \`Selected region: **\${region}**\` });
+});
+`}
+/>

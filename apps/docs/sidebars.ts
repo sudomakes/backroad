@@ -21,6 +21,7 @@ const sidebars: SidebarsConfig = {
         'components/charts',
         'components/multimedia',
         'components/layout',
+        'components/sidebar',
         'components/llm',
       ],
     },

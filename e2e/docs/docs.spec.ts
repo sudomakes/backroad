@@ -67,11 +67,56 @@ test.describe('docs site', () => {
     expect(body).toMatch(/Backroad/);
   });
 
-  // The BackroadSandbox component uses a WebContainer. On click it
-  // boots the runtime, installs deps, and starts the app — a ~30-60s
-  // process that's too brittle for CI. We only assert the CTA is present
-  // and that clicking it transitions to the booting state (textarea
-  // appears immediately for editing).
+  test.describe('search', () => {
+    test('search input is present in the navbar', async ({ page }) => {
+      await page.goto('/docs/intro');
+      // docusaurus-lunr-search renders a search input in the navbar
+      await expect(
+        page
+          .locator(
+            'input[placeholder*="Search"], input[aria-label*="Search"], .search-input input'
+          )
+          .first()
+      ).toBeVisible();
+    });
+
+    test('typing in search shows matching results', async ({ page }) => {
+      await page.goto('/docs/intro');
+      const searchInput = page
+        .locator(
+          'input[placeholder*="Search"], input[aria-label*="Search"], .search-input input'
+        )
+        .first();
+      await searchInput.click();
+      await searchInput.fill('sidebar');
+      // Wait for results to appear — lunr search renders section headers
+      await expect(page.getByText('COMPONENTS').first()).toBeVisible({
+        timeout: 10_000,
+      });
+    });
+
+    test('search result links to the correct page', async ({ page }) => {
+      await page.goto('/docs/intro');
+      const searchInput = page
+        .locator(
+          'input[placeholder*="Search"], input[aria-label*="Search"], .search-input input'
+        )
+        .first();
+      await searchInput.click();
+      await searchInput.fill('authentication');
+      // The results dropdown shows section headers; click the "Authentication" link
+      const authResult = page
+        .getByRole('link', { name: 'Authentication' })
+        .first();
+      await expect(authResult).toBeVisible({ timeout: 10_000 });
+      await authResult.click();
+      await expect(page).toHaveURL(/auth/);
+      await expect(
+        page.getByRole('heading', { name: /Authentication/i })
+      ).toBeVisible();
+    });
+  });
+
   test.describe('live sandbox (WebContainer)', () => {
     test('try-it page shows the Run CTA', async ({ page }) => {
       await page.goto('/docs/try-it');

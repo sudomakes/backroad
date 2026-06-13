@@ -8,9 +8,11 @@ const Stats = ({
   <div className="stats shadow">
     {items.map((s) => (
       <div className="stat" key={s.title}>
-        <div className="stat-title">{s.title}</div>
+        <div className="stat-title text-base-content/80">{s.title}</div>
         <div className="stat-value">{s.value}</div>
-        {s.description && <div className="stat-desc">{s.description}</div>}
+        {s.description && (
+          <div className="stat-desc text-base-content/70">{s.description}</div>
+        )}
       </div>
     ))}
   </div>

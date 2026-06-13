@@ -24,7 +24,7 @@ setup('sign up and save storage state', async ({ page }) => {
   await page.getByRole('button', { name: /create an account/i }).click();
 
   // autoSignIn=true lands on /
-  await expect(page).toHaveURL(/^http:\/\/localhost:4200\/?$/, {
+  await expect(page).toHaveURL(/^http:\/\/localhost:3333\/?$/, {
     timeout: 15_000,
   });
   await expect(

@@ -6,6 +6,7 @@
     "build": "pnpm -r --if-present run build",
     "build-demo": "pnpm --filter backroad-frontend run build && pnpm --filter @backroad-examples/demo run build && shx rm -rf dist/examples/demo/public && shx cp -R dist/libs/backroad-frontend dist/examples/demo/public",
     "dev": "cross-env BACKROAD_ENV=dev pnpm --parallel --filter @backroad-examples/demo --filter backroad-frontend run dev",
+    "d": "$npm_execpath dev",
     "hook-help": "$npm_execpath exec node .lefthook/hook-help.mjs",
     "lint": "pnpm -r --if-present run lint",
     "pre-commit-check": "$npm_execpath exec node .lefthook/pre-commit/run.mjs --manual",
