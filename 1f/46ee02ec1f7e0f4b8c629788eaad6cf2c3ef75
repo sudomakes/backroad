@@ -1,0 +1,27 @@
+libs/backroad-frontend/src/stories/Stats.stories.tsx
+  s_6a5e0488967b01::t_6a395de02b383f 11
+  s_6a5e0488967b01::t_b97efb2d26d10d 13-15
+libs/backroad-frontend/src/stories/Tabs.stories.tsx
+  s_6a5e0488967b01::t_b97efb2d26d10d 21-23
+knip-baseline.json
+  s_6a5e0488967b01::t_1528bd338838bc 9,15
+  s_6a5e0488967b01::t_248bc0eb594638 12,14
+knip.json
+  s_6a5e0488967b01::t_1bd54ca9fecc62 42-48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "1f46ee02ec1f7e0f4b8c629788eaad6cf2c3ef75",
+  "prompts": {},
+  "sessions": {
+    "s_6a5e0488967b01": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019ec041-3bb2-71aa-ae5b-6295a1ae6679",
+        "model": "mimo-v2.5-free"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
