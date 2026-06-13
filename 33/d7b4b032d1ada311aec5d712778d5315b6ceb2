@@ -1,0 +1,30 @@
+pnpm-lock.yaml
+  s_6a5e0488967b01::t_50bdca2d391ec1 548-550,6239-6246,24806-24809
+libs/backroad-frontend/.storybook/main.ts
+  s_6a5e0488967b01::t_01d44c20c80339 5
+libs/backroad-frontend/.storybook/preview.ts
+  s_6a5e0488967b01::t_490a5d6dd3c9a7 25-28,30-31
+  s_6a5e0488967b01::t_9276f4ba799a25 1,6-15,29
+libs/backroad-frontend/package.json
+  s_6a5e0488967b01::t_e637f24e6418cf 38
+  s_6a5e0488967b01::t_e17701904e613d 37
+libs/backroad-frontend/.storybook/test-runner.ts
+  s_6a5e0488967b01::t_b9d795d98f2311 1,10-12,20,31-33
+  s_6a5e0488967b01::t_9788f8cfd66594 4-9,13-19,21-24,34-35
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "33d7b4b032d1ada311aec5d712778d5315b6ceb2",
+  "prompts": {},
+  "sessions": {
+    "s_6a5e0488967b01": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019ec041-3bb2-71aa-ae5b-6295a1ae6679",
+        "model": "mimo-v2.5-free"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
