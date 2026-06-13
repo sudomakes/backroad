@@ -1,34 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { TreeRender } from '../tree';
 import { BackroadContainerRenderer } from '../types/containers';
 import { createPortal } from 'react-dom';
-import { socket } from '../socket';
 
 export const Sidebar: BackroadContainerRenderer<'sidebar'> = (props) => {
-  const [open, setOpen] = useState(props.args.defaultOpen ?? true);
-
-  useEffect(() => {
-    const handlePropsChange = (
-      changedProps: { path: string; args: { open?: boolean } },
-      callback: () => void
-    ) => {
-      if (
-        changedProps.path === props.path &&
-        changedProps.args.open !== undefined
-      ) {
-        setOpen(changedProps.args.open);
-      }
-      callback();
-    };
-    socket.on('props_change', handlePropsChange);
-    return () => {
-      socket.off('props_change', handlePropsChange);
-    };
-  }, [props.path]);
+  const [open, setOpen] = useState(true);
 
   return createPortal(
     <>
-      {/* Backdrop — only interactive when sidebar is open */}
+      {/* Backdrop */}
       <div
         className="fixed inset-0 z-[9] bg-black/30 transition-opacity duration-300"
         style={{
@@ -38,9 +18,9 @@ export const Sidebar: BackroadContainerRenderer<'sidebar'> = (props) => {
         onClick={() => setOpen(false)}
       />
 
-      {/* Sidebar sheet */}
+      {/* Sheet */}
       <nav
-        className={`w-screen max-w-[300px] h-full border-r overflow-auto bg-base-200 p-5 flex flex-col gap-3 fixed top-0 left-0 z-10 transition-transform duration-300 ease-in-out`}
+        className="w-screen max-w-[300px] h-full border-r overflow-auto bg-base-200 p-5 flex flex-col gap-3 fixed top-0 left-0 z-10 transition-transform duration-300 ease-in-out"
         style={{
           transform: open ? 'translateX(0)' : 'translateX(-100%)',
         }}
@@ -59,12 +39,12 @@ export const Sidebar: BackroadContainerRenderer<'sidebar'> = (props) => {
           </div>
         </div>
 
-        {props.children.map((child) => (
-          <TreeRender tree={child} key={child.path} />
-        ))}
+        {props.children.map((child) => {
+          return <TreeRender tree={child} key={child.path} />;
+        })}
       </nav>
 
-      {/* Reopen tab — visible when sidebar is closed */}
+      {/* Reopen tab */}
       {!open && (
         <div
           className="btn-primary fixed px-5 mt-2 z-10 py-3 rounded-r-xl cursor-pointer"

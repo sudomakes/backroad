@@ -1,7 +1,7 @@
 import type { TypedChartComponent } from 'react-chartjs-2/dist/types';
 import type { Props } from 'react-select';
 import type { ColumnHelper } from '@tanstack/react-table';
-import { HTMLProps, IframeHTMLAttributes } from 'react';
+import { HTMLProps } from 'react';
 import formidable from 'formidable';
 import type { DropzoneOptions } from 'react-dropzone';
 // import { v4 as uuidv4 } from 'uuid';
@@ -70,13 +70,6 @@ type _ComponentBasePropsMapping = {
   };
   image: {
     args: HTMLProps<HTMLImageElement>;
-    value: null;
-  };
-  iframe: {
-    args: { title: string } & Omit<
-      IframeHTMLAttributes<HTMLIFrameElement>,
-      'title'
-    >;
     value: null;
   };
   link: {
@@ -218,10 +211,8 @@ type ContainerArgsMapping = {
     args: { columns: number | number[] };
   };
   sidebar: {
-    args: {
-      /** Whether the sidebar starts open. Defaults to true. */
-      defaultOpen?: boolean;
-    };
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    args: {};
   };
   page: {
     args: { path: string };
