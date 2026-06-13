@@ -1,0 +1,40 @@
+e2e/smoke.spec.ts
+  s_bcf18689802c0e::t_6df1eb05517e5d 72
+  s_bcf18689802c0e::t_ddd4356f91788f 104
+e2e/auth.setup.ts
+  s_bcf18689802c0e::t_42fcf18e2d5e80 27
+.github/workflows/pr-checks.yml
+  s_6a5e0488967b01::t_27396ca40447c0 371-372
+  s_6a5e0488967b01::t_42bf9344d2c6a1 214-215,219-224,244
+package.json
+  s_bcf18689802c0e::t_20ecdf3c760b40 9
+playwright.config.ts
+  s_bcf18689802c0e::t_accbbb911fc01d 4,26,31-33,37,39,44
+  s_bcf18689802c0e::t_2ab0319cf0afd7 36
+pnpm-lock.yaml
+  s_bcf18689802c0e::t_2ab0319cf0afd7 545-547,6228-6235,24789-24793
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "2e6b13cef19d97f18ed621af85c0bf4c06b94b10",
+  "prompts": {},
+  "sessions": {
+    "s_6a5e0488967b01": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019ec041-3bb2-71aa-ae5b-6295a1ae6679",
+        "model": "mimo-v2.5-free"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    },
+    "s_bcf18689802c0e": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019ec00e-5eaf-7820-a782-fd2775ff4caf",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
