@@ -37,6 +37,9 @@ const config: Config = {
       },
     ],
     './plugins/webcontainer-webpack-plugin.ts',
+    // Local client-side search — no API key or subscription required.
+    // Indexes the built HTML at build time; query runs in-browser via Lunr.js.
+    'docusaurus-lunr-search',
   ],
 
   presets: [
