@@ -1,3 +1,17 @@
+## [1.10.0](https://github.com/sudomakes/backroad/compare/v1.9.0...v1.10.0) (2026-06-13)
+
+### Features
+
+- **sandbox:** add syntax highlighting to WebContainer editor ([af49dc6](https://github.com/sudomakes/backroad/commit/af49dc66d1657339b537880e768e0119d5c00428))
+
+### Bug Fixes
+
+- **e2e:** update sandbox test to look for CodeMirror editor ([e63c27f](https://github.com/sudomakes/backroad/commit/e63c27f20a58cafcd361cbd4d145fe0d733952f1))
+
+### Chores
+
+- tighten bundle size limits ([ce7fc5b](https://github.com/sudomakes/backroad/commit/ce7fc5bb38944a03901d7e879606298377b2bbd7))
+
 ## [1.9.0](https://github.com/sudomakes/backroad/compare/v1.8.0...v1.9.0) (2026-06-13)
 
 ### Features
