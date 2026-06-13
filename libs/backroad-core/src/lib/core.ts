@@ -218,8 +218,10 @@ type ContainerArgsMapping = {
     args: { columns: number | number[] };
   };
   sidebar: {
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    args: {};
+    args: {
+      /** Whether the sidebar starts open. Defaults to true. */
+      defaultOpen?: boolean;
+    };
   };
   page: {
     args: { path: string };

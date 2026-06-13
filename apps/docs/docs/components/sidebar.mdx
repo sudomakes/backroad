@@ -15,6 +15,10 @@ stays visible as the user navigates. This makes it the natural home for
 global controls: search boxes, region pickers, date-range selectors, or
 any input that should survive page changes.
 
+The sidebar opens as a slide-in panel with a **backdrop overlay**.
+Clicking the backdrop or the ✕ button closes it; a tab on the left edge
+lets the user reopen it.
+
 ## Basic usage
 
 ```ts
@@ -27,6 +31,38 @@ const region = sidebar.select({
     { value: 'us', label: 'US' },
   ],
 });
+```
+
+## Programmatic open / close
+
+The `sidebar()` handle exposes `.open()` and `.close()` so the script
+can control visibility without waiting for a user click:
+
+```ts
+const sidebar = br.sidebar({});
+sidebar.write({ body: '## Dashboard' });
+const showNav = sidebar.toggle({ label: 'Show navigation' });
+
+// Close the sidebar after the user toggles a control
+if (!showNav) {
+  sidebar.close();
+}
+```
+
+| Method            | What it does                          |
+| ----------------- | ------------------------------------- |
+| `sidebar.open()`  | Slides the sidebar open (client-side) |
+| `sidebar.close()` | Hides the sidebar (client-side)       |
+
+User clicks always take precedence — the ✕ button, backdrop, and
+reopen tab all work independently of the script.
+
+## Starting closed
+
+Pass `defaultOpen: false` to render the sidebar collapsed by default:
+
+```ts
+const sidebar = br.sidebar({ defaultOpen: false });
 ```
 
 ## Nesting inputs
@@ -73,6 +109,14 @@ run((br) => {
 ```
 
 The toggle state set on the sidebar page is visible from both routes.
+
+## Multiple sidebars
+
+Calling `br.sidebar()` more than once creates multiple sidebar
+instances. Each one portals to the same overlay layer, so only the
+**last-rendered** sidebar will be visually on top. In practice you
+should call `br.sidebar()` once at the top of your script and share it
+across pages.
 
 ## Try it
 

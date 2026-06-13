@@ -1,17 +1,51 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TreeRender } from '../tree';
 import { BackroadContainerRenderer } from '../types/containers';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
+import { socket } from '../socket';
 
 export const Sidebar: BackroadContainerRenderer<'sidebar'> = (props) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(props.args.defaultOpen ?? true);
+
+  useEffect(() => {
+    const handlePropsChange = (
+      changedProps: { path: string; args: { open?: boolean } },
+      callback: () => void
+    ) => {
+      if (
+        changedProps.path === props.path &&
+        changedProps.args.open !== undefined
+      ) {
+        setOpen(changedProps.args.open);
+      }
+      callback();
+    };
+    socket.on('props_change', handlePropsChange);
+    return () => {
+      socket.off('props_change', handlePropsChange);
+    };
+  }, [props.path]);
 
   return createPortal(
     <>
+      {/* Backdrop — only visible when sidebar is open */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="sidebar-backdrop"
+            className="fixed inset-0 z-[9] bg-black/30"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setOpen(false)}
+          />
+        )}
+      </AnimatePresence>
       <AnimatePresence>
         {open && (
           <motion.nav
+            key={`sidebar-${props.path}`}
             initial={{ opacity: 0, x: '-100%' }}
             animate={{ opacity: 1, x: '0' }}
             exit={{ opacity: 0, x: '-100%' }}
@@ -20,9 +54,7 @@ export const Sidebar: BackroadContainerRenderer<'sidebar'> = (props) => {
             <div className="flex justify-end">
               <div
                 className="cursor-pointer mb-4"
-                onClick={() => {
-                  setOpen(false);
-                }}
+                onClick={() => setOpen(false)}
               >
                 <svg
                   className="fill-current"
@@ -45,6 +77,7 @@ export const Sidebar: BackroadContainerRenderer<'sidebar'> = (props) => {
       <AnimatePresence>
         {!open && (
           <motion.div
+            key="sidebar-tab"
             className="btn-primary fixed px-5 mt-2 z-10 py-3 rounded-r-xl cursor-pointer"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
