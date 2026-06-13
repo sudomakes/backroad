@@ -128,15 +128,15 @@ test.describe('docs site', () => {
       ).toBeVisible();
     });
 
-    test('clicking Run mounts the editor textarea', async ({ page }) => {
+    test('clicking Run mounts the editor', async ({ page }) => {
       await page.goto('/docs/try-it');
       await page.getByRole('button', { name: /run the example/i }).click();
-      // The WebContainer sandbox shows a native <textarea> for editing
+      // The WebContainer sandbox shows a CodeMirror editor for editing
       // the app.ts source. It's rendered immediately on click.
-      await expect(page.locator('textarea[spellcheck="false"]')).toBeVisible({
+      await expect(page.locator('.cm-editor')).toBeVisible({
         timeout: 10_000,
       });
-      // The starting source code should be present in the textarea.
+      // The starting source code should be present in the editor.
       await expect(page.getByText(/import { run } from/i).first()).toBeVisible({
         timeout: 10_000,
       });

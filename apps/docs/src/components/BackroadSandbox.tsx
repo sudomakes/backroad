@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import useIsBrowser from '@docusaurus/useIsBrowser';
 import BrowserOnly from '@docusaurus/BrowserOnly';
+import CodeMirror from '@uiw/react-codemirror';
+import { javascript } from '@codemirror/lang-javascript';
+import { oneDark } from '@codemirror/theme-one-dark';
 
 /**
  * Embeds an editable, live-running Backroad app via WebContainer API.
@@ -299,23 +302,19 @@ function WebContainerSandbox({ code, dependencies, height }: Props) {
           >
             app.ts
           </div>
-          <textarea
+          <CodeMirror
             value={currentCode}
-            onChange={(e) => setCurrentCode(e.target.value)}
-            spellCheck={false}
-            style={{
-              flex: 1,
-              width: '100%',
-              border: 'none',
-              padding: '0.75rem',
-              fontFamily: 'monospace',
-              fontSize: '0.85rem',
-              lineHeight: 1.5,
-              background: 'var(--ifm-background-surface-color)',
-              color: 'var(--ifm-font-color-base)',
-              resize: 'none',
-              outline: 'none',
+            onChange={(value) => setCurrentCode(value)}
+            extensions={[javascript({ typescript: true })]}
+            theme={oneDark}
+            basicSetup={{
+              lineNumbers: true,
+              indentOnInput: true,
+              bracketMatching: true,
+              foldGutter: false,
+              highlightActiveLine: true,
             }}
+            style={{ flex: 1, fontSize: '0.85rem' }}
           />
         </div>
 
