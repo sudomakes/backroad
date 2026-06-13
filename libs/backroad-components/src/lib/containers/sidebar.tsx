@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TreeRender } from '../tree';
 import { BackroadContainerRenderer } from '../types/containers';
 import { createPortal } from 'react-dom';
@@ -6,11 +6,6 @@ import { socket } from '../socket';
 
 export const Sidebar: BackroadContainerRenderer<'sidebar'> = (props) => {
   const [open, setOpen] = useState(props.args.defaultOpen ?? true);
-  const sheetRef = useRef<HTMLElement>(null);
-  const portalTarget =
-    typeof document !== 'undefined'
-      ? document.getElementById('sidebar-portal')
-      : null;
 
   useEffect(() => {
     const handlePropsChange = (
@@ -31,14 +26,9 @@ export const Sidebar: BackroadContainerRenderer<'sidebar'> = (props) => {
     };
   }, [props.path]);
 
-  // When opening, move focus into the sheet for keyboard users.
-  useEffect(() => {
-    if (open) sheetRef.current?.focus();
-  }, [open]);
-
-  const content = (
+  return createPortal(
     <>
-      {/* Backdrop */}
+      {/* Backdrop — only interactive when sidebar is open */}
       <div
         className="fixed inset-0 z-[9] bg-black/30 transition-opacity duration-300"
         style={{
@@ -48,12 +38,9 @@ export const Sidebar: BackroadContainerRenderer<'sidebar'> = (props) => {
         onClick={() => setOpen(false)}
       />
 
-      {/* Sheet */}
+      {/* Sidebar sheet */}
       <nav
-        ref={sheetRef}
-        tabIndex={-1}
-        aria-label="Sidebar"
-        className="fixed top-0 left-0 z-10 h-full w-screen max-w-[300px] border-r overflow-auto bg-base-200 p-5 flex flex-col gap-3 transition-transform duration-300 ease-in-out outline-none"
+        className={`w-screen max-w-[300px] h-full border-r overflow-auto bg-base-200 p-5 flex flex-col gap-3 fixed top-0 left-0 z-10 transition-transform duration-300 ease-in-out`}
         style={{
           transform: open ? 'translateX(0)' : 'translateX(-100%)',
         }}
@@ -77,7 +64,7 @@ export const Sidebar: BackroadContainerRenderer<'sidebar'> = (props) => {
         ))}
       </nav>
 
-      {/* Closed-state tab */}
+      {/* Reopen tab — visible when sidebar is closed */}
       {!open && (
         <div
           className="btn-primary fixed px-5 mt-2 z-10 py-3 rounded-r-xl cursor-pointer"
@@ -102,9 +89,7 @@ export const Sidebar: BackroadContainerRenderer<'sidebar'> = (props) => {
           </svg>
         </div>
       )}
-    </>
+    </>,
+    document.getElementById('sidebar-portal') as HTMLElement
   );
-
-  // Portal to #sidebar-portal if available (app shell), otherwise render inline.
-  return portalTarget ? createPortal(content, portalTarget) : content;
 };
