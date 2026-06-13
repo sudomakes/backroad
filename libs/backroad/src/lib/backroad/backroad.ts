@@ -168,28 +168,22 @@ export class BackroadNodeManager<
     );
     const path = manager.container.path;
     const session = manager.backroadSession;
-    // Proxy prototype methods through to the real manager, then layer on
-    // sidebar-specific open/close.
-    return Object.assign(
-      Object.create(Object.getPrototypeOf(manager)),
-      manager,
-      {
-        /** Close the sidebar (hides it on the client). */
-        close() {
-          session.renderQueue.updateProps({
-            path,
-            args: { ...props, open: false },
-          });
-        },
-        /** Open the sidebar (shows it on the client). */
-        open() {
-          session.renderQueue.updateProps({
-            path,
-            args: { ...props, open: true },
-          });
-        },
-      }
-    );
+    // Attach sidebar-specific methods directly to the manager instance.
+    // Private class methods are bound to the original instance, so we
+    // cannot create a new object — we must mutate the manager itself.
+    (manager as any).close = () => {
+      session.renderQueue.updateProps({
+        path,
+        args: { ...props, open: false },
+      });
+    };
+    (manager as any).open = () => {
+      session.renderQueue.updateProps({
+        path,
+        args: { ...props, open: true },
+      });
+    };
+    return manager;
   }
   base(props: BackroadContainerFormat<'base'>) {
     return this.#addContainerDescendant(
