@@ -1,0 +1,59 @@
+apps/docs/docs/components/multimedia.mdx
+  s_bcf18689802c0e::t_031445d719a683 9-11,42-61
+libs/backroad-components/src/lib/components/index.tsx
+  s_bcf18689802c0e::t_5158dc3fc38700 7,68
+.gitignore
+  s_bcf18689802c0e::t_388ab83fe97175 77
+examples/demo/src/pages/index.ts
+  s_bcf18689802c0e::t_eaf34f57dc9c2b 5,20
+e2e/docs/playwright.config.ts
+  s_bcf18689802c0e::t_f8f9c802b7e151 1-37
+libs/backroad-components/src/lib/components/iframe.tsx
+  s_bcf18689802c0e::t_7b1b4973816007 1-3,6
+  s_bcf18689802c0e::t_2775cdb53071b8 4-5
+libs/backroad/src/lib/backroad/backroad.ts
+  s_bcf18689802c0e::t_9eda75c21059d4 258-260
+e2e/auth.setup.ts
+  s_bcf18689802c0e::t_941123edf76c10 1-36
+libs/backroad-core/src/lib/core.ts
+  s_bcf18689802c0e::t_62db49cbe6036a 75,80-81
+  s_bcf18689802c0e::t_374fe3d63ccaa4 4,76-79
+examples/demo/src/pages/iframe.ts
+  s_bcf18689802c0e::t_421aae97631589 7-8,10,17-18,20
+  s_bcf18689802c0e::t_2f8834850bf86e 1-6,9,11-16,19,21-24
+e2e/docs/docs.spec.ts
+  s_bcf18689802c0e::t_d4e913d4755e9b 3-4,8,18,29,37,46,53,64,70-75,77,86-87
+e2e/smoke.spec.ts
+  s_bcf18689802c0e::t_3d4037c6b12d95 42
+  s_bcf18689802c0e::t_051805e42cab76 16-20,38-39
+package.json
+  s_bcf18689802c0e::t_9ebe9eb1e22f6e 18
+examples/demo/src/main.ts
+  s_bcf18689802c0e::t_c771d9c28deaa7 33
+e2e/iframe.spec.ts
+  s_bcf18689802c0e::t_388ab83fe97175 1,3-5,8,11,14
+  s_bcf18689802c0e::t_326d84b813a406 2,6-7,9-10,12-13,15-32
+.github/workflows/pr-checks.yml
+  s_bcf18689802c0e::t_381eb1f1b59435 248,281-312,354,371,383
+libs/backroad/src/lib/backroad/backroad.test.ts
+  s_bcf18689802c0e::t_0126f2aebfe013 19-44
+playwright.config.ts
+  s_bcf18689802c0e::t_083f0bf488f3ab 17,58-60,63-67
+  s_bcf18689802c0e::t_6d879e19d35a29 18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "b40212834ad9d655bbb3713c41506d58e6e1a151",
+  "prompts": {},
+  "sessions": {
+    "s_bcf18689802c0e": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "019ec00e-5eaf-7820-a782-fd2775ff4caf",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
