@@ -25,9 +25,7 @@ export class RenderQueue {
   #flushToFrontend() {
     const socket = SocketManager.getSocket(this.backroadSession.sessionId);
     const nodesToEmit = this.flush();
-    socket.emit('render', nodesToEmit, () => {
-      console.log('batched render request acked by frontend');
-    });
+    socket.emit('render', nodesToEmit, () => {});
   }
   updateProps(props: any) {
     const socket = SocketManager.getSocket(this.backroadSession.sessionId);
