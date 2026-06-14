@@ -4,7 +4,7 @@ import { BackroadContainerRenderer } from '../types/containers';
 import { createPortal } from 'react-dom';
 
 export const Sidebar: BackroadContainerRenderer<'sidebar'> = (props) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   return createPortal(
     <>

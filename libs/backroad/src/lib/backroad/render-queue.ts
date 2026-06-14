@@ -25,7 +25,9 @@ export class RenderQueue {
   #flushToFrontend() {
     const socket = SocketManager.getSocket(this.backroadSession.sessionId);
     const nodesToEmit = this.flush();
-    socket.emit('render', nodesToEmit, () => {});
+    socket.emit('render', nodesToEmit, () => {
+      /* ack ignored */
+    });
   }
   updateProps(props: any) {
     const socket = SocketManager.getSocket(this.backroadSession.sessionId);
