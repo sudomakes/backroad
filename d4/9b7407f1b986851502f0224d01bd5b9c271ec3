@@ -1,0 +1,24 @@
+e2e/smoke.spec.ts
+  s_c1f508ba5bae45::t_ab0956347151ad 9,12,53,84,87,97
+libs/backroad/src/lib/backroad/backroad.test.ts
+  s_c1f508ba5bae45::t_3311d0f02c7866 79,83-84
+  s_c1f508ba5bae45::t_e38cb111058367 47,52
+libs/backroad/src/lib/backroad/backroad.ts
+  s_c1f508ba5bae45::t_4a80d96db4b7a5 309-311,314,323-324,326-327
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "d49b7407f1b986851502f0224d01bd5b9c271ec3",
+  "prompts": {},
+  "sessions": {
+    "s_c1f508ba5bae45": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "423b6bc8-82e7-4f9a-91f7-38afd8bd859e",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
