@@ -306,9 +306,12 @@ export class BackroadNodeManager<
   }
 
   login(provider?: string) {
+    // Social sign-in hits the better-auth API directly; plain login sends
+    // the browser to the React auth page (/auth/signin), NOT the API mount
+    // (/api/* is only better-auth's handler — it renders no UI).
     const url = provider
       ? `/api/auth/sign-in/social?provider=${encodeURIComponent(provider)}`
-      : '/api/signin';
+      : '/auth/signin';
     SocketManager.getSocket(this.backroadSession.sessionId).emit(
       'auth_redirect',
       { url },
@@ -317,9 +320,11 @@ export class BackroadNodeManager<
   }
 
   logout() {
+    // The client handler hits better-auth's sign-out endpoint to clear the
+    // cookie, then navigates to /auth/signin.
     SocketManager.getSocket(this.backroadSession.sessionId).emit(
-      'auth_redirect',
-      { url: '/api/signout' },
+      'auth_signout',
+      undefined,
       () => undefined
     );
   }
