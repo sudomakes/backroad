@@ -26,6 +26,7 @@
     "@signalwire/docusaurus-plugin-llms-txt": "^1.2.2",
     "@uiw/react-codemirror": "^4.25.10",
     "@webcontainer/api": "^1.6.4",
+    "@wterm/dom": "^0.3.0",
     "clsx": "^2.0.0",
     "docusaurus-lunr-search": "^3.6.0",
     "lunr": "^2.3.9",
