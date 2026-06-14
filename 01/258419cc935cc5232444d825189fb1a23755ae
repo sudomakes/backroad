@@ -1,0 +1,36 @@
+pnpm-workspace.yaml
+  s_dce21e6b7ca74d::t_9e0e70226c2b2f 22-26
+apps/docs/src/components/BackroadSandbox/idbStore.ts
+  s_dce21e6b7ca74d::t_6e9ccda2adb235 1-68
+apps/docs/package.json
+  s_dce21e6b7ca74d::t_105afd62e71d2d 29
+apps/docs/src/wterm.d.ts
+  s_dce21e6b7ca74d::t_0e3a5f86691883 1-4
+apps/docs/plugins/webcontainer-webpack-plugin.ts
+  s_dce21e6b7ca74d::t_b78b57f68b45cf 3-14,24-28
+apps/docs/docs/try-it.mdx
+  s_dce21e6b7ca74d::t_a6ee23964959b2 18-21
+  s_dce21e6b7ca74d::t_dbe3a98a717eba 10-17,22
+apps/docs/src/components/BackroadSandbox/useSandbox.ts
+  s_dce21e6b7ca74d::t_d0de69a79b00a7 4,22-35,38,45,49,52,64-66,121,123-124,129-149,151-152,155-157,211,220-221,223,225,228-234,236-245,247-248,263-270
+  s_dce21e6b7ca74d::t_392c728f5d8f42 1-3,5-21,36-37,39-44,46-48,50-51,53-63,67-120,122,125-128,150,153-154,158-210,212-219,222,224,226-227,235,246,249-262,271-286
+apps/docs/src/components/BackroadSandbox/index.tsx
+  s_dce21e6b7ca74d::t_bbbc31e4e85b49 25-27
+  s_dce21e6b7ca74d::t_aa0f7307ed1f09 1,3,7-14,17-20,23-24,35,39-116,118-125,127-139,141-147,149-156,158,162-173,177,184,194-196,198,201,204-210,213-215,218,232,235-237,242-257
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "01258419cc935cc5232444d825189fb1a23755ae",
+  "prompts": {},
+  "sessions": {
+    "s_dce21e6b7ca74d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4e20d0cd-ed87-49f1-b5ba-aaef2eab48f2",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
