@@ -33,38 +33,6 @@ const region = sidebar.select({
 });
 ```
 
-## Programmatic open / close
-
-The `sidebar()` handle exposes `.open()` and `.close()` so the script
-can control visibility without waiting for a user click:
-
-```ts
-const sidebar = br.sidebar({});
-sidebar.write({ body: '## Dashboard' });
-const showNav = sidebar.toggle({ label: 'Show navigation' });
-
-// Close the sidebar after the user toggles a control
-if (!showNav) {
-  sidebar.close();
-}
-```
-
-| Method            | What it does                          |
-| ----------------- | ------------------------------------- |
-| `sidebar.open()`  | Slides the sidebar open (client-side) |
-| `sidebar.close()` | Hides the sidebar (client-side)       |
-
-User clicks always take precedence — the ✕ button, backdrop, and
-reopen tab all work independently of the script.
-
-## Starting closed
-
-Pass `defaultOpen: false` to render the sidebar collapsed by default:
-
-```ts
-const sidebar = br.sidebar({ defaultOpen: false });
-```
-
 ## Nesting inputs
 
 The sidebar is a full container — nest any components inside it:
