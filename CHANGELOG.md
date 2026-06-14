@@ -1,3 +1,33 @@
+## [1.11.0](https://github.com/sudomakes/backroad/compare/v1.10.0...v1.11.0) (2026-06-14)
+
+### Features
+
+- **sidebar:** add backdrop, open/close API, and defaultOpen option ([e1c04b4](https://github.com/sudomakes/backroad/commit/e1c04b4d6d9859cd33ffc99be54fe2971749a76b))
+
+### Bug Fixes
+
+- **a11y:** use native buttons for sidebar controls ([4c2f465](https://github.com/sudomakes/backroad/commit/4c2f4655d29745693e6d939c50677a5d4fe0cfde))
+- **auth:** redirect login/logout to the React auth pages, not the API mount ([d49b740](https://github.com/sudomakes/backroad/commit/d49b7407f1b986851502f0224d01bd5b9c271ec3))
+- **backroad:** restore accidentally removed iframe method and test ([24c0729](https://github.com/sudomakes/backroad/commit/24c0729018e4176f49008173f23cac77627f69db))
+- **core:** restore iframe type removed during sidebar revert ([8c80c19](https://github.com/sudomakes/backroad/commit/8c80c19d77963d60b6a5fa1766541a0c0573b411))
+- default sidebar closed and silence empty-ack lint error ([68fdd46](https://github.com/sudomakes/backroad/commit/68fdd4671756669864d0a17f772b49256aa70541))
+- **e2e:** update smoke test auth URLs to match current API routes ([334693f](https://github.com/sudomakes/backroad/commit/334693f7a91be729045c236f573af2cbb7eb51d0))
+- **sidebar:** attach open/close directly to manager instance ([6a46d3c](https://github.com/sudomakes/backroad/commit/6a46d3c14f92fce72d7c4814c0e1e5cd3ec27706))
+- **sidebar:** preserve prototype methods when returning sidebar handle ([59be1e3](https://github.com/sudomakes/backroad/commit/59be1e3fcaf7375bfe86def70e5b609bf75d5fe7))
+- **sidebar:** restore portal rendering for persistent sidebar ([7963110](https://github.com/sudomakes/backroad/commit/7963110661a224b3069b037bf24708871b43c997))
+- **sidebar:** simplify component to match original structure ([1278cc5](https://github.com/sudomakes/backroad/commit/1278cc54333105850cd1f7e2843a8807fde57888))
+- **tests:** fix pre-existing test failures ([20534d1](https://github.com/sudomakes/backroad/commit/20534d110d99c2db454ea0e4b50b58e5c1f4c488))
+
+### Chores
+
+- sidebar added in demo ([43045ee](https://github.com/sudomakes/backroad/commit/43045ee78b16d93a80333f7c0db92be7ccb7e08a))
+
+### Refactoring
+
+- better sidebar and docs sandbox ([0125841](https://github.com/sudomakes/backroad/commit/01258419cc935cc5232444d825189fb1a23755ae))
+- removed useless code ([31747a2](https://github.com/sudomakes/backroad/commit/31747a24ccac95475b6b877a94b115f81cdb8e09))
+- **sidebar:** replace framer-motion with CSS transitions ([c59fc19](https://github.com/sudomakes/backroad/commit/c59fc19debea3ea20f5b226fa0b075bb9b554052))
+
 ## [1.10.0](https://github.com/sudomakes/backroad/compare/v1.9.0...v1.10.0) (2026-06-13)
 
 ### Features
