@@ -29,6 +29,19 @@ run(
       }
     }
 
+    // Sidebar navigation — lists every demo page with a clickable link.
+    const sb = br.sidebar({});
+    sb.write({ body: '## Backroad Demo' });
+    sb.link({ label: '🏠 Home', href: '/' });
+    sb.write({ body: '---' });
+    sb.link({ label: '📝 Markdown', href: '/markdown' });
+    sb.link({ label: '📊 Charts', href: '/charts' });
+    sb.link({ label: '📋 Form', href: '/form' });
+    sb.link({ label: '🔽 Select', href: '/select' });
+    sb.link({ label: '📈 Stats', href: '/stats' });
+    sb.link({ label: '📐 Columns', href: '/columns' });
+    sb.link({ label: '📁 File Upload', href: '/file-upload' });
+
     pages.fileUpload(br.page({ path: '/file-upload' }));
     pages.iframe(br.page({ path: '/iframe' }));
     pages.form(br.page({ path: '/form' }));

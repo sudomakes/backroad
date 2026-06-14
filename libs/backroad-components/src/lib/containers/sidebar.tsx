@@ -47,7 +47,7 @@ export const Sidebar: BackroadContainerRenderer<'sidebar'> = (props) => {
       {/* Reopen tab */}
       {!open && (
         <div
-          className="btn-primary fixed px-5 mt-2 z-10 py-3 rounded-r-xl cursor-pointer"
+          className="btn btn-primary fixed top-4 left-0 px-5 z-10 py-3 rounded-l-none rounded-r-xl cursor-pointer"
           onClick={() => setOpen(true)}
         >
           <svg
