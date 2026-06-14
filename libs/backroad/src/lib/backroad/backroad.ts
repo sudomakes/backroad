@@ -255,6 +255,9 @@ export class BackroadNodeManager<
   image(props: BackroadComponentFormat<'image'>) {
     return this.#initialiseAndAddComponentDescendant(props, 'image');
   }
+  iframe(props: BackroadComponentFormat<'iframe'>) {
+    return this.#initialiseAndAddComponentDescendant(props, 'iframe');
+  }
   table(props: BackroadComponentFormat<'table'>) {
     return this.#initialiseAndAddComponentDescendant(props, 'table');
   }
@@ -303,9 +306,9 @@ export class BackroadNodeManager<
   }
 
   login(provider?: string) {
-    // Send the user to the React /auth/signin route (handled by
-    // @daveyplate/better-auth-ui's AuthView). For social providers we
-    // can deep-link straight to the better-auth social sign-in endpoint.
+    // Social sign-in hits the better-auth API directly; plain login sends
+    // the browser to the React auth page (/auth/signin), NOT the API mount
+    // (/api/* is only better-auth's handler — it renders no UI).
     const url = provider
       ? `/api/auth/sign-in/social?provider=${encodeURIComponent(provider)}`
       : '/auth/signin';
@@ -317,9 +320,8 @@ export class BackroadNodeManager<
   }
 
   logout() {
-    // The client listens for `auth_signout` and calls
-    // `authClient.signOut()` (better-auth/react) which clears the cookie,
-    // then redirects to /signin.
+    // The client handler hits better-auth's sign-out endpoint to clear the
+    // cookie, then navigates to /auth/signin.
     SocketManager.getSocket(this.backroadSession.sessionId).emit(
       'auth_signout',
       undefined,

@@ -18,7 +18,9 @@ const Tabs = ({ labels }: { labels: string[] }) => {
             role="tab"
             aria-selected={active === idx}
             tabIndex={active === idx ? 0 : -1}
-            className={`tab tab-lifted ${active === idx ? 'tab-active' : ''}`}
+            className={`tab tab-lifted ${
+              active === idx ? 'tab-active' : 'text-base-content/70'
+            }`}
             onClick={() => setActive(idx)}
           >
             {label}

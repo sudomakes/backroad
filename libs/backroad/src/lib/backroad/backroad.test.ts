@@ -44,7 +44,7 @@ describe('br.login', () => {
     vi.clearAllMocks();
   });
 
-  it('defaults to /api/signin when no provider given', () => {
+  it('defaults to the /auth/signin page when no provider given', () => {
     const { session, emit } = makeSession('login-default');
     session.rootNodeManager.login();
     expect(emit).toHaveBeenCalledWith(
@@ -76,7 +76,7 @@ describe('br.login', () => {
 });
 
 describe('br.logout', () => {
-  it('emits auth_signout for the client to clear the cookie', () => {
+  it('emits auth_signout for the client to clear the session', () => {
     const { session, emit } = makeSession('logout');
     session.rootNodeManager.logout();
     expect(emit).toHaveBeenCalledWith(
@@ -84,5 +84,31 @@ describe('br.logout', () => {
       undefined,
       expect.any(Function)
     );
+  });
+});
+
+describe('components', () => {
+  it('adds iframe nodes as a first-class component', () => {
+    const { session } = makeSession('component-iframe');
+    const value = session.mainPageNodeManager.iframe({
+      id: 'docs-embed',
+      title: 'Docs embed',
+      src: 'https://example.com/docs',
+      loading: 'lazy',
+      referrerPolicy: 'strict-origin-when-cross-origin',
+    });
+
+    expect(value).toBeNull();
+    expect(session.mainPageNodeManager.container.children[0]).toMatchObject({
+      id: 'docs-embed',
+      type: 'iframe',
+      args: {
+        title: 'Docs embed',
+        src: 'https://example.com/docs',
+        loading: 'lazy',
+        referrerPolicy: 'strict-origin-when-cross-origin',
+      },
+    });
+    session.renderQueue.flush();
   });
 });

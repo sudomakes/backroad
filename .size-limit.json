@@ -2,19 +2,19 @@
   {
     "name": "backroad-frontend — main JS bundle",
     "path": "dist/libs/backroad-frontend/assets/index-*.js",
-    "limit": "400 KB",
+    "limit": "400 kB",
     "gzip": true
   },
   {
     "name": "backroad-frontend — main CSS bundle",
     "path": "dist/libs/backroad-frontend/assets/index-*.css",
-    "limit": "20 KB",
+    "limit": "20 kB",
     "gzip": true
   },
   {
     "name": "backroad-frontend — /signin chunk (lazy)",
     "path": "dist/libs/backroad-frontend/assets/signin-*.js",
-    "limit": "200 KB",
+    "limit": "175 kB",
     "gzip": true
   }
 ]

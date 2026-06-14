@@ -6,11 +6,11 @@
   "duplicates": 3,
   "enumMembers": 0,
   "exports": 5,
-  "files": 8,
+  "files": 7,
   "namespaceMembers": 0,
   "optionalPeerDependencies": 0,
-  "owners": 20,
+  "owners": 19,
   "types": 2,
-  "unlisted": 2,
-  "unresolved": 0
+  "unlisted": 1,
+  "unresolved": 1
 }

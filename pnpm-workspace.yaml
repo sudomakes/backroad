@@ -19,6 +19,11 @@ allowBuilds:
 overrides:
   '@babel/runtime': '7.29.2'
   '@types/node': '^20'
+  # Pin React types to v18 — react-remove-scroll (via react-select) has a wide
+  # `@types/react` peer that otherwise pulls a second copy at v19, whose stricter
+  # ReactNode/ReactPortal types break Docusaurus components (BrowserOnly, Link).
+  '@types/react': '18.2.14'
+  '@types/react-dom': '18.2.6'
   cross-spawn: '^7.0.6'
   esbuild: '^0.25.0'
   mdast-util-to-hast: '13.2.1'

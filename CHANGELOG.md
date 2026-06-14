@@ -1,3 +1,39 @@
+## [1.10.0](https://github.com/sudomakes/backroad/compare/v1.9.0...v1.10.0) (2026-06-13)
+
+### Features
+
+- **sandbox:** add syntax highlighting to WebContainer editor ([af49dc6](https://github.com/sudomakes/backroad/commit/af49dc66d1657339b537880e768e0119d5c00428))
+
+### Bug Fixes
+
+- **e2e:** update sandbox test to look for CodeMirror editor ([e63c27f](https://github.com/sudomakes/backroad/commit/e63c27f20a58cafcd361cbd4d145fe0d733952f1))
+
+### Chores
+
+- tighten bundle size limits ([ce7fc5b](https://github.com/sudomakes/backroad/commit/ce7fc5bb38944a03901d7e879606298377b2bbd7))
+
+## [1.9.0](https://github.com/sudomakes/backroad/compare/v1.8.0...v1.9.0) (2026-06-13)
+
+### Features
+
+- add a11y testing to storybook and wire into PR checks ([33d7b4b](https://github.com/sudomakes/backroad/commit/33d7b4b032d1ada311aec5d712778d5315b6ceb2))
+
+### Bug Fixes
+
+- **e2e:** run against production build instead of dev servers ([2e6b13c](https://github.com/sudomakes/backroad/commit/2e6b13cef19d97f18ed621af85c0bf4c06b94b10))
+- fix a11y violations and knip baseline ([1f46ee0](https://github.com/sudomakes/backroad/commit/1f46ee02ec1f7e0f4b8c629788eaad6cf2c3ef75))
+
+## [1.8.0](https://github.com/sudomakes/backroad/compare/v1.7.10...v1.8.0) (2026-06-13)
+
+### Features
+
+- **dev:** add gitleaks secret scan to pre-commit hook ([d692a82](https://github.com/sudomakes/backroad/commit/d692a8247e0a73c5e906d0e51cdbd0bd22c1bc6b))
+- **iframe:** add iframe as first-class component with e2e tests ([b402128](https://github.com/sudomakes/backroad/commit/b40212834ad9d655bbb3713c41506d58e6e1a151))
+
+### Bug Fixes
+
+- **ci:** run gitleaks CLI directly instead of gitleaks-action@v2 which requires a paid license ([e1eeca9](https://github.com/sudomakes/backroad/commit/e1eeca9dc4c24c2864841b79b977e3914c695848))
+
 ## [1.7.10](https://github.com/sudomakes/backroad/compare/v1.7.9...v1.7.10) (2026-06-10)
 
 ### Bug Fixes

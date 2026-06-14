@@ -7,8 +7,19 @@ import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
 
 # Try Backroad live in your browser
 
-This page runs a real Backroad server inside your browser (via the
-WebContainer API). Tweak the code on the left, the right re-renders.
+The live editors throughout these docs run a **real Backroad server inside your
+browser** — no install, no signup. They're powered by the
+[WebContainer API](https://webcontainers.io/), which boots a Node.js runtime on
+the page itself. You'll find the same embedded sandbox on the component and
+fundamentals pages; this page is the open-ended playground. Tweak the code on the
+left, the right re-renders.
+
+:::note First run is slow, the rest are fast
+The first run downloads and installs the dependency tree (~1 minute). Downloaded
+packages are then cached in your browser and shared across every sandbox on the
+site, so later runs — here or on any other docs page — install offline (no
+re-downloading) and start much faster.
+:::
 
 <BackroadSandbox
   height={520}
