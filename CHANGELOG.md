@@ -1,3 +1,9 @@
+## [1.12.0](https://github.com/sudomakes/backroad/compare/v1.11.0...v1.12.0) (2026-06-14)
+
+### Features
+
+- **demo:** add sidebar navigation listing all demo pages ([8302f55](https://github.com/sudomakes/backroad/commit/8302f558b764b55914d8e59fa86258d888852683))
+
 ## [1.11.0](https://github.com/sudomakes/backroad/compare/v1.10.0...v1.11.0) (2026-06-14)
 
 ### Features
