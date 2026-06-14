@@ -1,0 +1,22 @@
+libs/backroad-components/src/lib/containers/sidebar.tsx
+  s_49801d9c2f0fa7::t_1e2811191a9a55 12-14
+  s_49801d9c2f0fa7::t_504620da7ffeb5 56-58
+  s_49801d9c2f0fa7::t_5481dd9ebb2438 79
+  s_49801d9c2f0fa7::t_c8b2e50517e252 31-36,46
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "4c2f4655d29745693e6d939c50677a5d4fe0cfde",
+  "prompts": {},
+  "sessions": {
+    "s_49801d9c2f0fa7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "af0bb7ea-de20-446c-ade1-22b6cf0278c9",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
