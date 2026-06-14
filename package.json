@@ -94,7 +94,6 @@
     "express": "^4.22.1",
     "fast-json-stable-stringify": "^2.1.0",
     "formidable": "^3.5.4",
-    "framer-motion": "^10.16.4",
     "lodash": "^4.17.23",
     "minimatch": "^9.0.9",
     "react": "18.2.0",

@@ -15,6 +15,10 @@ stays visible as the user navigates. This makes it the natural home for
 global controls: search boxes, region pickers, date-range selectors, or
 any input that should survive page changes.
 
+The sidebar opens as a slide-in panel with a **backdrop overlay**.
+Clicking the backdrop or the ✕ button closes it; a tab on the left edge
+lets the user reopen it.
+
 ## Basic usage
 
 ```ts
@@ -73,6 +77,14 @@ run((br) => {
 ```
 
 The toggle state set on the sidebar page is visible from both routes.
+
+## Multiple sidebars
+
+Calling `br.sidebar()` more than once creates multiple sidebar
+instances. Each one portals to the same overlay layer, so only the
+**last-rendered** sidebar will be visually on top. In practice you
+should call `br.sidebar()` once at the top of your script and share it
+across pages.
 
 ## Try it
 
