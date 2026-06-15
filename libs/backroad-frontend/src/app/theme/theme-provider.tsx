@@ -20,6 +20,13 @@ type ThemeContextValue = {
   /** Light / dark / follow-system. */
   mode: ThemeMode;
   setMode: (mode: ThemeMode) => void;
+  /**
+   * Apply app-maker defaults (from the backroad config). Only seeds a
+   * dimension the user has NOT already chosen — a persisted localStorage value
+   * from a past run always wins — and does NOT persist, so it stays a default
+   * (the app can change it for return users until they pick their own).
+   */
+  seedDefaults: (defaults: { theme?: ThemeName; mode?: ThemeMode }) => void;
 };
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
@@ -74,8 +81,24 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     setModeState(next);
   }, []);
 
+  const seedDefaults = useCallback(
+    (defaults: { theme?: ThemeName; mode?: ThemeMode }) => {
+      // localStorage (a past user choice) dominates: only seed dimensions the
+      // user hasn't set, and never persist — keep it a default, not a choice.
+      if (defaults.theme && !localStorage.getItem(THEME_STORAGE_KEY)) {
+        setThemeState(defaults.theme);
+      }
+      if (defaults.mode && !localStorage.getItem(MODE_STORAGE_KEY)) {
+        setModeState(defaults.mode);
+      }
+    },
+    []
+  );
+
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, mode, setMode }}>
+    <ThemeContext.Provider
+      value={{ theme, setTheme, mode, setMode, seedDefaults }}
+    >
       {children}
     </ThemeContext.Provider>
   );

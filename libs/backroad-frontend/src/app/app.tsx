@@ -56,12 +56,14 @@ export function App() {
     }
   }, [config?.analytics?.google]);
 
-  // Seed the initial light/dark mode from `config.theme` once the config
-  // arrives. Users can still change appearance in the settings panel.
-  const { setMode } = useTheme();
+  // Seed the app-maker's default light/dark mode from `config.theme` once the
+  // config arrives. seedDefaults only applies when the user has no saved
+  // preference (localStorage wins) and doesn't persist, so a past user choice
+  // is never clobbered on reload.
+  const { seedDefaults } = useTheme();
   useEffect(() => {
-    if (config?.theme) setMode(config.theme);
-  }, [config?.theme, setMode]);
+    if (config?.theme) seedDefaults({ mode: config.theme });
+  }, [config?.theme, seedDefaults]);
 
   useEffect(() => {
     const onRender = (nodeData: string[], callback: () => void) => {
