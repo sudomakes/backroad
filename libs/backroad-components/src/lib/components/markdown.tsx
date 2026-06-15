@@ -12,6 +12,7 @@ export const Markdown: BackroadComponentRenderer<'markdown'> = (props) => {
           a: (props) => {
             return <Link to={props.href || '/'}>{props.children}</Link>;
           },
+          pre: (props) => <pre className="overflow-x-auto" {...props} />,
         }}
       >
         {props.args.body.toString()}
