@@ -1,0 +1,19 @@
+libs/backroad/src/lib/backroad/render-queue.ts
+  s_8cb87566ea2ef4::t_74f81efb40439f 6-11,14-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.7",
+  "base_commit_sha": "d573b1f3b70faa26ad8f01363c92c5b6aa78a5f1",
+  "prompts": {},
+  "sessions": {
+    "s_8cb87566ea2ef4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bb3e5d82-3360-44d4-9cf8-2d768efe8a15",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
