@@ -126,8 +126,15 @@ describe('toast (showToast handler)', () => {
     });
   });
 
-  it('defaults to info and passes a finite duration through', () => {
-    showToast({ message: 'Heads up', duration: 2000 });
-    expect(uiToast.info).toHaveBeenCalledWith('Heads up', { duration: 2000 });
+  it('defaults to the info variant and a 5s duration when unspecified', () => {
+    showToast({ message: 'Heads up' });
+    expect(uiToast.info).toHaveBeenCalledWith('Heads up', { duration: 5000 });
+  });
+
+  it('passes an explicit finite duration through', () => {
+    showToast({ message: 'Quick one', variant: 'warning', duration: 2000 });
+    expect(uiToast.warning).toHaveBeenCalledWith('Quick one', {
+      duration: 2000,
+    });
   });
 });

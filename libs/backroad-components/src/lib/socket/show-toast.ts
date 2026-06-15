@@ -9,11 +9,13 @@ const FIRE = {
   error: toast.error,
 } as const;
 
+const DEFAULT_DURATION = 5000;
+
 export const showToast = (args: ToastArgs) => {
   const fire = FIRE[args.variant ?? 'info'] ?? toast.info;
   fire(args.message, {
-    // sonner treats Infinity as "stay until dismissed"; our API uses 0.
-    // `undefined` falls back to sonner's default duration.
-    duration: args.duration === 0 ? Infinity : args.duration,
+    // 0 → sonner's "stay until dismissed"; otherwise the given ms, defaulting
+    // to 5s.
+    duration: args.duration === 0 ? Infinity : args.duration ?? DEFAULT_DURATION,
   });
 };

@@ -51,7 +51,7 @@ export type ServerToClientEventTypes =
 export type ToastArgs = {
   message: string;
   variant?: 'info' | 'success' | 'warning' | 'error';
-  // ms on screen; 0 keeps it until dismissed; omit for the default.
+  // ms on screen; 0 keeps it until dismissed; omit for the 5s default.
   duration?: number;
 };
 export type ClientToServerEvents =

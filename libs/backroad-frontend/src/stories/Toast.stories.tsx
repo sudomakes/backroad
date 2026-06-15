@@ -18,13 +18,7 @@ const toast = (id: string, args: ToastArgs) => ({
 
 const meta = {
   title: 'Components/Toast',
-  parameters: {
-    layout: 'fullscreen',
-    // sonner animates opacity on enter; axe's color-contrast check can read a
-    // mid-fade frame and false-fail. The surface uses the popover/
-    // popover-foreground token pair (guaranteed AA), so disable the gate here.
-    a11y: { test: 'off' },
-  },
+  parameters: { layout: 'fullscreen' },
 } satisfies Meta;
 export default meta;
 type Story = StoryObj<typeof meta>;
