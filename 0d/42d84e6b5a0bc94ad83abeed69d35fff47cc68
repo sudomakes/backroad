@@ -1,0 +1,19 @@
+libs/backroad-frontend/src/styles.css
+  s_5a1bcd361448d3::t_0fb4088e6904ee 152-154,264-266
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "0d42d84e6b5a0bc94ad83abeed69d35fff47cc68",
+  "prompts": {},
+  "sessions": {
+    "s_5a1bcd361448d3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f5f1f82d-4ed0-4775-a7d4-f3e124855869",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
