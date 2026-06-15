@@ -5,9 +5,9 @@ import {
 } from '@backroad/core';
 import { TreeRender, socket } from 'backroad-components';
 import { set } from 'lodash';
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import ReactGA from 'react-ga4';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import superjson from 'superjson';
 import { Navbar } from './layout/navbar';
 import useBackroadConfig from './hooks/useBackroadConfig';
@@ -53,6 +53,21 @@ export function App() {
       socket.off('disconnect', onDisconnect);
     };
   }, []);
+
+  // In-app navigation (React Router <Link>) changes the URL client-side
+  // without a socket round-trip, so the server would never learn the new
+  // path. Re-emit run_script on pathname change so the executor re-runs with
+  // the correct currentPath. Skip the initial mount — the connect effect
+  // already fires the first run — to avoid a double run on load.
+  const location = useLocation();
+  const didMountRef = useRef(false);
+  useEffect(() => {
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+      return;
+    }
+    socket.emit('run_script', { pathname: location.pathname }, () => undefined);
+  }, [location.pathname]);
 
   const config = useBackroadConfig();
   useEffect(() => {

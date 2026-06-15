@@ -62,13 +62,15 @@ export const run = async (
       }
     }
 
-    const runExecutor = async (pathname = '/') => {
+    // currentPath is derived purely from the triggering request — every
+    // run-triggering event (run_script, set_value, unset_value) carries the
+    // client's pathname, so the server holds no path state and assumes no
+    // default. No run is ever server-initiated.
+    const runExecutor = async (currentPath: string) => {
       socket.emit('running', true, () => undefined);
       try {
         backroadSession.resetTree();
-        await executor(backroadSession.mainPageNodeManager, {
-          currentPath: pathname,
-        });
+        await executor(backroadSession.mainPageNodeManager, { currentPath });
       } finally {
         socket.emit('running', false, () => undefined);
       }

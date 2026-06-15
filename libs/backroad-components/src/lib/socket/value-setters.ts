@@ -9,6 +9,7 @@ export const setBackroadValue = (props: { id: string; value: unknown }) => {
       {
         id: props.id,
         value: superjson.stringify(props.value),
+        pathname: window.location.pathname,
       },
       () => {
         resolve();
@@ -22,9 +23,13 @@ export const setRunUnsetBackroadValue = (
 ) => {
   return new Promise<void>((resolve) => {
     setBackroadValue(props).then(() => {
-      socket.emit('unset_value', { id: props.id }, () => {
-        resolve();
-      });
+      socket.emit(
+        'unset_value',
+        { id: props.id, pathname: window.location.pathname },
+        () => {
+          resolve();
+        }
+      );
     });
   });
 };

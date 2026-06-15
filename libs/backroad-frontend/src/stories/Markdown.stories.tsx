@@ -123,9 +123,12 @@ export const AllThemes: Story = {
               mode === 'dark' ? ' dark' : ''
             }`}
           >
-            <h4 className="text-sm font-medium text-foreground">
+            {/* Decorative caption, not document structure — a real heading
+                here would sit before the markdown's <h1> and trip axe's
+                heading-order rule. */}
+            <div className="text-sm font-medium text-foreground">
               {theme} ({mode})
-            </h4>
+            </div>
             <MarkdownCard body={SAMPLE} />
           </div>
         ))

@@ -12,7 +12,13 @@ export const Markdown: BackroadComponentRenderer<'markdown'> = (props) => {
           a: (props) => {
             return <Link to={props.href || '/'}>{props.children}</Link>;
           },
-          pre: (props) => <pre className="overflow-x-auto" {...props} />,
+          // A horizontally scrollable <pre> must be keyboard-focusable so
+          // keyboard users can scroll it (axe rule scrollable-region-focusable).
+          // tabIndex alone satisfies this; a role/landmark is NOT added, since
+          // multiple same-named regions would trip landmark-unique.
+          pre: (props) => (
+            <pre className="overflow-x-auto" tabIndex={0} {...props} />
+          ),
         }}
       >
         {props.args.body.toString()}
