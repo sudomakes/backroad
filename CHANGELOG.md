@@ -1,3 +1,30 @@
+## [1.13.0](https://github.com/sudomakes/backroad/compare/v1.12.0...v1.13.0) (2026-06-15)
+
+### Features
+
+- **backroad-ui:** add flat design-system lib (shadcn + AI Elements) ([d222e90](https://github.com/sudomakes/backroad/commit/d222e900fb6d5d3c93342691353b67440088b4be))
+- **components:** export renderer registry; fix Stats contrast ([0149d17](https://github.com/sudomakes/backroad/commit/0149d175d53d55f808dcec5541dd59eb18e3f8d9))
+- **config:** app-maker recommended appearance (palette + mode) ([c87e561](https://github.com/sudomakes/backroad/commit/c87e561903461168ba2641b5d203ccedf6e9cd26))
+- **frontend:** Tailwind v4 + shadcn migration, navbar GitHub link ([cef6b97](https://github.com/sudomakes/backroad/commit/cef6b97778c543b7816a9a13a1710a492f383118))
+- **runner:** emit real running state around script execution ([ba41e45](https://github.com/sudomakes/backroad/commit/ba41e4504c9e29f78bc3add6d92fa456a033b1dd))
+
+### Bug Fixes
+
+- **core:** import chart/socket types from package roots ([019ea8f](https://github.com/sudomakes/backroad/commit/019ea8f832b3c14ae0369f87e7514a493a179959))
+- **theme:** let a saved preference win over the app-maker default ([9f2e30d](https://github.com/sudomakes/backroad/commit/9f2e30dca80e841459581632f23f226fb3241f1e))
+- **themes:** darken claude/twitter/amethyst-haze primaries for WCAG AA ([71a8cef](https://github.com/sudomakes/backroad/commit/71a8cefb7e2bb77b6ea058ccce01f0bb47a1b127))
+- **themes:** raise claude/twitter muted-foreground to WCAG AA ([0d42d84](https://github.com/sudomakes/backroad/commit/0d42d84e6b5a0bc94ad83abeed69d35fff47cc68))
+
+### Chores
+
+- drop path-mapping comment from tsconfig.base.json ([3d534f9](https://github.com/sudomakes/backroad/commit/3d534f9435dfb45fb7bad09f02815d2b7cec1fd0))
+
+### Refactoring
+
+- **components:** collapse renderer exports to the registry ([33b667e](https://github.com/sudomakes/backroad/commit/33b667efb7135c0ab44b1fc5a8be53cd4005f684))
+- **components:** consume backroad-ui, migrate renderers to shadcn ([21902fc](https://github.com/sudomakes/backroad/commit/21902fcffea5d43b8ea41f2fbb34baa7a4cdf8f2))
+- **theme:** centralize prefs in a useLocalStorageState hook ([a47c710](https://github.com/sudomakes/backroad/commit/a47c7100cbf263faaffbd7177c0d33810df83635))
+
 ## [1.12.0](https://github.com/sudomakes/backroad/compare/v1.11.0...v1.12.0) (2026-06-14)
 
 ### Features
