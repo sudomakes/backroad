@@ -58,7 +58,6 @@ export type BackroadEventsMapping = {
     args: {
       id: string;
       value: string;
-      //  triggerRerun?: boolean
     };
     response?: void;
   };
@@ -81,7 +80,7 @@ export type BackroadEventsMapping = {
     response?: void;
   };
   run_script: {
-    args?: void;
+    args: { pathname: string };
     response?: never;
   };
   unset_value: {

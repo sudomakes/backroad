@@ -35,6 +35,14 @@ run((br) => {
 });
 ```
 
+The executor receives a second argument with run-time context:
+
+```ts
+run((br, { currentPath }) => {
+  // currentPath is the URL pathname that triggered this run, e.g. '/settings'
+});
+```
+
 Run it:
 
 ```bash
@@ -65,13 +73,13 @@ run(
 );
 ```
 
-| Option              | Default     | What it does                                                                           |
-| ------------------- | ----------- | -------------------------------------------------------------------------------------- |
-| `server.port`       | `3333`      | Port for Express + Socket.IO                                                           |
-| `appearance.theme`  | `'default'` | Recommended palette — `default`, `claude`, `twitter`, `supabase`, `amethyst-haze`. See [Themes](./configuration/themes). |
-| `appearance.mode`   | `'system'`  | Recommended mode — `light`, `dark`, or `system`. User's choice wins.                   |
-| `analytics.google`  | none        | Google Analytics 4 measurement ID. See [Analytics](./configuration/analytics).         |
-| `auth.instance`     | none        | A `better-auth` instance. See [Authentication](./auth).                                |
+| Option             | Default     | What it does                                                                                                             |
+| ------------------ | ----------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `server.port`      | `3333`      | Port for Express + Socket.IO                                                                                             |
+| `appearance.theme` | `'default'` | Recommended palette — `default`, `claude`, `twitter`, `supabase`, `amethyst-haze`. See [Themes](./configuration/themes). |
+| `appearance.mode`  | `'system'`  | Recommended mode — `light`, `dark`, or `system`. User's choice wins.                                                     |
+| `analytics.google` | none        | Google Analytics 4 measurement ID. See [Analytics](./configuration/analytics).                                           |
+| `auth.instance`    | none        | A `better-auth` instance. See [Authentication](./auth).                                                                  |
 
 ## Where to go from here
 

@@ -2,11 +2,7 @@
 import superjson from 'superjson';
 import { socket } from './client';
 
-export const setBackroadValue = (props: {
-  id: string;
-  value: unknown;
-  // triggerRerun?: boolean
-}) => {
+export const setBackroadValue = (props: { id: string; value: unknown }) => {
   return new Promise<void>((resolve) => {
     socket.emit(
       'set_value',
@@ -24,7 +20,6 @@ export const setBackroadValue = (props: {
 export const setRunUnsetBackroadValue = (
   props: Parameters<typeof setBackroadValue>[0]
 ) => {
-  // sets and re-runs in backend
   return new Promise<void>((resolve) => {
     setBackroadValue(props).then(() => {
       socket.emit('unset_value', { id: props.id }, () => {

@@ -8,7 +8,7 @@ const initialMessages = [
 const auth = buildAuth();
 
 run(
-  (br) => {
+  (br, { currentPath }) => {
     // Auth gate: only enforced when auth env vars are configured. Mirrors
     // Streamlit's top-of-script `if not st.user.is_logged_in: ...` pattern.
     if (auth && !br.user.isLoggedIn) {
@@ -41,6 +41,8 @@ run(
     sb.link({ label: '📈 Stats', href: '/stats' });
     sb.link({ label: '📐 Columns', href: '/columns' });
     sb.link({ label: '📁 File Upload', href: '/file-upload' });
+    sb.write({ body: '---' });
+    sb.write({ body: `📍 \`${currentPath}\`` });
 
     pages.fileUpload(br.page({ path: '/file-upload' }));
     pages.iframe(br.page({ path: '/iframe' }));
