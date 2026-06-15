@@ -1,0 +1,23 @@
+libs/backroad/src/lib/backroad/chat-manager.ts
+  s_8cb87566ea2ef4::t_85df11c6fed1b1 56-61,63-67,70,72,74
+  s_8cb87566ea2ef4::t_248a2143430f67 20-25,37-40
+examples/demo/src/main.ts
+  s_8cb87566ea2ef4::t_fb5d8eb43da1ae 11
+  s_8cb87566ea2ef4::t_b40dd2e1aff632 57
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.7",
+  "base_commit_sha": "26b60a7a606d4d121cb547c9312a3808e93d44b7",
+  "prompts": {},
+  "sessions": {
+    "s_8cb87566ea2ef4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bb3e5d82-3360-44d4-9cf8-2d768efe8a15",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
