@@ -28,7 +28,7 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Configuration',
-      items: ['configuration/themes', 'auth'],
+      items: ['configuration/themes', 'configuration/analytics', 'auth'],
     },
     'hosting',
     {

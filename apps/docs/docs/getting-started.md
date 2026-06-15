@@ -57,7 +57,7 @@ run(
   },
   {
     server: { port: 4000 },
-    theme: 'dark',
+    appearance: { theme: 'claude', mode: 'light' },
     analytics: { google: 'G-XXXXXXX' },
     // Auth is optional — see the Authentication section.
     // auth: { instance: betterAuth(...) },
@@ -65,12 +65,13 @@ run(
 );
 ```
 
-| Option             | Default   | What it does                                                                 |
-| ------------------ | --------- | ---------------------------------------------------------------------------- |
-| `server.port`      | `3333`    | Port for Express + Socket.IO                                                 |
-| `theme`            | `'light'` | Initial daisyUI theme — `light` or `dark`. User can override via the navbar. |
-| `analytics.google` | none      | Google Analytics 4 measurement ID                                            |
-| `auth.instance`    | none      | A `better-auth` instance. See [Authentication](./auth).                      |
+| Option              | Default     | What it does                                                                           |
+| ------------------- | ----------- | -------------------------------------------------------------------------------------- |
+| `server.port`       | `3333`      | Port for Express + Socket.IO                                                           |
+| `appearance.theme`  | `'default'` | Recommended palette — `default`, `claude`, `twitter`, `supabase`, `amethyst-haze`. See [Themes](./configuration/themes). |
+| `appearance.mode`   | `'system'`  | Recommended mode — `light`, `dark`, or `system`. User's choice wins.                   |
+| `analytics.google`  | none        | Google Analytics 4 measurement ID. See [Analytics](./configuration/analytics).         |
+| `auth.instance`     | none        | A `better-auth` instance. See [Authentication](./auth).                                |
 
 ## Where to go from here
 
