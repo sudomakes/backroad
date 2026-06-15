@@ -1,0 +1,77 @@
+name: Storybook Preview
+
+# Per-PR Storybook preview deployments on Cloudflare Pages. Storybook is a
+# static build (no backend needed), so every PR gets a unique *.pages.dev URL
+# showing the full component library across all themes. Reuses the same
+# Cloudflare secrets as deploy-docs-cloudflare.yml.
+#
+# One-time setup (dashboard): create a Cloudflare Pages project named
+# "backroad-storybook" (Direct Upload / no Git integration — this workflow
+# uploads the build). Its production branch can stay "main".
+
+on:
+  pull_request:
+    paths:
+      - 'libs/backroad-frontend/**'
+      - 'libs/backroad-ui/**'
+      - 'libs/backroad-components/**'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/preview-storybook.yml'
+  workflow_dispatch:
+
+# Cancel superseded runs on the same PR so only the latest preview builds.
+concurrency:
+  group: storybook-preview-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  deployments: write
+  pull-requests: write
+
+jobs:
+  build-and-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        with:
+          version: 11.5.2
+          run_install: false
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Storybook
+        run: pnpm --filter backroad-frontend run storybook:build
+
+      - name: Deploy to Cloudflare Pages
+        id: deploy
+        uses: cloudflare/pages-action@1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: backroad-storybook
+          directory: dist/storybook
+          branch: ${{ github.head_ref || github.ref_name }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Comment preview URL on PR
+        if: github.event_name == 'pull_request'
+        uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
+        with:
+          header: storybook-preview
+          message: |
+            📚 **Storybook preview** for this PR: ${{ steps.deploy.outputs.url }}
+
+            Updated on every push. Shows every component across all themes + dark mode.
