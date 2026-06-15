@@ -173,6 +173,11 @@ export class BackroadNodeManager<
     );
   }
   page(props: BackroadContainerFormat<'page'>) {
+    if (props.path === '/') {
+      throw new Error(
+        'br.page({ path: "/" }) is not allowed — the root br object already represents the home page. Add content directly to br instead.'
+      );
+    }
     return this.backroadSession.rootNodeManager.#addContainerDescendant(
       this.#constructContainerObject(props, 'page')
     );
