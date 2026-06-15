@@ -1,5 +1,4 @@
-import type { Socket } from 'socket.io';
-import { DefaultEventsMap } from 'socket.io/dist/typed-events';
+import type { Socket, DefaultEventsMap } from 'socket.io';
 import { InitOptions } from 'react-ga4/types/ga4';
 import type { BackroadAuthInstance } from './auth';
 
