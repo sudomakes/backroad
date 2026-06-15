@@ -19,9 +19,6 @@
     "baseUrl": ".",
     "paths": {
       "@backroad/backroad": ["libs/backroad/src/index.ts"],
-      // The design-system primitive set (shadcn + AI Elements) lives in its own
-      // flat lib so consumers can pull just the UI layer without dragging in the
-      // socket runtime / chart registry that backroad-components carries.
       "backroad-ui": ["libs/backroad-ui/src/index.ts"],
       "backroad-components": ["libs/backroad-components/src/index.ts"],
       "@backroad/core": ["libs/backroad-core/src/index.ts"]
