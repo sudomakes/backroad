@@ -1,0 +1,23 @@
+.github/workflows/pr-checks.yml
+  s_5a1bcd361448d3::t_e1ecb08dfa126f 214-216,239,366
+libs/backroad-frontend/.storybook/preview.ts
+  s_5a1bcd361448d3::t_e1ecb08dfa126f 12-16
+libs/backroad-frontend/.storybook/test-runner.ts
+  s_5a1bcd361448d3::t_e1ecb08dfa126f 5-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "03e1e2d4d075085f5b9d08b9218e3154b781311a",
+  "prompts": {},
+  "sessions": {
+    "s_5a1bcd361448d3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f5f1f82d-4ed0-4775-a7d4-f3e124855869",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
