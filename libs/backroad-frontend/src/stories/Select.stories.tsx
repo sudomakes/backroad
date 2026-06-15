@@ -1,6 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import {
+  Label,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from 'backroad-ui';
 
-const Select = ({
+const SelectField = ({
   label,
   options,
   defaultValue,
@@ -11,32 +19,31 @@ const Select = ({
 }) => {
   const id = `s-${label.replace(/\W+/g, '-').toLowerCase()}`;
   return (
-    <div className="form-control w-full max-w-xs">
-      <label className="label" htmlFor={id}>
-        <span className="backroad-label">{label}</span>
-      </label>
-      <select
-        id={id}
-        defaultValue={defaultValue}
-        className="select select-bordered w-full max-w-xs"
-      >
-        {options.map((o) => (
-          <option key={o} value={o}>
-            {o}
-          </option>
-        ))}
-      </select>
+    <div className="flex w-full max-w-xs flex-col gap-2">
+      <Label htmlFor={id}>{label}</Label>
+      <Select defaultValue={defaultValue}>
+        <SelectTrigger id={id} className="w-full">
+          <SelectValue placeholder={`Select ${label.toLowerCase()}`} />
+        </SelectTrigger>
+        <SelectContent>
+          {options.map((o) => (
+            <SelectItem key={o} value={o}>
+              {o}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
     </div>
   );
 };
 
-const meta: Meta<typeof Select> = {
+const meta: Meta<typeof SelectField> = {
   title: 'Components/Select',
-  component: Select,
+  component: SelectField,
   parameters: { layout: 'centered' },
 };
 export default meta;
-type Story = StoryObj<typeof Select>;
+type Story = StoryObj<typeof SelectField>;
 
 export const Default: Story = {
   args: {

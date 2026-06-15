@@ -1,12 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="cupcake">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <title>Backroad App</title>
     <base href="/" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/src/styles.scss" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <script>
+      // Apply the persisted theme palette + light/dark mode before first
+      // paint to avoid a flash of the wrong theme. Mirrors the logic in the
+      // ThemeProvider; kept inline + dependency-free so it runs synchronously.
+      (function () {
+        try {
+          var theme = localStorage.getItem('backroad-theme') || 'default';
+          var mode = localStorage.getItem('backroad-mode') || 'system';
+          var root = document.documentElement;
+          if (theme && theme !== 'default')
+            root.setAttribute('data-theme', theme);
+          var prefersDark = window.matchMedia(
+            '(prefers-color-scheme: dark)'
+          ).matches;
+          var dark = mode === 'dark' || (mode === 'system' && prefersDark);
+          root.classList.toggle('dark', dark);
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

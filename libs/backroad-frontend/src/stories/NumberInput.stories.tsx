@@ -1,5 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { Button, Input, Label } from 'backroad-ui';
+import { Minus, Plus } from 'lucide-react';
 
+// Mirrors libs/backroad-components/src/lib/components/number_input.tsx:
+// a shadcn Input flanked by increment/decrement icon buttons.
 const NumberInput = ({
   label,
   defaultValue,
@@ -13,18 +17,33 @@ const NumberInput = ({
 }) => {
   const id = `ni-${label.replace(/\W+/g, '-').toLowerCase()}`;
   return (
-    <div className="form-control w-full max-w-xs">
-      <label className="label" htmlFor={id}>
-        <span className="backroad-label">{label}</span>
-      </label>
-      <input
-        id={id}
-        type="number"
-        defaultValue={defaultValue}
-        min={min}
-        max={max}
-        className="input input-bordered w-full max-w-xs"
-      />
+    <div className="flex w-full max-w-xs flex-col gap-2">
+      <Label htmlFor={id}>{label}</Label>
+      <div className="flex items-center gap-2">
+        <Input
+          id={id}
+          type="number"
+          defaultValue={defaultValue}
+          min={min}
+          max={max}
+        />
+        <Button
+          type="button"
+          variant="outline"
+          size="icon"
+          aria-label="Decrement"
+        >
+          <Minus className="size-4" />
+        </Button>
+        <Button
+          type="button"
+          variant="outline"
+          size="icon"
+          aria-label="Increment"
+        >
+          <Plus className="size-4" />
+        </Button>
+      </div>
     </div>
   );
 };

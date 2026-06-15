@@ -1,17 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+// Mirrors libs/backroad-components/src/lib/components/stats.tsx — the
+// token-driven, daisyUI-free stats card.
 const Stats = ({
   items,
 }: {
-  items: Array<{ title: string; value: string; description?: string }>;
+  items: Array<{ label: string; value: string; description?: string }>;
 }) => (
-  <div className="stats shadow">
+  <div className="flex min-h-[100px] flex-wrap divide-x divide-border rounded-lg border border-border bg-card text-card-foreground shadow-sm">
     {items.map((s) => (
-      <div className="stat" key={s.title}>
-        <div className="stat-title text-base-content/80">{s.title}</div>
-        <div className="stat-value">{s.value}</div>
+      <div className="flex flex-col gap-1 px-6 py-4" key={s.label}>
+        <div className="text-sm text-muted-foreground">{s.label}</div>
+        <div className="text-2xl font-semibold text-primary">{s.value}</div>
         {s.description && (
-          <div className="stat-desc text-base-content/70">{s.description}</div>
+          <div className="mt-2 text-sm text-muted-foreground">
+            {s.description}
+          </div>
         )}
       </div>
     ))}
@@ -29,9 +33,9 @@ type Story = StoryObj<typeof Stats>;
 export const Triple: Story = {
   args: {
     items: [
-      { title: 'Downloads', value: '31K', description: 'Jan 1st - Feb 1st' },
-      { title: 'New users', value: '4,200', description: '↗︎ 400 (22%)' },
-      { title: 'New registers', value: '1,200', description: '↘︎ 90 (14%)' },
+      { label: 'Downloads', value: '31K', description: 'Jan 1st - Feb 1st' },
+      { label: 'New users', value: '4,200', description: '↗︎ 400 (22%)' },
+      { label: 'New registers', value: '1,200', description: '↘︎ 90 (14%)' },
     ],
   },
 };

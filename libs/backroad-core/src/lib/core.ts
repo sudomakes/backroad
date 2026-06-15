@@ -197,6 +197,7 @@ type _ComponentBasePropsMapping = {
       fontSize: number;
       top?: number;
       left?: number;
+      variant?: 'dots' | 'bars';
     };
     value: null;
   };

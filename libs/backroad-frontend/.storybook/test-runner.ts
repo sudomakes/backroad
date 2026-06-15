@@ -2,17 +2,14 @@ import { type TestRunnerConfig } from '@storybook/test-runner';
 import { injectAxe, checkA11y } from 'axe-playwright';
 
 /**
- * Apply the Storybook theme to the page before the axe scan.
- * Backroad uses daisyUI's `data-theme` attribute plus Tailwind's
- * `.dark` class — we need both to be in sync for accurate contrast
- * calculations.
+ * Apply the Storybook light/dark mode to the page before the axe scan.
+ * Light/dark is keyed on Tailwind's `.dark` class on the root (the tweakcn
+ * palettes layer on top via `data-theme`, but contrast only depends on the
+ * resolved light/dark tokens, so the default palette is enough here).
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const applyTheme = async (page: any, theme: string) => {
   await page.evaluate((t: string) => {
-    // daisyUI uses data-theme for its component theming
-    document.documentElement.setAttribute('data-theme', t);
-    // Tailwind dark: variant is keyed on .dark class
     document.documentElement.classList.toggle('dark', t === 'dark');
   }, theme);
   // Wait for the class change to settle so Tailwind's cascade updates

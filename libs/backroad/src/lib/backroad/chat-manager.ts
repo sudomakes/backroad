@@ -1,4 +1,4 @@
-import { type BackroadNodeManager } from '../backroad';
+import { type BackroadNodeManager } from '.';
 import { type ManagerArgsMapping } from '@backroad/core';
 
 type ChatManagerProps = {

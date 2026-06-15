@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { Label, Switch } from 'backroad-ui';
 
-const Toggle = ({
+const ToggleField = ({
   label,
   defaultChecked,
 }: {
@@ -9,27 +10,22 @@ const Toggle = ({
 }) => {
   const id = `tg-${label.replace(/\W+/g, '-').toLowerCase()}`;
   return (
-    <div className="flex gap-3 items-center">
-      <input
-        id={id}
-        type="checkbox"
-        className="toggle toggle-primary"
-        defaultChecked={defaultChecked}
-      />
-      <label htmlFor={id} className="flex-1">
+    <div className="flex items-center gap-3">
+      <Switch id={id} defaultChecked={defaultChecked} />
+      <Label htmlFor={id} className="flex-1 font-normal">
         {label}
-      </label>
+      </Label>
     </div>
   );
 };
 
-const meta: Meta<typeof Toggle> = {
+const meta: Meta<typeof ToggleField> = {
   title: 'Components/Toggle',
-  component: Toggle,
+  component: ToggleField,
   parameters: { layout: 'centered' },
 };
 export default meta;
-type Story = StoryObj<typeof Toggle>;
+type Story = StoryObj<typeof ToggleField>;
 
 export const Off: Story = { args: { label: 'Notifications' } };
 export const On: Story = { args: { label: 'Dark mode', defaultChecked: true } };

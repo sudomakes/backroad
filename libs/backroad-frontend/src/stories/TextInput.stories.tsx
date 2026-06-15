@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { Input, Label } from 'backroad-ui';
 
 const TextInput = ({
   label,
@@ -11,16 +12,13 @@ const TextInput = ({
 }) => {
   const id = `ti-${label.replace(/\W+/g, '-').toLowerCase()}`;
   return (
-    <div className="form-control w-full max-w-xs">
-      <label className="label" htmlFor={id}>
-        <span className="backroad-label">{label}</span>
-      </label>
-      <input
+    <div className="flex w-full max-w-xs flex-col gap-2">
+      <Label htmlFor={id}>{label}</Label>
+      <Input
         id={id}
         type="text"
         defaultValue={defaultValue}
         placeholder={placeholder}
-        className="input input-bordered w-full max-w-xs"
       />
     </div>
   );

@@ -1,22 +1,25 @@
 import { useState } from 'react';
 import { BackroadComponentRenderer } from '../types/components';
 import { setBackroadValue } from '../socket';
+import { Checkbox as UICheckbox } from '../ui/checkbox';
+import { Label } from '../ui/label';
 
 export const Checkbox: BackroadComponentRenderer<'checkbox'> = (props) => {
   const [value, setValue] = useState(props.value);
   return (
-    <div className="flex gap-3 items-center">
-      <input
-        type="checkbox"
-        className="checkbox checkbox-primary"
-        checked={value}
-        onChange={(e) => {
-          const newValue = e.target.checked;
+    <div className="flex items-center gap-3">
+      <UICheckbox
+        id={props.id}
+        checked={!!value}
+        onCheckedChange={(checked) => {
+          const newValue = checked === true;
           setValue(newValue);
           setBackroadValue({ id: props.id, value: newValue });
         }}
       />
-      <span className="flex-1">{props.args.label}</span>
+      <Label htmlFor={props.id} className="flex-1 font-normal">
+        {props.args.label}
+      </Label>
     </div>
   );
 };

@@ -1,40 +1,35 @@
-import { PaperAirplaneIcon } from '@heroicons/react/24/outline';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { setRunUnsetBackroadValue } from '../../socket';
 import { BackroadComponentRenderer } from '../../types/components';
-// [contenteditable=true]:empty:before{
-//     content: attr(placeholder);
-//     pointer-events: none;
-//     display: block; /* For Firefox */
-//   }
+import {
+  PromptInput,
+  PromptInputSubmit,
+  PromptInputTextarea,
+  PromptInputToolbar,
+} from '../../ui/ai-elements/prompt-input';
+
 export const ChatInput: BackroadComponentRenderer<'chat_input'> = (props) => {
   const [value, setValue] = useState(props.value);
-  const handleValueSubmission = (value: string | null) => {
-    setRunUnsetBackroadValue({ id: props.id, value: value });
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const text = (value || '').trim();
+    if (!text) return;
+    setRunUnsetBackroadValue({ id: props.id, value: text });
     setValue('');
   };
+
   return (
-    <div
-      className={`border-base-300 border p-2 rounded-lg flex items-start bg-base-200`}
-    >
-      <textarea
+    <PromptInput onSubmit={handleSubmit}>
+      <PromptInputTextarea
         value={value || ''}
         onChange={(e) => setValue(e.target.value || '')}
-        onKeyUp={(e) => {
-          if (e.key === 'Enter') {
-            handleValueSubmission(e.currentTarget.value);
-            e.currentTarget.blur();
-          }
-        }}
         placeholder={props.args.placeholder}
-        className={`flex-1 bg-transparent focus:outline-none`}
       />
-      <PaperAirplaneIcon
-        width={20}
-        onClick={() => {
-          // handleValueSubmission(value)
-        }}
-      />
-    </div>
+      <PromptInputToolbar>
+        <span />
+        <PromptInputSubmit disabled={!value} />
+      </PromptInputToolbar>
+    </PromptInput>
   );
 };

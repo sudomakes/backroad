@@ -1,46 +1,34 @@
-import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from 'backroad-ui';
 
-// Mirrors libs/backroad-components/src/lib/containers/tabs.tsx: daisyui
-// .tabs / .tab / .tab-lifted / .tab-active with click-based selection.
-// Adds button semantics + keyboard activation so a11y rules pass —
-// changes axe surfaces here are real fixes for the production
-// component too.
-const Tabs = ({ labels }: { labels: string[] }) => {
-  const [active, setActive] = useState(0);
-  return (
-    <div className="w-96">
-      <div role="tablist" className="tabs w-full">
+// Renders the real shadcn Tabs (Radix under the hood) shipped by
+// backroad-components, mirroring the tabs container renderer.
+const TabsDemo = ({ labels }: { labels: string[] }) => (
+  <div className="w-96">
+    <Tabs defaultValue="0" className="w-full">
+      <TabsList className="w-full">
         {labels.map((label, idx) => (
-          <button
-            key={label}
-            type="button"
-            role="tab"
-            aria-selected={active === idx}
-            tabIndex={active === idx ? 0 : -1}
-            className={`tab tab-lifted ${
-              active === idx ? 'tab-active' : 'text-base-content/70'
-            }`}
-            onClick={() => setActive(idx)}
-          >
+          <TabsTrigger key={label} value={String(idx)}>
             {label}
-          </button>
+          </TabsTrigger>
         ))}
-      </div>
-      <div role="tabpanel" className="mt-4 p-4">
-        <p>Content for {labels[active]}.</p>
-      </div>
-    </div>
-  );
-};
+      </TabsList>
+      {labels.map((label, idx) => (
+        <TabsContent key={label} value={String(idx)} className="mt-4 p-4">
+          <p>Content for {label}.</p>
+        </TabsContent>
+      ))}
+    </Tabs>
+  </div>
+);
 
-const meta: Meta<typeof Tabs> = {
+const meta: Meta<typeof TabsDemo> = {
   title: 'Containers/Tabs',
-  component: Tabs,
+  component: TabsDemo,
   parameters: { layout: 'centered' },
 };
 export default meta;
-type Story = StoryObj<typeof Tabs>;
+type Story = StoryObj<typeof TabsDemo>;
 
 export const ThreeTabs: Story = {
   args: { labels: ['Overview', 'Details', 'Settings'] },

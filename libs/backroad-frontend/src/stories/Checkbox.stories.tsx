@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { Checkbox, Label } from 'backroad-ui';
 
-const Checkbox = ({
+const CheckboxField = ({
   label,
   defaultChecked,
 }: {
@@ -9,27 +10,22 @@ const Checkbox = ({
 }) => {
   const id = `cb-${label.replace(/\W+/g, '-').toLowerCase()}`;
   return (
-    <div className="flex gap-3 items-center">
-      <input
-        id={id}
-        type="checkbox"
-        className="checkbox checkbox-primary"
-        defaultChecked={defaultChecked}
-      />
-      <label htmlFor={id} className="flex-1">
+    <div className="flex items-center gap-3">
+      <Checkbox id={id} defaultChecked={defaultChecked} />
+      <Label htmlFor={id} className="flex-1 font-normal">
         {label}
-      </label>
+      </Label>
     </div>
   );
 };
 
-const meta: Meta<typeof Checkbox> = {
+const meta: Meta<typeof CheckboxField> = {
   title: 'Components/Checkbox',
-  component: Checkbox,
+  component: CheckboxField,
   parameters: { layout: 'centered' },
 };
 export default meta;
-type Story = StoryObj<typeof Checkbox>;
+type Story = StoryObj<typeof CheckboxField>;
 
 export const Unchecked: Story = { args: { label: 'Accept terms' } };
 export const Checked: Story = {

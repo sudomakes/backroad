@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { Label, RadioGroup, RadioGroupItem } from 'backroad-ui';
 
-const Radio = ({
+const RadioField = ({
   label,
   options,
   defaultValue,
@@ -11,38 +12,32 @@ const Radio = ({
 }) => {
   const name = `r-${label.replace(/\W+/g, '-').toLowerCase()}`;
   return (
-    <fieldset className="form-control">
-      <legend className="label">
-        <span className="backroad-label">{label}</span>
-      </legend>
-      <div className="flex flex-col gap-2">
+    <div className="flex w-full max-w-xs flex-col gap-3">
+      <span className="backroad-label">{label}</span>
+      <RadioGroup defaultValue={defaultValue}>
         {options.map((opt) => {
           const id = `${name}-${opt.replace(/\W+/g, '-').toLowerCase()}`;
           return (
-            <div key={opt} className="flex gap-3 items-center">
-              <input
-                id={id}
-                type="radio"
-                name={name}
-                className="radio radio-primary"
-                defaultChecked={defaultValue === opt}
-              />
-              <label htmlFor={id}>{opt}</label>
+            <div key={opt} className="flex items-center gap-2">
+              <RadioGroupItem value={opt} id={id} />
+              <Label htmlFor={id} className="font-normal">
+                {opt}
+              </Label>
             </div>
           );
         })}
-      </div>
-    </fieldset>
+      </RadioGroup>
+    </div>
   );
 };
 
-const meta: Meta<typeof Radio> = {
+const meta: Meta<typeof RadioField> = {
   title: 'Components/Radio',
-  component: Radio,
+  component: RadioField,
   parameters: { layout: 'centered' },
 };
 export default meta;
-type Story = StoryObj<typeof Radio>;
+type Story = StoryObj<typeof RadioField>;
 
 export const Default: Story = {
   args: {

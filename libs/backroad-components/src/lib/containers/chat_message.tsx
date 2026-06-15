@@ -5,8 +5,11 @@ import { LoadingSpinner } from '../components/loading_spinner';
 import { useEffect, useState } from 'react';
 import { socket } from '../socket';
 import { BackroadContainer } from '@backroad/core';
-const leftAlignClasses = 'flex-row text-left';
-const rightAlignClasses = 'flex-row-reverse !text-right';
+import {
+  Message,
+  MessageAvatar,
+  MessageContent,
+} from '../ui/ai-elements/message';
 
 export const ChatMessage: BackroadContainerRenderer<'chat_message'> = (
   props
@@ -30,33 +33,17 @@ export const ChatMessage: BackroadContainerRenderer<'chat_message'> = (
       socket.off('props_change', handlePropsChange);
     };
   }, [loading]);
+
+  // Avatar side: explicit `avatarPlacement` wins, otherwise human messages
+  // sit on the right (`user`) and everything else on the left (`assistant`).
+  const isUser = props.args.avatarPlacement
+    ? props.args.avatarPlacement === 'right'
+    : props.args.by === 'human';
+
   return (
-    <div
-      className={`flex gap-3 items-start ${
-        props.args.avatarPlacement
-          ? { left: leftAlignClasses, right: rightAlignClasses }[
-              props.args.avatarPlacement
-            ]
-          : props.args.by
-          ? {
-              ai: leftAlignClasses,
-              human: rightAlignClasses,
-            }[props.args.by]
-          : leftAlignClasses
-      }`}
-    >
-      <div className="bg-primary text-primary-content p-3 rounded-xl">
-        {props.args.avatar ? (
-          <img src={props.args.avatar} alt={`${props.args.by} message`} />
-        ) : (
-          { ai: <CpuChipIcon width={24} />, human: <UserIcon width={24} /> }[
-            props.args.by
-          ]
-        )}
-      </div>
-      <div className="flex-1">
+    <Message from={isUser ? 'user' : 'assistant'}>
+      <MessageContent>
         <Base {...{ ...props, type: 'base' }} />
-        {/* {props.children.map(child => <TreeRender tree={child} key={child.path} />)} */}
         {loading && (
           <LoadingSpinner
             path={props.path}
@@ -66,7 +53,12 @@ export const ChatMessage: BackroadContainerRenderer<'chat_message'> = (
             args={{ fontSize: 6.5, top: 21, left: 18 }}
           />
         )}
-      </div>
-    </div>
+      </MessageContent>
+      <MessageAvatar src={props.args.avatar} name={props.args.by}>
+        {{ ai: <CpuChipIcon width={20} />, human: <UserIcon width={20} /> }[
+          props.args.by
+        ] ?? <CpuChipIcon width={20} />}
+      </MessageAvatar>
+    </Message>
   );
 };
