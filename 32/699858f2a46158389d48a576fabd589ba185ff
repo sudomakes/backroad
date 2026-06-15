@@ -1,0 +1,33 @@
+libs/backroad-frontend/src/stories/Markdown.stories.tsx
+  s_40a2c6aeb0a81c::t_f9b154d7f23a0a 1-28,55-56,58-87,111-135
+  s_cb042d1013c8ad::t_c99e2d97e7226e 29-54,57
+  s_cb042d1013c8ad::t_5050cbda683489 88-110
+libs/backroad-components/src/lib/containers/columns.tsx
+  s_cb042d1013c8ad::t_d1f08c13dab85f 16-20
+libs/backroad-frontend/src/styles.css
+  s_40a2c6aeb0a81c::t_34b9a09acba285 506-513,515-519,523-546
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "32699858f2a46158389d48a576fabd589ba185ff",
+  "prompts": {},
+  "sessions": {
+    "s_40a2c6aeb0a81c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f6bc7c88-8b9e-49e8-b954-b3b968ef2906",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    },
+    "s_cb042d1013c8ad": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cfc5bc12-dba5-4bde-886e-56ca83c3ea7f",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
