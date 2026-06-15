@@ -5,7 +5,7 @@ import {
 } from '@backroad/core';
 import { TreeRender, socket } from 'backroad-components';
 import { set } from 'lodash';
-import { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import ReactGA from 'react-ga4';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import superjson from 'superjson';
@@ -30,21 +30,8 @@ export function App() {
     // larger bundle now that better-auth-ui is included). Seed initial
     // state from `socket.connected` so we don't sit forever on
     // "Disconnected" after a missed `connect` event.
-    if (socket.connected) {
-      setConnected(true);
-      socket.emit(
-        'run_script',
-        { pathname: window.location.pathname },
-        () => undefined
-      );
-    }
-    const onConnect = () => {
-      setConnected(true);
-      console.log('sending run script request');
-      socket.emit('run_script', { pathname: window.location.pathname }, () => {
-        console.log('ran script');
-      });
-    };
+    if (socket.connected) setConnected(true);
+    const onConnect = () => setConnected(true);
     const onDisconnect = () => setConnected(false);
     socket.on('connect', onConnect);
     socket.on('disconnect', onDisconnect);
@@ -54,20 +41,18 @@ export function App() {
     };
   }, []);
 
-  // In-app navigation (React Router <Link>) changes the URL client-side
-  // without a socket round-trip, so the server would never learn the new
-  // path. Re-emit run_script on pathname change so the executor re-runs with
-  // the correct currentPath. Skip the initial mount — the connect effect
-  // already fires the first run — to avoid a double run on load.
+  // A run is triggered whenever we're connected and on a known path. This
+  // single rule covers both cases that need an initial/refresh run:
+  //   - (re)connect: `connected` flips true → emit
+  //   - in-app navigation: React Router <Link> changes the URL client-side
+  //     with no socket round-trip, so `location.pathname` changes → emit
+  // Gating on `connected` (which starts false) means mount alone never emits —
+  // there's no duplicate initial run to guard against.
   const location = useLocation();
-  const didMountRef = useRef(false);
   useEffect(() => {
-    if (!didMountRef.current) {
-      didMountRef.current = true;
-      return;
-    }
+    if (!connected) return;
     socket.emit('run_script', { pathname: location.pathname }, () => undefined);
-  }, [location.pathname]);
+  }, [connected, location.pathname]);
 
   const config = useBackroadConfig();
   useEffect(() => {
