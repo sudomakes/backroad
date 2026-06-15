@@ -1,3 +1,15 @@
+## [1.14.1](https://github.com/sudomakes/backroad/compare/v1.14.0...v1.14.1) (2026-06-15)
+
+### Bug Fixes
+
+- **layout:** contain wide content within columns and code blocks ([3269985](https://github.com/sudomakes/backroad/commit/32699858f2a46158389d48a576fabd589ba185ff))
+- re-run on navigation, stateless currentPath, a11y for code blocks ([7ed7845](https://github.com/sudomakes/backroad/commit/7ed784552ec66bc7e73609b2c8272597813128f3))
+
+### Refactoring
+
+- **app:** extract useRunScript hook for clarity ([5110da6](https://github.com/sudomakes/backroad/commit/5110da6654d3e34a0c1a3c3a3aecfdeab2e7b8be))
+- **app:** single run-trigger effect, drop didMount guard ([21b34cc](https://github.com/sudomakes/backroad/commit/21b34ccc7c8022e7dd584413385c746a36461a1e))
+
 ## [1.14.0](https://github.com/sudomakes/backroad/compare/v1.13.2...v1.14.0) (2026-06-15)
 
 ### Features
