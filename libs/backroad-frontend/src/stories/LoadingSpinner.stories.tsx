@@ -62,30 +62,39 @@ export const BarsAmethystHaze: Story = createStory('bars', 'amethyst-haze');
 export const AllVariants: Story = {
   render: () => (
     <div style={{ padding: '2rem' }} className="space-y-8">
-      {['default', 'claude', 'twitter', 'supabase', 'amethyst-haze'].map(
-        (theme) => (
-          <div key={theme} data-theme={theme} className="space-y-4">
-            <h4 className="text-sm font-medium text-muted-foreground">
-              {theme}
-            </h4>
-            <div className="flex items-center gap-4">
-              <LoadingSpinner
-                path="story"
-                id="dots"
-                type="loading_spinner"
-                value={null}
-                args={{ fontSize: 14, top: 0, left: 0, variant: 'dots' }}
-              />
-              <LoadingSpinner
-                path="story"
-                id="bars"
-                type="loading_spinner"
-                value={null}
-                args={{ fontSize: 14, top: 0, left: 0, variant: 'bars' }}
-              />
+      {/* Every theme is rendered in BOTH light and dark so each mode's contrast
+          is independently scanned — otherwise a broken mode rots unnoticed. */}
+      {['default', 'claude', 'twitter', 'supabase', 'amethyst-haze'].flatMap(
+        (theme) =>
+          (['light', 'dark'] as const).map((mode) => (
+            <div
+              key={`${theme}-${mode}`}
+              data-theme={theme}
+              className={`space-y-4 rounded-lg bg-background p-4 text-foreground${
+                mode === 'dark' ? ' dark' : ''
+              }`}
+            >
+              <h4 className="text-sm font-medium text-foreground">
+                {theme} ({mode})
+              </h4>
+              <div className="flex items-center gap-4">
+                <LoadingSpinner
+                  path="story"
+                  id="dots"
+                  type="loading_spinner"
+                  value={null}
+                  args={{ fontSize: 14, top: 0, left: 0, variant: 'dots' }}
+                />
+                <LoadingSpinner
+                  path="story"
+                  id="bars"
+                  type="loading_spinner"
+                  value={null}
+                  args={{ fontSize: 14, top: 0, left: 0, variant: 'bars' }}
+                />
+              </div>
             </div>
-          </div>
-        )
+          ))
       )}
     </div>
   ),

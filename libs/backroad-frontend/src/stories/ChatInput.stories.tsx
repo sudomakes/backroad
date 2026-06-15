@@ -91,18 +91,20 @@ export const AllThemes: Story = {
   render: () => (
     <div style={{ padding: '2rem' }} className="space-y-8">
       {themes.map((theme) => (
-        <div key={theme} data-theme={theme} className="space-y-4">
-          <h4 className="text-sm font-medium text-muted-foreground">
+        <div
+          key={theme}
+          data-theme={theme}
+          className="space-y-4 rounded-lg bg-background p-4 text-foreground"
+        >
+          <h4 className="text-sm font-medium text-foreground">
             {theme} (light)
           </h4>
-          <ChatInputDemo
-            placeholder={`Send a message (${theme})…`}
-            theme={theme}
-          />
+          {/* No `theme` prop: the demos inherit the swatch's theme context so
+              text + background resolve from one coherent palette. */}
+          <ChatInputDemo placeholder={`Send a message (${theme})…`} />
           <ChatInputDemo
             placeholder={`Filled (${theme})`}
             value="Sample message"
-            theme={theme}
           />
         </div>
       ))}
@@ -110,19 +112,15 @@ export const AllThemes: Story = {
         <div
           key={`${theme}-dark`}
           data-theme={theme}
-          className="dark space-y-4"
+          className="dark space-y-4 rounded-lg bg-background p-4 text-foreground"
         >
-          <h4 className="text-sm font-medium text-muted-foreground">
+          <h4 className="text-sm font-medium text-foreground">
             {theme} (dark)
           </h4>
-          <ChatInputDemo
-            placeholder={`Send a message (${theme} dark)…`}
-            theme={theme}
-          />
+          <ChatInputDemo placeholder={`Send a message (${theme} dark)…`} />
           <ChatInputDemo
             placeholder={`Filled (${theme} dark)`}
             value="Sample message"
-            theme={theme}
           />
         </div>
       ))}

@@ -164,33 +164,41 @@ themeStories.forEach(({ name, args }) => {
 export const AllThemes: Story = {
   render: () => (
     <div style={{ padding: '2rem' }} className="space-y-8">
-      {themes.map((theme) => (
-        <div key={theme} data-theme={theme} className="space-y-4">
-          <h4 className="text-sm font-medium text-muted-foreground">{theme}</h4>
-          <div className="space-y-3">
-            <ChatMessage
-              from="assistant"
-              text="Assistant message"
-              theme={theme}
-            />
-            <ChatMessage from="user" text="User message" theme={theme} />
-            <ChatMessage
-              from="assistant"
-              text="Loading with dots…"
-              loading
-              loadingVariant="dots"
-              theme={theme}
-            />
-            <ChatMessage
-              from="assistant"
-              text="Loading with bars…"
-              loading
-              loadingVariant="bars"
-              theme={theme}
-            />
+      {/* Every theme is rendered in BOTH light and dark so each mode's contrast
+          is independently scanned — otherwise a broken mode rots unnoticed. */}
+      {themes.flatMap((theme) =>
+        (['light', 'dark'] as const).map((mode) => (
+          <div
+            key={`${theme}-${mode}`}
+            data-theme={theme}
+            className={`space-y-4 rounded-lg bg-background p-4 text-foreground${
+              mode === 'dark' ? ' dark' : ''
+            }`}
+          >
+            <h4 className="text-sm font-medium text-foreground">
+              {theme} ({mode})
+            </h4>
+            {/* No `theme` prop: the messages inherit the swatch's theme context
+                so bubble + text resolve from one coherent palette. */}
+            <div className="space-y-3">
+              <ChatMessage from="assistant" text="Assistant message" />
+              <ChatMessage from="user" text="User message" />
+              <ChatMessage
+                from="assistant"
+                text="Loading with dots…"
+                loading
+                loadingVariant="dots"
+              />
+              <ChatMessage
+                from="assistant"
+                text="Loading with bars…"
+                loading
+                loadingVariant="bars"
+              />
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      )}
     </div>
   ),
 };
