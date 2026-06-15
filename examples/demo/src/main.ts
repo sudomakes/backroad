@@ -8,7 +8,7 @@ const initialMessages = [
 const auth = buildAuth();
 
 run(
-  (br, { currentPath }) => {
+  async (br, { currentPath }) => {
     // Auth gate: only enforced when auth env vars are configured. Mirrors
     // Streamlit's top-of-script `if not st.user.is_logged_in: ...` pattern.
     if (auth && !br.user.isLoggedIn) {
@@ -58,7 +58,7 @@ run(
     // const br = brBase.base({});
     br.write({ body: `# Backroad LLM Example\n---` });
     const button = br.button({ label: 'Reset' });
-    const chatManager = new ChatManager({
+    const chatManager = await ChatManager.create({
       br,
       messagesStateName: 'messages',
       initialMessages,

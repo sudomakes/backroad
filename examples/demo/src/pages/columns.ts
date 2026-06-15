@@ -21,6 +21,22 @@ export const backroadColumnsExample = async (br: BackroadNodeManager) => {
     items: [{ label: 'Last 30 days', value: '99.97%', delta: '-0.01%' }],
   });
   col3.write({ body: 'One minor incident on Tuesday night.' });
+  // Dock a chat input at the bottom of column 3. The grid stretches all cells
+  // to the tallest row, so col3 gets a bounded height to pin against.
+  col3.bottom().chatInput({ id: 'col-chat', placeholder: 'Chat in column 3' });
+
+  // Make column 1 tall so the grid row (and the stretched col3) has real height.
+  col1.write({
+    body: '- Enterprise upsells\n- New seat expansion\n- Annual prepay\n- Reduced churn\n- Marketplace fees\n- Partner referrals\n- Usage overages',
+  });
+
+  br.write({ body: '---' });
+  br.write({ body: '## Dock inside a tab (`tab.bottom()`)' });
+  const [tabA, tabB] = await br.tabs({ labels: ['Chat tab', 'Plain tab'] });
+  tabA.write({ body: '### Conversation' });
+  tabA.write({ body: 'A docked input lives at the bottom of this tab panel.' });
+  tabA.bottom().chatInput({ id: 'tab-chat', placeholder: 'Chat in tab A' });
+  tabB.write({ body: 'Nothing docked here — ordinary tab content.' });
 
   br.write({ body: '---' });
   br.write({ body: '## Custom ratio (`columns: [1, 2]`)' });

@@ -8,7 +8,7 @@ export const backroadLLMExample = async (br: BackroadNodeManager) => {
   messages.forEach((message) => {
     br.chatMessage({ by: message.by }).write({ body: message.content });
   });
-  const input = br.chatInput({ id: 'input' });
+  const input = br.bottom().chatInput({ id: 'input' });
   if (input) {
     br.setValue('messages', [
       ...messages,

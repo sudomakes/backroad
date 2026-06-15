@@ -17,7 +17,12 @@ export class ChatManager {
   userInput: string | null;
   userInputComplete: boolean;
   awaitingLlmResponse = false;
-  constructor(props: ChatManagerProps) {
+  // Use `await ChatManager.create(...)`. The constructor only does synchronous
+  // setup; `initialize` is async (a stored message's content may be a
+  // Promise<string> that must be awaited), and it must finish before callers
+  // read `userInput`/`userInputComplete` — so construction is gated behind an
+  // awaited factory rather than a fire-and-forget call in the constructor.
+  private constructor(props: ChatManagerProps) {
     this.br = props.br;
     this.messagesStateName = props.messagesStateName;
     this.initialMessages = props.initialMessages;
@@ -28,9 +33,13 @@ export class ChatManager {
     );
     this.userInput = null;
     this.userInputComplete = false;
-    this.initialize(props.inputId);
   }
-  private initialize(inputId: string) {
+  static async create(props: ChatManagerProps): Promise<ChatManager> {
+    const manager = new ChatManager(props);
+    await manager.initialize(props.inputId);
+    return manager;
+  }
+  private async initialize(inputId: string) {
     if (
       !this.messages.every(
         (message) => message.by === 'ai' || message.by === 'human'
@@ -44,19 +53,25 @@ export class ChatManager {
         this.br.chatMessage({ by }).write({ body: content as string });
       });
 
-    // Only show chat input if the last message was from an llm
-    if (this.messages.slice(-1)[0].by === 'ai') {
-      this.userInput = this.br.chatInput({ id: inputId });
-    }
+    // Render the input once, unconditionally, docked in a `bottom` container.
+    // It used to be emitted only when the last message was from the llm — and
+    // re-emitted again inside addAIMessage — purely to keep it ordered *below*
+    // the newest message in normal flow. The dock pins it to the bottom of the
+    // frame regardless of emit order, so a single render here is enough.
+    const inputValue = this.br.bottom().chatInput({ id: inputId });
 
-    if (this.userInput) {
+    const lastMessage = this.messages.slice(-1)[0];
+    if (inputValue) {
+      // The user just submitted a prompt — record it so the next run drives the
+      // llm turn (where lastMessage will be this human message).
+      this.userInput = inputValue;
       this.br.setValue(this.messagesStateName, [
         ...this.messages,
-        { by: 'human', content: this.userInput },
+        { by: 'human', content: inputValue },
       ]);
-    } else if (this.messages.slice(-1)[0].by === 'human') {
+    } else if (lastMessage.by === 'human') {
       this.userInputComplete = true;
-      this.userInput = this.messages.slice(-1)[0].content as string;
+      this.userInput = await lastMessage.content;
     }
   }
 
@@ -68,7 +83,6 @@ export class ChatManager {
       loadingPromise:
         typeof message.content !== 'string' ? message.content : undefined,
     });
-    this.userInput = this.br.chatInput({ id: this.inputId });
     if (typeof message.content !== 'string') {
       message.content.then((body) => {
         this.br.setValue(this.messagesStateName, [

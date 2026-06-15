@@ -3,14 +3,7 @@
 // `exports` map and fails to resolve under `bundler`/`node16` moduleResolution
 // (e.g. the Storybook tsconfig). Each component IS a TypedChartComponent<T>,
 // so `Parameters<typeof X>[0]` yields the identical props type.
-import type {
-  Line,
-  Bar,
-  Pie,
-  Doughnut,
-  Radar,
-  Scatter,
-} from 'react-chartjs-2';
+import type { Line, Bar, Pie, Doughnut, Radar, Scatter } from 'react-chartjs-2';
 import type { Props } from 'react-select';
 import type { ColumnHelper } from '@tanstack/react-table';
 import { HTMLProps, IframeHTMLAttributes } from 'react';
@@ -267,6 +260,10 @@ type ContainerArgsMapping = {
     args: { columns: number | number[] };
   };
   sidebar: {
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    args: {};
+  };
+  bottom: {
     // eslint-disable-next-line @typescript-eslint/ban-types
     args: {};
   };
