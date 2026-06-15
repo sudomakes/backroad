@@ -1,4 +1,16 @@
-import type { TypedChartComponent } from 'react-chartjs-2/dist/types';
+// Import the typed chart components from the package root rather than the
+// deep `react-chartjs-2/dist/types` path, which isn't in the package's
+// `exports` map and fails to resolve under `bundler`/`node16` moduleResolution
+// (e.g. the Storybook tsconfig). Each component IS a TypedChartComponent<T>,
+// so `Parameters<typeof X>[0]` yields the identical props type.
+import type {
+  Line,
+  Bar,
+  Pie,
+  Doughnut,
+  Radar,
+  Scatter,
+} from 'react-chartjs-2';
 import type { Props } from 'react-select';
 import type { ColumnHelper } from '@tanstack/react-table';
 import { HTMLProps, IframeHTMLAttributes } from 'react';
@@ -124,27 +136,27 @@ type _ComponentBasePropsMapping = {
   };
   line_chart: {
     // eslint-disable-next-line @typescript-eslint/ban-types
-    args: Parameters<TypedChartComponent<'line'>>[0];
+    args: Parameters<typeof Line>[0];
     value: null;
   };
   bar_chart: {
-    args: Parameters<TypedChartComponent<'bar'>>[0];
+    args: Parameters<typeof Bar>[0];
     value: null;
   };
   pie_chart: {
-    args: Parameters<TypedChartComponent<'pie'>>[0];
+    args: Parameters<typeof Pie>[0];
     value: null;
   };
   doughnut_chart: {
-    args: Parameters<TypedChartComponent<'doughnut'>>[0];
+    args: Parameters<typeof Doughnut>[0];
     value: null;
   };
   radar_chart: {
-    args: Parameters<TypedChartComponent<'radar'>>[0];
+    args: Parameters<typeof Radar>[0];
     value: null;
   };
   scatter_chart: {
-    args: Parameters<TypedChartComponent<'scatter'>>[0];
+    args: Parameters<typeof Scatter>[0];
     value: null;
   };
 
@@ -197,6 +209,7 @@ type _ComponentBasePropsMapping = {
       fontSize: number;
       top?: number;
       left?: number;
+      variant?: 'dots' | 'bars';
     };
     value: null;
   };

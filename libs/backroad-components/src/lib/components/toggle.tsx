@@ -1,22 +1,23 @@
 import { useState } from 'react';
 import { BackroadComponentRenderer } from '../types/components';
 import { setBackroadValue } from '../socket';
+import { Switch, Label } from 'backroad-ui';
 
 export const Toggle: BackroadComponentRenderer<'toggle'> = (props) => {
   const [value, setValue] = useState(props.value);
   return (
-    <div className="flex gap-3 items-center">
-      <input
-        type="checkbox"
-        className="toggle toggle-primary"
-        checked={value}
-        onChange={(e) => {
-          const newValue = e.target.checked;
-          setValue(newValue);
-          setBackroadValue({ id: props.id, value: newValue });
+    <div className="flex items-center gap-3">
+      <Switch
+        id={props.id}
+        checked={!!value}
+        onCheckedChange={(checked) => {
+          setValue(checked);
+          setBackroadValue({ id: props.id, value: checked });
         }}
       />
-      <span className="flex-1">{props.args.label}</span>
+      <Label htmlFor={props.id} className="flex-1 font-normal">
+        {props.args.label}
+      </Label>
     </div>
   );
 };

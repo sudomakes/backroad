@@ -211,17 +211,12 @@ jobs:
 
   # Storybook + axe accessibility scan. Builds storybook, serves it
   # statically, then runs @storybook/test-runner with axe-playwright on
-  # every story. Runs twice — once per theme — so contrast issues in
-  # both light and dark mode are caught.
+  # every story. Stories own their theme + light/dark mode per swatch (the
+  # AllThemes showcases render each theme in both modes), so a single scan
+  # covers light and dark — no per-mode matrix needed.
   storybook-a11y:
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    strategy:
-      fail-fast: false
-      matrix:
-        theme: [light, dark]
-    env:
-      STORYBOOK_THEME: ${{ matrix.theme }}
     steps:
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
@@ -241,7 +236,7 @@ jobs:
         run: pnpm --filter backroad-frontend exec playwright install --with-deps chromium
       - name: Build storybook
         run: pnpm --filter backroad-frontend run storybook:build
-      - name: Serve storybook + run axe (${{ matrix.theme }})
+      - name: Serve storybook + run axe
         run: |
           pnpm --filter backroad-frontend exec http-server ../../dist/storybook --port 6006 --silent &
           pnpm --filter backroad-frontend exec wait-on tcp:6006 --timeout 30000
@@ -368,8 +363,7 @@ jobs:
             echo '- Test: ${{ needs.test.result }}'
             echo '- Build: ${{ needs.build.result }}'
             echo '- Knip: ${{ needs.knip.result }}'
-            echo '- Storybook a11y (light): ${{ needs.storybook-a11y.result }}'
-            echo '- Storybook a11y (dark): ${{ needs.storybook-a11y.result }}'
+            echo '- Storybook a11y: ${{ needs.storybook-a11y.result }}'
             echo '- E2E: ${{ needs.e2e.result }}'
             echo '- E2E (docs): ${{ needs.e2e-docs.result }}'
             echo '- Bundle size: ${{ needs.bundle-size.result }}'

@@ -1,16 +1,16 @@
 {
   "binaries": 0,
   "catalog": 0,
-  "dependencies": 30,
+  "dependencies": 28,
   "devDependencies": 8,
   "duplicates": 3,
   "enumMembers": 0,
   "exports": 5,
-  "files": 7,
+  "files": 6,
   "namespaceMembers": 0,
   "optionalPeerDependencies": 0,
-  "owners": 19,
+  "owners": 18,
   "types": 2,
-  "unlisted": 1,
+  "unlisted": 2,
   "unresolved": 1
 }

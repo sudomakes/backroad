@@ -55,9 +55,18 @@ export const run = async (
       }
     }
 
+    // Single chokepoint for every script run (initial render, set_value,
+    // run_script, unset_value). Emit the real running state around the
+    // executor — true on start, false once it settles (including async work) —
+    // so the client reflects actual execution instead of a fixed timeout.
     const runExecutor = async () => {
-      backroadSession.resetTree();
-      await executor(backroadSession.mainPageNodeManager);
+      socket.emit('running', true, () => undefined);
+      try {
+        backroadSession.resetTree();
+        await executor(backroadSession.mainPageNodeManager);
+      } finally {
+        socket.emit('running', false, () => undefined);
+      }
     };
     // execute once to populate defaults and stuff
 

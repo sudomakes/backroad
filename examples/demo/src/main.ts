@@ -73,7 +73,12 @@ run(
     }
   },
   {
-    theme: 'dark',
+    // Recommended defaults; users can change palette/mode in settings and
+    // their choice is remembered (persisted client-side, wins over these).
+    appearance: {
+      theme: 'claude',
+      mode: 'light',
+    },
     analytics: {
       google: 'G-77B7VHC5Z8',
     },

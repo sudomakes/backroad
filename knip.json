@@ -37,13 +37,20 @@
     "libs/backroad-components": {
       "entry": ["src/index.ts"],
       "project": ["src/**/*.{ts,tsx}"]
+    },
+    "libs/backroad-ui": {
+      "entry": ["src/index.ts"],
+      "project": ["src/**/*.{ts,tsx}"]
     }
   },
   "ignoreBinaries": ["lefthook"],
   "ignoreDependencies": [
-    // Docusaurus plugins are loaded by name from the config, not imported.
     "docusaurus-lunr-search",
     "lunr",
-    "@docusaurus/plugin-content-docs"
+    "@docusaurus/plugin-content-docs",
+    "tailwindcss",
+    "@tailwindcss/typography",
+    "tw-animate-css",
+    "postcss"
   ]
 }

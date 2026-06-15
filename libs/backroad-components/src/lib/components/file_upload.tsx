@@ -7,6 +7,7 @@ import {
   CloudArrowUpIcon,
 } from '@heroicons/react/24/outline';
 import { minimatch } from 'minimatch';
+import { Label, buttonVariants } from 'backroad-ui';
 
 const baseStyle = {
   flex: 1,
@@ -15,30 +16,30 @@ const baseStyle = {
   alignItems: 'center',
   padding: '20px',
   borderWidth: 2,
-  borderRadius: 2,
+  borderRadius: 'var(--radius)',
   maxWidth: 600,
-  borderColor: 'hsl(var(--nc))',
+  borderColor: 'var(--border)',
   borderStyle: 'dashed',
-  backgroundColor: 'hsl(var(--n))',
-  color: 'hsl(var(--nc))',
+  backgroundColor: 'var(--muted)',
+  color: 'var(--muted-foreground)',
   outline: 'none',
   cursor: 'pointer',
   transition: 'border .24s ease-in-out',
 };
 
 const focusedStyle = {
-  borderColor: 'hsl(var(--p))',
-  color: 'hsl(var(--p))',
+  borderColor: 'var(--ring)',
+  color: 'var(--foreground)',
 };
 
 const acceptStyle = {
-  color: 'hsl(var(--suc))',
-  borderColor: 'hsl(var(--suc))',
+  color: 'var(--primary)',
+  borderColor: 'var(--primary)',
 };
 
 const rejectStyle = {
-  color: 'hsl(var(--er))',
-  borderColor: 'hsl(var(--er))',
+  color: 'var(--destructive)',
+  borderColor: 'var(--destructive)',
 };
 
 export const FileUpload: BackroadComponentRenderer<'file_upload'> = (props) => {
@@ -127,14 +128,12 @@ export const FileUpload: BackroadComponentRenderer<'file_upload'> = (props) => {
 
   return (
     <div>
-      <label className="label">
-        <span className="backroad-label">{props.args.label}</span>
-      </label>
+      <Label className="mb-2">{props.args.label}</Label>
 
       <div {...getRootProps({ style: style })}>
         <input {...getInputProps()} />
-        <div className="flex gap-4 items-center w-full">
-          <div className="flex-1 flex gap-4 items-center">
+        <div className="flex w-full items-center gap-4">
+          <div className="flex flex-1 items-center gap-4">
             <CloudArrowUpIcon width={40} />
             <p>
               {acceptedFiles.length
@@ -144,7 +143,7 @@ export const FileUpload: BackroadComponentRenderer<'file_upload'> = (props) => {
                 : "Drag 'n' drop some files here, or click to select files"}{' '}
             </p>
           </div>
-          <div className="btn btn-primary">Upload Files</div>
+          <div className={buttonVariants()}>Upload Files</div>
           <div>
             <ClipboardDocumentIcon
               width={40}

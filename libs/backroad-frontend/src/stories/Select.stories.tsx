@@ -1,34 +1,24 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { backroadClientComponents } from 'backroad-components';
+import { ThemeMatrix } from './theme-matrix';
 
-const Select = ({
-  label,
-  options,
-  defaultValue,
-}: {
-  label: string;
-  options: string[];
-  defaultValue?: string;
-}) => {
-  const id = `s-${label.replace(/\W+/g, '-').toLowerCase()}`;
-  return (
-    <div className="form-control w-full max-w-xs">
-      <label className="label" htmlFor={id}>
-        <span className="backroad-label">{label}</span>
-      </label>
-      <select
-        id={id}
-        defaultValue={defaultValue}
-        className="select select-bordered w-full max-w-xs"
-      >
-        {options.map((o) => (
-          <option key={o} value={o}>
-            {o}
-          </option>
-        ))}
-      </select>
-    </div>
-  );
-};
+// The real `select` renderer. NOTE: backroad's select is react-select under the
+// hood (not the shadcn Select primitive) — rendering the real renderer keeps the
+// story honest about what the app actually shows.
+const Select = backroadClientComponents.select;
+const COUNTRIES = [
+  { value: 'in', label: 'India' },
+  { value: 'us', label: 'United States' },
+  { value: 'de', label: 'Germany' },
+  { value: 'jp', label: 'Japan' },
+];
+const select = (value: string) => ({
+  path: 'story',
+  id: 'story',
+  type: 'select' as const,
+  value,
+  args: { label: 'Country', options: COUNTRIES },
+});
 
 const meta: Meta<typeof Select> = {
   title: 'Components/Select',
@@ -38,10 +28,11 @@ const meta: Meta<typeof Select> = {
 export default meta;
 type Story = StoryObj<typeof Select>;
 
-export const Default: Story = {
-  args: {
-    label: 'Country',
-    options: ['India', 'United States', 'Germany', 'Japan'],
-    defaultValue: 'India',
-  },
+export const Default: Story = { render: () => <Select {...select('in')} /> };
+export const AllThemes: Story = {
+  render: () => (
+    <ThemeMatrix>
+      <Select {...select('in')} />
+    </ThemeMatrix>
+  ),
 };

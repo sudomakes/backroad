@@ -2,7 +2,8 @@ import { BackroadComponent } from '@backroad/core';
 import { useState } from 'react';
 import { setBackroadValue } from '../socket';
 import { handleKeyUpBlur } from '../helpers/handleKeyUp';
-import { PlusIcon, MinusIcon } from '@heroicons/react/24/outline';
+import { Minus, Plus } from 'lucide-react';
+import { Input, Label, Button } from 'backroad-ui';
 
 export const NumberInput = (props: BackroadComponent<'number_input', true>) => {
   const [inputValue, setInputValue] = useState(props.value);
@@ -15,12 +16,11 @@ export const NumberInput = (props: BackroadComponent<'number_input', true>) => {
     return operation(formattedValue);
   };
   return (
-    <div className="form-control w-full max-w-xs">
-      <label className="label">
-        <span className="backroad-label">{props.args.label}</span>
-      </label>
-      <label className="input-group">
-        <input
+    <div className="flex w-full max-w-xs flex-col gap-2">
+      <Label htmlFor={props.id}>{props.args.label}</Label>
+      <div className="flex items-center gap-2">
+        <Input
+          id={props.id}
           type="number"
           min={props.args.min}
           max={props.args.max}
@@ -30,35 +30,40 @@ export const NumberInput = (props: BackroadComponent<'number_input', true>) => {
           placeholder="Type here"
           onKeyUp={handleKeyUpBlur}
           onBlur={(e) => {
-            console.log('blur setting value');
             setBackroadValue({
               id: props.id,
               value: getFormattedValue(e.target.value),
             });
           }}
-          className="input input-bordered w-full max-w-xs [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+          className="[appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
         />
-        <span
+        <Button
+          type="button"
+          variant="outline"
+          size="icon"
+          aria-label="Decrement"
           onClick={() => {
             const newValue = inputValue - stepValue;
             setInputValue(newValue);
             setBackroadValue({ id: props.id, value: newValue });
           }}
-          className="cursor-pointer bg-secondary text-secondary-content hover:bg-secondary-focus hover:text-secondary-content"
         >
-          <MinusIcon width={15} />
-        </span>
-        <span
+          <Minus className="size-4" />
+        </Button>
+        <Button
+          type="button"
+          variant="outline"
+          size="icon"
+          aria-label="Increment"
           onClick={() => {
             const newValue = inputValue + stepValue;
             setInputValue(newValue);
             setBackroadValue({ id: props.id, value: newValue });
           }}
-          className="cursor-pointer bg-secondary text-secondary-content hover:bg-secondary-focus hover:text-secondary-content"
         >
-          <PlusIcon width={15} />
-        </span>
-      </label>
+          <Plus className="size-4" />
+        </Button>
+      </div>
     </div>
   );
 };

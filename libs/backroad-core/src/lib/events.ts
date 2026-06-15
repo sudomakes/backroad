@@ -1,5 +1,4 @@
-import type { Socket } from 'socket.io';
-import { DefaultEventsMap } from 'socket.io/dist/typed-events';
+import type { Socket, DefaultEventsMap } from 'socket.io';
 import { InitOptions } from 'react-ga4/types/ga4';
 import type { BackroadAuthInstance } from './auth';
 
@@ -9,7 +8,16 @@ export type BackroadConfig =
       analytics?: {
         google?: string | InitOptions[];
       };
-      theme?: 'light' | 'dark';
+      /**
+       * App-maker recommended defaults. Applied only until the user picks their
+       * own (a persisted client preference always wins), so these are
+       * recommendations, not overrides — unlike session-scoped backroad values.
+       */
+      appearance?: {
+        /** Palette name matching a frontend theme (e.g. 'claude', 'twitter'). */
+        theme?: string;
+        mode?: 'light' | 'dark' | 'system';
+      };
       server?: {
         port?: number;
       };
@@ -59,7 +67,9 @@ export type BackroadEventsMapping = {
     response?: void;
   };
   running: {
-    args: null;
+    // true when the server starts executing the script, false when it
+    // finishes — drives the live "Running" indicator (no client-side guesses).
+    args: boolean;
     response?: void;
   };
   props_change: {

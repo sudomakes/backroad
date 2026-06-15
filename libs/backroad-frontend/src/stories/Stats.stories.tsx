@@ -1,22 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { backroadClientComponents } from 'backroad-components';
+import { ThemeMatrix } from './theme-matrix';
 
-const Stats = ({
-  items,
-}: {
-  items: Array<{ title: string; value: string; description?: string }>;
-}) => (
-  <div className="stats shadow">
-    {items.map((s) => (
-      <div className="stat" key={s.title}>
-        <div className="stat-title text-base-content/80">{s.title}</div>
-        <div className="stat-value">{s.value}</div>
-        {s.description && (
-          <div className="stat-desc text-base-content/70">{s.description}</div>
-        )}
-      </div>
-    ))}
-  </div>
-);
+// The real `stats` renderer — including the up/down delta indicators (green ↗ /
+// red ↘) that the old hand-written story dropped entirely.
+const Stats = backroadClientComponents.stats;
+type Item = { label: string; value: string | number; delta?: string | number };
+const stats = (items: Item[]) => ({
+  path: 'story',
+  id: 'story',
+  type: 'stats' as const,
+  value: null,
+  args: { items },
+});
 
 const meta: Meta<typeof Stats> = {
   title: 'Components/Stats',
@@ -26,12 +22,17 @@ const meta: Meta<typeof Stats> = {
 export default meta;
 type Story = StoryObj<typeof Stats>;
 
-export const Triple: Story = {
-  args: {
-    items: [
-      { title: 'Downloads', value: '31K', description: 'Jan 1st - Feb 1st' },
-      { title: 'New users', value: '4,200', description: '↗︎ 400 (22%)' },
-      { title: 'New registers', value: '1,200', description: '↘︎ 90 (14%)' },
-    ],
-  },
+const ITEMS: Item[] = [
+  { label: 'Downloads', value: '31K' },
+  { label: 'New users', value: '4,200', delta: '+22%' },
+  { label: 'New registers', value: '1,200', delta: '-14%' },
+];
+
+export const Triple: Story = { render: () => <Stats {...stats(ITEMS)} /> };
+export const AllThemes: Story = {
+  render: () => (
+    <ThemeMatrix>
+      <Stats {...stats(ITEMS)} />
+    </ThemeMatrix>
+  ),
 };

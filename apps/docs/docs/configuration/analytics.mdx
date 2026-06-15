@@ -1,0 +1,72 @@
+---
+title: Analytics
+---
+
+# Analytics
+
+Backroad has built-in support for **Google Analytics 4 (GA4)**. Give it your
+measurement ID in the run config and Backroad initializes analytics in the
+visitor's browser automatically — no extra `<script>` tags or wiring.
+
+## Enabling Google Analytics
+
+Pass your GA4 measurement ID (it looks like `G-XXXXXXXXXX`) under
+`analytics.google` in the second argument to `run`:
+
+```ts
+import { run } from '@backroad/backroad';
+
+run(
+  (br) => {
+    // your app
+  },
+  {
+    analytics: {
+      google: 'G-XXXXXXXXXX',
+    },
+  }
+);
+```
+
+That's it. When a visitor connects, Backroad initializes GA4 (via
+[`react-ga4`](https://github.com/codler/react-ga4)) with your measurement ID and
+GA4's standard collection (page views, enhanced measurement) begins.
+
+## Advanced configuration
+
+For multiple data streams or custom gtag/GA options, pass an array of
+`react-ga4` init objects instead of a single string. The value of
+`analytics.google` is forwarded directly to `ReactGA.initialize(...)`, so any
+form `react-ga4` accepts works:
+
+```ts
+run(
+  (br) => {
+    // ...
+  },
+  {
+    analytics: {
+      google: [
+        {
+          trackingId: 'G-XXXXXXXXXX',
+          gaOptions: {
+            /* ga options */
+          },
+          gtagOptions: {
+            /* gtag options */
+          },
+        },
+      ],
+    },
+  }
+);
+```
+
+## Notes
+
+- **Client-side only.** Analytics is initialized in the browser after the
+  client connects to your Backroad server; it never runs server-side.
+- **Opt-in per environment.** Provide the measurement ID only where you want
+  tracking (e.g. production). Omit `analytics` entirely to disable it.
+- **Consent is your responsibility.** Make sure you meet any cookie/consent
+  requirements (GDPR and similar) that apply to your audience before enabling.

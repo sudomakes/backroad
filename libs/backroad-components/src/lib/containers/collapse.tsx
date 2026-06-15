@@ -13,7 +13,7 @@ import { Base } from './base';
 export const Collapse: BackroadContainerRenderer<'collapse'> = (props) => {
   return (
     <ReactAccordion allowZeroExpanded>
-      <AccordionItem className="border border-base-300 p-4 rounded-lg">
+      <AccordionItem className="rounded-lg border border-border p-4">
         <AccordionItemHeading className="">
           <AccordionItemButton>
             <AccordionItemState>

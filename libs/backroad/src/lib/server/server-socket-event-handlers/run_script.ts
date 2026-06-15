@@ -5,9 +5,7 @@ import { IServerSocketEventHandler } from './types';
 export const runScript: IServerSocketEventHandler<
   'run_script',
   () => Promise<void>
-> = (socket, backroadSession, context) => () => {
-  context();
-  socket.emit('running', null, () => {
-    console.log('running event emitted');
-  });
+> = (socket, backroadSession, context) => async () => {
+  // runExecutor emits the running start/end signal itself.
+  await context();
 };

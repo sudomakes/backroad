@@ -1,36 +1,29 @@
 import { useState } from 'react';
 import { BackroadComponentRenderer } from '../types/components';
 import { setBackroadValue } from '../socket';
+import { RadioGroup, RadioGroupItem, Label } from 'backroad-ui';
 
 export const Radio: BackroadComponentRenderer<'radio'> = (props) => {
   const [value, setValue] = useState(props.value);
   return (
-    <div className="form-control w-full max-w-xs">
-      <label className="label">
-        <span className="backroad-label">{props.args.label}</span>
-      </label>
-      {props.args.options.map((option) => {
-        return (
-          <div className="form-control" key={option}>
-            <label className="label cursor-pointer">
-              <span className="label-text">{option}</span>
-              <input
-                type="radio"
-                name={props.id}
-                value={option}
-                checked={value === option}
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    setValue(option);
-                    setBackroadValue({ id: props.id, value: option });
-                  }
-                }}
-                className="radio radio-primary"
-              />
-            </label>
+    <div className="flex w-full max-w-xs flex-col gap-3">
+      <span className="backroad-label">{props.args.label}</span>
+      <RadioGroup
+        value={value ?? undefined}
+        onValueChange={(option) => {
+          setValue(option);
+          setBackroadValue({ id: props.id, value: option });
+        }}
+      >
+        {props.args.options.map((option) => (
+          <div className="flex items-center gap-2" key={option}>
+            <RadioGroupItem value={option} id={`${props.id}-${option}`} />
+            <Label htmlFor={`${props.id}-${option}`} className="font-normal">
+              {option}
+            </Label>
           </div>
-        );
-      })}
+        ))}
+      </RadioGroup>
     </div>
   );
 };

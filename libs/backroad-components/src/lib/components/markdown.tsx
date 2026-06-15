@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export const Markdown: BackroadComponentRenderer<'markdown'> = (props) => {
   return (
-    <div className="prose max-w-none">
+    <div className="prose prose-inherit-color max-w-none">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{

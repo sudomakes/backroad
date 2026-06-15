@@ -6,41 +6,66 @@ import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
 
 # Themes
 
-Backroad's UI is themed with [daisyUI](https://daisyui.com/), which
-sits on top of Tailwind. Out of the box you get two themes — `light`
-and `dark` — and a navbar toggle for end users to flip between them.
+Backroad's UI is built on [shadcn/ui](https://ui.shadcn.com/) primitives over
+Tailwind. Theming has two independent axes:
 
-## Setting the initial theme
+- **Palette** (`theme`) — a named colour scheme. Built in: `default`, `claude`,
+  `twitter`, `supabase`, and `amethyst-haze`.
+- **Mode** (`mode`) — `light`, `dark`, or `system` (follow the OS preference).
+
+End users can change both from the settings menu in the navbar (top-right).
+
+## Recommending defaults
+
+As the app maker you can recommend a starting palette and mode via
+`appearance` in the run config:
 
 ```ts
+import { run } from '@backroad/backroad';
+
 run(
   (br) => {
-    // …
+    // your app
   },
   {
-    theme: 'dark',
+    appearance: {
+      theme: 'claude', // palette
+      mode: 'light', // 'light' | 'dark' | 'system'
+    },
   }
 );
 ```
 
-Valid values: `'light'` (default) and `'dark'`. The user's last choice
-is persisted in `localStorage`, so subsequent visits respect their
-override.
+Both fields are optional — omit either to fall back to the built-in default
+(`default` palette, `system` mode).
+
+### Recommendations vs. the user's choice
+
+This is a recommendation, not a lock. The moment a user picks a palette or mode
+themselves, their choice is **persisted in the browser** (`localStorage`) and
+**wins over the app's recommendation** on every future visit. Until they pick,
+your recommended default applies — so you can keep refining the default for
+first-time visitors without overriding anyone who has already chosen.
+
+This is intentionally different from regular Backroad values, which are scoped
+to a session: theme and mode are durable client-side **preferences**, not
+session state.
 
 ## Reacting to the theme in your script
 
-The theme is purely client-side — your script doesn't observe it. If
-you need to render a chart with theme-appropriate colors, drive that
-off a `br.toggle({ label: 'Dark mode' })` in your script instead, and
-let the user pick.
+The palette/mode are purely client-side — your server script doesn't observe
+them. If you need theme-aware output (e.g. chart colours), drive it off an
+explicit control like `br.toggle({ label: 'Dark mode' })` in your script and let
+the user pick.
 
-## Brand color
+## Customizing palettes
 
-Backroad re-uses daisyUI's `primary`, `secondary`, `accent`, and
-semantic (`success`, `warning`, `error`) tokens. If you fork the
-frontend and want a custom palette, swap the daisyUI plugin config in
-`apps/client/tailwind.config.ts`. There's no run-time override at the
-moment.
+Each palette is a set of CSS variables (shadcn tokens such as `--primary`,
+`--secondary`, `--muted`, `--card`) defined in the frontend's `styles.css`:
+`:root` holds the `default` palette and each named palette lives in a
+`[data-theme="…"]` block (with a `.dark` variant). To add a palette, add a
+matching CSS block and register it in the theme list — there's no run-time
+palette override beyond the `appearance` recommendation above.
 
 ## Try it
 
@@ -52,7 +77,7 @@ run(
 (br) => {
 br.write({ body: '# Themed sandbox' });
 br.write({
-body: 'Use the navbar toggle (top-right) to flip between light and dark.',
+body: 'Open the settings menu (top-right) to change palette and mode.',
 });
 
     if (br.button({ label: 'Primary action' })) {
@@ -60,7 +85,7 @@ body: 'Use the navbar toggle (top-right) to flip between light and dark.',
     }
 
 },
-{ theme: 'dark' }
+{ appearance: { theme: 'claude', mode: 'light' } }
 );
 `}
 />

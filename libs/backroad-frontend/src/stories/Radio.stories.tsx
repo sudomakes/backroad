@@ -1,40 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { backroadClientComponents } from 'backroad-components';
+import { ThemeMatrix } from './theme-matrix';
 
-const Radio = ({
-  label,
-  options,
-  defaultValue,
-}: {
-  label: string;
-  options: string[];
-  defaultValue?: string;
-}) => {
-  const name = `r-${label.replace(/\W+/g, '-').toLowerCase()}`;
-  return (
-    <fieldset className="form-control">
-      <legend className="label">
-        <span className="backroad-label">{label}</span>
-      </legend>
-      <div className="flex flex-col gap-2">
-        {options.map((opt) => {
-          const id = `${name}-${opt.replace(/\W+/g, '-').toLowerCase()}`;
-          return (
-            <div key={opt} className="flex gap-3 items-center">
-              <input
-                id={id}
-                type="radio"
-                name={name}
-                className="radio radio-primary"
-                defaultChecked={defaultValue === opt}
-              />
-              <label htmlFor={id}>{opt}</label>
-            </div>
-          );
-        })}
-      </div>
-    </fieldset>
-  );
-};
+// The real `radio` renderer (shadcn RadioGroup + Label).
+const Radio = backroadClientComponents.radio;
+const radio = (label: string, options: string[], value = options[0]) => ({
+  path: 'story',
+  id: 'story',
+  type: 'radio' as const,
+  value,
+  args: { label, options },
+});
 
 const meta: Meta<typeof Radio> = {
   title: 'Components/Radio',
@@ -44,10 +20,15 @@ const meta: Meta<typeof Radio> = {
 export default meta;
 type Story = StoryObj<typeof Radio>;
 
+const PLANS = ['Free', 'Pro', 'Enterprise'];
+
 export const Default: Story = {
-  args: {
-    label: 'Plan',
-    options: ['Free', 'Pro', 'Enterprise'],
-    defaultValue: 'Pro',
-  },
+  render: () => <Radio {...radio('Plan', PLANS, 'Pro')} />,
+};
+export const AllThemes: Story = {
+  render: () => (
+    <ThemeMatrix>
+      <Radio {...radio('Plan', PLANS, 'Pro')} />
+    </ThemeMatrix>
+  ),
 };

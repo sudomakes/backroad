@@ -1,27 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { backroadClientComponents } from 'backroad-components';
+import { ThemeMatrix } from './theme-matrix';
 
-const Checkbox = ({
-  label,
-  defaultChecked,
-}: {
-  label: string;
-  defaultChecked?: boolean;
-}) => {
-  const id = `cb-${label.replace(/\W+/g, '-').toLowerCase()}`;
-  return (
-    <div className="flex gap-3 items-center">
-      <input
-        id={id}
-        type="checkbox"
-        className="checkbox checkbox-primary"
-        defaultChecked={defaultChecked}
-      />
-      <label htmlFor={id} className="flex-1">
-        {label}
-      </label>
-    </div>
-  );
-};
+// The real `checkbox` renderer (shadcn Checkbox + Label).
+const Checkbox = backroadClientComponents.checkbox;
+const checkbox = (label: string, value = false) => ({
+  path: 'story',
+  id: 'story',
+  type: 'checkbox' as const,
+  value,
+  args: { label },
+});
 
 const meta: Meta<typeof Checkbox> = {
   title: 'Components/Checkbox',
@@ -31,7 +20,16 @@ const meta: Meta<typeof Checkbox> = {
 export default meta;
 type Story = StoryObj<typeof Checkbox>;
 
-export const Unchecked: Story = { args: { label: 'Accept terms' } };
+export const Unchecked: Story = {
+  render: () => <Checkbox {...checkbox('Accept terms')} />,
+};
 export const Checked: Story = {
-  args: { label: 'Email me updates', defaultChecked: true },
+  render: () => <Checkbox {...checkbox('Email me updates', true)} />,
+};
+export const AllThemes: Story = {
+  render: () => (
+    <ThemeMatrix>
+      <Checkbox {...checkbox('Email me updates', true)} />
+    </ThemeMatrix>
+  ),
 };
