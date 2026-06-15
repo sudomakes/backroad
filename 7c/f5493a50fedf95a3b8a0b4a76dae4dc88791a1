@@ -1,0 +1,42 @@
+libs/backroad-frontend/src/app/app.tsx
+  s_cb042d1013c8ad::t_6c677abd5dd81c 106-108,112-115,138
+  s_cb042d1013c8ad::t_2c32e5477c4464 35-39,44
+libs/backroad-core/src/lib/events.ts
+  s_cb042d1013c8ad::t_c8d54257ba9ee3 83
+libs/backroad/src/lib/runner/index.ts
+  s_cb042d1013c8ad::t_6655df2bdfba94 69,71
+  s_cb042d1013c8ad::t_84205835d27829 7-10,12-15
+libs/backroad-components/src/lib/containers/sidebar.tsx
+  s_cb042d1013c8ad::t_9788c016280b98 30
+  s_cb042d1013c8ad::t_fb4479e583cbd3 1-2,9-12
+libs/backroad/src/lib/backroad/backroad.ts
+  s_cb042d1013c8ad::t_b6e393fbd4a79e 166
+apps/docs/docs/getting-started.md
+  s_cb042d1013c8ad::t_6622bd2f6de22d 38-45
+apps/docs/docs/components/sidebar.mdx
+  s_cb042d1013c8ad::t_a9cb79e56a657c 81-106
+e2e/sidebar.spec.ts
+  s_cb042d1013c8ad::t_cc5d28492c618d 1-91
+libs/backroad/src/lib/server/server-socket-event-handlers/run_script.ts
+  s_cb042d1013c8ad::t_9a67f792ad5581 8
+  s_cb042d1013c8ad::t_104193d243861f 7,9
+examples/demo/src/main.ts
+  s_cb042d1013c8ad::t_fbbf226c9b4857 11
+  s_cb042d1013c8ad::t_2300ec940f0576 44-45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "7cf5493a50fedf95a3b8a0b4a76dae4dc88791a1",
+  "prompts": {},
+  "sessions": {
+    "s_cb042d1013c8ad": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cfc5bc12-dba5-4bde-886e-56ca83c3ea7f",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
