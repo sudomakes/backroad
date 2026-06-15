@@ -1,0 +1,36 @@
+libs/backroad-frontend/src/stories/Toggle.stories.tsx
+  s_5a1bcd361448d3::t_8f8b3145b21e8d 2-3,5-13,15,17,21,23-33
+libs/backroad-frontend/src/stories/Stats.stories.tsx
+  s_5a1bcd361448d3::t_a81e0f29e64aea 2-3,5-15,25-37
+libs/backroad-frontend/src/stories/Checkbox.stories.tsx
+  s_5a1bcd361448d3::t_328d53c1ddfd5b 2-3,5-13,15,17,21,23-25,27-34
+libs/backroad-frontend/src/stories/NumberInput.stories.tsx
+  s_5a1bcd361448d3::t_ad4e76ff798fdc 2-3,5-16,27-39
+libs/backroad-frontend/src/stories/Button.stories.tsx
+  s_5a1bcd361448d3::t_2db27fd8aaeb00 2-16,26,28-37
+libs/backroad-frontend/src/stories/TextInput.stories.tsx
+  s_5a1bcd361448d3::t_295cd82eaa6a7e 2-3,5-10,21-23,26-42
+libs/backroad-frontend/src/stories/Select.stories.tsx
+  s_5a1bcd361448d3::t_59d426824c1de3 2-3,5-21,23,25,29,31-37
+libs/backroad-frontend/src/stories/Radio.stories.tsx
+  s_5a1bcd361448d3::t_2b7862613121d8 2-3,5-13,15,17,21-23,26-33
+libs/backroad-frontend/src/stories/theme-matrix.tsx
+  s_5a1bcd361448d3::t_1d9fc166e02ce4 3
+  s_5a1bcd361448d3::t_fa8c9f7e9c3c34 1-2,4-38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "3ddf89b99a09c2c88036d5e6e200e1a90a5693ad",
+  "prompts": {},
+  "sessions": {
+    "s_5a1bcd361448d3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f5f1f82d-4ed0-4775-a7d4-f3e124855869",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
