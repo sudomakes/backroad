@@ -1,0 +1,45 @@
+libs/backroad-core/src/lib/core.ts
+  s_8cb87566ea2ef4::t_426c16c4e999e1 230-233
+libs/backroad-components/src/lib/containers/index.tsx
+  s_8cb87566ea2ef4::t_3f5b17bec285f7 6
+  s_8cb87566ea2ef4::t_84fd8219189812 5
+  s_8cb87566ea2ef4::t_f65810eeb53ef9 19
+  s_8cb87566ea2ef4::t_526d92e5a2fe41 18
+libs/backroad-components/src/lib/containers/base.tsx
+  s_8cb87566ea2ef4::t_68a719ac6e3371 1,4-7,9-32
+  s_8cb87566ea2ef4::t_b8f90dd496c9a2 2
+libs/backroad/src/lib/backroad/backroad.ts
+  s_8cb87566ea2ef4::t_22e494d7d1371d 175-182
+examples/demo/src/pages/columns.ts
+  s_8cb87566ea2ef4::t_0da1f505b4ae9c 24-39
+examples/demo/src/pages/llm.ts
+  s_8cb87566ea2ef4::t_f2689ecba1af97 11
+libs/backroad-components/src/lib/containers/bottom.tsx
+  s_8cb87566ea2ef4::t_071ec7c965ccde 1-3,5-15
+  s_8cb87566ea2ef4::t_04c4627cd77a79 4
+libs/backroad-components/src/lib/containers/page.tsx
+  s_8cb87566ea2ef4::t_a572b2215e8581 2,5
+  s_8cb87566ea2ef4::t_0f2cd199ff9c9b 6-7
+  s_8cb87566ea2ef4::t_8e5c3df6fc8c88 1,4
+  s_8cb87566ea2ef4::t_6f08425f0c9f97 8-10,12-35
+libs/backroad-components/src/lib/containers/frame.tsx
+  s_8cb87566ea2ef4::t_20a46384b083fa 1,7-14,17,20-23,25-33,35,37-39,42-48
+  s_8cb87566ea2ef4::t_742d338f56ac42 2-6,15-16,18-19,24,36,40-41,49-50
+  s_8cb87566ea2ef4::t_f51f7a221f2572 34
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.7",
+  "base_commit_sha": "8bdc9f300036a5935bf6fcae8d787f1573055089",
+  "prompts": {},
+  "sessions": {
+    "s_8cb87566ea2ef4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bb3e5d82-3360-44d4-9cf8-2d768efe8a15",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
