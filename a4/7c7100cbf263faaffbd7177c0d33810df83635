@@ -1,0 +1,25 @@
+libs/backroad-frontend/src/app/hooks/use-local-storage-state.ts
+  s_5a1bcd361448d3::t_cda8a692323d6d 1-69
+libs/backroad-frontend/src/app/theme/theme-provider.tsx
+  s_5a1bcd361448d3::t_d4dc244a0602d9 9,11,17,20,24-27,32-36,43-45,49-54,58-61,63-72,87-94,96-97
+libs/backroad-frontend/index.html
+  s_5a1bcd361448d3::t_d92588aa273d35 11-16,19-21,23-24,28-30
+libs/backroad-frontend/src/app/theme/themes.ts
+  s_5a1bcd361448d3::t_d3028d8e05866c 16-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "a47c7100cbf263faaffbd7177c0d33810df83635",
+  "prompts": {},
+  "sessions": {
+    "s_5a1bcd361448d3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f5f1f82d-4ed0-4775-a7d4-f3e124855869",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
