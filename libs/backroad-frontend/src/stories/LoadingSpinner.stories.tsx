@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { LoadingSpinner } from 'backroad-components';
+import { backroadClientComponents } from 'backroad-components';
+
+const LoadingSpinner = backroadClientComponents.loading_spinner;
 
 const ThemeFrame = ({
   theme,

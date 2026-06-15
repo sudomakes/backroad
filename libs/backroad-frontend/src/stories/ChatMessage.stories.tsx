@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { LoadingSpinner } from 'backroad-components';
+import { backroadClientComponents } from 'backroad-components';
 import { Message, MessageAvatar, MessageContent } from 'backroad-ui';
+
+const LoadingSpinner = backroadClientComponents.loading_spinner;
 import { Bot, User } from 'lucide-react';
 
 const themes = [

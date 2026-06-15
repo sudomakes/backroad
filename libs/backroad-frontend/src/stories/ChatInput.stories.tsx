@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ChatInput } from 'backroad-components';
+import { backroadClientComponents } from 'backroad-components';
+
+const ChatInput = backroadClientComponents.chat_input;
 
 const themes = [
   'default',

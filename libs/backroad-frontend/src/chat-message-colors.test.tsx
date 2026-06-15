@@ -2,7 +2,9 @@ import type { ComponentProps } from 'react';
 import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { MessageContent } from 'backroad-ui';
-import { Markdown } from 'backroad-components';
+import { backroadClientComponents } from 'backroad-components';
+
+const Markdown = backroadClientComponents.markdown;
 
 /**
  * Regression guard for chat-message contrast.
