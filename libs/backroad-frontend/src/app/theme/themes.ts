@@ -13,6 +13,7 @@ export const THEMES = [
 export type ThemeName = (typeof THEMES)[number]['value'];
 export type ThemeMode = 'light' | 'dark' | 'system';
 
-// Kept in sync with the pre-paint script in index.html.
-export const THEME_STORAGE_KEY = 'backroad-theme';
-export const MODE_STORAGE_KEY = 'backroad-mode';
+// Single JSON blob of client preferences ({ theme, mode }); `null` on a field
+// means "no explicit choice — follow the app-maker default". Kept in sync with
+// the pre-paint script in index.html.
+export const PREFERENCES_STORAGE_KEY = 'backroad-preferences';

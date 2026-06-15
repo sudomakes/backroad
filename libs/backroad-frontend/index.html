@@ -8,20 +8,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/src/styles.css" />
     <script>
-      // Apply the persisted theme palette + light/dark mode before first
-      // paint to avoid a flash of the wrong theme. Mirrors the logic in the
-      // ThemeProvider; kept inline + dependency-free so it runs synchronously.
+      // Apply the persisted preference (palette + light/dark) before first
+      // paint to avoid a flash of the wrong theme. Reads the same
+      // `backroad-preferences` blob the ThemeProvider writes; kept inline +
+      // dependency-free so it runs synchronously. Only the user's saved choice
+      // is known pre-paint — the app-maker default arrives over the socket and
+      // is applied by the ThemeProvider once connected.
       (function () {
         try {
-          var theme = localStorage.getItem('backroad-theme') || 'default';
-          var mode = localStorage.getItem('backroad-mode') || 'system';
+          var prefs = JSON.parse(
+            localStorage.getItem('backroad-preferences') || '{}'
+          );
           var root = document.documentElement;
-          if (theme && theme !== 'default')
-            root.setAttribute('data-theme', theme);
+          if (prefs.theme && prefs.theme !== 'default')
+            root.setAttribute('data-theme', prefs.theme);
           var prefersDark = window.matchMedia(
             '(prefers-color-scheme: dark)'
           ).matches;
-          var dark = mode === 'dark' || (mode === 'system' && prefersDark);
+          var dark =
+            prefs.mode === 'dark' ||
+            ((prefs.mode === 'system' || !prefs.mode) && prefersDark);
           root.classList.toggle('dark', dark);
         } catch (e) {}
       })();

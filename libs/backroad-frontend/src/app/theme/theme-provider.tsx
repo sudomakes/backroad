@@ -6,28 +6,33 @@ import {
   useState,
   type ReactNode,
 } from 'react';
+import { useLocalStorageState } from '../hooks/use-local-storage-state';
 import {
-  MODE_STORAGE_KEY,
-  THEME_STORAGE_KEY,
+  PREFERENCES_STORAGE_KEY,
   type ThemeMode,
   type ThemeName,
 } from './themes';
 
 type ThemeContextValue = {
-  /** Selected colour palette (tweakcn theme). */
+  /** Effective colour palette (tweakcn theme). */
   theme: ThemeName;
   setTheme: (theme: ThemeName) => void;
-  /** Light / dark / follow-system. */
+  /** Effective light / dark / follow-system. */
   mode: ThemeMode;
   setMode: (mode: ThemeMode) => void;
   /**
-   * Apply app-maker defaults (from the backroad config). Only seeds a
-   * dimension the user has NOT already chosen — a persisted localStorage value
-   * from a past run always wins — and does NOT persist, so it stays a default
-   * (the app can change it for return users until they pick their own).
+   * Register app-maker defaults (from the backroad config). They apply only
+   * while the user hasn't made their own choice — a persisted preference always
+   * wins — and are never written to storage, so the app can keep recommending
+   * them to return users until they pick their own.
    */
   seedDefaults: (defaults: { theme?: ThemeName; mode?: ThemeMode }) => void;
 };
+
+// `null` = the user hasn't chosen this dimension; fall back to the app-maker
+// default, then the built-in default.
+type Preferences = { theme: ThemeName | null; mode: ThemeMode | null };
+const NO_PREFERENCES: Preferences = { theme: null, mode: null };
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
@@ -35,28 +40,36 @@ const prefersDark = () =>
   window.matchMedia('(prefers-color-scheme: dark)').matches;
 
 /**
- * Apply the palette (`data-theme` attribute) and resolved light/dark state
- * (`.dark` class) to the document root. `default` uses the bare `:root`
- * tokens, so we strip the attribute rather than set `data-theme="default"`.
+ * Apply the palette (`data-theme`) and resolved light/dark (`.dark` class) to
+ * the document root. `default` uses the bare `:root` tokens, so strip the
+ * attribute rather than set `data-theme="default"`.
  */
 const applyTheme = (theme: ThemeName, mode: ThemeMode) => {
   const root = document.documentElement;
-  if (theme === 'default') {
-    root.removeAttribute('data-theme');
-  } else {
-    root.setAttribute('data-theme', theme);
-  }
-  const dark = mode === 'dark' || (mode === 'system' && prefersDark());
-  root.classList.toggle('dark', dark);
+  if (theme === 'default') root.removeAttribute('data-theme');
+  else root.setAttribute('data-theme', theme);
+  root.classList.toggle(
+    'dark',
+    mode === 'dark' || (mode === 'system' && prefersDark())
+  );
 };
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setThemeState] = useState<ThemeName>(
-    () => (localStorage.getItem(THEME_STORAGE_KEY) as ThemeName) || 'default'
+  // Persisted user choices (one JSON blob; the hook owns all localStorage I/O).
+  const [prefs, setPrefs] = useLocalStorageState<Preferences>(
+    PREFERENCES_STORAGE_KEY,
+    NO_PREFERENCES
   );
-  const [mode, setModeState] = useState<ThemeMode>(
-    () => (localStorage.getItem(MODE_STORAGE_KEY) as ThemeMode) || 'system'
-  );
+  // App-maker recommendations from the config — in-memory, never persisted.
+  const [appDefaults, setAppDefaults] = useState<{
+    theme?: ThemeName;
+    mode?: ThemeMode;
+  }>({});
+
+  // Effective value = user choice → app default → built-in. The `??` chain is
+  // why a saved preference dominates the app-maker default.
+  const theme = prefs.theme ?? appDefaults.theme ?? 'default';
+  const mode = prefs.mode ?? appDefaults.mode ?? 'system';
 
   useEffect(() => {
     applyTheme(theme, mode);
@@ -71,27 +84,17 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     return () => mq.removeEventListener('change', onChange);
   }, [theme, mode]);
 
-  const setTheme = useCallback((next: ThemeName) => {
-    localStorage.setItem(THEME_STORAGE_KEY, next);
-    setThemeState(next);
-  }, []);
-
-  const setMode = useCallback((next: ThemeMode) => {
-    localStorage.setItem(MODE_STORAGE_KEY, next);
-    setModeState(next);
-  }, []);
-
+  const setTheme = useCallback(
+    (next: ThemeName) => setPrefs((p) => ({ ...p, theme: next })),
+    [setPrefs]
+  );
+  const setMode = useCallback(
+    (next: ThemeMode) => setPrefs((p) => ({ ...p, mode: next })),
+    [setPrefs]
+  );
   const seedDefaults = useCallback(
-    (defaults: { theme?: ThemeName; mode?: ThemeMode }) => {
-      // localStorage (a past user choice) dominates: only seed dimensions the
-      // user hasn't set, and never persist — keep it a default, not a choice.
-      if (defaults.theme && !localStorage.getItem(THEME_STORAGE_KEY)) {
-        setThemeState(defaults.theme);
-      }
-      if (defaults.mode && !localStorage.getItem(MODE_STORAGE_KEY)) {
-        setModeState(defaults.mode);
-      }
-    },
+    (defaults: { theme?: ThemeName; mode?: ThemeMode }) =>
+      setAppDefaults((prev) => ({ ...prev, ...defaults })),
     []
   );
 
