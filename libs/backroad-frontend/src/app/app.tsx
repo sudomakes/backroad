@@ -7,7 +7,7 @@ import { TreeRender, socket } from 'backroad-components';
 import { set } from 'lodash';
 import { lazy, Suspense, useEffect, useState } from 'react';
 import ReactGA from 'react-ga4';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import superjson from 'superjson';
 import { Navbar } from './layout/navbar';
 import useBackroadConfig from './hooks/useBackroadConfig';
@@ -19,32 +19,38 @@ import type { ThemeName } from './theme/themes';
 // the /signin/* routes, so React.lazy keeps them out of every other page
 // view.
 const AuthRoute = lazy(() => import('./auth/signin'));
+
+// Asks the server to (re)run the script for the given path. The server has no
+// path state of its own, so the run is what carries currentPath to it.
+//
+// Two things must trigger a run, and both reduce to "we're connected and the
+// path is known":
+//   - (re)connect — `connected` flips true (initial load, or after a drop)
+//   - in-app navigation — React Router <Link> changes the URL client-side with
+//     no socket round-trip, so only `pathname` changes
+//
+// Gating on `connected` (which starts false) means mounting alone never emits,
+// so there's no duplicate initial run to guard against.
+function useRunScript(connected: boolean, pathname: string) {
+  useEffect(() => {
+    if (!connected) return;
+    socket.emit('run_script', { pathname }, () => undefined);
+  }, [connected, pathname]);
+}
+
 export function App() {
   const [connected, setConnected] = useState(false);
   const [treeStruct, setTreeStruct] = useState<BackroadContainer<'base', true>>(
     getInitialTreeStructure()
   );
+  // Keep `connected` in sync with the socket (drives the Navbar indicator).
+  // `socket` is a module-level singleton — it may already be connected by the
+  // time this mounts (especially with the larger better-auth-ui bundle), so
+  // seed from `socket.connected` to avoid sitting on "Disconnected" forever
+  // after a missed `connect` event.
   useEffect(() => {
-    // `socket` is a module-level singleton — connection may already be
-    // established by the time this component mounts (especially with the
-    // larger bundle now that better-auth-ui is included). Seed initial
-    // state from `socket.connected` so we don't sit forever on
-    // "Disconnected" after a missed `connect` event.
-    if (socket.connected) {
-      setConnected(true);
-      socket.emit(
-        'run_script',
-        { pathname: window.location.pathname },
-        () => undefined
-      );
-    }
-    const onConnect = () => {
-      setConnected(true);
-      console.log('sending run script request');
-      socket.emit('run_script', { pathname: window.location.pathname }, () => {
-        console.log('ran script');
-      });
-    };
+    if (socket.connected) setConnected(true);
+    const onConnect = () => setConnected(true);
     const onDisconnect = () => setConnected(false);
     socket.on('connect', onConnect);
     socket.on('disconnect', onDisconnect);
@@ -53,6 +59,9 @@ export function App() {
       socket.off('disconnect', onDisconnect);
     };
   }, []);
+
+  const location = useLocation();
+  useRunScript(connected, location.pathname);
 
   const config = useBackroadConfig();
   useEffect(() => {

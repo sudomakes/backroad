@@ -58,6 +58,10 @@ export type BackroadEventsMapping = {
     args: {
       id: string;
       value: string;
+      // The path the client is on when this run is triggered. Every
+      // run-triggering event carries it so the server derives currentPath
+      // purely from the request — no persisted/assumed state.
+      pathname: string;
     };
     response?: void;
   };
@@ -84,7 +88,7 @@ export type BackroadEventsMapping = {
     response?: never;
   };
   unset_value: {
-    args: { id: string };
+    args: { id: string; pathname: string };
     response?: void;
   };
   backroad_config: {
