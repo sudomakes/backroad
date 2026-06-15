@@ -1,3 +1,9 @@
+## [1.13.2](https://github.com/sudomakes/backroad/compare/v1.13.1...v1.13.2) (2026-06-15)
+
+### Bug Fixes
+
+- upgrade deps ([79c4d62](https://github.com/sudomakes/backroad/commit/79c4d6224d660f30bcf3cf8e7e31ea20030f5257))
+
 ## [1.13.1](https://github.com/sudomakes/backroad/compare/v1.13.0...v1.13.1) (2026-06-15)
 
 ### Bug Fixes
