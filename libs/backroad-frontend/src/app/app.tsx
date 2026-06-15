@@ -9,9 +9,9 @@ import { lazy, Suspense, useEffect, useState } from 'react';
 import ReactGA from 'react-ga4';
 import { Route, Routes } from 'react-router-dom';
 import superjson from 'superjson';
-import { Footer } from './layout/footer';
 import { Navbar } from './layout/navbar';
 import useBackroadConfig from './hooks/useBackroadConfig';
+import { useTheme } from './theme/theme-provider';
 
 // Code-split the auth bundle. @daveyplate/better-auth-ui plus its Radix /
 // shadcn deps add ~160KB gzipped to the JS bundle; we only need them on
@@ -55,6 +55,13 @@ export function App() {
       ReactGA.initialize(config.analytics.google);
     }
   }, [config?.analytics?.google]);
+
+  // Seed the initial light/dark mode from `config.theme` once the config
+  // arrives. Users can still change appearance in the settings panel.
+  const { setMode } = useTheme();
+  useEffect(() => {
+    if (config?.theme) setMode(config.theme);
+  }, [config?.theme, setMode]);
 
   useEffect(() => {
     const onRender = (nodeData: string[], callback: () => void) => {
@@ -127,7 +134,6 @@ export function App() {
             );
           })}
         </Routes>
-        <Footer />
       </div>
     </div>
   );

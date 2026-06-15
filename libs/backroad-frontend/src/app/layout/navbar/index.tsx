@@ -1,5 +1,6 @@
 import { socket } from 'backroad-components';
-import { cn } from 'backroad-ui';
+import { Button, cn } from 'backroad-ui';
+import { Github } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { NavbarMenu } from './menu';
 
@@ -36,6 +37,21 @@ export const Navbar = (props: { connected: boolean }) => {
         />
         {props.connected ? 'Connected' : 'Disconnected'}
       </div>
+      <Button
+        asChild
+        variant="ghost"
+        size="icon"
+        aria-label="Backroad on GitHub"
+        className="rounded-[inherit] text-muted-foreground hover:text-foreground"
+      >
+        <a
+          href="https://github.com/sudo-vaibhav/backroad"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <Github />
+        </a>
+      </Button>
       <NavbarMenu />
     </header>
   );
