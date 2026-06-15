@@ -417,6 +417,9 @@ importers:
       '@tanstack/react-table':
         specifier: ^8.10.6
         version: 8.21.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@tanstack/react-virtual':
+        specifier: ^3.14.2
+        version: 3.14.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       backroad-ui:
         specifier: workspace:*
         version: link:../backroad-ui
@@ -7236,12 +7239,27 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0
 
+  '@tanstack/react-virtual@3.14.2':
+    resolution:
+      {
+        integrity: sha512-IpWnmCLvuymRfeeLNVXIzNEYBFLpd3drVIS91sqV78VTZFyldlChkOocZRCPp1B+Wnk09bcLNme8WaMU/9/9bQ==,
+      }
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+
   '@tanstack/table-core@8.21.3':
     resolution:
       {
         integrity: sha512-ldZXEhOBb8Is7xLs01fR3YEc3DERiz5silj8tnGkFZytt1abEvl/GhUmCE0PMLaMPTa3Jk4HbKmRlHmu+gCftg==,
       }
     engines: { node: '>=12' }
+
+  '@tanstack/virtual-core@3.17.0':
+    resolution:
+      {
+        integrity: sha512-gOxY/hFkPh/XQYhnThBHzkbkX3Ed+z/iushyz+R+JAr213aXxUDgQoTgTdrDpBSRsjFM73P/KfUyWmaF9WHMkQ==,
+      }
 
   '@testing-library/dom@9.3.4':
     resolution:
@@ -25955,7 +25973,15 @@ snapshots:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
 
+  '@tanstack/react-virtual@3.14.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@tanstack/virtual-core': 3.17.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+
   '@tanstack/table-core@8.21.3': {}
+
+  '@tanstack/virtual-core@3.17.0': {}
 
   '@testing-library/dom@9.3.4':
     dependencies:

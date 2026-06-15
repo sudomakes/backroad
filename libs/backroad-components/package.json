@@ -10,6 +10,7 @@
     "@backroad/core": "workspace:*",
     "@heroicons/react": "^2.0.18",
     "@tanstack/react-table": "^8.10.6",
+    "@tanstack/react-virtual": "^3.14.2",
     "backroad-ui": "workspace:*",
     "chart.js": "^4.4.0",
     "chartjs-plugin-autocolors": "^0.2.2",
