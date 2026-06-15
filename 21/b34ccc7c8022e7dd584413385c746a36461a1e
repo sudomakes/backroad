@@ -1,0 +1,20 @@
+libs/backroad-frontend/src/app/app.tsx
+  s_cb042d1013c8ad::t_2d71661995caa3 33-34,44-50,53,55
+  s_cb042d1013c8ad::t_f2fe3cc10186e8 8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "21b34ccc7c8022e7dd584413385c746a36461a1e",
+  "prompts": {},
+  "sessions": {
+    "s_cb042d1013c8ad": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cfc5bc12-dba5-4bde-886e-56ca83c3ea7f",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
