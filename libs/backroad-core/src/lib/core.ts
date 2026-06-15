@@ -9,6 +9,7 @@ import type { ColumnHelper } from '@tanstack/react-table';
 import { HTMLProps, IframeHTMLAttributes } from 'react';
 import formidable from 'formidable';
 import type { DropzoneOptions } from 'react-dropzone';
+import type { ToastArgs } from './events';
 // import { v4 as uuidv4 } from 'uuid';
 // type FileUploadObject = {
 //   id: string;
@@ -240,9 +241,15 @@ type _ComponentBasePropsMapping = {
     };
     value: null;
   };
-  // NOTE: `toast` is intentionally NOT a component — it's a fire-and-forget
-  // action that emits a `toast_show` socket event (see br.toast / ToastArgs in
-  // events.ts), so it bypasses the render queue entirely.
+  // Transient notification. Renders nothing in the page flow — on mount the
+  // renderer fires a sonner toast (a side effect) and unmounts on the next run.
+  // Works because the render queue flushes each run on its own microtask, so a
+  // button's set→unset reruns reach the client as separate commits (the node
+  // gets one real mount before the unset removes it). No value (display-only).
+  toast: {
+    args: ToastArgs;
+    value: null;
+  };
 };
 export type ComponentPropsMapping = {
   [key in keyof _ComponentBasePropsMapping]: {

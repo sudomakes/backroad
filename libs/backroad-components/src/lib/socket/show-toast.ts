@@ -1,7 +1,6 @@
-/** Turns server-driven `toast_show` events into sonner notifications. */
+/** Maps a toast's args onto a sonner notification. */
 import type { ToastArgs } from '@backroad/core';
 import { toast } from 'backroad-ui';
-import { socket } from './client';
 
 const FIRE = {
   info: toast.info,
@@ -10,7 +9,6 @@ const FIRE = {
   error: toast.error,
 } as const;
 
-// Exported for unit testing the variant/duration mapping without a live socket.
 export const showToast = (args: ToastArgs) => {
   const fire = FIRE[args.variant ?? 'info'] ?? toast.info;
   fire(args.message, {
@@ -18,8 +16,4 @@ export const showToast = (args: ToastArgs) => {
     // `undefined` falls back to sonner's default duration.
     duration: args.duration === 0 ? Infinity : args.duration,
   });
-};
-
-export const registerToastSynchronizer = (): void => {
-  socket.on('toast_show', showToast);
 };

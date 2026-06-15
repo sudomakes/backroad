@@ -24,6 +24,7 @@ import { TextArea } from './text_area';
 import { Slider } from './slider';
 import { DateInput } from './date_input';
 import { TimeInput } from './time_input';
+import { Toast } from './toast';
 import { Video } from './video';
 import { LoadingSpinner } from './loading_spinner';
 
@@ -95,4 +96,5 @@ export const backroadClientComponents: {
   iframe: Iframe,
   video: Video,
   loading_spinner: LoadingSpinner,
+  toast: Toast,
 };

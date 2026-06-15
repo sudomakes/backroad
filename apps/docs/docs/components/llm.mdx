@@ -11,9 +11,8 @@ Backroad ships components tuned for chat-style LLM frontends:
 
 ## `br.chatInput`
 
-A bottom-of-page text input that returns the submitted message on the
-run after the user hits enter, then `null` on subsequent runs until the
-next submit.
+A text input that returns the submitted message on the run after the
+user hits enter, then `null` on subsequent runs until the next submit.
 
 ```ts
 const message = br.chatInput({ placeholder: 'Ask me anything…' });
@@ -22,6 +21,17 @@ if (message) {
   // run an LLM call, store it in your message log, …
 }
 ```
+
+To keep the input pinned to the bottom of the page while the conversation
+scrolls above it, dock it in [`br.bottom()`](./layout#bottom-dock):
+
+```ts
+const message = br.bottom().chatInput({ id: 'chat' });
+```
+
+The dock renders outside the scrolling body, so a single render is enough —
+you don't have to re-emit the input below the newest message to keep it at
+the bottom.
 
 ## `br.chatMessage`
 
@@ -81,7 +91,7 @@ run((br) => {
     bubble.write({ body: m.text });
   }
 
-  const next = br.chatInput({ placeholder: 'Say something…' });
+  const next = br.bottom().chatInput({ placeholder: 'Say something…' });
   if (next) {
     history.push({ role: 'user', text: next });
     history.push({ role: 'assistant', text: `You said: ${next}` });
@@ -110,7 +120,7 @@ avatarPlacement: m.role === 'user' ? 'right' : 'left',
 bubble.write({ body: m.text });
 }
 
-const next = br.chatInput({ placeholder: 'Say something…' });
+const next = br.bottom().chatInput({ placeholder: 'Say something…' });
 if (next) {
 history.push({ role: 'user', text: next });
 history.push({ role: 'bot', text: \`Echo: \${next}\` });

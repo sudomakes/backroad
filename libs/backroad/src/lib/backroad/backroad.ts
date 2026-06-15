@@ -9,7 +9,6 @@ import {
   type GenericBackroadComponent,
   type InbuiltComponentTypes,
   type InbuiltContainerTypes,
-  type ToastArgs,
 } from '@backroad/core';
 import omit from 'lodash/omit';
 import superjson from 'superjson';
@@ -320,14 +319,12 @@ export class BackroadNodeManager<
   timeInput(props: BackroadComponentFormat<'time_input'>) {
     return this.#initialiseAndAddComponentDescendant(props, 'time_input');
   }
-  // A toast is an action, not a node: emit it straight to the client (like
-  // login/logout) so it can't be batched away by a button's set→unset reruns.
-  toast(props: ToastArgs) {
-    SocketManager.getSocket(this.backroadSession.sessionId).emit(
-      'toast_show',
-      props,
-      () => undefined
-    );
+  // A toast node renders nothing in the page flow; the client renderer fires a
+  // sonner notification on mount. The microtask render queue flushes each run
+  // separately, so a button's set→unset reruns give the node one real mount
+  // (firing the toast) before the unset removes it.
+  toast(props: BackroadComponentFormat<'toast'>) {
+    return this.#initialiseAndAddComponentDescendant(props, 'toast');
   }
   fileUpload(props: BackroadComponentFormat<'file_upload'>) {
     return this.#initialiseAndAddComponentDescendant(props, 'file_upload');

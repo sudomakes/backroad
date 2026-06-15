@@ -1,12 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useEffect } from 'react';
+import type { ToastArgs } from '@backroad/core';
+import { backroadClientComponents } from 'backroad-components';
 import { Toaster } from 'backroad-ui';
-import { showToast } from 'backroad-components';
 
-// `toast` isn't a rendered component — br.toast() emits a `toast_show` event
-// that the client turns into a sonner notification via `showToast`. This story
-// mounts the app-root <Toaster> and fires one of each variant through that same
-// helper, so it previews exactly what an app author gets.
+// The real `toast` renderer fires a sonner notification on mount and draws
+// nothing inline, so the story mounts a <Toaster> and one Toast node per
+// variant. duration: 0 keeps them on screen (sonner → Infinity) for the
+// preview instead of auto-dismissing.
+const Toast = backroadClientComponents.toast;
+const toast = (id: string, args: ToastArgs) => ({
+  path: 'story',
+  id,
+  type: 'toast' as const,
+  value: null,
+  args,
+});
+
 const meta = {
   title: 'Components/Toast',
   parameters: {
@@ -20,21 +29,38 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const ToastDemo = () => {
-  useEffect(() => {
-    // duration: 0 → sonner "stay until dismissed" so the preview is stable.
-    showToast({ message: 'Sandbox session started.', variant: 'info', duration: 0 });
-    showToast({ message: 'Deploy finished successfully.', variant: 'success', duration: 0 });
-    showToast({ message: 'You are approaching your quota.', variant: 'warning', duration: 0 });
-    showToast({ message: 'Failed to connect to the sandbox.', variant: 'error', duration: 0 });
-  }, []);
-  return (
+export const AllVariants: Story = {
+  render: () => (
     <div style={{ minHeight: '60vh' }}>
       <Toaster position="top-right" />
+      <Toast
+        {...toast('info', {
+          message: 'Sandbox session started.',
+          variant: 'info',
+          duration: 0,
+        })}
+      />
+      <Toast
+        {...toast('success', {
+          message: 'Deploy finished successfully.',
+          variant: 'success',
+          duration: 0,
+        })}
+      />
+      <Toast
+        {...toast('warning', {
+          message: 'You are approaching your quota.',
+          variant: 'warning',
+          duration: 0,
+        })}
+      />
+      <Toast
+        {...toast('error', {
+          message: 'Failed to connect to the sandbox.',
+          variant: 'error',
+          duration: 0,
+        })}
+      />
     </div>
-  );
-};
-
-export const AllVariants: Story = {
-  render: () => <ToastDemo />,
+  ),
 };

@@ -7,9 +7,9 @@ import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
 # Layout
 
 Layout in Backroad is done with **container methods**: `br.columns`,
-`br.tabs`, `br.collapse`, `br.sidebar`. Each returns a manager (or an
-array of them) scoped to the new container, and any subsequent
-component calls happen inside that scope.
+`br.tabs`, `br.collapse`, `br.sidebar`, `br.bottom`. Each returns a
+manager (or an array of them) scoped to the new container, and any
+subsequent component calls happen inside that scope.
 
 For the full container model, see
 [Fundamentals: Containers](../fundamentals/containers).
@@ -57,6 +57,24 @@ sidebar.select({
   ],
 });
 ```
+
+## Bottom (dock)
+
+`br.bottom()` pins its children to the bottom of the page while everything
+above scrolls — ideal for a chat input that should stay put as the
+conversation grows.
+
+```ts
+const message = br.bottom().chatInput({ id: 'chat' });
+if (message) {
+  // handle the submitted message
+}
+```
+
+The dock lives outside the scrolling body, so its position doesn't depend on
+*when* you emit it — render it wherever is convenient in your script and it
+still sits at the bottom. See [LLM components](./llm) for the full chat
+pattern.
 
 ## Nesting
 
