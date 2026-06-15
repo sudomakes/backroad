@@ -13,14 +13,16 @@ export const Stats: BackroadComponentRenderer<'stats'> = (props) => {
         return (
           <div className="flex flex-col gap-1 px-6 py-4" key={item.label}>
             <div className="text-sm text-muted-foreground">{item.label}</div>
-            <div className="text-2xl font-semibold text-primary">
+            <div className="text-2xl font-semibold text-card-foreground">
               {item.value}
             </div>
 
             {item.delta !== undefined && (
               <div
                 className={`mt-2 flex items-center gap-2 text-lg ${
-                  deltaType ? 'text-green-500' : 'text-red-500'
+                  deltaType
+                    ? 'text-emerald-700 dark:text-emerald-400'
+                    : 'text-red-700 dark:text-red-400'
                 }`}
               >
                 {deltaType === true ? (
