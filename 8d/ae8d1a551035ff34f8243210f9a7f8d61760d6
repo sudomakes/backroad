@@ -1,0 +1,26 @@
+apps/docs/sidebars.ts
+  s_5a1bcd361448d3::t_432e5da53733ee 31
+apps/docs/docs/configuration/analytics.mdx
+  s_5a1bcd361448d3::t_23da51535480e6 1-72
+apps/docs/docs/getting-started.md
+  s_5a1bcd361448d3::t_33323816887f30 60
+  s_5a1bcd361448d3::t_1d8898dc4d6a73 68-74
+apps/docs/docs/configuration/themes.mdx
+  s_5a1bcd361448d3::t_f06337d15c2be8 9-10,12-21,24-25,28,31-34,39-52,56-59,61,63-68,80,88
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "8dae8d1a551035ff34f8243210f9a7f8d61760d6",
+  "prompts": {},
+  "sessions": {
+    "s_5a1bcd361448d3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f5f1f82d-4ed0-4775-a7d4-f3e124855869",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
