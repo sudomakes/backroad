@@ -1,0 +1,23 @@
+libs/backroad-frontend/vite.config.ts
+  s_5a1bcd361448d3::t_d39c492e485b4d 41
+libs/backroad-frontend/src/test-setup.ts
+  s_5a1bcd361448d3::t_4486f7efcafdae 1-16
+libs/backroad-frontend/src/app/app.test.tsx
+  s_5a1bcd361448d3::t_093cf369fc71ec 6,10-11,13-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "ea9bab3aaee99688f0efa05e6b698fddb89889e7",
+  "prompts": {},
+  "sessions": {
+    "s_5a1bcd361448d3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f5f1f82d-4ed0-4775-a7d4-f3e124855869",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
