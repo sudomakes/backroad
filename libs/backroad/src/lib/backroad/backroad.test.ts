@@ -44,12 +44,12 @@ describe('br.login', () => {
     vi.clearAllMocks();
   });
 
-  it('defaults to /api/signin when no provider given', () => {
+  it('defaults to the /auth/signin page when no provider given', () => {
     const { session, emit } = makeSession('login-default');
     session.rootNodeManager.login();
     expect(emit).toHaveBeenCalledWith(
       'auth_redirect',
-      { url: '/api/signin' },
+      { url: '/auth/signin' },
       expect.any(Function)
     );
   });
@@ -76,12 +76,12 @@ describe('br.login', () => {
 });
 
 describe('br.logout', () => {
-  it('emits auth_redirect for the client to clear the session', () => {
+  it('emits auth_signout for the client to clear the session', () => {
     const { session, emit } = makeSession('logout');
     session.rootNodeManager.logout();
     expect(emit).toHaveBeenCalledWith(
-      'auth_redirect',
-      { url: '/api/signout' },
+      'auth_signout',
+      undefined,
       expect.any(Function)
     );
   });

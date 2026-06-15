@@ -20,9 +20,12 @@ overrides:
   '@babel/runtime': '7.29.2'
   '@types/node': '^20'
   # Pin React types to the v18 line (runtime react is pinned to 18.2.0 below).
-  # Radix's optional `@types/react` peer otherwise resolves to v19 for any lib
-  # without React types in scope (e.g. backroad-ui), and two @types/react copies
-  # in one program collapse forwardRef props to `never` (RefAttributes<never>).
+  # Two independent reasons: (1) Radix's optional `@types/react` peer otherwise
+  # resolves to v19 for any lib without React types in scope (e.g. backroad-ui),
+  # and two @types/react copies in one program collapse forwardRef props to
+  # `never` (RefAttributes<never>); (2) react-remove-scroll (via react-select)
+  # has a wide peer whose v19 ReactNode/ReactPortal types break Docusaurus
+  # components (BrowserOnly, Link).
   '@types/react': '18.2.14'
   '@types/react-dom': '18.2.6'
   cross-spawn: '^7.0.6'

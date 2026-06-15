@@ -1,3 +1,75 @@
+## [1.12.0](https://github.com/sudomakes/backroad/compare/v1.11.0...v1.12.0) (2026-06-14)
+
+### Features
+
+- **demo:** add sidebar navigation listing all demo pages ([8302f55](https://github.com/sudomakes/backroad/commit/8302f558b764b55914d8e59fa86258d888852683))
+
+## [1.11.0](https://github.com/sudomakes/backroad/compare/v1.10.0...v1.11.0) (2026-06-14)
+
+### Features
+
+- **sidebar:** add backdrop, open/close API, and defaultOpen option ([e1c04b4](https://github.com/sudomakes/backroad/commit/e1c04b4d6d9859cd33ffc99be54fe2971749a76b))
+
+### Bug Fixes
+
+- **a11y:** use native buttons for sidebar controls ([4c2f465](https://github.com/sudomakes/backroad/commit/4c2f4655d29745693e6d939c50677a5d4fe0cfde))
+- **auth:** redirect login/logout to the React auth pages, not the API mount ([d49b740](https://github.com/sudomakes/backroad/commit/d49b7407f1b986851502f0224d01bd5b9c271ec3))
+- **backroad:** restore accidentally removed iframe method and test ([24c0729](https://github.com/sudomakes/backroad/commit/24c0729018e4176f49008173f23cac77627f69db))
+- **core:** restore iframe type removed during sidebar revert ([8c80c19](https://github.com/sudomakes/backroad/commit/8c80c19d77963d60b6a5fa1766541a0c0573b411))
+- default sidebar closed and silence empty-ack lint error ([68fdd46](https://github.com/sudomakes/backroad/commit/68fdd4671756669864d0a17f772b49256aa70541))
+- **e2e:** update smoke test auth URLs to match current API routes ([334693f](https://github.com/sudomakes/backroad/commit/334693f7a91be729045c236f573af2cbb7eb51d0))
+- **sidebar:** attach open/close directly to manager instance ([6a46d3c](https://github.com/sudomakes/backroad/commit/6a46d3c14f92fce72d7c4814c0e1e5cd3ec27706))
+- **sidebar:** preserve prototype methods when returning sidebar handle ([59be1e3](https://github.com/sudomakes/backroad/commit/59be1e3fcaf7375bfe86def70e5b609bf75d5fe7))
+- **sidebar:** restore portal rendering for persistent sidebar ([7963110](https://github.com/sudomakes/backroad/commit/7963110661a224b3069b037bf24708871b43c997))
+- **sidebar:** simplify component to match original structure ([1278cc5](https://github.com/sudomakes/backroad/commit/1278cc54333105850cd1f7e2843a8807fde57888))
+- **tests:** fix pre-existing test failures ([20534d1](https://github.com/sudomakes/backroad/commit/20534d110d99c2db454ea0e4b50b58e5c1f4c488))
+
+### Chores
+
+- sidebar added in demo ([43045ee](https://github.com/sudomakes/backroad/commit/43045ee78b16d93a80333f7c0db92be7ccb7e08a))
+
+### Refactoring
+
+- better sidebar and docs sandbox ([0125841](https://github.com/sudomakes/backroad/commit/01258419cc935cc5232444d825189fb1a23755ae))
+- removed useless code ([31747a2](https://github.com/sudomakes/backroad/commit/31747a24ccac95475b6b877a94b115f81cdb8e09))
+- **sidebar:** replace framer-motion with CSS transitions ([c59fc19](https://github.com/sudomakes/backroad/commit/c59fc19debea3ea20f5b226fa0b075bb9b554052))
+
+## [1.10.0](https://github.com/sudomakes/backroad/compare/v1.9.0...v1.10.0) (2026-06-13)
+
+### Features
+
+- **sandbox:** add syntax highlighting to WebContainer editor ([af49dc6](https://github.com/sudomakes/backroad/commit/af49dc66d1657339b537880e768e0119d5c00428))
+
+### Bug Fixes
+
+- **e2e:** update sandbox test to look for CodeMirror editor ([e63c27f](https://github.com/sudomakes/backroad/commit/e63c27f20a58cafcd361cbd4d145fe0d733952f1))
+
+### Chores
+
+- tighten bundle size limits ([ce7fc5b](https://github.com/sudomakes/backroad/commit/ce7fc5bb38944a03901d7e879606298377b2bbd7))
+
+## [1.9.0](https://github.com/sudomakes/backroad/compare/v1.8.0...v1.9.0) (2026-06-13)
+
+### Features
+
+- add a11y testing to storybook and wire into PR checks ([33d7b4b](https://github.com/sudomakes/backroad/commit/33d7b4b032d1ada311aec5d712778d5315b6ceb2))
+
+### Bug Fixes
+
+- **e2e:** run against production build instead of dev servers ([2e6b13c](https://github.com/sudomakes/backroad/commit/2e6b13cef19d97f18ed621af85c0bf4c06b94b10))
+- fix a11y violations and knip baseline ([1f46ee0](https://github.com/sudomakes/backroad/commit/1f46ee02ec1f7e0f4b8c629788eaad6cf2c3ef75))
+
+## [1.8.0](https://github.com/sudomakes/backroad/compare/v1.7.10...v1.8.0) (2026-06-13)
+
+### Features
+
+- **dev:** add gitleaks secret scan to pre-commit hook ([d692a82](https://github.com/sudomakes/backroad/commit/d692a8247e0a73c5e906d0e51cdbd0bd22c1bc6b))
+- **iframe:** add iframe as first-class component with e2e tests ([b402128](https://github.com/sudomakes/backroad/commit/b40212834ad9d655bbb3713c41506d58e6e1a151))
+
+### Bug Fixes
+
+- **ci:** run gitleaks CLI directly instead of gitleaks-action@v2 which requires a paid license ([e1eeca9](https://github.com/sudomakes/backroad/commit/e1eeca9dc4c24c2864841b79b977e3914c695848))
+
 ## [1.7.10](https://github.com/sudomakes/backroad/compare/v1.7.9...v1.7.10) (2026-06-10)
 
 ### Bug Fixes
