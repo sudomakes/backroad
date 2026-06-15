@@ -1,0 +1,22 @@
+libs/backroad-frontend/src/stories/Table.stories.tsx
+  s_5dc673d60ce5d9::t_f07b0867e872cd 144-145
+  s_5dc673d60ce5d9::t_71dfcab41ff1e9 106-109
+libs/backroad-frontend/src/table.test.tsx
+  s_5dc673d60ce5d9::t_19c224e353a4ec 78-81
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.7",
+  "base_commit_sha": "c88d16ccbc566319ed5d6f12c4e6d46c670f381b",
+  "prompts": {},
+  "sessions": {
+    "s_5dc673d60ce5d9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4f177e39-e04b-462a-b115-ee2f7587cae9",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
