@@ -1,3 +1,9 @@
+## [1.13.1](https://github.com/sudomakes/backroad/compare/v1.13.0...v1.13.1) (2026-06-15)
+
+### Bug Fixes
+
+- improve columns ([479eb34](https://github.com/sudomakes/backroad/commit/479eb34d19e12706fce0ad63cb7e3c2529b5e5c1))
+
 ## [1.13.0](https://github.com/sudomakes/backroad/compare/v1.12.0...v1.13.0) (2026-06-15)
 
 ### Features
