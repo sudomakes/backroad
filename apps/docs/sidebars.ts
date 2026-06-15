@@ -17,6 +17,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'components/writing-and-markdown',
         'components/inputs',
+        'components/feedback',
         'components/data',
         'components/charts',
         'components/multimedia',

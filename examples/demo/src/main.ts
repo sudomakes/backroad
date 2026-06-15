@@ -40,6 +40,7 @@ run(
     sb.link({ label: '🔽 Select', href: '/select' });
     sb.link({ label: '📈 Stats', href: '/stats' });
     sb.link({ label: '📐 Columns', href: '/columns' });
+    sb.link({ label: '🎛️ Widgets', href: '/widgets' });
     sb.link({ label: '📁 File Upload', href: '/file-upload' });
     sb.write({ body: '---' });
     sb.write({ body: `📍 \`${currentPath}\`` });
@@ -52,6 +53,7 @@ run(
     pages.stats(br.page({ path: '/stats' }));
     pages.columns(br.page({ path: '/columns' }));
     pages.charts(br.page({ path: '/charts' }));
+    pages.widgets(br.page({ path: '/widgets' }));
 
     // const br = brBase.base({});
     br.write({ body: `# Backroad LLM Example\n---` });

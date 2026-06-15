@@ -44,7 +44,19 @@ export type ServerToClientEventTypes =
   | 'backroad_config'
   | 'props_change'
   | 'auth_redirect'
-  | 'auth_signout';
+  | 'auth_signout'
+  | 'toast_show';
+
+// A toast is a fire-and-forget notification, not a tree node. Pushing it
+// through the render queue would let the 500ms batch coalesce a button's
+// transient set→unset reruns and drop it before it ever reaches the client, so
+// it rides its own immediate event instead (like auth_redirect).
+export type ToastArgs = {
+  message: string;
+  variant?: 'info' | 'success' | 'warning' | 'error';
+  // ms on screen; 0 keeps it until dismissed; omit for the default.
+  duration?: number;
+};
 export type ClientToServerEvents =
   ConstructSocketIoEventSignatureFromBackroadEvents<ClientToServerEventTypes>;
 export type ServerToClientEvents =
@@ -101,6 +113,10 @@ export type BackroadEventsMapping = {
   };
   auth_signout: {
     args: undefined;
+    response?: void;
+  };
+  toast_show: {
+    args: ToastArgs;
     response?: void;
   };
 };

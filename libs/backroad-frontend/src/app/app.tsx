@@ -4,6 +4,7 @@ import {
   type BackroadNode,
 } from '@backroad/core';
 import { TreeRender, socket } from 'backroad-components';
+import { Toaster } from 'backroad-ui';
 import { set } from 'lodash';
 import { lazy, Suspense, useEffect, useState } from 'react';
 import ReactGA from 'react-ga4';
@@ -117,6 +118,8 @@ export function App() {
 
   return (
     <div className="flex min-h-screen">
+      {/* App-root toast outlet — br.toast() fires notifications into this. */}
+      <Toaster position="top-right" />
       <div id="sidebar-portal" className="relative h-screen"></div>
       {/* Non-page root children (e.g. sidebar) stay mounted across all routes */}
       {nonPageChildren.map((child) => (

@@ -194,6 +194,40 @@ type _ComponentBasePropsMapping = {
     };
     value: string;
   }>;
+  text_area: AllowDefaultHelper<{
+    args: {
+      label: string;
+      placeholder?: string;
+      rows?: number;
+    };
+    value: string;
+  }>;
+  slider: AllowDefaultHelper<{
+    args: {
+      label: string;
+      min?: number;
+      max?: number;
+      step?: number;
+    };
+    value: number;
+  }>;
+  // ISO date string (`YYYY-MM-DD`); empty string means no date selected.
+  date_input: AllowDefaultHelper<{
+    args: {
+      label: string;
+      min?: string;
+      max?: string;
+    };
+    value: string;
+  }>;
+  // 24-hour time string (`HH:mm`); empty string means no time selected.
+  time_input: AllowDefaultHelper<{
+    args: {
+      label: string;
+      step?: number;
+    };
+    value: string;
+  }>;
   file_upload: {
     args: {
       label: string;
@@ -213,7 +247,9 @@ type _ComponentBasePropsMapping = {
     };
     value: null;
   };
-  // date_input: AllowDefaultHelper<{}>
+  // NOTE: `toast` is intentionally NOT a component — it's a fire-and-forget
+  // action that emits a `toast_show` socket event (see br.toast / ToastArgs in
+  // events.ts), so it bypasses the render queue entirely.
 };
 export type ComponentPropsMapping = {
   [key in keyof _ComponentBasePropsMapping]: {
@@ -353,5 +389,10 @@ export const defaultValueFallbacks: {
   toggle: false,
   radio: (props) => props.args.options[0],
   text_input: '',
+  text_area: '',
+  // Seed the slider at its min (or 0) so the thumb starts at the low end.
+  slider: (props) => props.args.min ?? 0,
+  date_input: '',
+  time_input: '',
   file_upload: [],
 };

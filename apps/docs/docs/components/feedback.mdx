@@ -1,0 +1,56 @@
+---
+title: Feedback
+---
+
+import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
+
+# Feedback
+
+Components for telling the user what just happened.
+
+## Toast
+
+A transient notification that pops into the corner of the screen and
+auto-dismisses. Unlike most components, `toast` renders nothing in the page
+flow — calling it fires the notification as a side effect, so put it inside the
+branch that should trigger it (e.g. right after a button click).
+
+```ts
+if (br.button({ label: 'Save' })) {
+  br.toast({
+    message: 'Saved your preferences!',
+    variant: 'success', // 'info' (default) | 'success' | 'warning' | 'error'
+    duration: 4000, // ms on screen; 0 keeps it until dismissed
+  });
+}
+```
+
+The four variants only change the icon and accent — the message text always
+uses the theme's popover colours so it stays readable in every palette and in
+both light and dark mode.
+
+## Try it
+
+<BackroadSandbox
+  height={420}
+  code={`import { run } from '@backroad/backroad';
+
+run((br) => {
+br.write({ body: '# Toast demo' });
+
+const variant = br.select({
+label: 'Variant',
+options: [
+{ value: 'info', label: 'Info' },
+{ value: 'success', label: 'Success' },
+{ value: 'warning', label: 'Warning' },
+{ value: 'error', label: 'Error' },
+],
+});
+
+if (br.button({ label: 'Notify' })) {
+br.toast({ message: \`This is a \${variant ?? 'info'} toast\`, variant: variant ?? 'info' });
+}
+});
+`}
+/>

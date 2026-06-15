@@ -9,6 +9,7 @@ import {
   type GenericBackroadComponent,
   type InbuiltComponentTypes,
   type InbuiltContainerTypes,
+  type ToastArgs,
 } from '@backroad/core';
 import omit from 'lodash/omit';
 import superjson from 'superjson';
@@ -298,6 +299,27 @@ export class BackroadNodeManager<
   }
   textInput(props: BackroadComponentFormat<'text_input'>) {
     return this.#initialiseAndAddComponentDescendant(props, 'text_input');
+  }
+  textArea(props: BackroadComponentFormat<'text_area'>) {
+    return this.#initialiseAndAddComponentDescendant(props, 'text_area');
+  }
+  slider(props: BackroadComponentFormat<'slider'>) {
+    return this.#initialiseAndAddComponentDescendant(props, 'slider');
+  }
+  dateInput(props: BackroadComponentFormat<'date_input'>) {
+    return this.#initialiseAndAddComponentDescendant(props, 'date_input');
+  }
+  timeInput(props: BackroadComponentFormat<'time_input'>) {
+    return this.#initialiseAndAddComponentDescendant(props, 'time_input');
+  }
+  // A toast is an action, not a node: emit it straight to the client (like
+  // login/logout) so it can't be batched away by a button's set→unset reruns.
+  toast(props: ToastArgs) {
+    SocketManager.getSocket(this.backroadSession.sessionId).emit(
+      'toast_show',
+      props,
+      () => undefined
+    );
   }
   fileUpload(props: BackroadComponentFormat<'file_upload'>) {
     return this.#initialiseAndAddComponentDescendant(props, 'file_upload');
