@@ -14,3 +14,20 @@ if (typeof window !== 'undefined' && typeof window.matchMedia !== 'function') {
       dispatchEvent: () => false,
     } as MediaQueryList);
 }
+
+// jsdom doesn't implement ResizeObserver, which @tanstack/react-virtual (used
+// by the virtualized `table` component) constructs on mount. Provide a no-op
+// stub so virtualized components can render in tests.
+if (typeof globalThis.ResizeObserver === 'undefined') {
+  globalThis.ResizeObserver = class {
+    observe() {
+      return undefined;
+    }
+    unobserve() {
+      return undefined;
+    }
+    disconnect() {
+      return undefined;
+    }
+  };
+}
