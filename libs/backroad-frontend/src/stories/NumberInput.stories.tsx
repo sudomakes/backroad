@@ -1,52 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Button, Input, Label } from 'backroad-ui';
-import { Minus, Plus } from 'lucide-react';
+import { backroadClientComponents } from 'backroad-components';
+import { ThemeMatrix } from './theme-matrix';
 
-// Mirrors libs/backroad-components/src/lib/components/number_input.tsx:
-// a shadcn Input flanked by increment/decrement icon buttons.
-const NumberInput = ({
-  label,
-  defaultValue,
-  min,
-  max,
-}: {
-  label: string;
-  defaultValue?: number;
-  min?: number;
-  max?: number;
-}) => {
-  const id = `ni-${label.replace(/\W+/g, '-').toLowerCase()}`;
-  return (
-    <div className="flex w-full max-w-xs flex-col gap-2">
-      <Label htmlFor={id}>{label}</Label>
-      <div className="flex items-center gap-2">
-        <Input
-          id={id}
-          type="number"
-          defaultValue={defaultValue}
-          min={min}
-          max={max}
-        />
-        <Button
-          type="button"
-          variant="outline"
-          size="icon"
-          aria-label="Decrement"
-        >
-          <Minus className="size-4" />
-        </Button>
-        <Button
-          type="button"
-          variant="outline"
-          size="icon"
-          aria-label="Increment"
-        >
-          <Plus className="size-4" />
-        </Button>
-      </div>
-    </div>
-  );
-};
+// The real `number_input` renderer (shadcn Input flanked by +/- icon buttons).
+const NumberInput = backroadClientComponents.number_input;
+const numberInput = (
+  args: { label: string; min?: number; max?: number; step?: number },
+  value = 0
+) => ({
+  path: 'story',
+  id: 'story',
+  type: 'number_input' as const,
+  value,
+  args,
+});
 
 const meta: Meta<typeof NumberInput> = {
   title: 'Components/NumberInput',
@@ -57,5 +24,17 @@ export default meta;
 type Story = StoryObj<typeof NumberInput>;
 
 export const Default: Story = {
-  args: { label: 'Quantity', defaultValue: 1, min: 0, max: 99 },
+  render: () => <NumberInput {...numberInput({ label: 'Quantity' }, 1)} />,
+};
+export const WithRange: Story = {
+  render: () => (
+    <NumberInput {...numberInput({ label: 'Age', min: 0, max: 120 }, 30)} />
+  ),
+};
+export const AllThemes: Story = {
+  render: () => (
+    <ThemeMatrix>
+      <NumberInput {...numberInput({ label: 'Quantity' }, 1)} />
+    </ThemeMatrix>
+  ),
 };

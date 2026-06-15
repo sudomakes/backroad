@@ -1,54 +1,38 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import {
-  Label,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from 'backroad-ui';
+import { backroadClientComponents } from 'backroad-components';
+import { ThemeMatrix } from './theme-matrix';
 
-const SelectField = ({
-  label,
-  options,
-  defaultValue,
-}: {
-  label: string;
-  options: string[];
-  defaultValue?: string;
-}) => {
-  const id = `s-${label.replace(/\W+/g, '-').toLowerCase()}`;
-  return (
-    <div className="flex w-full max-w-xs flex-col gap-2">
-      <Label htmlFor={id}>{label}</Label>
-      <Select defaultValue={defaultValue}>
-        <SelectTrigger id={id} className="w-full">
-          <SelectValue placeholder={`Select ${label.toLowerCase()}`} />
-        </SelectTrigger>
-        <SelectContent>
-          {options.map((o) => (
-            <SelectItem key={o} value={o}>
-              {o}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-    </div>
-  );
-};
+// The real `select` renderer. NOTE: backroad's select is react-select under the
+// hood (not the shadcn Select primitive) — rendering the real renderer keeps the
+// story honest about what the app actually shows.
+const Select = backroadClientComponents.select;
+const COUNTRIES = [
+  { value: 'in', label: 'India' },
+  { value: 'us', label: 'United States' },
+  { value: 'de', label: 'Germany' },
+  { value: 'jp', label: 'Japan' },
+];
+const select = (value: string) => ({
+  path: 'story',
+  id: 'story',
+  type: 'select' as const,
+  value,
+  args: { label: 'Country', options: COUNTRIES },
+});
 
-const meta: Meta<typeof SelectField> = {
+const meta: Meta<typeof Select> = {
   title: 'Components/Select',
-  component: SelectField,
+  component: Select,
   parameters: { layout: 'centered' },
 };
 export default meta;
-type Story = StoryObj<typeof SelectField>;
+type Story = StoryObj<typeof Select>;
 
-export const Default: Story = {
-  args: {
-    label: 'Country',
-    options: ['India', 'United States', 'Germany', 'Japan'],
-    defaultValue: 'India',
-  },
+export const Default: Story = { render: () => <Select {...select('in')} /> };
+export const AllThemes: Story = {
+  render: () => (
+    <ThemeMatrix>
+      <Select {...select('in')} />
+    </ThemeMatrix>
+  ),
 };

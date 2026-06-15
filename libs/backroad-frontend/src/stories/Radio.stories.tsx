@@ -1,48 +1,34 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Label, RadioGroup, RadioGroupItem } from 'backroad-ui';
+import { backroadClientComponents } from 'backroad-components';
+import { ThemeMatrix } from './theme-matrix';
 
-const RadioField = ({
-  label,
-  options,
-  defaultValue,
-}: {
-  label: string;
-  options: string[];
-  defaultValue?: string;
-}) => {
-  const name = `r-${label.replace(/\W+/g, '-').toLowerCase()}`;
-  return (
-    <div className="flex w-full max-w-xs flex-col gap-3">
-      <span className="backroad-label">{label}</span>
-      <RadioGroup defaultValue={defaultValue}>
-        {options.map((opt) => {
-          const id = `${name}-${opt.replace(/\W+/g, '-').toLowerCase()}`;
-          return (
-            <div key={opt} className="flex items-center gap-2">
-              <RadioGroupItem value={opt} id={id} />
-              <Label htmlFor={id} className="font-normal">
-                {opt}
-              </Label>
-            </div>
-          );
-        })}
-      </RadioGroup>
-    </div>
-  );
-};
+// The real `radio` renderer (shadcn RadioGroup + Label).
+const Radio = backroadClientComponents.radio;
+const radio = (label: string, options: string[], value = options[0]) => ({
+  path: 'story',
+  id: 'story',
+  type: 'radio' as const,
+  value,
+  args: { label, options },
+});
 
-const meta: Meta<typeof RadioField> = {
+const meta: Meta<typeof Radio> = {
   title: 'Components/Radio',
-  component: RadioField,
+  component: Radio,
   parameters: { layout: 'centered' },
 };
 export default meta;
-type Story = StoryObj<typeof RadioField>;
+type Story = StoryObj<typeof Radio>;
+
+const PLANS = ['Free', 'Pro', 'Enterprise'];
 
 export const Default: Story = {
-  args: {
-    label: 'Plan',
-    options: ['Free', 'Pro', 'Enterprise'],
-    defaultValue: 'Pro',
-  },
+  render: () => <Radio {...radio('Plan', PLANS, 'Pro')} />,
+};
+export const AllThemes: Story = {
+  render: () => (
+    <ThemeMatrix>
+      <Radio {...radio('Plan', PLANS, 'Pro')} />
+    </ThemeMatrix>
+  ),
 };

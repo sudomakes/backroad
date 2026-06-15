@@ -1,28 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Input, Label } from 'backroad-ui';
+import { backroadClientComponents } from 'backroad-components';
+import { ThemeMatrix } from './theme-matrix';
 
-const TextInput = ({
-  label,
-  placeholder,
-  defaultValue,
-}: {
-  label: string;
-  placeholder?: string;
-  defaultValue?: string;
-}) => {
-  const id = `ti-${label.replace(/\W+/g, '-').toLowerCase()}`;
-  return (
-    <div className="flex w-full max-w-xs flex-col gap-2">
-      <Label htmlFor={id}>{label}</Label>
-      <Input
-        id={id}
-        type="text"
-        defaultValue={defaultValue}
-        placeholder={placeholder}
-      />
-    </div>
-  );
-};
+// The real `text_input` renderer (shadcn Input + Label, commits on blur).
+const TextInput = backroadClientComponents.text_input;
+const textInput = (
+  args: { label: string; placeholder?: string },
+  value = ''
+) => ({ path: 'story', id: 'story', type: 'text_input' as const, value, args });
 
 const meta: Meta<typeof TextInput> = {
   title: 'Components/TextInput',
@@ -33,12 +18,26 @@ export default meta;
 type Story = StoryObj<typeof TextInput>;
 
 export const Empty: Story = {
-  args: { label: 'Name', placeholder: 'Enter your name' },
+  render: () => (
+    <TextInput {...textInput({ label: 'Name', placeholder: 'Enter your name' })} />
+  ),
 };
 export const WithValue: Story = {
-  args: {
-    label: 'Email',
-    placeholder: 'you@example.com',
-    defaultValue: 'demo@example.com',
-  },
+  render: () => (
+    <TextInput
+      {...textInput(
+        { label: 'Email', placeholder: 'you@example.com' },
+        'demo@example.com'
+      )}
+    />
+  ),
+};
+export const AllThemes: Story = {
+  render: () => (
+    <ThemeMatrix>
+      <TextInput
+        {...textInput({ label: 'Name', placeholder: 'Enter your name' })}
+      />
+    </ThemeMatrix>
+  ),
 };

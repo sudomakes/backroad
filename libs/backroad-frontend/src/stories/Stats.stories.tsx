@@ -1,26 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { backroadClientComponents } from 'backroad-components';
+import { ThemeMatrix } from './theme-matrix';
 
-// Mirrors libs/backroad-components/src/lib/components/stats.tsx — the
-// token-driven, daisyUI-free stats card.
-const Stats = ({
-  items,
-}: {
-  items: Array<{ label: string; value: string; description?: string }>;
-}) => (
-  <div className="flex min-h-[100px] flex-wrap divide-x divide-border rounded-lg border border-border bg-card text-card-foreground shadow-sm">
-    {items.map((s) => (
-      <div className="flex flex-col gap-1 px-6 py-4" key={s.label}>
-        <div className="text-sm text-muted-foreground">{s.label}</div>
-        <div className="text-2xl font-semibold text-primary">{s.value}</div>
-        {s.description && (
-          <div className="mt-2 text-sm text-muted-foreground">
-            {s.description}
-          </div>
-        )}
-      </div>
-    ))}
-  </div>
-);
+// The real `stats` renderer — including the up/down delta indicators (green ↗ /
+// red ↘) that the old hand-written story dropped entirely.
+const Stats = backroadClientComponents.stats;
+type Item = { label: string; value: string | number; delta?: string | number };
+const stats = (items: Item[]) => ({
+  path: 'story',
+  id: 'story',
+  type: 'stats' as const,
+  value: null,
+  args: { items },
+});
 
 const meta: Meta<typeof Stats> = {
   title: 'Components/Stats',
@@ -30,12 +22,17 @@ const meta: Meta<typeof Stats> = {
 export default meta;
 type Story = StoryObj<typeof Stats>;
 
-export const Triple: Story = {
-  args: {
-    items: [
-      { label: 'Downloads', value: '31K', description: 'Jan 1st - Feb 1st' },
-      { label: 'New users', value: '4,200', description: '↗︎ 400 (22%)' },
-      { label: 'New registers', value: '1,200', description: '↘︎ 90 (14%)' },
-    ],
-  },
+const ITEMS: Item[] = [
+  { label: 'Downloads', value: '31K' },
+  { label: 'New users', value: '4,200', delta: '+22%' },
+  { label: 'New registers', value: '1,200', delta: '-14%' },
+];
+
+export const Triple: Story = { render: () => <Stats {...stats(ITEMS)} /> };
+export const AllThemes: Story = {
+  render: () => (
+    <ThemeMatrix>
+      <Stats {...stats(ITEMS)} />
+    </ThemeMatrix>
+  ),
 };

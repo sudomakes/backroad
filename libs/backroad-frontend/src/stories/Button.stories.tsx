@@ -1,32 +1,38 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Button } from 'backroad-ui';
+import { backroadClientComponents } from 'backroad-components';
+import { ThemeMatrix } from './theme-matrix';
 
-// Stories render the real shadcn Button shipped by backroad-components so
-// axe scans the exact DOM users see. The production renderer also wires a
-// socket event on click; that's outside what a11y cares about.
+// The real `button` renderer the backroad tree mounts (wraps the shadcn Button
+// and wires a socket event on click). Rendering it directly keeps the story in
+// lockstep with what the app actually ships.
+const Button = backroadClientComponents.button;
+const button = (label: string) =>
+  ({
+    path: 'story',
+    id: 'story',
+    type: 'button' as const,
+    value: false,
+    args: { label },
+  });
+
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
   component: Button,
   parameters: { layout: 'centered' },
-  args: { children: 'Submit' },
 };
 export default meta;
 type Story = StoryObj<typeof Button>;
 
-export const Default: Story = {};
-export const Secondary: Story = {
-  args: { children: 'Continue', variant: 'secondary' },
-};
-export const Destructive: Story = {
-  args: { children: 'Delete', variant: 'destructive' },
-};
-export const Ghost: Story = { args: { children: 'Cancel', variant: 'ghost' } };
-export const Outline: Story = {
-  args: { children: 'Learn more', variant: 'outline' },
-};
-export const Disabled: Story = {
-  args: { children: 'Unavailable', disabled: true },
-};
+export const Default: Story = { render: () => <Button {...button('Submit')} /> };
 export const LongLabel: Story = {
-  args: { children: 'A label that is unusually long for a button' },
+  render: () => (
+    <Button {...button('A label that is unusually long for a button')} />
+  ),
+};
+export const AllThemes: Story = {
+  render: () => (
+    <ThemeMatrix>
+      <Button {...button('Submit')} />
+    </ThemeMatrix>
+  ),
 };
