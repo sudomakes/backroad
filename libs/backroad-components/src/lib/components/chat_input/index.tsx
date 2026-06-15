@@ -6,7 +6,7 @@ import {
   PromptInputSubmit,
   PromptInputTextarea,
   PromptInputToolbar,
-} from '../../ui/ai-elements/prompt-input';
+} from 'backroad-ui';
 
 export const ChatInput: BackroadComponentRenderer<'chat_input'> = (props) => {
   const [value, setValue] = useState(props.value);

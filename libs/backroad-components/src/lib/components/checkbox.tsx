@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { BackroadComponentRenderer } from '../types/components';
 import { setBackroadValue } from '../socket';
-import { Checkbox as UICheckbox } from '../ui/checkbox';
-import { Label } from '../ui/label';
+import { Checkbox as UICheckbox, Label } from 'backroad-ui';
 
 export const Checkbox: BackroadComponentRenderer<'checkbox'> = (props) => {
   const [value, setValue] = useState(props.value);

@@ -5,11 +5,7 @@ import { LoadingSpinner } from '../components/loading_spinner';
 import { useEffect, useState } from 'react';
 import { socket } from '../socket';
 import { BackroadContainer } from '@backroad/core';
-import {
-  Message,
-  MessageAvatar,
-  MessageContent,
-} from '../ui/ai-elements/message';
+import { Message, MessageAvatar, MessageContent } from 'backroad-ui';
 
 export const ChatMessage: BackroadContainerRenderer<'chat_message'> = (
   props

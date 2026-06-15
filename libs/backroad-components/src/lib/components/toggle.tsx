@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { BackroadComponentRenderer } from '../types/components';
 import { setBackroadValue } from '../socket';
-import { Switch } from '../ui/switch';
-import { Label } from '../ui/label';
+import { Switch, Label } from 'backroad-ui';
 
 export const Toggle: BackroadComponentRenderer<'toggle'> = (props) => {
   const [value, setValue] = useState(props.value);

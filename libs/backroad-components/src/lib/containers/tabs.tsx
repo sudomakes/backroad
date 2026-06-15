@@ -1,6 +1,6 @@
 import { BackroadContainerRenderer } from '../types/containers';
 import { TreeRender } from '../tree';
-import { Tabs as UITabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
+import { Tabs as UITabs, TabsContent, TabsList, TabsTrigger } from 'backroad-ui';
 
 export const Tabs: BackroadContainerRenderer<'tabs'> = (props) => {
   return (

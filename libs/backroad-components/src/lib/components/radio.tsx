@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { BackroadComponentRenderer } from '../types/components';
 import { setBackroadValue } from '../socket';
-import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
-import { Label } from '../ui/label';
+import { RadioGroup, RadioGroupItem, Label } from 'backroad-ui';
 
 export const Radio: BackroadComponentRenderer<'radio'> = (props) => {
   const [value, setValue] = useState(props.value);

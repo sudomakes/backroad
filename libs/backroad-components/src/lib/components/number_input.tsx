@@ -3,9 +3,7 @@ import { useState } from 'react';
 import { setBackroadValue } from '../socket';
 import { handleKeyUpBlur } from '../helpers/handleKeyUp';
 import { Minus, Plus } from 'lucide-react';
-import { Input } from '../ui/input';
-import { Label } from '../ui/label';
-import { Button } from '../ui/button';
+import { Input, Label, Button } from 'backroad-ui';
 
 export const NumberInput = (props: BackroadComponent<'number_input', true>) => {
   const [inputValue, setInputValue] = useState(props.value);

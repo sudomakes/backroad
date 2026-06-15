@@ -7,8 +7,7 @@ import {
   CloudArrowUpIcon,
 } from '@heroicons/react/24/outline';
 import { minimatch } from 'minimatch';
-import { Label } from '../ui/label';
-import { buttonVariants } from '../ui/button';
+import { Label, buttonVariants } from 'backroad-ui';
 
 const baseStyle = {
   flex: 1,
