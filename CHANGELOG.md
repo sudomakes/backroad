@@ -1,3 +1,13 @@
+## [1.15.0](https://github.com/sudomakes/backroad/compare/v1.14.1...v1.15.0) (2026-06-15)
+
+### Features
+
+- **table:** restyle + gated virtualization, stories, tests ([7e58b69](https://github.com/sudomakes/backroad/commit/7e58b6914e4ab63f1fcc8fe835487f4b9077a629))
+
+### Bug Fixes
+
+- **table:** lazy-load charts for bundle budget, fix table a11y ([c154dad](https://github.com/sudomakes/backroad/commit/c154dad0792a6cec560f44db918deaee7832c28b))
+
 ## [1.14.1](https://github.com/sudomakes/backroad/compare/v1.14.0...v1.14.1) (2026-06-15)
 
 ### Bug Fixes
