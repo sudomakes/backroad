@@ -103,10 +103,10 @@ export const WithFooter: Story = {
 };
 
 // --- Stress tests -----------------------------------------------------------
-// These exercise the layout limits. NOTE: the renderer has no virtualization or
-// pagination — it maps every row/column straight into the DOM — so these also
-// surface raw render cost. The `overflow-x-auto` wrapper keeps wide tables from
-// blowing out the page; tall tables render all rows.
+// These exercise the layout limits. Wide tables stay on the `overflow-x-auto`
+// wrapper so they scroll horizontally instead of blowing out the page. Tall
+// tables cross the virtualization threshold and switch to a bounded scroll
+// viewport that only mounts the visible window of rows.
 
 const WIDE_COLUMN_COUNT = 40;
 const WIDE_COLUMNS: Columns = Object.fromEntries(
@@ -141,8 +141,8 @@ const LONG_DATA: Row[] = Array.from({ length: LONG_ROW_COUNT }, (_, i) => ({
   started: `2026-06-15T${String(i % 24).padStart(2, '0')}:00:00.000Z`,
 }));
 
-/** 2,000 rows — there is NO virtualization, so all 2,000 rows mount as real DOM
- * nodes. Use this to feel the render/scroll cost that windowing would remove. */
+/** 2,000 rows — past the virtualization threshold, so only the visible window
+ * (plus overscan) mounts as DOM nodes inside a bounded scroll viewport. */
 export const LongTable: Story = {
   render: () => <Table {...table(SANDBOX_COLUMNS, LONG_DATA)} />,
 };

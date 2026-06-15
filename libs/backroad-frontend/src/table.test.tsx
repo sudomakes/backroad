@@ -75,10 +75,10 @@ describe('Table', () => {
     expect(getByText('Total')).toBeTruthy();
   });
 
-  // The gate between "render every row" and "virtualize" is what we can assert
-  // deterministically. The actual windowed row count depends on real layout
-  // measurement, which jsdom doesn't provide (every rect is 0×0) — that's
-  // covered by the Storybook `LongTable` story / visual check, not here.
+  // The gate between "render every row" and "virtualize" asserts deterministically
+  // (no layout needed). The actual windowed row count needs real measurements,
+  // which jsdom lacks (every rect is 0×0) — that's covered separately in the
+  // "windowing" block below by mocking element geometry.
   describe('virtualization gate', () => {
     const wrapper = (container: HTMLElement) =>
       container.firstElementChild as HTMLElement;
