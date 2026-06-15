@@ -8,7 +8,16 @@ export type BackroadConfig =
       analytics?: {
         google?: string | InitOptions[];
       };
-      theme?: 'light' | 'dark';
+      /**
+       * App-maker recommended defaults. Applied only until the user picks their
+       * own (a persisted client preference always wins), so these are
+       * recommendations, not overrides — unlike session-scoped backroad values.
+       */
+      appearance?: {
+        /** Palette name matching a frontend theme (e.g. 'claude', 'twitter'). */
+        theme?: string;
+        mode?: 'light' | 'dark' | 'system';
+      };
       server?: {
         port?: number;
       };

@@ -12,6 +12,7 @@ import superjson from 'superjson';
 import { Navbar } from './layout/navbar';
 import useBackroadConfig from './hooks/useBackroadConfig';
 import { useTheme } from './theme/theme-provider';
+import type { ThemeName } from './theme/themes';
 
 // Code-split the auth bundle. @daveyplate/better-auth-ui plus its Radix /
 // shadcn deps add ~160KB gzipped to the JS bundle; we only need them on
@@ -56,14 +57,20 @@ export function App() {
     }
   }, [config?.analytics?.google]);
 
-  // Seed the app-maker's default light/dark mode from `config.theme` once the
-  // config arrives. seedDefaults only applies when the user has no saved
-  // preference (localStorage wins) and doesn't persist, so a past user choice
-  // is never clobbered on reload.
+  // Seed the app-maker's recommended palette + mode from the config once it
+  // arrives. seedDefaults only applies when the user has no saved preference
+  // (localStorage wins) and never persists, so a past user choice is never
+  // clobbered on reload.
   const { seedDefaults } = useTheme();
+  const appearance = config?.appearance;
   useEffect(() => {
-    if (config?.theme) seedDefaults({ mode: config.theme });
-  }, [config?.theme, seedDefaults]);
+    if (appearance) {
+      seedDefaults({
+        theme: appearance.theme as ThemeName | undefined,
+        mode: appearance.mode,
+      });
+    }
+  }, [appearance, seedDefaults]);
 
   useEffect(() => {
     const onRender = (nodeData: string[], callback: () => void) => {
