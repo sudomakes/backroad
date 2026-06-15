@@ -1,0 +1,42 @@
+libs/backroad-components/src/lib/components/checkbox.tsx
+  s_5a1bcd361448d3::t_8187c626324d38 4
+libs/backroad-components/src/lib/containers/chat_message.tsx
+  s_5a1bcd361448d3::t_a32ef69be6b26b 8
+libs/backroad-components/src/lib/components/chat_input/index.tsx
+  s_5a1bcd361448d3::t_85ad334920fe85 9
+libs/backroad-components/src/lib/components/number_input.tsx
+  s_5a1bcd361448d3::t_605338827bb2aa 6
+libs/backroad-components/src/index.ts
+  s_5a1bcd361448d3::t_f45caf0c5a867a 7
+  s_5a1bcd361448d3::t_dfd08802a29a23 3-6
+libs/backroad-components/src/lib/containers/tabs.tsx
+  s_5a1bcd361448d3::t_768e5a45dcfb9d 3
+libs/backroad-components/src/lib/components/toggle.tsx
+  s_5a1bcd361448d3::t_6a887109545f85 4
+libs/backroad-components/src/lib/components/file_upload.tsx
+  s_5a1bcd361448d3::t_887709f65f8646 10
+libs/backroad-components/src/lib/components/markdown.tsx
+  s_5a1bcd361448d3::t_d366da033fe394 8
+libs/backroad-components/src/lib/helpers/select.tsx
+  s_5a1bcd361448d3::t_7257f577801cc4 3
+libs/backroad-components/package.json
+  s_5a1bcd361448d3::t_264e35d9755dd4 13,31
+libs/backroad-components/src/lib/components/radio.tsx
+  s_5a1bcd361448d3::t_86514c5dd0a7d6 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "21902fcffea5d43b8ea41f2fbb34baa7a4cdf8f2",
+  "prompts": {},
+  "sessions": {
+    "s_5a1bcd361448d3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f5f1f82d-4ed0-4775-a7d4-f3e124855869",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
