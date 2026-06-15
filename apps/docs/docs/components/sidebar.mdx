@@ -78,6 +78,32 @@ run((br) => {
 
 The toggle state set on the sidebar page is visible from both routes.
 
+## Conditional content per route
+
+`run` passes a second argument with `currentPath` — the pathname that
+triggered this execution. Use it to show different sidebar content on
+different pages without re-declaring the sidebar:
+
+```ts
+run((br, { currentPath }) => {
+  const sidebar = br.sidebar({});
+  sidebar.link({ label: '🏠 Home', href: '/' });
+  sidebar.link({ label: '⚙️ Settings', href: '/settings' });
+
+  if (currentPath === '/settings') {
+    sidebar.write({ body: '---' });
+    sidebar.write({ body: '### Settings' });
+    sidebar.toggle({ label: 'Email notifications' });
+    sidebar.toggle({ label: 'Dark mode' });
+  }
+
+  br.page({ path: '/settings' }).write({ body: '# Settings' });
+});
+```
+
+`currentPath` reflects the URL that triggered the current run —
+navigation fires a new run, so `currentPath` is always up to date.
+
 ## Multiple sidebars
 
 Calling `br.sidebar()` more than once creates multiple sidebar

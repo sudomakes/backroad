@@ -1,8 +1,7 @@
 import { BackroadNodeManager } from '@backroad/backroad';
 
 export const backroadSelectExample = (br: BackroadNodeManager) => {
-  const sidebar = br.sidebar({});
-  const value = sidebar.select({
+  const value = br.select({
     options: [
       { value: 'Amol', label: 'Amol' },
       { value: 'Sangeeth', label: 'Sangeeth' },

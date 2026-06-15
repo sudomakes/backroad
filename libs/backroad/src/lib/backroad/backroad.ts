@@ -163,7 +163,7 @@ export class BackroadNodeManager<
     }`;
   }
   sidebar(props: BackroadContainerFormat<'sidebar'>) {
-    return this.#addContainerDescendant(
+    return this.backroadSession.rootNodeManager.#addContainerDescendant(
       this.#constructContainerObject(props, 'sidebar')
     );
   }

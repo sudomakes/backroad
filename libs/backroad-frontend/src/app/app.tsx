@@ -32,12 +32,16 @@ export function App() {
     // "Disconnected" after a missed `connect` event.
     if (socket.connected) {
       setConnected(true);
-      socket.emit('run_script', undefined, () => undefined);
+      socket.emit(
+        'run_script',
+        { pathname: window.location.pathname },
+        () => undefined
+      );
     }
     const onConnect = () => {
       setConnected(true);
       console.log('sending run script request');
-      socket.emit('run_script', undefined, () => {
+      socket.emit('run_script', { pathname: window.location.pathname }, () => {
         console.log('ran script');
       });
     };
@@ -99,9 +103,16 @@ export function App() {
   });
 
   console.log('pages data', treeStruct);
+  const nonPageChildren = treeStruct.children.filter((c) => c.type !== 'page');
+  const pageChildren = treeStruct.children.filter((c) => c.type === 'page');
+
   return (
     <div className="flex min-h-screen">
       <div id="sidebar-portal" className="relative h-screen"></div>
+      {/* Non-page root children (e.g. sidebar) stay mounted across all routes */}
+      {nonPageChildren.map((child) => (
+        <TreeRender tree={child} key={child.path} />
+      ))}
       <div className="flex-1 relative flex flex-col">
         <Navbar connected={connected} />
         <Routes>
@@ -124,7 +135,7 @@ export function App() {
               </Suspense>
             }
           />
-          {treeStruct.children.map((pageContainer) => {
+          {pageChildren.map((pageContainer) => {
             const castedPageContainer = pageContainer as BackroadContainer<
               'page',
               true
