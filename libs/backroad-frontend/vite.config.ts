@@ -38,6 +38,7 @@ export default defineConfig({
       dir: '../../node_modules/.vitest',
     },
     environment: 'jsdom',
+    setupFiles: ['./src/test-setup.ts'],
     // `.test.*` only — `.spec.*` is reserved for Playwright e2e specs.
     include: ['src/**/*.test.{ts,tsx,js,jsx}'],
   },
