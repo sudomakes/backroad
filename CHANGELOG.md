@@ -1,3 +1,9 @@
+## [1.14.0](https://github.com/sudomakes/backroad/compare/v1.13.2...v1.14.0) (2026-06-15)
+
+### Features
+
+- improved sidebar ([7cf5493](https://github.com/sudomakes/backroad/commit/7cf5493a50fedf95a3b8a0b4a76dae4dc88791a1))
+
 ## [1.13.2](https://github.com/sudomakes/backroad/compare/v1.13.1...v1.13.2) (2026-06-15)
 
 ### Bug Fixes
