@@ -1,0 +1,22 @@
+examples/demo/src/pages/columns.ts
+  s_cb042d1013c8ad::t_65f99fa4e8cc5a 4-7,11-13,17-19,23-27,29-31,38-40,48-52,54
+  s_cb042d1013c8ad::t_4aa6cf221deec0 8-10,14-15,20-22,32-37,41-45,53
+libs/backroad/src/lib/backroad/backroad.ts
+  s_cb042d1013c8ad::t_4009426e072c24 176-180
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "479eb34d19e12706fce0ad63cb7e3c2529b5e5c1",
+  "prompts": {},
+  "sessions": {
+    "s_cb042d1013c8ad": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cfc5bc12-dba5-4bde-886e-56ca83c3ea7f",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
