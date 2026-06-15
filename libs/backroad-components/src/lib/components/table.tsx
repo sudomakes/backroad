@@ -17,8 +17,10 @@ const VIRTUALIZE_THRESHOLD = 100;
 // corrects it from the real DOM, so variable-height rows still scroll cleanly.
 const ESTIMATED_ROW_HEIGHT = 41;
 
+// text-foreground (not muted) so header/footer text clears WCAG AA contrast on
+// the bg-muted header strip — muted-on-muted fails the a11y gate.
 const HEADER_CELL_CLASS =
-  'whitespace-nowrap px-4 py-2.5 text-left align-middle font-medium text-muted-foreground';
+  'whitespace-nowrap px-4 py-2.5 text-left align-middle font-medium text-foreground';
 
 export const Table: BackroadComponentRenderer<'table'> = (props) => {
   const columnsHelper = createColumnHelper<any>();
@@ -69,15 +71,22 @@ export const Table: BackroadComponentRenderer<'table'> = (props) => {
   );
 
   return (
+    // tabIndex makes the scroll container keyboard-reachable so it can be
+    // scrolled without a mouse (axe scrollable-region-focusable).
+    // jsx-a11y/no-noninteractive-tabindex flags this, but the two rules
+    // directly conflict for scrollable regions — axe wins, the region needs
+    // to take focus.
     <div
       ref={scrollRef}
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+      tabIndex={0}
       className={`w-full rounded-lg border border-border bg-card text-card-foreground shadow-sm ${
         virtualize ? 'max-h-[70vh] overflow-auto' : 'overflow-x-auto'
       }`}
     >
       <table className="w-full border-collapse text-sm">
         <thead
-          className={`bg-muted text-muted-foreground ${
+          className={`bg-muted text-foreground ${
             virtualize ? 'sticky top-0 z-10' : ''
           }`}
         >
@@ -119,7 +128,7 @@ export const Table: BackroadComponentRenderer<'table'> = (props) => {
         </tbody>
         {hasFooter && (
           <tfoot
-            className={`border-t border-border bg-muted text-muted-foreground ${
+            className={`border-t border-border bg-muted text-foreground ${
               virtualize ? 'sticky bottom-0 z-10' : ''
             }`}
           >

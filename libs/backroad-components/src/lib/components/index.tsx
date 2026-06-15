@@ -1,20 +1,15 @@
 import { BackroadComponent, InbuiltComponentTypes } from '@backroad/core';
-import { BarChart } from './bar_chart';
+import { lazy } from 'react';
 import { Button } from './button';
 import { ChatInput } from './chat_input';
-import { DoughnutChart } from './doughnut_chart';
 import { Image } from './image';
 import { Iframe } from './iframe';
 import { Json } from './json';
-import { LineChart } from './line_chart';
 import { Link } from './link';
 import { LinkGroup } from './link_group';
 import { Markdown } from './markdown';
 import { Multiselect } from './multiselect';
 import { NumberInput } from './number_input';
-import { PieChart } from './pie_chart';
-import { RadarChart } from './radar_chart';
-import { ScatterChart } from './scatter_chart';
 import { Select } from './select';
 import { Stats } from './stats';
 import { Table } from './table';
@@ -27,6 +22,30 @@ import { FileUpload } from './file_upload';
 import { TextInput } from './text_input';
 import { Video } from './video';
 import { LoadingSpinner } from './loading_spinner';
+
+// Charts are lazy-loaded so chart.js + react-chartjs-2 (the heaviest dependency
+// in this lib) ship in their own chunk instead of the main bundle — they're
+// only fetched once a chart actually renders. They all share one chunk because
+// they import the same chart.js core. TreeRender wraps every renderer in a
+// <Suspense> boundary, so the lazy load is transparent to callers.
+const LineChart = lazy(() =>
+  import('./line_chart').then((m) => ({ default: m.LineChart }))
+);
+const BarChart = lazy(() =>
+  import('./bar_chart').then((m) => ({ default: m.BarChart }))
+);
+const PieChart = lazy(() =>
+  import('./pie_chart').then((m) => ({ default: m.PieChart }))
+);
+const DoughnutChart = lazy(() =>
+  import('./doughnut_chart').then((m) => ({ default: m.DoughnutChart }))
+);
+const RadarChart = lazy(() =>
+  import('./radar_chart').then((m) => ({ default: m.RadarChart }))
+);
+const ScatterChart = lazy(() =>
+  import('./scatter_chart').then((m) => ({ default: m.ScatterChart }))
+);
 
 export const backroadClientComponents: {
   [key in InbuiltComponentTypes]: (
@@ -44,12 +63,12 @@ export const backroadClientComponents: {
 
   title: Title,
 
-  line_chart: LineChart,
-  bar_chart: BarChart,
-  pie_chart: PieChart,
-  doughnut_chart: DoughnutChart,
-  radar_chart: RadarChart,
-  scatter_chart: ScatterChart,
+  line_chart: (props) => <LineChart {...props} />,
+  bar_chart: (props) => <BarChart {...props} />,
+  pie_chart: (props) => <PieChart {...props} />,
+  doughnut_chart: (props) => <DoughnutChart {...props} />,
+  radar_chart: (props) => <RadarChart {...props} />,
+  scatter_chart: (props) => <ScatterChart {...props} />,
 
   chat_input: ChatInput,
 
