@@ -9,7 +9,11 @@ const preview: Preview = {
         light: '',
         dark: 'dark',
       },
-      defaultTheme: 'dark',
+      // Baseline must be light: the AllThemes showcases render each theme in
+      // both modes via a `.dark` class on the swatch itself. A global
+      // `html.dark` baseline would force `dark:` utilities onto the light
+      // swatches while their background stays light → false contrast failures.
+      defaultTheme: 'light',
       parentSelector: 'html',
     }),
   ],
