@@ -1,3 +1,13 @@
+## [1.16.0](https://github.com/sudomakes/backroad/compare/v1.15.0...v1.16.0) (2026-06-15)
+
+### Features
+
+- **containers:** add bottom dock pinned via Frame body/dock split ([8bdc9f3](https://github.com/sudomakes/backroad/commit/8bdc9f300036a5935bf6fcae8d787f1573055089))
+
+### Refactoring
+
+- **chat-manager:** single docked input, async-safe construction ([26b60a7](https://github.com/sudomakes/backroad/commit/26b60a7a606d4d121cb547c9312a3808e93d44b7))
+
 ## [1.15.0](https://github.com/sudomakes/backroad/compare/v1.14.1...v1.15.0) (2026-06-15)
 
 ### Features
