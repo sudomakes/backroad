@@ -1,0 +1,192 @@
+libs/backroad-components/src/lib/containers/tabs.tsx
+  s_5a1bcd361448d3::t_768e5a45dcfb9d 3
+libs/backroad-components/src/lib/components/select.tsx
+  s_5a1bcd361448d3::t_7e562a79bb6f15 5
+libs/backroad-components/src/lib/helpers/select.tsx
+  s_5a1bcd361448d3::t_7257f577801cc4 3
+libs/backroad-ui/src/lib/checkbox.tsx
+  s_5a1bcd361448d3::t_04b52d50aefbeb 1-33
+libs/backroad-ui/src/lib/label.tsx
+  s_5a1bcd361448d3::t_04b52d50aefbeb 1-23
+libs/backroad-ui/src/lib/dropdown-menu.tsx
+  s_5a1bcd361448d3::t_04b52d50aefbeb 1-139
+libs/backroad-ui/src/lib/tooltip.tsx
+  s_5a1bcd361448d3::t_04b52d50aefbeb 1-37
+libs/backroad-frontend/src/stories/ChatMessage.stories.tsx
+  s_28aabcabf90045::t_b4c4ef5293eed4 13-30,69-139,147-149,158-170,176,191-195
+  s_5a1bcd361448d3::t_589fc8a3917826 2-3
+  s_5a1bcd361448d3::t_1a29c3e914af71 6-12,43-48,140-146,150-156,171-175,177-190
+pnpm-workspace.yaml
+  s_5a1bcd361448d3::t_4fa7e76114752e 22-27
+libs/backroad-frontend/src/stories/ChatInput.stories.tsx
+  s_28aabcabf90045::t_95488fb1ac6d9d 29
+  s_5a1bcd361448d3::t_1a29c3e914af71 4-10,62-65,69-75,78-80,95-106,110-126
+  s_5a1bcd361448d3::t_eefa991db837ea 2
+  s_28aabcabf90045::t_253acad3a4c558 82,84
+  s_28aabcabf90045::t_7e971189245674 1,3,11-28,30-61,66-68,76-77,81,83,85-94,107-109,127-131
+libs/backroad-components/src/lib/components/checkbox.tsx
+  s_5a1bcd361448d3::t_8187c626324d38 4
+libs/backroad-frontend/src/stories/TextInput.stories.tsx
+  s_5a1bcd361448d3::t_80ebc7d151665e 2
+libs/backroad-ui/tsconfig.lib.json
+  s_5a1bcd361448d3::t_6b9d6928382c33 1-25
+libs/backroad-ui/src/lib/utils.ts
+  s_5a1bcd361448d3::t_04b52d50aefbeb 1-9
+libs/backroad-ui/.babelrc
+  s_5a1bcd361448d3::t_bd0405452f70a1 1-12
+libs/backroad-ui/src/index.ts
+  s_5a1bcd361448d3::t_7a5d604f2cca22 1-23
+libs/backroad-ui/src/lib/radio-group.tsx
+  s_5a1bcd361448d3::t_04b52d50aefbeb 1-42
+libs/backroad-components/src/lib/components/multiselect.tsx
+  s_5a1bcd361448d3::t_d1c70036519200 7
+libs/backroad-ui/src/lib/button.tsx
+  s_5a1bcd361448d3::t_04b52d50aefbeb 1-4,6-20,22-26,29-57
+knip.json
+  s_5a1bcd361448d3::t_4a101b0c4d8aa0 40-41
+  s_5a1bcd361448d3::t_1a29c3e914af71 42-43
+libs/backroad-components/src/index.ts
+  s_5a1bcd361448d3::t_dfd08802a29a23 3
+libs/backroad-frontend/.storybook/preview.ts
+  s_5a1bcd361448d3::t_04b52d50aefbeb 3
+libs/backroad-frontend/src/stories/Tabs.stories.tsx
+  s_5a1bcd361448d3::t_1a29c3e914af71 2
+libs/backroad-frontend/src/stories/LoadingSpinner.stories.tsx
+  s_5a1bcd361448d3::t_1a29c3e914af71 32-36,65-86,88-89,92
+  s_5a1bcd361448d3::t_38a2d4f2fbb4e2 2
+  s_28aabcabf90045::t_7c5147c719df1b 38-64,87,90
+libs/backroad-ui/src/lib/badge.tsx
+  s_5a1bcd361448d3::t_04b52d50aefbeb 1-44
+libs/backroad-ui/src/lib/textarea.tsx
+  s_5a1bcd361448d3::t_04b52d50aefbeb 1-7,9-21,23-26
+libs/backroad-ui/README.md
+  s_5a1bcd361448d3::t_087fad87785b3f 1-6
+libs/backroad-frontend/index.html
+  s_5a1bcd361448d3::t_04b52d50aefbeb 2,9-28
+libs/backroad-components/src/lib/components/chat_input/index.tsx
+  s_5a1bcd361448d3::t_85ad334920fe85 9
+libs/backroad-frontend/src/stories/Checkbox.stories.tsx
+  s_5a1bcd361448d3::t_2f5f0a4f00b48f 2
+libs/backroad-frontend/package.json
+  s_5a1bcd361448d3::t_3dcbb541e0cf8b 21
+libs/backroad-frontend/src/stories/PromptInput.stories.tsx
+  s_5a1bcd361448d3::t_8c0e3878ed8cda 8
+libs/backroad-ui/tsconfig.json
+  s_5a1bcd361448d3::t_9c32717614ae2e 1-7,9-17
+libs/backroad-core/src/lib/core.ts
+  s_28aabcabf90045::t_68c0bc03a3755c 200
+libs/backroad-frontend/src/stories/Radio.stories.tsx
+  s_5a1bcd361448d3::t_2e7b222cedd1d5 2
+libs/backroad-components/src/lib/containers/chat_message.tsx
+  s_5a1bcd361448d3::t_a32ef69be6b26b 8
+libs/backroad-frontend/vite.config.ts
+  s_5a1bcd361448d3::t_04b52d50aefbeb 3,33
+libs/backroad-ui/src/lib/select.tsx
+  s_5a1bcd361448d3::t_04b52d50aefbeb 1-127
+libs/backroad-ui/src/lib/dialog.tsx
+  s_5a1bcd361448d3::t_04b52d50aefbeb 1-111
+libs/backroad-components/src/lib/components/button.tsx
+  s_5a1bcd361448d3::t_a82ac3d7a4b284 3
+libs/backroad/src/lib/backroad/chat-manager.ts
+  s_5a1bcd361448d3::t_04b52d50aefbeb 1
+libs/backroad-ui/src/lib/card.tsx
+  s_5a1bcd361448d3::t_04b52d50aefbeb 1-90
+libs/backroad-ui/src/lib/input.tsx
+  s_5a1bcd361448d3::t_04b52d50aefbeb 1-27
+knip-baseline.json
+  s_5a1bcd361448d3::t_41cba55d6fc745 9,12,14
+  s_5a1bcd361448d3::t_fa6c89944cfdc3 4
+libs/backroad-ui/src/lib/ai-elements/conversation.tsx
+  s_5a1bcd361448d3::t_04b52d50aefbeb 1-66
+libs/backroad-components/src/lib/components/markdown.tsx
+  s_5a1bcd361448d3::t_d366da033fe394 8
+libs/backroad-components/src/lib/containers/collapse.tsx
+  s_5a1bcd361448d3::t_04b52d50aefbeb 16
+pnpm-lock.yaml
+  s_5a1bcd361448d3::t_04b52d50aefbeb 10-11,156-160,243-247,316,338,341,414-443,453-464,491,494,500,510-515,554,558-560,568-569,611-668,2701,3026-3037,4062,5086-5087,5102-5103,5118-5119,5134-5135,5150,5162,5174-5175,5190,5202-5203,5218-5219,5234,5246-5247,5262,5274-5275,5290-5291,5306-5307,5322-5323,5338-5339,5354-5371,5386-5387,5402-5403,5418-5419,5434,5440-5455,5462-5463,5478-5479,5494,5506,5518,5530,5542,5554,5566,5578,5590,5602-5603,6513-6514,6541-6542,6966-7096,7105-7112,7587,8196,11670,11673,11676,11679,11681-11688,14362,14365,17196,17221,17234,17308,18506,19233-19238,19643,19692,19698-19705,22036,22048-22061,22073,22081,23224-23231,24397,24399,24403,24406,24408-24412,24416,24419,24422-24428,24432,24435,24437-24440,24444,24481,24485,24500,24503-24508,24512,24539,24541,24545,24548,24551-24565,24569,24571,24574,24577-24584,24589,24620,24622-24631,24635,24638,24641-24648,24652,24655,24659-24676,24680,24682,24685,24687,24691,24701,24703-24709,24711,24713-24714,24716,24719-24725,24729,24732,24735-24745,24749,24780,24784,24792,24796,24798,24803,24805,24807,24810,24812,24814,24818,25664-25725,25728-25735,28751-28758,30653,34126-34127,34429
+libs/backroad-frontend/src/stories/Stats.stories.tsx
+  s_5a1bcd361448d3::t_04b52d50aefbeb 3-4,8,10,12-14,16-18,36-38
+tsconfig.base.json
+  s_5a1bcd361448d3::t_34c196cbb396c7 22-25
+libs/backroad-ui/src/lib/tabs.tsx
+  s_5a1bcd361448d3::t_04b52d50aefbeb 1-67
+libs/backroad-components/src/lib/components/toggle.tsx
+  s_5a1bcd361448d3::t_6a887109545f85 4
+libs/backroad-frontend/src/app/layout/navbar/menu.tsx
+  s_e3740db2974ebc::t_cf604ed60d5937 26-27,29-48,50-51,91
+  s_5a1bcd361448d3::t_e3fc7b44cb92bc 16
+  s_e3740db2974ebc::t_7fb1bf4c97a728 80-82
+libs/backroad-frontend/src/stories/Toggle.stories.tsx
+  s_5a1bcd361448d3::t_2ad442da4e886e 2
+libs/backroad-components/src/lib/components/radio.tsx
+  s_5a1bcd361448d3::t_86514c5dd0a7d6 4
+libs/backroad-frontend/src/main.tsx
+  s_5a1bcd361448d3::t_04b52d50aefbeb 5,12-16
+libs/backroad-ui/package.json
+  s_5a1bcd361448d3::t_fbe5e68f69f513 1-25,30-31
+  s_5a1bcd361448d3::t_a9ba366c77a4f7 26-29
+libs/backroad-frontend/src/stories/NumberInput.stories.tsx
+  s_5a1bcd361448d3::t_af730d11a9adee 2
+libs/backroad-components/src/lib/components/number_input.tsx
+  s_5a1bcd361448d3::t_605338827bb2aa 6
+libs/backroad-ui/src/lib/ai-elements/prompt-input.tsx
+  s_5a1bcd361448d3::t_04b52d50aefbeb 1-84
+libs/backroad-ui/.eslintrc.json
+  s_5a1bcd361448d3::t_a659acc06d2c8b 1-4
+libs/backroad-frontend/src/stories/Select.stories.tsx
+  s_5a1bcd361448d3::t_507b8d67a13bce 9
+libs/backroad-components/src/lib/components/link_group.tsx
+  s_5a1bcd361448d3::t_04b52d50aefbeb 6,10
+libs/backroad-components/src/lib/components/stats.tsx
+  s_5a1bcd361448d3::t_04b52d50aefbeb 5,14-18,22
+libs/backroad-frontend/src/app/layout/navbar/index.tsx
+  s_5a1bcd361448d3::t_b7ff6a9dee021e 2
+libs/backroad-frontend/.storybook/test-runner.ts
+  s_5a1bcd361448d3::t_04b52d50aefbeb 5-8
+libs/backroad-components/src/lib/components/loading_spinner.tsx
+  s_5a1bcd361448d3::t_1a29c3e914af71 18-25,31-38
+  s_28aabcabf90045::t_b1f6ae1a195d41 6-17,26-30,39-41
+libs/backroad-ui/src/lib/ai-elements/message.tsx
+  s_5a1bcd361448d3::t_1b3506f1c64aaa 1-39,41-77
+  s_5a1bcd361448d3::t_e0edd6c8f06d00 40
+libs/backroad-components/src/lib/components/file_upload.tsx
+  s_5a1bcd361448d3::t_887709f65f8646 10
+libs/backroad-ui/src/lib/switch.tsx
+  s_5a1bcd361448d3::t_04b52d50aefbeb 1-32
+libs/backroad-components/src/lib/components/text_input.tsx
+  s_5a1bcd361448d3::t_8185927ebdf982 5
+libs/backroad-frontend/src/stories/Button.stories.tsx
+  s_5a1bcd361448d3::t_a5a9deaaca5ef9 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "d222e900fb6d5d3c93342691353b67440088b4be",
+  "prompts": {},
+  "sessions": {
+    "s_28aabcabf90045": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_138abfc2dffeJ4XxovvSP7Ztin",
+        "model": "mimo-v2.5-pro-ultraspeed"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    },
+    "s_5a1bcd361448d3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f5f1f82d-4ed0-4775-a7d4-f3e124855869",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    },
+    "s_e3740db2974ebc": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "e898bd79-423c-49be-aa2c-c25a9f2f5bb8",
+        "model": "gpt-5-mini"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
