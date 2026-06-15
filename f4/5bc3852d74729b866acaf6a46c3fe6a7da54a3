@@ -1,0 +1,88 @@
+libs/backroad-components/src/lib/socket/index.ts
+  s_5dc673d60ce5d9::t_07879e0583b5f2 1,3,6,11
+libs/backroad/src/lib/backroad/backroad.ts
+  s_5dc673d60ce5d9::t_8c9973361aab49 315-322
+  s_5dc673d60ce5d9::t_74eb8d74f957fe 12
+  s_5dc673d60ce5d9::t_f77e5797eaa231 303-314,323
+libs/backroad-ui/src/index.ts
+  s_5dc673d60ce5d9::t_5b18e57a6fdfb9 17-18
+apps/docs/docs/components/inputs.mdx
+  s_5dc673d60ce5d9::t_0c62be859d2d6f 53-102
+apps/docs/sidebars.ts
+  s_5dc673d60ce5d9::t_d72dddc610b76e 20
+libs/backroad-components/src/lib/components/time_input.tsx
+  s_5dc673d60ce5d9::t_21732b111a571a 1-25
+libs/backroad-components/src/lib/components/date_input.tsx
+  s_5dc673d60ce5d9::t_9b0f5a2f9465ac 1-26
+apps/docs/docs/components/feedback.mdx
+  s_5dc673d60ce5d9::t_965bce58597599 1-56
+libs/backroad-core/src/lib/events.ts
+  s_5dc673d60ce5d9::t_e8020db53afd88 118-121
+  s_5dc673d60ce5d9::t_7ddd0eea357458 47-59
+libs/backroad-frontend/src/stories/Slider.stories.tsx
+  s_5dc673d60ce5d9::t_722a29e2b470ab 1-34
+libs/backroad-ui/src/lib/slider.tsx
+  s_5dc673d60ce5d9::t_ddb16ba35608df 1-10,44-46
+  s_5dc673d60ce5d9::t_3987b03e1f1775 11-43
+libs/backroad-core/src/lib/core.ts
+  s_5dc673d60ce5d9::t_b3ad8aebd60771 392-396
+  s_5dc673d60ce5d9::t_f2f6a5891acdeb 197-230
+  s_5dc673d60ce5d9::t_12d57fc5c62661 250-252
+libs/backroad-ui/package.json
+  s_5dc673d60ce5d9::t_77b18227f28384 16,25
+libs/backroad-frontend/src/widgets.test.tsx
+  s_5dc673d60ce5d9::t_3d182ca6e3e094 35,37
+  s_5dc673d60ce5d9::t_fef5ac714d3ded 3
+  s_5dc673d60ce5d9::t_cd93ce5643ca8f 1-2,5,23-34,36,38-116,127-128,132-133
+  s_5dc673d60ce5d9::t_c50d88bfa9db16 122
+  s_5dc673d60ce5d9::t_09081c2e70f236 4,6-22
+  s_5dc673d60ce5d9::t_8f5505200b076e 117-121,123-126,129-131
+examples/demo/src/pages/widgets.ts
+  s_5dc673d60ce5d9::t_6e7b81811f79bb 1-41
+libs/backroad-frontend/src/app/app.tsx
+  s_5dc673d60ce5d9::t_c11787d20a81ec 121-122
+  s_5dc673d60ce5d9::t_9983d86d20b9a8 7
+libs/backroad-frontend/src/stories/TextArea.stories.tsx
+  s_5dc673d60ce5d9::t_24b8b82456c3a7 1-45
+libs/backroad-frontend/src/stories/TimeInput.stories.tsx
+  s_5dc673d60ce5d9::t_11b45708a9f65c 1-34
+examples/demo/src/pages/index.ts
+  s_5dc673d60ce5d9::t_bbd3be6edad064 10,22
+libs/backroad-components/src/lib/components/text_area.tsx
+  s_5dc673d60ce5d9::t_337ffe98611861 1-25
+libs/backroad-frontend/src/stories/DateInput.stories.tsx
+  s_5dc673d60ce5d9::t_f47eaf417c3be2 1-39
+libs/backroad-frontend/src/stories/Toast.stories.tsx
+  s_5dc673d60ce5d9::t_76dc4b3c282928 1,3,5,11-18,20,22,32-34,40
+  s_5dc673d60ce5d9::t_7b87595f3c7734 2,4,6-10,19,21,23-31,35-39
+examples/demo/src/main.ts
+  s_5dc673d60ce5d9::t_e2cf88c7271305 43,56
+libs/backroad-ui/src/lib/sonner.tsx
+  s_5dc673d60ce5d9::t_701b28bec95771 1-28
+libs/backroad-components/src/lib/components/slider.tsx
+  s_5dc673d60ce5d9::t_211eb3c5f88ca5 4,6-10,19-21,23,25,29-33
+  s_5dc673d60ce5d9::t_dc4ab79636ec18 1-3,5,11-18,22,24,26-28,34-37
+libs/backroad-components/src/lib/components/index.tsx
+  s_5dc673d60ce5d9::t_8b30f29bb79981 85-88
+  s_5dc673d60ce5d9::t_79cfc2d74a54bc 23-26
+e2e/widgets.spec.ts
+  s_5dc673d60ce5d9::t_28a49d1f1d37f5 1-57
+libs/backroad-components/src/lib/socket/toast-synchronizer.ts
+  s_5dc673d60ce5d9::t_6764f14914e50d 1-25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.7",
+  "base_commit_sha": "f45bc3852d74729b866acaf6a46c3fe6a7da54a3",
+  "prompts": {},
+  "sessions": {
+    "s_5dc673d60ce5d9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "4f177e39-e04b-462a-b115-ee2f7587cae9",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
