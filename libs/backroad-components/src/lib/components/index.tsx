@@ -20,6 +20,11 @@ import { Checkbox } from './checkbox';
 import { Radio } from './radio';
 import { FileUpload } from './file_upload';
 import { TextInput } from './text_input';
+import { TextArea } from './text_area';
+import { Slider } from './slider';
+import { DateInput } from './date_input';
+import { TimeInput } from './time_input';
+import { Toast } from './toast';
 import { Video } from './video';
 import { LoadingSpinner } from './loading_spinner';
 
@@ -78,6 +83,10 @@ export const backroadClientComponents: {
   radio: Radio,
   file_upload: FileUpload,
   text_input: TextInput,
+  text_area: TextArea,
+  slider: Slider,
+  date_input: DateInput,
+  time_input: TimeInput,
   multiselect: Multiselect,
   select: Select,
   number_input: NumberInput,
@@ -87,4 +96,5 @@ export const backroadClientComponents: {
   iframe: Iframe,
   video: Video,
   loading_spinner: LoadingSpinner,
+  toast: Toast,
 };

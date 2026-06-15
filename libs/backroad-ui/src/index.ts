@@ -14,6 +14,8 @@ export * from './lib/tabs';
 export * from './lib/card';
 export * from './lib/badge';
 export * from './lib/select';
+export * from './lib/slider';
+export * from './lib/sonner';
 export * from './lib/dialog';
 export * from './lib/dropdown-menu';
 export * from './lib/tooltip';

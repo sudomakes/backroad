@@ -9,6 +9,7 @@ import type { ColumnHelper } from '@tanstack/react-table';
 import { HTMLProps, IframeHTMLAttributes } from 'react';
 import formidable from 'formidable';
 import type { DropzoneOptions } from 'react-dropzone';
+import type { ToastArgs } from './events';
 // import { v4 as uuidv4 } from 'uuid';
 // type FileUploadObject = {
 //   id: string;
@@ -187,6 +188,40 @@ type _ComponentBasePropsMapping = {
     };
     value: string;
   }>;
+  text_area: AllowDefaultHelper<{
+    args: {
+      label: string;
+      placeholder?: string;
+      rows?: number;
+    };
+    value: string;
+  }>;
+  slider: AllowDefaultHelper<{
+    args: {
+      label: string;
+      min?: number;
+      max?: number;
+      step?: number;
+    };
+    value: number;
+  }>;
+  // ISO date string (`YYYY-MM-DD`); empty string means no date selected.
+  date_input: AllowDefaultHelper<{
+    args: {
+      label: string;
+      min?: string;
+      max?: string;
+    };
+    value: string;
+  }>;
+  // 24-hour time string (`HH:mm`); empty string means no time selected.
+  time_input: AllowDefaultHelper<{
+    args: {
+      label: string;
+      step?: number;
+    };
+    value: string;
+  }>;
   file_upload: {
     args: {
       label: string;
@@ -206,7 +241,15 @@ type _ComponentBasePropsMapping = {
     };
     value: null;
   };
-  // date_input: AllowDefaultHelper<{}>
+  // Transient notification. Renders nothing in the page flow — on mount the
+  // renderer fires a sonner toast (a side effect) and unmounts on the next run.
+  // Works because the render queue flushes each run on its own microtask, so a
+  // button's set→unset reruns reach the client as separate commits (the node
+  // gets one real mount before the unset removes it). No value (display-only).
+  toast: {
+    args: ToastArgs;
+    value: null;
+  };
 };
 export type ComponentPropsMapping = {
   [key in keyof _ComponentBasePropsMapping]: {
@@ -350,5 +393,10 @@ export const defaultValueFallbacks: {
   toggle: false,
   radio: (props) => props.args.options[0],
   text_input: '',
+  text_area: '',
+  // Seed the slider at its min (or 0) so the thumb starts at the low end.
+  slider: (props) => props.args.min ?? 0,
+  date_input: '',
+  time_input: '',
   file_upload: [],
 };

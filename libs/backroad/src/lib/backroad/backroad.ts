@@ -307,6 +307,25 @@ export class BackroadNodeManager<
   textInput(props: BackroadComponentFormat<'text_input'>) {
     return this.#initialiseAndAddComponentDescendant(props, 'text_input');
   }
+  textArea(props: BackroadComponentFormat<'text_area'>) {
+    return this.#initialiseAndAddComponentDescendant(props, 'text_area');
+  }
+  slider(props: BackroadComponentFormat<'slider'>) {
+    return this.#initialiseAndAddComponentDescendant(props, 'slider');
+  }
+  dateInput(props: BackroadComponentFormat<'date_input'>) {
+    return this.#initialiseAndAddComponentDescendant(props, 'date_input');
+  }
+  timeInput(props: BackroadComponentFormat<'time_input'>) {
+    return this.#initialiseAndAddComponentDescendant(props, 'time_input');
+  }
+  // A toast node renders nothing in the page flow; the client renderer fires a
+  // sonner notification on mount. The microtask render queue flushes each run
+  // separately, so a button's set→unset reruns give the node one real mount
+  // (firing the toast) before the unset removes it.
+  toast(props: BackroadComponentFormat<'toast'>) {
+    return this.#initialiseAndAddComponentDescendant(props, 'toast');
+  }
   fileUpload(props: BackroadComponentFormat<'file_upload'>) {
     return this.#initialiseAndAddComponentDescendant(props, 'file_upload');
   }

@@ -6,3 +6,4 @@ registerAuthSynchronizers();
 export { sessionId } from './session';
 export { socket } from './client';
 export { setBackroadValue, setRunUnsetBackroadValue } from './value-setters';
+export { showToast } from './show-toast';

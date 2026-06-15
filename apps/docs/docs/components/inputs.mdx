@@ -50,6 +50,56 @@ const age = br.numberInput({
 });
 ```
 
+## Text area
+
+Multi-line text. Like `textInput`, the value commits when the field loses
+focus (so Enter inserts a newline instead of submitting).
+
+```ts
+const bio = br.textArea({
+  label: 'Bio',
+  placeholder: 'Tell us about yourself',
+  rows: 6,
+  defaultValue: '',
+});
+```
+
+## Slider
+
+Drag (or use the arrow keys) to pick a number in a range. The value commits
+on release, not on every tick, so the script reruns once per change rather
+than once per pixel.
+
+```ts
+const volume = br.slider({
+  label: 'Volume',
+  min: 0,
+  max: 100,
+  step: 1,
+  defaultValue: 30,
+});
+```
+
+## Date & time
+
+Native date and time pickers. `dateInput` returns an ISO `YYYY-MM-DD` string
+and `timeInput` returns a 24-hour `HH:mm` string; both return `''` when
+nothing is selected.
+
+```ts
+const start = br.dateInput({
+  label: 'Start date',
+  min: '2026-01-01',
+  max: '2026-12-31',
+  defaultValue: '2026-06-15',
+});
+
+const remindAt = br.timeInput({
+  label: 'Reminder at',
+  defaultValue: '09:00',
+});
+```
+
 ## Checkbox / toggle
 
 Two flavors of the same boolean: `br.checkbox` renders a square check,

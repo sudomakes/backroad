@@ -45,6 +45,15 @@ export type ServerToClientEventTypes =
   | 'props_change'
   | 'auth_redirect'
   | 'auth_signout';
+
+// Args for the `toast` component (see core.ts). The toast renders nothing in
+// the page flow — on mount it fires a sonner notification as a side effect.
+export type ToastArgs = {
+  message: string;
+  variant?: 'info' | 'success' | 'warning' | 'error';
+  // ms on screen; 0 keeps it until dismissed; omit for the 5s default.
+  duration?: number;
+};
 export type ClientToServerEvents =
   ConstructSocketIoEventSignatureFromBackroadEvents<ClientToServerEventTypes>;
 export type ServerToClientEvents =
