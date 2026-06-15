@@ -2,7 +2,8 @@ import { InbuiltContainerTypes } from '@backroad/core';
 import { BackroadContainerRenderer } from '../types/containers';
 import { Base } from './base';
 import { Sidebar } from './sidebar';
-import { _Page } from './page';
+import { Bottom } from './bottom';
+import { Page } from './page';
 import { Columns } from './columns';
 import { Collapse } from './collapse';
 import { Tabs } from './tabs';
@@ -14,7 +15,8 @@ export const backroadClientContainers: {
   base: Base,
   columns: Columns,
   sidebar: Sidebar,
-  page: _Page,
+  bottom: Bottom,
+  page: Page,
   collapse: Collapse,
   tabs: Tabs,
   chat_message: ChatMessage,
