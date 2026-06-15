@@ -58,7 +58,9 @@ export type BackroadEventsMapping = {
     response?: void;
   };
   running: {
-    args: null;
+    // true when the server starts executing the script, false when it
+    // finishes — drives the live "Running" indicator (no client-side guesses).
+    args: boolean;
     response?: void;
   };
   props_change: {

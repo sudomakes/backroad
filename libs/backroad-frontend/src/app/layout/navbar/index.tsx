@@ -7,10 +7,9 @@ import { NavbarMenu } from './menu';
 export const Navbar = (props: { connected: boolean }) => {
   const [running, setRunning] = useState(false);
   useEffect(() => {
-    const onRunning = () => {
-      setRunning(true);
-      setTimeout(() => setRunning(false), 2000);
-    };
+    // The server emits `running: true` when it starts executing the script and
+    // `running: false` once it settles, so this reflects real execution state.
+    const onRunning = (isRunning: boolean) => setRunning(isRunning);
     socket.on('running', onRunning);
     return () => {
       socket.off('running', onRunning);
