@@ -13,7 +13,11 @@ export const Columns: BackroadContainerRenderer<'columns'> = (props) => {
       }}
     >
       {props.children.map((child) => {
-        return <TreeRender tree={child} key={child.path} />;
+        return (
+          <div className="min-w-0" key={child.path}>
+            <TreeRender tree={child} />
+          </div>
+        );
       })}
     </div>
   );

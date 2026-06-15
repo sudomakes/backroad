@@ -444,7 +444,9 @@
 
 @layer utilities {
   @keyframes typing-dot {
-    0%, 60%, 100% {
+    0%,
+    60%,
+    100% {
       transform: translateY(0);
       opacity: 0.4;
     }
@@ -455,7 +457,9 @@
   }
 
   @keyframes typing-bar {
-    0%, 60%, 100% {
+    0%,
+    60%,
+    100% {
       transform: scaleY(0.4);
       opacity: 0.4;
     }
@@ -499,11 +503,47 @@
     --tw-prose-captions: currentColor;
     --tw-prose-kbd: currentColor;
     --tw-prose-code: currentColor;
-    --tw-prose-pre-code: currentColor;
+    /* Code is the one exception to currentColor inheritance: a fenced block is
+       its own surface, so it can't borrow the container's text colour (light
+       text on a primary bubble would be unreadable on the neutral code panel).
+       Pin its surface/text to theme tokens instead so it tracks the active
+       palette + mode — light panel in light mode, dark in dark — rather than
+       Tailwind Typography's hardcoded dark-slate `--tw-prose-pre-bg`. */
+    --tw-prose-pre-bg: var(--muted);
+    --tw-prose-pre-code: var(--foreground);
     --tw-prose-hr: color-mix(in oklch, currentColor 20%, transparent);
-    --tw-prose-quote-borders: color-mix(in oklch, currentColor 30%, transparent);
+    --tw-prose-quote-borders: color-mix(
+      in oklch,
+      currentColor 30%,
+      transparent
+    );
     --tw-prose-th-borders: color-mix(in oklch, currentColor 25%, transparent);
     --tw-prose-td-borders: color-mix(in oklch, currentColor 15%, transparent);
+  }
+
+  /* Give fenced code blocks a border so the neutral `--muted` panel reads as a
+     distinct surface against same-tone cards. */
+  .prose-inherit-color :where(pre) {
+    border: 1px solid var(--border);
+  }
+
+  /* Inline `code` becomes a themed chip (surface + border + text) that pairs
+     with the active palette, instead of inheriting the container's text colour
+     with no background. Excludes code inside `pre`, which keeps the block
+     styling above. */
+  .prose-inherit-color :where(code):not(:where(pre code)) {
+    background-color: var(--muted);
+    color: var(--foreground);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.125em 0.375em;
+    font-weight: 500;
+  }
+  /* Drop Tailwind Typography's literal backtick pseudo-elements — the chip
+     already signals "code". */
+  .prose-inherit-color :where(code):not(:where(pre code))::before,
+  .prose-inherit-color :where(code):not(:where(pre code))::after {
+    content: none;
   }
 }
 

@@ -1,10 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { TreeRender } from '../tree';
 import { BackroadContainerRenderer } from '../types/containers';
 import { createPortal } from 'react-dom';
 
 export const Sidebar: BackroadContainerRenderer<'sidebar'> = (props) => {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
 
   return createPortal(
     <>
@@ -22,7 +27,7 @@ export const Sidebar: BackroadContainerRenderer<'sidebar'> = (props) => {
 
       {/* Sheet */}
       <nav
-        className="w-screen max-w-[300px] h-full border-r overflow-auto bg-base-200 p-5 flex flex-col gap-3 fixed top-0 left-0 z-10 transition-transform duration-300 ease-in-out"
+        className="w-screen max-w-[300px] h-full border-r overflow-auto bg-card p-5 flex flex-col gap-3 fixed top-0 left-0 z-10 transition-transform duration-300 ease-in-out"
         style={{
           transform: open ? 'translateX(0)' : 'translateX(-100%)',
         }}

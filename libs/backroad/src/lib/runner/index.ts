@@ -4,8 +4,15 @@ import { SocketManager } from '../backroad/socket-manager';
 import { startBackroadServer } from '../server';
 import { sessionManager } from '../server/sessions/session-manager';
 import { socketEventHandlers } from '../server/server-socket-event-handlers';
+export type BackroadRunContext = {
+  currentPath: string;
+};
+
 export const run = async (
-  executor: (nodeManager: BackroadNodeManager) => void | Promise<void>,
+  executor: (
+    nodeManager: BackroadNodeManager,
+    context: BackroadRunContext
+  ) => void | Promise<void>,
   backroadOptions?: BackroadConfig
 ) => {
   const port = backroadOptions?.server?.port || 3333;
@@ -55,15 +62,15 @@ export const run = async (
       }
     }
 
-    // Single chokepoint for every script run (initial render, set_value,
-    // run_script, unset_value). Emit the real running state around the
-    // executor — true on start, false once it settles (including async work) —
-    // so the client reflects actual execution instead of a fixed timeout.
-    const runExecutor = async () => {
+    // currentPath is derived purely from the triggering request — every
+    // run-triggering event (run_script, set_value, unset_value) carries the
+    // client's pathname, so the server holds no path state and assumes no
+    // default. No run is ever server-initiated.
+    const runExecutor = async (currentPath: string) => {
       socket.emit('running', true, () => undefined);
       try {
         backroadSession.resetTree();
-        await executor(backroadSession.mainPageNodeManager);
+        await executor(backroadSession.mainPageNodeManager, { currentPath });
       } finally {
         socket.emit('running', false, () => undefined);
       }
