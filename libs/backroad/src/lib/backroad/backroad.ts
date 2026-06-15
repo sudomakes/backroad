@@ -172,6 +172,14 @@ export class BackroadNodeManager<
       this.#constructContainerObject(props, 'base')
     );
   }
+  // A dock: its children are pinned to the bottom of the enclosing frame (the
+  // page) while the rest of the page scrolls above them. Used to keep a chat
+  // input in place while message bubbles grow.
+  bottom(props: BackroadContainerFormat<'bottom'> = {}) {
+    return this.#addContainerDescendant(
+      this.#constructContainerObject(props, 'bottom')
+    );
+  }
   page(props: BackroadContainerFormat<'page'>) {
     if (props.path === '/') {
       throw new Error(
