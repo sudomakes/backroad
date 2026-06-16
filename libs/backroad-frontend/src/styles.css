@@ -449,6 +449,15 @@
   }
 }
 
+/* Streamdown renders the code-block header (the language label) with
+   `text-muted-foreground`, which drops under WCAG AA on light theme
+   backgrounds (e.g. claude's cream). Use full foreground so the label always
+   clears contrast. Unlayered (not in `@layer base`) so it wins over Tailwind's
+   `text-muted-foreground` utility, which lives in `@layer utilities`. */
+[data-streamdown='code-block-header'] {
+  color: var(--foreground);
+}
+
 @layer utilities {
   @keyframes typing-dot {
     0%,
