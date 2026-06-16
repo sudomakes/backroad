@@ -12,3 +12,7 @@ declare module '*.svg' {
   const src: string;
   export default src;
 }
+
+// Side-effect CSS imports (e.g. `import 'streamdown/styles.css'`). The more
+// specific `*.module.css` declaration above still wins for CSS-module imports.
+declare module '*.css';

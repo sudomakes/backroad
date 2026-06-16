@@ -35,6 +35,26 @@ const greeting = 'hi';
 
 `body` can also be a number, in which case it renders as a plain string.
 
+### Streaming markdown
+
+`br.write` appends a new block on every call. To grow a _single_ block over
+time — streamed LLM output, a live log, incremental progress — use
+`writeStream` or `streamable`, which create one markdown node and re-render it
+in place rather than emitting new siblings:
+
+```ts
+// Pump an async iterable of text chunks; returns the full string when done.
+const full = await br.writeStream(tokenStream);
+
+// Or drive it by hand:
+const { update } = br.streamable();
+update('Working…');
+update('Working… done ✅');
+```
+
+Most commonly used for chat — see
+[LLM components](./llm#streaming-replies).
+
 ## `br.title` — quick page heading
 
 A shortcut for `br.write({ body: '# ...' })` that's slightly less noisy

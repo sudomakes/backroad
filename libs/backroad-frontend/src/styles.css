@@ -11,6 +11,13 @@
 @source '../../backroad-components/src';
 @source '../../backroad-ui/src';
 @source '../../../node_modules/@daveyplate/better-auth-ui/dist';
+/* Streamdown (the markdown renderer) and its code/mermaid/math plugins ship
+   compiled JS whose Tailwind utility classes must be generated here too — it
+   styles itself with our design tokens (bg-muted, border-border, …). */
+@source '../../backroad-components/node_modules/streamdown/dist/*.js';
+@source '../../backroad-components/node_modules/@streamdown/code/dist/*.js';
+@source '../../backroad-components/node_modules/@streamdown/mermaid/dist/*.js';
+@source '../../backroad-components/node_modules/@streamdown/math/dist/*.js';
 
 /* `dark:` variants flip on the `.dark` class set by the theme provider. */
 @custom-variant dark (&:where(.dark, .dark *));

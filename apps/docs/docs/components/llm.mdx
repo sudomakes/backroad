@@ -47,10 +47,50 @@ const msg = br.chatMessage({
 msg.write({ body: 'Hello, human.' });
 ```
 
-### Async assistant replies
+### Streaming replies
 
-When the response is a `Promise<string>`, pass it as `loadingPromise`
-and Backroad will render a spinner that swaps to the message once the
+Most LLMs stream their output token by token. `writeStream` pumps any
+`AsyncIterable<string>` into a single bubble, re-rendering the accumulated
+text as each chunk arrives, so the message fills in live instead of appearing
+all at once. It returns the complete string when the stream ends — so **your
+script owns the history**: append the result yourself.
+
+```ts
+// Map your provider's stream to an async iterable of text chunks.
+async function* tokens(prompt: string) {
+  const stream = await openai.responses.create({
+    model: 'gpt-4o',
+    input: prompt,
+    stream: true,
+  });
+  for await (const event of stream) {
+    if (event.type === 'response.output_text.delta') yield event.delta;
+  }
+}
+
+const reply = await br
+  .chatMessage({ by: 'Assistant' })
+  .writeStream(tokens(prompt));
+// `reply` is the full text — persist it however you store history.
+```
+
+This is the analog of Streamlit's `st.write_stream`. The Vercel AI SDK's
+`textStream` is already an `AsyncIterable<string>`, so you can pass it directly.
+
+When you need to drive the bubble by hand — interleaving reasoning and answer,
+or writing from SDK callbacks rather than an iterable — use `streamable`, which
+returns an `update(body)` you call yourself:
+
+```ts
+const { update } = br.chatMessage({ by: 'Assistant' }).streamable();
+let text = '';
+onToken((chunk) => update((text += chunk)));
+```
+
+### Async assistant replies (all at once)
+
+If you'd rather render the reply in one shot, pass a `Promise<string>` as
+`loadingPromise` — Backroad shows a spinner that swaps to the message once the
 promise resolves:
 
 ```ts
@@ -67,6 +107,13 @@ const bubble = br.chatMessage({
 reply.then((text) => bubble.write({ body: text }));
 ```
 
+:::note
+
+`ChatManager` is **deprecated**. Let your script own the message history (as
+above) and stream the AI turn with `writeStream` instead.
+
+:::
+
 ## `br.loading`
 
 A standalone spinner — handy outside of chat:
@@ -80,21 +127,26 @@ br.loading({ fontSize: 24 });
 ```ts
 import { run } from '@backroad/backroad';
 
-const history: { role: 'user' | 'assistant'; text: string }[] = [];
+const history: { by: 'human' | 'ai'; content: string }[] = [];
 
-run((br) => {
+// Stand-in for a real LLM stream; swap for your provider's token stream.
+async function* reply(prompt: string) {
+  for (const word of `You said: ${prompt}`.split(' ')) {
+    await new Promise((r) => setTimeout(r, 60));
+    yield word + ' ';
+  }
+}
+
+run(async (br) => {
   for (const m of history) {
-    const bubble = br.chatMessage({
-      by: m.role === 'user' ? 'You' : 'Assistant',
-      avatarPlacement: m.role === 'user' ? 'right' : 'left',
-    });
-    bubble.write({ body: m.text });
+    br.chatMessage({ by: m.by }).write({ body: m.content });
   }
 
   const next = br.bottom().chatInput({ placeholder: 'Say something…' });
   if (next) {
-    history.push({ role: 'user', text: next });
-    history.push({ role: 'assistant', text: `You said: ${next}` });
+    br.chatMessage({ by: 'human' }).write({ body: next });
+    const text = await br.chatMessage({ by: 'ai' }).writeStream(reply(next));
+    history.push({ by: 'human', content: next }, { by: 'ai', content: text });
   }
 });
 ```
@@ -105,25 +157,29 @@ run((br) => {
   height={560}
   code={`import { run } from '@backroad/backroad';
 
-const history: { role: 'user' | 'bot'; text: string }[] = [
-{ role: 'bot', text: 'Hi! Type something and I will echo it back.' },
+const history = [
+{ by: 'ai', content: 'Hi! Type something and I will echo it back.' },
 ];
 
-run((br) => {
+async function\* reply(prompt) {
+for (const word of (\`Echo: \${prompt}\`).split(' ')) {
+await new Promise((r) => setTimeout(r, 80));
+yield word + ' ';
+}
+}
+
+run(async (br) => {
 br.write({ body: '# Mini chat' });
 
 for (const m of history) {
-const bubble = br.chatMessage({
-by: m.role === 'user' ? 'You' : 'Bot',
-avatarPlacement: m.role === 'user' ? 'right' : 'left',
-});
-bubble.write({ body: m.text });
+br.chatMessage({ by: m.by }).write({ body: m.content });
 }
 
 const next = br.bottom().chatInput({ placeholder: 'Say something…' });
 if (next) {
-history.push({ role: 'user', text: next });
-history.push({ role: 'bot', text: \`Echo: \${next}\` });
+br.chatMessage({ by: 'human' }).write({ body: next });
+const text = await br.chatMessage({ by: 'ai' }).writeStream(reply(next));
+history.push({ by: 'human', content: next }, { by: 'ai', content: text });
 }
 });
 `}

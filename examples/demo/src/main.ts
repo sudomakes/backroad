@@ -1,4 +1,4 @@
-import { run, ChatManager } from '@backroad/backroad';
+import { run } from '@backroad/backroad';
 import { pages } from './pages';
 import { buildAuth } from './auth';
 
@@ -58,18 +58,26 @@ run(
     // const br = brBase.base({});
     br.write({ body: `# Backroad LLM Example\n---` });
     const button = br.button({ label: 'Reset' });
-    const chatManager = await ChatManager.create({
-      br,
-      messagesStateName: 'messages',
-      initialMessages,
-      inputId: 'input',
-    });
 
-    if (chatManager.userInputComplete) {
-      const gptResponsePromise = getGPTResponse(
-        chatManager.userInput as string
-      );
-      chatManager.addAIMessage({ by: 'ai', content: gptResponsePromise });
+    // Streamlit-style chat: the SCRIPT owns the message history. Replay the
+    // stored messages, read the input, and on submit stream the AI turn into a
+    // single bubble — then persist both messages so the next rerun replays
+    // them. No ChatManager; `writeStream` is the only streaming primitive used.
+    const messages = br.getOrDefault('messages', initialMessages);
+    messages.forEach((message) => {
+      br.chatMessage({ by: message.by }).write({ body: message.content });
+    });
+    const input = br.bottom().chatInput({ id: 'input' });
+    if (input) {
+      br.chatMessage({ by: 'human' }).write({ body: input });
+      const reply = await br
+        .chatMessage({ by: 'ai' })
+        .writeStream(streamGPTResponse(input));
+      br.setValue('messages', [
+        ...messages,
+        { by: 'human', content: input },
+        { by: 'ai', content: reply },
+      ]);
     }
 
     if (button) {
@@ -90,18 +98,96 @@ run(
   }
 );
 
-const getGPTResponse = async (message: string) => {
-  await simulatedDelay();
-  if (message.includes('1+1')) {
-    return 'Ah, the answer to that is 2!! 😎';
-  } else {
-    return `I don't know...
-    ![i-dont-know](https://t3.ftcdn.net/jpg/05/66/80/74/360_F_566807496_uKCQoOWWdXbFWKluJXo2ilg7B61J0qIe.jpg)`;
+// A stand-in for a real LLM token stream. Returns a long, rich markdown
+// answer that exercises everything the Streamdown renderer can do — syntax
+// highlighting, tables, task lists, blockquotes, a Mermaid diagram, and KaTeX
+// math — so streaming shows its full range. Swap this for an
+// OpenAI/Anthropic/Vercel-AI-SDK stream mapped to `AsyncIterable<string>`.
+async function* streamGPTResponse(message: string): AsyncGenerator<string> {
+  const text = richAnswer(message);
+  // Stream word-by-word so unterminated markdown (half-open code fences,
+  // tables, diagrams) is parsed gracefully as it arrives.
+  for (const word of text.split(' ')) {
+    await new Promise((resolve) => setTimeout(resolve, 60));
+    yield word + ' ';
   }
-};
+}
 
-const simulatedDelay = () => {
-  return new Promise((resolve) => {
-    setTimeout(resolve, 3000);
-  });
-};
+const richAnswer = (message: string) => `## Streaming a debounce, two ways
+
+Great question about **"${message.trim() || 'how streaming works'}"** — here's a
+quick tour. A debounce delays a call until input settles; below it is in both
+Python and TypeScript, plus when to reach for each.
+
+| Language   | Typing       | Best for                    | Async-native |
+| ---------- | ------------ | --------------------------- | :----------: |
+| Python     | gradual      | data & ML scripts           |      ✅       |
+| TypeScript | structural   | UI & full-stack apps        |      ✅       |
+
+\`\`\`python
+import asyncio
+from typing import Callable
+
+def debounce(wait: float) -> Callable:
+    """Coalesce rapid calls into the last one after \`wait\` seconds."""
+    def decorator(fn):
+        task: asyncio.Task | None = None
+
+        async def wrapper(*args, **kwargs):
+            nonlocal task
+            if task:
+                task.cancel()
+            async def later():
+                await asyncio.sleep(wait)
+                return await fn(*args, **kwargs)
+            task = asyncio.create_task(later())
+        return wrapper
+    return decorator
+\`\`\`
+
+The TypeScript version leans on \`setTimeout\` and closures instead:
+
+\`\`\`ts
+function debounce<A extends unknown[]>(
+  fn: (...args: A) => void,
+  wait: number,
+): (...args: A) => void {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  return (...args: A) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), wait);
+  };
+}
+\`\`\`
+
+> **Heads up:** a *trailing* debounce that resets on every keystroke never
+> fires during a continuous stream — which is exactly why streamed tokens
+> should flush on a microtask, not a timer.
+
+### How a request actually flows
+
+\`\`\`mermaid
+flowchart LR
+  U[User types] --> D{debounced?}
+  D -- no --> Q[queue render]
+  D -- yes --> W[wait for pause]
+  W --> Q
+  Q --> S[(server)]
+  S --> R[stream tokens back]
+\`\`\`
+
+A little math, since debouncing is really about rate. If events arrive every
+$\\Delta t$ seconds and the debounce window is $w$, the effective flush rate is:
+
+$$
+f = \\frac{1}{\\max(\\Delta t,\\ w)}
+$$
+
+### To wire this in
+
+- [x] Pick a debounce strategy (leading / trailing)
+- [x] Render the answer as it streams
+- [ ] Swap this stub for a real LLM \`textStream\`
+- [ ] Persist the final message to your history
+
+Ask me to expand any section and I'll stream the next part in. ✨`;

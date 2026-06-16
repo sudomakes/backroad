@@ -97,8 +97,9 @@ export class BackroadNodeManager<
   setValue(id: string, value: any) {
     this.backroadSession.setValue(id, value);
   }
-  // you should not have to call this manually
-  // use initialiseAndAddComponentDescendant instead (exception: fileupload)
+  // you should not have to call this manually — use
+  // #initialiseAndAddComponentDescendant (for the value) or
+  // #initialiseAndAddComponentNode (for the node) instead.
   #addComponentDescendant<ComponentType extends InbuiltComponentTypes>(
     nodeData: BackroadComponent<ComponentType, false>
   ) {
@@ -109,8 +110,9 @@ export class BackroadNodeManager<
     );
     return this.backroadSession.valueOf<ComponentType>(nodeData.id);
   }
-  // you should not have to call this manually
-  // use initialiseAndAddComponentDescendant instead (exception: fileupload)
+  // you should not have to call this manually — use
+  // #initialiseAndAddComponentDescendant (for the value) or
+  // #initialiseAndAddComponentNode (for the node) instead.
   #initialiseAndConstructComponentObject<T extends InbuiltComponentTypes>(
     props: BackroadComponentFormat<T>,
     type: T
@@ -140,13 +142,23 @@ export class BackroadNodeManager<
 
     return componentNode;
   }
+  // Construct a component, add it to the tree, and return the NODE. Most
+  // callers want the value (#initialiseAndAddComponentDescendant wraps this);
+  // streaming needs the node itself to re-emit it in place — see `streamable`.
+  #initialiseAndAddComponentNode<T extends InbuiltComponentTypes>(
+    props: BackroadComponentFormat<T>,
+    type: T
+  ) {
+    const node = this.#initialiseAndConstructComponentObject(props, type);
+    this.#addComponentDescendant(node);
+    return node;
+  }
   #initialiseAndAddComponentDescendant<T extends InbuiltComponentTypes>(
     props: BackroadComponentFormat<T>,
     type: T
   ) {
-    return this.#addComponentDescendant(
-      this.#initialiseAndConstructComponentObject(props, type)
-    );
+    const node = this.#initialiseAndAddComponentNode(props, type);
+    return this.backroadSession.valueOf<T>(node.id);
   }
   #getRenderPayload(
     node: BackroadNode<false, false>,
@@ -258,6 +270,50 @@ export class BackroadNodeManager<
   }
   write(props: BackroadComponentFormat<'markdown'>) {
     return this.#initialiseAndAddComponentDescendant(props, 'markdown');
+  }
+  // A markdown node you can rewrite in place. `write()` appends a fresh child
+  // on every call; this creates the node ONCE — fixing its path in the tree —
+  // and hands back an `update(body)` that re-emits that same node. The client
+  // merges renders by path (`set(tree, path, node)`), so each update patches
+  // this one element instead of adding siblings. The Backroad analog of
+  // Streamlit's `c = st.empty(); c.markdown(acc)`. Use this when the content
+  // isn't a clean async iterable (interleaved reasoning, SDK callbacks, …);
+  // for the common token-stream case reach for `writeStream`.
+  streamable(props: Partial<BackroadComponentFormat<'markdown'>> = {}) {
+    const node = this.#initialiseAndAddComponentNode(
+      // `streaming: true` tells the renderer to re-render this node in place
+      // rather than remounting on each body change — smooth, memoized streaming
+      // (matches Streamlit). Static `write()` nodes omit it and remount on
+      // change so a server-driven update can't be starved by a focused input.
+      { body: '', ...props, streaming: true },
+      'markdown'
+    );
+    return {
+      update: (body: string | number) => {
+        node.args = { ...node.args, body };
+        this.backroadSession.renderQueue.addToQueue(
+          this.#getRenderPayload(node, this.backroadSession)
+        );
+      },
+    };
+  }
+  // Pumps an async iterable of text chunks into a single markdown node,
+  // re-rendering the accumulated text once per chunk (full-replacement
+  // streaming). Each `await` between chunks lets the render queue flush, so the
+  // bubble grows live. Returns the complete string so the *caller* owns
+  // persistence (e.g. appending it to a messages state) — mirrors Streamlit's
+  // `st.write_stream`.
+  async writeStream(
+    stream: AsyncIterable<string>,
+    props: Partial<BackroadComponentFormat<'markdown'>> = {}
+  ): Promise<string> {
+    const { update } = this.streamable(props);
+    let acc = '';
+    for await (const chunk of stream) {
+      acc += chunk;
+      update(acc);
+    }
+    return acc;
   }
   line(props: BackroadComponentFormat<'line_chart'>) {
     return this.#initialiseAndAddComponentDescendant(props, 'line_chart');

@@ -15,7 +15,12 @@ export type PromptInputProps = ComponentProps<'form'>;
 export const PromptInput = ({ className, ...props }: PromptInputProps) => (
   <form
     className={cn(
-      'w-full divide-y divide-border overflow-hidden rounded-xl border border-input bg-background shadow-xs',
+      // The composer is a large, primary surface, so it needs a clearer edge
+      // than a regular inline input — `border-input` (white/15% in dark mode)
+      // is nearly invisible against a dark background. Use a muted-foreground
+      // tint that stays legible in both light and dark themes, and a slightly
+      // stronger shadow for elevation.
+      'w-full divide-y divide-border overflow-hidden rounded-xl border border-muted-foreground/30 bg-background shadow-sm',
       'focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50',
       className
     )}

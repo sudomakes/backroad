@@ -1,19 +1,18 @@
-import type { ComponentProps } from 'react';
 import { render } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
 import { MessageContent } from 'backroad-ui';
-import { backroadClientComponents } from 'backroad-components';
-
-const Markdown = backroadClientComponents.markdown;
 
 /**
  * Regression guard for chat-message contrast.
  *
- * The bug: the user bubble is `bg-primary`, but its text rendered dark and
- * failed contrast. Two contracts must hold to prevent it:
- *   1. Each bubble background is paired with its matching `*-foreground` token.
- *   2. Markdown's `prose` must not impose its own color — otherwise it
- *      overrides the bubble's foreground token and contrast breaks again.
+ * The bug: a bubble background paired with a mismatched (or theme-inverted)
+ * foreground rendered low-contrast text. The contract: every bubble background
+ * is paired with a matching `*-foreground` token, and the assistant bubble
+ * follows the page mode (so the markdown renderer's own token-styled surfaces —
+ * tables, code, inline code — never end up dark-on-dark inside it).
+ *
+ * (The previous `prose-inherit-color` guard is gone: the markdown renderer is
+ * now Streamdown, which styles itself with the design tokens directly instead
+ * of Tailwind Typography's `prose` palette, so there's nothing to neutralise.)
  */
 describe('chat message colors', () => {
   it('pairs every bubble background with its matching foreground token', () => {
@@ -23,28 +22,9 @@ describe('chat message colors', () => {
     // user bubble
     expect(cls).toContain('group-[.is-user]:bg-primary');
     expect(cls).toContain('group-[.is-user]:text-primary-foreground');
-    // assistant bubble
-    expect(cls).toContain('group-[.is-assistant]:bg-secondary');
-    expect(cls).toContain('group-[.is-assistant]:text-secondary-foreground');
-  });
-
-  it('does not let prose own text color (bubble foreground must win)', () => {
-    const { container } = render(
-      <BrowserRouter>
-        <Markdown
-          {...({
-            args: { body: 'hi claude' },
-          } as unknown as ComponentProps<typeof Markdown>)}
-        />
-      </BrowserRouter>
-    );
-
-    const prose = container.querySelector('.prose');
-    expect(prose).not.toBeNull();
-    // color is neutralised so it inherits from the container...
-    expect(prose?.className).toContain('prose-inherit-color');
-    // ...and prose's own palette is not re-introduced.
-    expect(prose?.className).not.toContain('prose-invert');
-    expect(prose?.className).not.toMatch(/\btext-(?!inherit\b)[a-z]/);
+    // assistant bubble — a mode-consistent surface, not the theme-inverted
+    // `secondary` (which some themes render light even under `.dark`).
+    expect(cls).toContain('group-[.is-assistant]:bg-muted');
+    expect(cls).toContain('group-[.is-assistant]:text-foreground');
   });
 });

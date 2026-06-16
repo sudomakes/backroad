@@ -43,7 +43,10 @@ type _ComponentBasePropsMapping = {
     value: number;
   }>;
   markdown: {
-    args: { body: string | number };
+    // `streaming` is set only by the streaming primitives (streamable /
+    // writeStream). The renderer reads it to re-render in place instead of
+    // remounting on every body change — see libs/backroad-components markdown.
+    args: { body: string | number; streaming?: boolean };
     value: null;
   };
   button: {

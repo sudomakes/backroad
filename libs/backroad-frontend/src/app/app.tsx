@@ -101,8 +101,7 @@ export function App() {
             newTree = set(newTree, parsedNode.path, parsedNode);
           }
         });
-        console.log('new tree', newTree);
-        return newTree; // need to update the object ref by destructuring to trigger a rerender
+        return newTree; // new object ref triggers a rerender
       });
       callback();
     };
