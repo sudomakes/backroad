@@ -8,6 +8,14 @@ type ChatManagerProps = {
   inputId: string;
 };
 
+/**
+ * @deprecated Prefer the streaming primitives on `BackroadNodeManager`. Let the
+ * script own its message state and stream the AI turn with
+ * `br.chatMessage({ by: 'ai' }).writeStream(stream)` — see `examples/demo`.
+ * `ChatManager` pulls message-history ownership into the framework and renders
+ * AI replies all-at-once instead of streaming; it is kept only for backwards
+ * compatibility and will be removed in a future release.
+ */
 export class ChatManager {
   private br: ChatManagerProps['br'];
   private messagesStateName: ChatManagerProps['messagesStateName'];

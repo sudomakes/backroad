@@ -37,7 +37,14 @@ export const MessageContent = ({
     className={cn(
       'flex flex-col gap-2 overflow-hidden rounded-lg px-4 py-3 text-sm',
       'group-[.is-user]:bg-primary group-[.is-user]:text-primary-foreground',
-      'group-[.is-assistant]:bg-secondary group-[.is-assistant]:text-secondary-foreground',
+      // Assistant bubble must follow the page mode, not `secondary` — some
+      // themes (e.g. claude) define `--secondary` as a light accent even in
+      // dark mode, which left a cream bubble under `.dark`. The markdown
+      // renderer styles its own surfaces (tables, code, inline code) with the
+      // page-mode tokens (`bg-muted`, `border-border`, …), so a mismatched
+      // bubble rendered dark-on-dark. `bg-muted` + a border keeps the bubble
+      // and its rendered markdown in the same mode in every theme.
+      'group-[.is-assistant]:bg-muted group-[.is-assistant]:text-foreground group-[.is-assistant]:border group-[.is-assistant]:border-border',
       className
     )}
     {...props}

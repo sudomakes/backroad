@@ -1,28 +1,31 @@
-import { default as ReactMarkdown } from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+import { lazy, Suspense } from 'react';
 import { BackroadComponentRenderer } from '../types/components';
-import { Link } from 'react-router-dom';
 
-export const Markdown: BackroadComponentRenderer<'markdown'> = (props) => {
-  return (
-    <div className="prose prose-inherit-color max-w-none">
-      <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        components={{
-          a: (props) => {
-            return <Link to={props.href || '/'}>{props.children}</Link>;
-          },
-          // A horizontally scrollable <pre> must be keyboard-focusable so
-          // keyboard users can scroll it (axe rule scrollable-region-focusable).
-          // tabIndex alone satisfies this; a role/landmark is NOT added, since
-          // multiple same-named regions would trip landmark-unique.
-          pre: (props) => (
-            <pre className="overflow-x-auto" tabIndex={0} {...props} />
-          ),
-        }}
-      >
-        {props.args.body.toString()}
-      </ReactMarkdown>
-    </div>
-  );
-};
+// The Streamdown renderer pulls in Shiki, Mermaid, and KaTeX — heavy deps we
+// don't want in the entry bundle, since that would slow first paint and input
+// hydration on every page (even ones with no markdown). Load it as an async
+// chunk instead; markdown appears once it resolves, and the chunk is cached
+// after the first markdown node so subsequent pages render it immediately.
+const StreamdownMarkdown = lazy(() => import('./markdown-streamdown'));
+
+export const Markdown: BackroadComponentRenderer<'markdown'> = (props) => (
+  // Keying strategy depends on whether the node is streaming:
+  //
+  // - Static (`br.write`): key by `id` (a hash of the content). When the body
+  //   changes, the id changes, so the renderer REMOUNTS. Streamdown renders
+  //   block updates inside a React `useTransition` (non-urgent work); a
+  //   server-driven update landing while an input holds focus (a slider
+  //   mid-nudge, a focused date picker) gets starved by that urgent input work
+  //   and never paints. Remounting sidesteps the transition so it always lands.
+  //
+  // - Streaming (`writeStream`/`streamable`): no key, so the node re-renders IN
+  //   PLACE on every chunk — smooth, memoized, no remount churn (matches
+  //   Streamlit). Backroad drives the streaming itself by re-emitting the whole
+  //   node, so it doesn't need Streamdown's internal streaming machinery.
+  <Suspense fallback={null}>
+    <StreamdownMarkdown
+      key={props.args.streaming ? undefined : props.id}
+      {...props}
+    />
+  </Suspense>
+);
