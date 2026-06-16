@@ -1,0 +1,53 @@
+libs/backroad-ui/src/lib/ai-elements/prompt-input.tsx
+  s_4541814118fc9a::t_3c263641912f24 18-23
+libs/backroad-frontend/src/chat-message-colors.test.tsx
+  s_4541814118fc9a::t_f6e0dbda5f07c5 7-15,25-28
+libs/backroad-core/src/lib/core.ts
+  s_4541814118fc9a::t_6bd710a336e55a 46-49
+libs/backroad/src/lib/backroad/backroad.ts
+  s_4541814118fc9a::t_3c263641912f24 100-102,113-115,145-155,160-161,274-283,289-316
+  s_4541814118fc9a::t_e2e6d7ef991c8b 317
+  s_4541814118fc9a::t_3329ff70ade2fe 284-288
+apps/docs/docs/components/llm.mdx
+  s_4541814118fc9a::t_d6fd7bd4781c15 170
+  s_4541814118fc9a::t_3c263641912f24 50,52-93,110-113,115-116,130-138,140,142,147-149,160-161,164-169,171,175,180-182
+  s_4541814118fc9a::t_fc7463438c130a 114
+libs/backroad-frontend/src/app/app.tsx
+  s_4541814118fc9a::t_f80e38360e5758 104
+libs/backroad-components/src/lib/components/markdown-streamdown.tsx
+  s_4541814118fc9a::t_52eaad1961f532 22-24,42-60
+  s_4541814118fc9a::t_a7b949e8251c72 28-34
+libs/backroad-components/src/lib/components/markdown.tsx
+  s_4541814118fc9a::t_3c263641912f24 1,4-11,25,30-31
+  s_4541814118fc9a::t_3f188842c78a69 12-24,26-29
+libs/backroad/src/lib/backroad/chat-manager.ts
+  s_4541814118fc9a::t_3c263641912f24 11-18
+apps/docs/docs/components/writing-and-markdown.mdx
+  s_4541814118fc9a::t_3c263641912f24 38-57
+libs/backroad-ui/src/lib/ai-elements/message.tsx
+  s_4541814118fc9a::t_91c66cc42c0560 40-47
+types/assets.d.ts
+  s_4541814118fc9a::t_3c263641912f24 15-18
+libs/backroad-components/package.json
+  s_4541814118fc9a::t_3c263641912f24 12-14,20,36
+libs/backroad-frontend/src/styles.css
+  s_4541814118fc9a::t_3c263641912f24 14-20
+examples/demo/src/main.ts
+  s_4541814118fc9a::t_3c263641912f24 1,62-80,101-112,114-191,193
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.7",
+  "base_commit_sha": "a4c7ae22d454cbdbdbccf7dd13d8cba431adea43",
+  "prompts": {},
+  "sessions": {
+    "s_4541814118fc9a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9f24ab2a-a555-4311-964b-ec259cda4d9c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": null
+    }
+  }
+}
