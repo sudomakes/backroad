@@ -55,6 +55,17 @@ type _ComponentBasePropsMapping = {
     };
     value: boolean;
   };
+  download_button: {
+    // Only the label rides along in the tree on every rerun. The payload
+    // (data/filename/mime) is held server-side and streamed on demand from
+    // GET /api/download/:sessionId/:id when the button is actually clicked —
+    // see the `downloadButton` builder and the server route.
+    args: {
+      label: string;
+    };
+    // true on the run where the button was clicked, then unset.
+    value: boolean;
+  };
 
   select: AllowDefaultHelper<{
     readonly args: {
@@ -391,6 +402,7 @@ export const defaultValueFallbacks: {
 } = {
   chat_input: null,
   button: false,
+  download_button: false,
   color_picker: '#000000',
   checkbox: false,
   toggle: false,

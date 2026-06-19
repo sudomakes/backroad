@@ -22,7 +22,10 @@ export const backroadWidgetsExample = (br: BackroadNodeManager) => {
   });
   br.write({ body: `Volume is ${volume}` });
 
-  const date = br.dateInput({ label: 'Start date', defaultValue: '2026-06-15' });
+  const date = br.dateInput({
+    label: 'Start date',
+    defaultValue: '2026-06-15',
+  });
   br.write({ body: `Date: ${date || 'none'}` });
 
   const time = br.timeInput({ label: 'Reminder at', defaultValue: '09:00' });
@@ -37,5 +40,18 @@ export const backroadWidgetsExample = (br: BackroadNodeManager) => {
       variant: 'success',
       duration: 6000,
     });
+  }
+
+  // `downloaded` is true only on the run right after the click, so the echo
+  // below renders once per press — letting the e2e spec assert the round-trip
+  // in addition to intercepting the actual browser download.
+  const downloaded = br.downloadButton({
+    label: 'Download Report',
+    data: () => Promise.resolve(JSON.stringify({ status: 'ok' }, null, 2)),
+    filename: 'backroad-report.json',
+    mime: 'application/json',
+  });
+  if (downloaded) {
+    br.write({ body: 'Report downloaded!' });
   }
 };

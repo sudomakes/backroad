@@ -13,6 +13,30 @@ import { join } from 'path';
 import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 import { sessionManager } from './sessions/session-manager';
 
+// Minimal extension → MIME map for download_button's auto-inference. Anything
+// unknown falls back to application/octet-stream (a safe "just download it").
+const MIME_BY_EXTENSION: Record<string, string> = {
+  txt: 'text/plain',
+  csv: 'text/csv',
+  json: 'application/json',
+  html: 'text/html',
+  xml: 'application/xml',
+  md: 'text/markdown',
+  pdf: 'application/pdf',
+  png: 'image/png',
+  jpg: 'image/jpeg',
+  jpeg: 'image/jpeg',
+  gif: 'image/gif',
+  svg: 'image/svg+xml',
+  webp: 'image/webp',
+  zip: 'application/zip',
+  xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+};
+const inferMimeType = (filename: string) => {
+  const ext = filename.split('.').pop()?.toLowerCase() ?? '';
+  return MIME_BY_EXTENSION[ext] ?? 'application/octet-stream';
+};
+
 export const startBackroadServer = (options: {
   port: number;
   auth?: { instance: BackroadAuthInstance };
@@ -86,6 +110,38 @@ export const startBackroadServer = (options: {
     //     )
     //   );
     // });
+
+    // On-demand download for br.downloadButton. The payload lives in session
+    // state (never in the component tree), so it crosses the wire only when the
+    // user actually clicks — streamed here with an attachment disposition.
+    app.get('/api/download/:sessionId/:id', async (req, res) => {
+      const session = sessionManager.getSession(req.params.sessionId);
+      const download = session?.getDownload(req.params.id);
+      if (!download) {
+        return res.status(404).json({ error: 'download not found' });
+      }
+      // Resolve the payload now — this is the first (and only) time the
+      // contents are computed.
+      let content: string | Uint8Array;
+      try {
+        content = await download.data();
+      } catch (err) {
+        console.error('download_button payload failed to generate', err);
+        return res.status(500).json({ error: 'failed to generate download' });
+      }
+      const filename = download.filename ?? 'download';
+      res.setHeader('Content-Type', download.mime ?? inferMimeType(filename));
+      res.setHeader(
+        'Content-Disposition',
+        `attachment; filename="${encodeURIComponent(filename)}"`
+      );
+      // express handles strings and Buffers natively; coerce a bare Uint8Array.
+      return res.send(
+        typeof content === 'string' || Buffer.isBuffer(content)
+          ? content
+          : Buffer.from(content)
+      );
+    });
 
     app.get('*', (req, res) =>
       res.sendFile(path.resolve(__dirname, 'public', 'index.html'))

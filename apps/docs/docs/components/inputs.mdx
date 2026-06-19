@@ -27,6 +27,43 @@ if (br.button({ label: 'Compute' })) {
 }
 ```
 
+## Download button
+
+Triggers a file download in the browser when clicked. `data` is a function that
+produces the file contents; it's called **only when the user clicks** — never on
+the runs where the button is just sitting there — so an expensive payload costs
+nothing until it's actually wanted. The result also stays on the server and is
+streamed on demand, so it never rides along in the component tree on every
+rerun. Like `button`, it returns `true` exactly on the run after the click.
+
+```ts
+const downloaded = br.downloadButton({
+  label: 'Download report',
+  data: () => JSON.stringify({ status: 'ok' }, null, 2),
+  filename: 'backroad-report.json',
+});
+
+if (downloaded) {
+  // runs once after the user clicks
+  br.write({ body: 'Report downloaded!' });
+}
+```
+
+`filename` defaults to `"download"`, and `mime` is inferred from the filename
+extension (falling back to `application/octet-stream`) — so for common types you
+can omit it.
+
+`data` may be async, and may return raw bytes (a `Uint8Array` or `Buffer`) for
+binary formats like images, PDFs, or zips:
+
+```ts
+br.downloadButton({
+  label: 'Export PDF',
+  filename: 'report.pdf', // mime inferred as application/pdf
+  data: async () => await renderPdf(), // returns a Buffer
+});
+```
+
 ## Text input
 
 ```ts

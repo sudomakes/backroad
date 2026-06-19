@@ -9,9 +9,32 @@ import { BackroadNodeManager } from '../../backroad';
 import { RenderQueue } from '../../backroad/render-queue';
 import superjson from 'superjson';
 // import { UploadManager } from './upload-manager';
+
+// What a download_button payload can resolve to: text or raw bytes (Buffer is a
+// Uint8Array, so binary formats — images, PDFs, zips — are covered).
+type DownloadContent = string | Uint8Array;
+// Always a function so the contents are computed lazily, on request only. May
+// be sync or async.
+export type DownloadDataResolver = () =>
+  | DownloadContent
+  | Promise<DownloadContent>;
+
 export class BackroadSession {
   sessionId: string;
   state: { [key: string]: unknown } = {};
+  // Payloads for download_button, keyed by component id. Kept out of the
+  // component tree so a large file never serializes into every rerun's render
+  // emit — it's streamed on demand via GET /api/download/:sessionId/:id.
+  // `data` may be a thunk: when so, the contents aren't even computed until a
+  // download is actually requested, so an expensive payload costs nothing on
+  // the (common) runs where the button is never clicked.
+  downloads: {
+    [id: string]: {
+      data: DownloadDataResolver;
+      filename?: string;
+      mime?: string;
+    };
+  } = {};
   renderQueue: RenderQueue;
   rootNodeManager: BackroadNodeManager<'base'>;
   user: BackroadUser = { isLoggedIn: false };
@@ -50,6 +73,20 @@ export class BackroadSession {
   }
   unsetValue(id: string) {
     delete this.state[id];
+  }
+
+  setDownload(
+    id: string,
+    payload: {
+      data: DownloadDataResolver;
+      filename?: string;
+      mime?: string;
+    }
+  ) {
+    this.downloads[id] = payload;
+  }
+  getDownload(id: string) {
+    return this.downloads[id];
   }
 
   // notify

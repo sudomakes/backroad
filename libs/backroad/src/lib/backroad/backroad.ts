@@ -13,7 +13,10 @@ import {
 import omit from 'lodash/omit';
 import superjson from 'superjson';
 // import {File} from "formidable"
-import { BackroadSession } from '../server/sessions/session';
+import {
+  BackroadSession,
+  type DownloadDataResolver,
+} from '../server/sessions/session';
 import { ObjectHasher } from './object-hasher';
 import { SocketManager } from './socket-manager';
 
@@ -264,6 +267,30 @@ export class BackroadNodeManager<
 
   button(props: BackroadComponentFormat<'button'>) {
     return this.#initialiseAndAddComponentDescendant(props, 'button');
+  }
+  downloadButton(
+    props: BackroadComponentFormat<'download_button'> & {
+      // File contents to serve when clicked. Always a function so the work is
+      // deferred until a download is actually requested — it won't run on the
+      // (common) runs where the button is never clicked. Return a string for
+      // text or a Uint8Array/Buffer for binary formats; sync or async.
+      data: DownloadDataResolver;
+      // Name the downloaded file is saved as. Defaults to "download".
+      filename?: string;
+      // MIME type for the response. Inferred from the filename extension when
+      // omitted, falling back to application/octet-stream.
+      mime?: string;
+    }
+  ) {
+    // Keep the payload off the tree: only `label` (in `rest`) becomes the
+    // node's args, so reruns never re-ship the file. The contents are stored
+    // server-side, keyed by the component id, and streamed on click from
+    // GET /api/download/:sessionId/:id — filename/mime defaults are resolved
+    // there.
+    const { data, filename, mime, ...rest } = props;
+    const node = this.#initialiseAndAddComponentNode(rest, 'download_button');
+    this.backroadSession.setDownload(node.id, { data, filename, mime });
+    return this.backroadSession.valueOf<'download_button'>(node.id);
   }
   numberInput(props: BackroadComponentFormat<'number_input'>) {
     return this.#initialiseAndAddComponentDescendant(props, 'number_input');

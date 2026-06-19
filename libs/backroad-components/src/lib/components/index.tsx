@@ -1,6 +1,7 @@
 import { BackroadComponent, InbuiltComponentTypes } from '@backroad/core';
 import { lazy } from 'react';
 import { Button } from './button';
+import { DownloadButton } from './download_button';
 import { ChatInput } from './chat_input';
 import { Image } from './image';
 import { Iframe } from './iframe';
@@ -91,6 +92,7 @@ export const backroadClientComponents: {
   select: Select,
   number_input: NumberInput,
   button: Button,
+  download_button: DownloadButton,
 
   image: Image,
   iframe: Iframe,
