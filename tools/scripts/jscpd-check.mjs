@@ -179,8 +179,17 @@ function main() {
     process.exit(1);
   }
 
-  const { report } = runJscpd();
-  const pct = report?.statistics?.total?.percentage ?? 0;
+  const { code, report } = runJscpd();
+  if (!report?.statistics?.total) {
+    const md = buildMarkdown(report, threshold);
+    writeStepSummary(md);
+    writeReportFile(md);
+    process.stderr.write(
+      `\n✗ duplication gate failed: jscpd did not produce a readable JSON report (exit ${code}).\n`
+    );
+    process.exit(1);
+  }
+  const pct = report.statistics.total.percentage ?? 0;
   const ok = pct <= threshold;
 
   const md = buildMarkdown(report, threshold);
