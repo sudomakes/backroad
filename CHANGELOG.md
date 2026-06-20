@@ -1,3 +1,9 @@
+## [1.20.0](https://github.com/sudomakes/backroad/compare/v1.19.0...v1.20.0) (2026-06-20)
+
+### Features
+
+- fix sandcastle setup ([029eb75](https://github.com/sudomakes/backroad/commit/029eb75f1ff59df44e0301f3b8a0faac2195a964))
+
 ## [1.19.0](https://github.com/sudomakes/backroad/compare/v1.18.2...v1.19.0) (2026-06-20)
 
 ### Features
