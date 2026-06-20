@@ -140,6 +140,15 @@ export function rewriteWorkspaceDependencies(section, workspacePackages) {
   );
 }
 
+export function assertFileExists(relativePath, message) {
+  const absolutePath = path.join(workspaceRoot, relativePath);
+  if (!existsSync(absolutePath)) {
+    throw new Error(
+      message ?? `Expected file to exist but it was missing: ${relativePath}`
+    );
+  }
+}
+
 export function publishTagForVersion(version) {
   return version.includes('-') ? 'alpha' : 'latest';
 }
