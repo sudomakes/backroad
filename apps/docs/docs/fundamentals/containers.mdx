@@ -3,6 +3,7 @@ title: Containers
 ---
 
 import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
+import code from '@site/src/examples/containers.ts?raw';
 
 # Containers
 
@@ -103,22 +104,4 @@ run((br) => {
 
 ## Try it
 
-<BackroadSandbox
-  height={520}
-  code={`import { run } from '@backroad/backroad';
-
-run((br) => {
-br.write({ body: '# Containers demo' });
-
-const [left, right] = br.columns({ columns: 2 });
-left.write({ body: '## Left column' });
-if (left.button({ label: 'Left' })) {
-left.write({ body: 'Left clicked!' });
-}
-
-right.write({ body: '## Right column' });
-const more = right.collapse({ label: 'Show more' });
-more.write({ body: 'Hidden until you expand the panel.' });
-});
-`}
-/>
+<BackroadSandbox height={520} code={code} />

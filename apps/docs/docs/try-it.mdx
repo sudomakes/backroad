@@ -4,6 +4,7 @@ sidebar_position: 3
 ---
 
 import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
+import code from '@site/src/examples/try-it.ts?raw';
 
 # Try Backroad live in your browser
 
@@ -21,28 +22,7 @@ site, so later runs — here or on any other docs page — install offline (no
 re-downloading) and start much faster.
 :::
 
-<BackroadSandbox
-  height={520}
-  code={`import { run } from '@backroad/backroad';
-
-run((br) => {
-br.write({ body: '# Hello, Backroad' });
-
-const name = br.textInput({
-label: 'Your name',
-defaultValue: 'world',
-});
-
-if (name) {
-br.write({ body: \`Hello, **\${name}**!\` });
-}
-
-if (br.button({ label: 'Click me' })) {
-br.write({ body: 'Clicked!' });
-}
-});
-`}
-/>
+<BackroadSandbox height={520} code={code} />
 
 ## What works in the sandbox
 

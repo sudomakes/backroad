@@ -3,6 +3,7 @@ title: Themes
 ---
 
 import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
+import code from '@site/src/examples/themes.ts?raw';
 
 # Themes
 
@@ -69,23 +70,4 @@ palette override beyond the `appearance` recommendation above.
 
 ## Try it
 
-<BackroadSandbox
-  height={520}
-  code={`import { run } from '@backroad/backroad';
-
-run(
-(br) => {
-br.write({ body: '# Themed sandbox' });
-br.write({
-body: 'Open the settings menu (top-right) to change palette and mode.',
-});
-
-    if (br.button({ label: 'Primary action' })) {
-      br.write({ body: 'Clicked.' });
-    }
-
-},
-{ appearance: { theme: 'claude', mode: 'light' } }
-);
-`}
-/>
+<BackroadSandbox height={520} code={code} />
