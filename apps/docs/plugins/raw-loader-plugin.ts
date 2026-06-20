@@ -9,10 +9,31 @@ import type { Plugin } from '@docusaurus/types';
 // as a string, so no extra loader dependency is needed. The rule has to apply
 // to both the client and server (prerender) bundles, since the MDX import is
 // resolved in both.
+//
+// The catch: our example files are `.ts`, so Docusaurus's own `/\.[jt]sx?$/`
+// babel-loader rule ALSO matches them. webpack runs loaders first and only then
+// applies the module `type`, so without intervention babel would transpile (and
+// in production minify) the source, and `asset/source` would capture that
+// mangled JS — `import { run } from '...'` arrives in the editor as
+// `import{run}from'...'`. We therefore exclude `?raw` resources from the
+// JS/TS rule so only `asset/source` handles them, yielding the file verbatim.
 export default function rawLoaderPlugin(): Plugin {
   return {
     name: 'raw-loader-plugin',
-    configureWebpack() {
+    configureWebpack(config) {
+      // Stop the JS/TS loader (babel) from also matching our `?raw` imports;
+      // otherwise it transpiles the file before `asset/source` reads it.
+      for (const rule of config.module?.rules ?? []) {
+        if (
+          rule &&
+          typeof rule === 'object' &&
+          'test' in rule &&
+          rule.test instanceof RegExp &&
+          rule.test.test('example.ts')
+        ) {
+          rule.resourceQuery = { not: [/raw/] };
+        }
+      }
       return {
         module: {
           rules: [
