@@ -1,0 +1,27 @@
+release.config.js
+  s_c1dcdc4e5a8038::t_3412f52fcb725e 29-30,32
+tools/scripts/release.mjs
+  s_c1dcdc4e5a8038::t_900fa145eb1fac 13-15
+tools/scripts/publish-package.mjs
+  s_c1dcdc4e5a8038::t_41b8a4d8c39f7b 1,4,15-16,18-44
+package.json
+  s_c1dcdc4e5a8038::t_78653425101c74 16
+tools/scripts/publish.mjs
+  s_c1dcdc4e5a8038::t_4045d27a2636fd 1-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "c9de9fd6a089324903fca8ded09355eed1083fb2",
+  "prompts": {},
+  "sessions": {
+    "s_c1dcdc4e5a8038": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "02e9cf32-0ff4-40a2-b9ad-d1ebd5e12fa0",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
