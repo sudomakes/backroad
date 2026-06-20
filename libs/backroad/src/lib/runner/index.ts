@@ -16,7 +16,7 @@ export const run = async (
   executor: BackroadExecutor,
   backroadOptions?: BackroadConfig
 ) => {
-  const port = backroadOptions?.server?.port || 3333;
+  const port = backroadOptions?.server?.port ?? 3333;
 
   const app = express();
   const handler = buildBackroadHandler(executor, {
