@@ -3,7 +3,6 @@ import { rm } from 'node:fs/promises';
 
 import {
   copyDirectoryContents,
-  publishTagForVersion,
   readJson,
   run,
   validateVersion,
@@ -11,6 +10,9 @@ import {
   writeJson,
 } from './helpers.mjs';
 
+// PREPARE phase only: stamp versions + build the publishable artifacts.
+// The actual `npm publish` lives in publish.mjs and runs in semantic-release's
+// `publish` phase, so npm and the git tag stay in lockstep. See release.config.js.
 const version = process.env.VERSION;
 validateVersion(version);
 
@@ -38,12 +40,3 @@ await copyDirectoryContents(
   'dist/libs/backroad-frontend',
   'dist/libs/backroad/src/lib/server/public'
 );
-
-const tag = publishTagForVersion(version);
-
-run('node', [
-  'tools/scripts/publish-package.mjs',
-  'dist/libs/backroad-core',
-  tag,
-]);
-run('node', ['tools/scripts/publish-package.mjs', 'dist/libs/backroad', tag]);

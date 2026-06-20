@@ -13,6 +13,7 @@
     "pre-push-check": "$npm_execpath exec node .lefthook/pre-push/run.mjs --manual",
     "prepare": "lefthook install",
     "release": "node tools/scripts/release.mjs",
+    "release:publish": "node tools/scripts/publish.mjs",
     "test": "pnpm -r --if-present run test",
     "typecheck": "pnpm -r --if-present run typecheck",
     "e2e": "playwright test",

@@ -26,7 +26,10 @@ module.exports = {
     [
       '@semantic-release/exec',
       {
+        // Build in `prepare`; publish in `publish` so npm and the git tag stay
+        // atomic — the tag is pushed immediately after a successful publish.
         prepareCmd: `VERSION=\${nextRelease.version} pnpm run release`,
+        publishCmd: `VERSION=\${nextRelease.version} pnpm run release:publish`,
       },
     ],
     [
