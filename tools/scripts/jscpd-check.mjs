@@ -189,7 +189,16 @@ function main() {
     );
     process.exit(1);
   }
-  const pct = report.statistics.total.percentage ?? 0;
+  const pct = Number(report.statistics.total.percentage);
+  if (!Number.isFinite(pct)) {
+    const md = buildMarkdown(report, threshold);
+    writeStepSummary(md);
+    writeReportFile(md);
+    process.stderr.write(
+      `\n✗ duplication gate failed: invalid duplication percentage in jscpd report (exit ${code}).\n`
+    );
+    process.exit(1);
+  }
   const ok = pct <= threshold;
 
   const md = buildMarkdown(report, threshold);
