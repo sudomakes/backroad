@@ -1,3 +1,18 @@
+## [1.18.0](https://github.com/sudomakes/backroad/compare/v1.17.0...v1.18.0) (2026-06-20)
+
+### Features
+
+- **chat:** streaming markdown via Streamdown + writeStream ([a4c7ae2](https://github.com/sudomakes/backroad/commit/a4c7ae22d454cbdbdbccf7dd13d8cba431adea43))
+- download button ([125c398](https://github.com/sudomakes/backroad/commit/125c3980281332c4b6f9d2ff4af6084600e78705))
+- streamables and other nice things ([247a8c3](https://github.com/sudomakes/backroad/commit/247a8c31b1843c2d1f178e9d8c41ef143ac379f1))
+- version bump ([8312328](https://github.com/sudomakes/backroad/commit/8312328eb079318c703164e75e7ee7d8e473f897))
+
+### Bug Fixes
+
+- **chat:** a11y + knip for the Streamdown renderer ([6e1e54d](https://github.com/sudomakes/backroad/commit/6e1e54d4f395e7f8d31201da8313bd9cd48c629a))
+- **release:** split publish from prepare so npm and git tag stay atomic ([c9de9fd](https://github.com/sudomakes/backroad/commit/c9de9fd6a089324903fca8ded09355eed1083fb2))
+- version issues ([85cc0da](https://github.com/sudomakes/backroad/commit/85cc0da69cce43e81edc83e69b61dc4805e8e893))
+
 ## [1.16.0](https://github.com/sudomakes/backroad/compare/v1.15.0...v1.16.0) (2026-06-15)
 
 ### Features
