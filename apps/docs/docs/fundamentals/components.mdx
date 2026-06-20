@@ -3,6 +3,7 @@ title: Components
 ---
 
 import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
+import code from '@site/src/examples/components.ts?raw';
 
 # Components
 
@@ -71,27 +72,4 @@ Each is documented under [Components](../components/writing-and-markdown).
 
 ## Try it
 
-<BackroadSandbox
-  height={520}
-  code={`import { run } from '@backroad/backroad';
-
-run((br) => {
-br.title({ label: 'Components in one place' });
-
-const name = br.textInput({
-label: 'Name',
-defaultValue: 'Ada',
-});
-
-const excited = br.toggle({ label: 'Excited?' });
-
-br.write({
-body: \`Hello, **\${name}**\${excited ? '!!!' : '.'}\`,
-});
-
-if (br.button({ label: 'Click me' })) {
-br.write({ body: 'Button was clicked.' });
-}
-});
-`}
-/>
+<BackroadSandbox height={520} code={code} />

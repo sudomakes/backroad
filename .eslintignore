@@ -2,3 +2,6 @@ coverage
 dist
 node_modules
 tmp
+# Raw live-sandbox samples — imported as text (?raw), not real modules.
+# Prettier still formats them; ESLint would flag the unresolved imports.
+apps/docs/src/examples

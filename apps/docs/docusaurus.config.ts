@@ -37,6 +37,9 @@ const config: Config = {
       },
     ],
     './plugins/webcontainer-webpack-plugin.ts',
+    // Lets the live-sandbox MDX import each example's source from a real `.ts`
+    // file via `?raw` (so Prettier formats the samples on commit).
+    './plugins/raw-loader-plugin.ts',
     // Local client-side search — no API key or subscription required.
     // Indexes the built HTML at build time; query runs in-browser via Lunr.js.
     'docusaurus-lunr-search',

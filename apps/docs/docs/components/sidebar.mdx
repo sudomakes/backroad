@@ -3,6 +3,7 @@ title: Sidebar
 ---
 
 import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
+import code from '@site/src/examples/sidebar.ts?raw';
 
 # Sidebar
 
@@ -114,27 +115,4 @@ across pages.
 
 ## Try it
 
-<BackroadSandbox
-  height={560}
-  code={`import { run } from '@backroad/backroad';
-
-run((br) => {
-const sidebar = br.sidebar({});
-sidebar.write({ body: '## Sidebar' });
-const region = sidebar.select({
-label: 'Region',
-options: [
-{ value: 'all', label: 'All regions' },
-{ value: 'eu', label: 'EU' },
-{ value: 'us', label: 'US' },
-{ value: 'apac', label: 'APAC' },
-],
-defaultValue: 'all',
-});
-sidebar.toggle({ label: 'Include archived' });
-
-br.write({ body: '# Dashboard' });
-br.write({ body: \`Selected region: **\${region}**\` });
-});
-`}
-/>
+<BackroadSandbox height={560} code={code} />
