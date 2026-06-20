@@ -435,16 +435,20 @@ jobs:
             '${{ needs.test.result }}' \
             '${{ needs.build.result }}' \
             '${{ needs.knip.result }}' \
-            '${{ needs.duplication.result }}' \
             '${{ needs.storybook-a11y.result }}' \
             '${{ needs.e2e.result }}' \
             '${{ needs.e2e-docs.result }}' \
             '${{ needs.bundle-size.result }}'; do
-            # 'skipped' is allowed: the duplication gate can be bypassed with
-            # the skip-duplication-gate label, which skips that job.
-            if [ "$r" != "success" ] && [ "$r" != "skipped" ]; then
+            if [ "$r" != "success" ]; then
               echo "One or more checks failed."
               exit 1
             fi
           done
+          # Only the duplication gate may be skipped, via the
+          # skip-duplication-gate label which skips that job.
+          dup='${{ needs.duplication.result }}'
+          if [ "$dup" != "success" ] && [ "$dup" != "skipped" ]; then
+            echo "Duplication gate failed."
+            exit 1
+          fi
           echo "All checks passed."
