@@ -1,0 +1,95 @@
+.jscpd.json
+  s_095e19459029f5::t_5ecf5b7a8025b5 1-28
+libs/backroad-frontend/src/app/auth/signin.tsx
+  s_095e19459029f5::t_aeefcdb6f01eca 34-36,40
+  s_095e19459029f5::t_edb0ed323dad37 27-31
+  s_095e19459029f5::t_cf1c7c9de00408 2,4
+  s_095e19459029f5::t_c1dc2163f07895 44
+libs/backroad-components/src/lib/components/download_button.tsx
+  s_095e19459029f5::t_2d7bf4ecb7d85f 17-19
+  s_095e19459029f5::t_be2d76cc4985d2 1
+libs/backroad/src/lib/backroad/backroad.ts
+  s_095e19459029f5::t_3d6389d25caf42 429-430
+  s_095e19459029f5::t_3a47527dd5b150 437-439
+  s_095e19459029f5::t_088abc1692ae9b 431
+libs/backroad/src/lib/server/sessions/session-manager.ts
+  s_095e19459029f5::t_1c1157c18b407b 1,3-22,24-29,31-32
+libs/backroad-frontend/src/main.tsx
+  s_095e19459029f5::t_bb9be88f5bc9ef 1
+  s_095e19459029f5::t_f7e66c8d0cc42d 14
+  s_095e19459029f5::t_ce87119d5df42f 15
+libs/backroad-components/src/lib/socket/index.ts
+  s_095e19459029f5::t_24e2d94a3439a5 7
+libs/backroad-frontend/src/lib/auth-client.ts
+  s_095e19459029f5::t_6a759c5e6a6925 1,4,6-23
+tools/scripts/jscpd-check.mjs
+  s_095e19459029f5::t_828741a7a64265 1-202
+libs/backroad/src/lib/adapters/express.ts
+  s_095e19459029f5::t_588be242153c4f 1-23
+libs/backroad/src/lib/backroad/socket-manager/index.ts
+  s_095e19459029f5::t_de28f04bb92786 3-6,8-11,14-15
+apps/docs/docs/embedding.md
+  s_095e19459029f5::t_d2a7e7181bea72 1-135
+libs/backroad/package.json
+  s_095e19459029f5::t_f7ca8614e69418 29-31,34-36,39-41
+libs/backroad/src/lib/server/build.ts
+  s_095e19459029f5::t_78fdb4b7ae203b 62
+  s_095e19459029f5::t_9b2230a3ac4a4a 12-15
+  s_095e19459029f5::t_b16f7a66f7d886 1-5,7-11,16-61,63-257,268-279
+  s_095e19459029f5::t_3f51fd909542e4 258-267
+  s_095e19459029f5::t_3c029ad0ee8f95 6
+libs/backroad-components/src/lib/socket/base-path.ts
+  s_095e19459029f5::t_4d8556056a44fd 1-3,6,8-10
+  s_095e19459029f5::t_26e2ff6be0a9e4 4-5,7,11-25
+apps/docs/sidebars.ts
+  s_095e19459029f5::t_b59b93e8db6caa 35
+libs/backroad-frontend/vite.config.ts
+  s_095e19459029f5::t_dc744bde9d972e 8-11
+libs/backroad/src/lib/runner/index.ts
+  s_095e19459029f5::t_980ec26f272807 2-8,10-14,16,21-26,28-29,31-33,35-39
+libs/backroad-components/src/lib/components/file_upload.tsx
+  s_095e19459029f5::t_29b7af404b1535 4
+  s_095e19459029f5::t_cfa80aa50f3293 54
+libs/backroad/src/lib/server/sessions/session.ts
+  s_095e19459029f5::t_4d8182106814ad 42-45,47,50
+  s_095e19459029f5::t_0411b85d0af451 10
+libs/backroad-components/src/lib/socket/client.ts
+  s_095e19459029f5::t_5e65308ff2a7e3 4,13
+  s_095e19459029f5::t_6085b8097b2d5c 8-10
+package.json
+  s_095e19459029f5::t_85fcaa9dee137f 74
+  s_095e19459029f5::t_9f9aa34a86efce 25-27
+.github/workflows/pr-checks.yml
+  s_095e19459029f5::t_03e71496334e52 214-267
+  s_095e19459029f5::t_81109f960555f7 436,441-443
+  s_095e19459029f5::t_ac4e1469cfccac 28-29
+  s_095e19459029f5::t_9c12e94d275c0c 423
+  s_095e19459029f5::t_02c0ca182c9c24 405
+libs/backroad/src/index.ts
+  s_095e19459029f5::t_75c30132fbda9f 2,5-16
+libs/backroad/src/lib/backroad/backroad.test.ts
+  s_095e19459029f5::t_24b90f1bcdb677 7-9,11-12,16
+libs/backroad/src/lib/backroad/render-queue.ts
+  s_095e19459029f5::t_b6fb93d50df008 27-29
+  s_095e19459029f5::t_ec73370cf8a544 36-38
+libs/backroad-components/src/lib/socket/auth-synchronizers.ts
+  s_095e19459029f5::t_7331c12c226acb 2,6-8,10,18,25
+libs/backroad/src/lib/adapters/hono.ts
+  s_095e19459029f5::t_5cd58d21f6e83b 1-84
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "bd86346f0f1231325a936d5025cff916e2143dbd",
+  "prompts": {},
+  "sessions": {
+    "s_095e19459029f5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "45effac0-fbe2-4014-a422-3c58bb7e2397",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
