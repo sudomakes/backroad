@@ -1,0 +1,21 @@
+tools/scripts/release.mjs
+  s_c1dcdc4e5a8038::t_7c5678843adb55 7,15-20,43-45,62-70
+release.config.js
+  s_c1dcdc4e5a8038::t_68276d18758117 29-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "cdeef794629bba1d90f5d770e3acffd54841be3a",
+  "prompts": {},
+  "sessions": {
+    "s_c1dcdc4e5a8038": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "02e9cf32-0ff4-40a2-b9ad-d1ebd5e12fa0",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
