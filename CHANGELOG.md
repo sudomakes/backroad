@@ -1,3 +1,9 @@
+## [1.18.1](https://github.com/sudomakes/backroad/compare/v1.18.0...v1.18.1) (2026-06-20)
+
+### Bug Fixes
+
+- **release:** guard against publishing without the frontend bundle ([1099eea](https://github.com/sudomakes/backroad/commit/1099eeaf07d69d29e0a023150641970bf3371ea7))
+
 ## [1.18.0](https://github.com/sudomakes/backroad/compare/v1.17.0...v1.18.0) (2026-06-20)
 
 ### Features
