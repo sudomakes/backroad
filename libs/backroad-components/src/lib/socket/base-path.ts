@@ -20,6 +20,13 @@ export const getBasePath = (): string => readBasePath();
 export const withBasePath = (path: string): string => {
   const base = readBasePath();
   if (!base || !path.startsWith('/')) return path;
-  if (path === base || path.startsWith(`${base}/`)) return path;
+  if (
+    path === base ||
+    path.startsWith(`${base}/`) ||
+    path.startsWith(`${base}?`) ||
+    path.startsWith(`${base}#`)
+  ) {
+    return path;
+  }
   return `${base}${path}`;
 };
