@@ -203,6 +203,12 @@ export const buildBackroadHandler = (
       );
       socketManager.register(backroadSession.sessionId, socket);
 
+      // Drop the socket from the manager on disconnect so long-running servers
+      // with many reconnecting clients don't accumulate stale entries.
+      socket.on('disconnect', () => {
+        socketManager.unregister(backroadSession.sessionId);
+      });
+
       // Resolve the better-auth session once per WS connection from the upgrade
       // headers, then cache it on the BackroadSession.
       if (authConfig) {

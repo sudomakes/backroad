@@ -14,4 +14,7 @@ export class SocketManager {
   register(sessionId: string, socket: ServerSocketType) {
     this.#sessionToSocketMapping.set(sessionId, socket);
   }
+  unregister(sessionId: string) {
+    this.#sessionToSocketMapping.delete(sessionId);
+  }
 }
