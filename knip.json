@@ -45,6 +45,7 @@
   },
   "ignoreBinaries": ["lefthook"],
   "ignoreDependencies": [
+    "@ai-hero/sandcastle",
     "docusaurus-lunr-search",
     "lunr",
     "@docusaurus/plugin-content-docs",
