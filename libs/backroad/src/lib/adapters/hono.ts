@@ -68,8 +68,16 @@ export const backroadHono = (
 
     // The express router matches paths relative to the mount, so strip the
     // prefix Hono's route() left on the raw Node url.
-    if (basePath && incoming.url && incoming.url.startsWith(basePath)) {
-      incoming.url = incoming.url.slice(basePath.length) || '/';
+    if (basePath && incoming.url) {
+      const url = incoming.url;
+      const isMatch =
+        url === basePath ||
+        url.startsWith(`${basePath}/`) ||
+        url.startsWith(`${basePath}?`);
+      if (isMatch) {
+        const next = url.slice(basePath.length);
+        incoming.url = next ? (next.startsWith('/') ? next : `/${next}`) : '/';
+      }
     }
 
     await new Promise<void>((resolve) => {
