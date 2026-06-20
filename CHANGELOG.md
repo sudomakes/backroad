@@ -1,3 +1,9 @@
+## [1.18.2](https://github.com/sudomakes/backroad/compare/v1.18.1...v1.18.2) (2026-06-20)
+
+### Bug Fixes
+
+- **release:** run build, assemble and publish in a single phase ([cdeef79](https://github.com/sudomakes/backroad/commit/cdeef794629bba1d90f5d770e3acffd54841be3a))
+
 ## [1.18.1](https://github.com/sudomakes/backroad/compare/v1.18.0...v1.18.1) (2026-06-20)
 
 ### Bug Fixes
