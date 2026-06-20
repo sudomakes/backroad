@@ -1,3 +1,24 @@
+## [1.20.0](https://github.com/sudomakes/backroad/compare/v1.19.0...v1.20.0) (2026-06-20)
+
+### Features
+
+- fix sandcastle setup ([029eb75](https://github.com/sudomakes/backroad/commit/029eb75f1ff59df44e0301f3b8a0faac2195a964))
+
+## [1.19.0](https://github.com/sudomakes/backroad/compare/v1.18.2...v1.19.0) (2026-06-20)
+
+### Features
+
+- **docs:** move live-sandbox samples to raw-imported .ts files ([40697dc](https://github.com/sudomakes/backroad/commit/40697dcedf8485137e00bce70b5d1244cb9ca8d2))
+
+### Bug Fixes
+
+- **docs:** keep ?raw sandbox imports verbatim, not babel-minified ([#41](https://github.com/sudomakes/backroad/issues/41)) ([91b9ce7](https://github.com/sudomakes/backroad/commit/91b9ce72fd9d1159f53d0ec0f5c9b289389267f3))
+
+### Chores
+
+- add sandcastle harness ([ede780c](https://github.com/sudomakes/backroad/commit/ede780cd943b322f82881e504e2be9e17026f596))
+- **sandcastle:** run corepack as agent user; drop local harness files ([ee3189b](https://github.com/sudomakes/backroad/commit/ee3189bc45b0b8a0d9897dab1f1fbf8a98a09c7e))
+
 ## [1.18.2](https://github.com/sudomakes/backroad/compare/v1.18.1...v1.18.2) (2026-06-20)
 
 ### Bug Fixes

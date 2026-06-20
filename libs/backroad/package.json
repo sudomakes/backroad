@@ -1,6 +1,6 @@
 {
   "name": "@backroad/backroad",
-  "version": "1.18.2",
+  "version": "1.20.0",
   "main": "./src/index.js",
   "type": "commonjs",
   "scripts": {

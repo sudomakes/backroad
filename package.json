@@ -1,6 +1,6 @@
 {
   "name": "backroad-monorepo",
-  "version": "1.18.2",
+  "version": "1.20.0",
   "packageManager": "pnpm@11.5.2",
   "scripts": {
     "build": "pnpm -r --if-present run build",
@@ -19,6 +19,7 @@
     "e2e:docs": "playwright test --config=e2e/docs/playwright.config.ts",
     "e2e:install": "playwright install --with-deps chromium",
     "knip": "knip",
+    "sandbox:build-image": "sandcastle docker build-image --dockerfile .sandcastle/Dockerfile",
     "knip:ci": "node tools/scripts/knip-check.mjs",
     "knip:baseline": "node tools/scripts/knip-check.mjs --write",
     "dup-check": "jscpd",
