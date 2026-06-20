@@ -4,6 +4,7 @@ import { rm } from 'node:fs/promises';
 import {
   assertFileExists,
   copyDirectoryContents,
+  publishTagForVersion,
   readJson,
   run,
   validateVersion,
@@ -11,12 +12,15 @@ import {
   writeJson,
 } from './helpers.mjs';
 
+// Single-phase release: stamp versions → build → assemble → verify → publish, all
+// in one process. An earlier attempt split publish into a separate semantic-release
+// `publish` step; the working `dist` got clobbered between phases and shipped a
+// package with no UI (1.18.0). Keeping everything sequential here avoids any
+// cross-phase gap. npm/git desync is handled by publish-package.mjs's idempotent
+// skip (a re-run finishes the git tag without re-publishing).
 const FRONTEND_DIST = 'dist/libs/backroad-frontend';
 const BACKROAD_PUBLIC = 'dist/libs/backroad/src/lib/server/public';
 
-// PREPARE phase only: stamp versions + build the publishable artifacts.
-// The actual `npm publish` lives in publish.mjs and runs in semantic-release's
-// `publish` phase, so npm and the git tag stay in lockstep. See release.config.js.
 const version = process.env.VERSION;
 validateVersion(version);
 
@@ -36,9 +40,9 @@ run('pnpm', ['--filter', 'backroad-frontend', 'run', 'build']);
 run('pnpm', ['--filter', '@backroad/core', 'run', 'build']);
 run('pnpm', ['--filter', '@backroad/backroad', 'run', 'build']);
 
-// The frontend bundle is what the server serves at runtime. If the build did not
-// produce it, fail loudly here — copyDirectoryContents would otherwise silently
-// no-op on a missing source and ship a package that 404s out of the box (see 1.18.0).
+// The frontend bundle is what the server serves at runtime. Fail loudly if the
+// build did not produce it — copyDirectoryContents would otherwise silently no-op
+// on a missing source and ship a package that 404s out of the box.
 assertFileExists(
   `${FRONTEND_DIST}/index.html`,
   `Frontend build is missing ${FRONTEND_DIST}/index.html — refusing to assemble a package without the UI.`
@@ -55,3 +59,12 @@ assertFileExists(
   `${BACKROAD_PUBLIC}/index.html`,
   `Frontend bundle was not copied into ${BACKROAD_PUBLIC} — aborting before publish.`
 );
+
+const tag = publishTagForVersion(version);
+
+run('node', [
+  'tools/scripts/publish-package.mjs',
+  'dist/libs/backroad-core',
+  tag,
+]);
+run('node', ['tools/scripts/publish-package.mjs', 'dist/libs/backroad', tag]);
