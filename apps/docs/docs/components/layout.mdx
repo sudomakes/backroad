@@ -3,6 +3,7 @@ title: Layout
 ---
 
 import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
+import code from '@site/src/examples/layout.ts?raw';
 
 # Layout
 
@@ -72,7 +73,7 @@ if (message) {
 ```
 
 The dock lives outside the scrolling body, so its position doesn't depend on
-*when* you emit it — render it wherever is convenient in your script and it
+_when_ you emit it — render it wherever is convenient in your script and it
 still sits at the bottom. See [LLM components](./llm) for the full chat
 pattern.
 
@@ -93,20 +94,4 @@ moreRight.write({ body: 'Hidden content.' });
 
 ## Try it
 
-<BackroadSandbox
-  height={560}
-  code={`import { run } from '@backroad/backroad';
-
-run((br) => {
-br.write({ body: '# Layout' });
-
-const [left, right] = br.columns({ columns: [1, 2] });
-left.write({ body: '## Narrow' });
-left.toggle({ label: 'Switch' });
-
-const [a, b] = right.tabs({ labels: ['Tab A', 'Tab B'] });
-a.write({ body: 'Hello from **Tab A**.' });
-b.write({ body: 'Hello from **Tab B**.' });
-});
-`}
-/>
+<BackroadSandbox height={560} code={code} />

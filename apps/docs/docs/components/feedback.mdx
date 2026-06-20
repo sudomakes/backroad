@@ -3,6 +3,7 @@ title: Feedback
 ---
 
 import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
+import code from '@site/src/examples/feedback.ts?raw';
 
 # Feedback
 
@@ -31,26 +32,4 @@ both light and dark mode.
 
 ## Try it
 
-<BackroadSandbox
-  height={420}
-  code={`import { run } from '@backroad/backroad';
-
-run((br) => {
-br.write({ body: '# Toast demo' });
-
-const variant = br.select({
-label: 'Variant',
-options: [
-{ value: 'info', label: 'Info' },
-{ value: 'success', label: 'Success' },
-{ value: 'warning', label: 'Warning' },
-{ value: 'error', label: 'Error' },
-],
-});
-
-if (br.button({ label: 'Notify' })) {
-br.toast({ message: \`This is a \${variant ?? 'info'} toast\`, variant: variant ?? 'info' });
-}
-});
-`}
-/>
+<BackroadSandbox height={420} code={code} />

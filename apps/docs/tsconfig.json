@@ -8,5 +8,8 @@
     "ignoreDeprecations": "6.0",
     "strict": true
   },
-  "exclude": [".docusaurus", "build"]
+  // src/examples/*.ts are raw sandbox samples imported as text (?raw); they
+  // import `@backroad/backroad`, which isn't a docs dependency, so they must
+  // not be type-checked here. Prettier still formats them on commit.
+  "exclude": [".docusaurus", "build", "src/examples"]
 }

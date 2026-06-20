@@ -3,6 +3,7 @@ title: Multimedia
 ---
 
 import { BackroadSandbox } from '@site/src/components/BackroadSandbox';
+import code from '@site/src/examples/multimedia.ts?raw';
 
 # Multimedia
 
@@ -75,21 +76,4 @@ if (files.length > 0) {
 
 ## Try it
 
-<BackroadSandbox
-  height={520}
-  code={`import { run } from '@backroad/backroad';
-
-run((br) => {
-br.write({ body: '# Multimedia' });
-
-const url = br.textInput({
-label: 'Image URL',
-defaultValue: 'https://placekitten.com/640/360',
-});
-
-if (url) {
-br.image({ src: url, alt: 'preview', width: 480 });
-}
-});
-`}
-/>
+<BackroadSandbox height={520} code={code} />
