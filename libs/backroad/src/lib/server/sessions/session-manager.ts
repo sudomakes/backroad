@@ -6,27 +6,27 @@ import { BackroadSession } from './session';
 // SocketManager — the two move together because every BackroadSession needs to
 // reach its instance's sockets (render-queue, br.login/logout).
 export const createSessionManager = (socketManager: SocketManager) => {
-  const sessions: { [key: string]: BackroadSession | undefined } = {};
+  const sessions = new Map<string, BackroadSession>();
   return {
     getSession: <const T extends boolean>(
       sessionId: BackroadSession['sessionId'],
       props?: { upsert: T }
     ): T extends true ? BackroadSession : BackroadSession | null => {
-      if (!sessions[sessionId]) {
+      const existing = sessions.get(sessionId);
+      if (!existing) {
         if (props && props.upsert) {
-          sessions[sessionId] = new BackroadSession(sessionId, socketManager);
-          return sessions[sessionId];
+          const created = new BackroadSession(sessionId, socketManager);
+          sessions.set(sessionId, created);
+          return created;
         } else {
           // @ts-expect-error - this is fine
           return null;
         }
       }
-      return sessions[sessionId];
+      return existing;
     },
     unregister: (session: BackroadSession) => {
-      delete sessions[session.sessionId];
+      sessions.delete(session.sessionId);
     },
   };
 };
-
-export type SessionManager = ReturnType<typeof createSessionManager>;
