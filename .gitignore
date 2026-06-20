@@ -65,8 +65,6 @@ __screenshots__/
 # ── Logs ─────────────────────────────────────────────────────────────────
 *.log
 npm-debug.log
-yarn-error.log
-testem.log
 /connect.lock
 /libpeerconnection.log
 /typings
