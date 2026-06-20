@@ -55,8 +55,9 @@ const inferMimeType = (filename: string) => {
 // with no trailing slash, so every call site can compose it predictably.
 const normalizeBasePath = (basePath?: string) => {
   if (!basePath) return '';
-  const trimmed = basePath.replace(/\/+$/, '');
-  return trimmed.startsWith('/') ? trimmed : `/${trimmed}`;
+  const trimmed = basePath.replace(/^\/+|\/+$/g, '');
+  if (!trimmed) return '';
+  return `/${trimmed}`;
 };
 
 export type BackroadHandler = express.Express & {
@@ -130,14 +131,21 @@ export const buildBackroadHandler = (
   router.post('/api/uploads', (req, res) => {
     const form = formidable({});
     form.parse<'sessionId' | 'id', 'files'>(req, (err, fields, files) => {
+      if (err) {
+        return res.status(400).json({ error: 'invalid upload payload' });
+      }
       const sessionId = fields.sessionId?.[0];
       const id = fields.id?.[0];
-      if (sessionId && id) {
-        const session = sessionManager.getSession(sessionId);
-        const value = files.files || [];
-        session?.setValue(id, value);
-        return res.json(value);
+      if (!sessionId || !id) {
+        return res.status(400).json({ error: 'sessionId and id are required' });
       }
+      const session = sessionManager.getSession(sessionId);
+      if (!session) {
+        return res.status(404).json({ error: 'session not found' });
+      }
+      const value = files.files || [];
+      session.setValue(id, value);
+      return res.json(value);
     });
   });
 
