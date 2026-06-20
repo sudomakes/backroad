@@ -5,13 +5,13 @@ import type { ServerSocketType } from '@backroad/core';
 // lets two Backroad apps run in the same process without their sockets
 // colliding.
 export class SocketManager {
-  #sessionToSocketMapping: Record<string, ServerSocketType> = {};
+  #sessionToSocketMapping = new Map<string, ServerSocketType>();
   getSocket(sessionId: string) {
-    if (sessionId in this.#sessionToSocketMapping)
-      return this.#sessionToSocketMapping[sessionId];
+    const socket = this.#sessionToSocketMapping.get(sessionId);
+    if (socket) return socket;
     else throw new Error(`No socket found for session ${sessionId}`);
   }
   register(sessionId: string, socket: ServerSocketType) {
-    this.#sessionToSocketMapping[sessionId] = socket;
+    this.#sessionToSocketMapping.set(sessionId, socket);
   }
 }
