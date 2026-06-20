@@ -1,0 +1,19 @@
+.sandcastle/Dockerfile
+  s_2866261e7599c8::t_193b84d9558b57 31,34-40
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "ee3189bc45b0b8a0d9897dab1f1fbf8a98a09c7e",
+  "prompts": {},
+  "sessions": {
+    "s_2866261e7599c8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6dda67fc-e202-4d9c-b064-75c2ff502431",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
