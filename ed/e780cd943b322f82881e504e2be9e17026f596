@@ -1,0 +1,43 @@
+.sandcastle/Dockerfile
+  s_4ebe51476bb703::t_41ae80f8267d14 2-17,22-43
+  s_a2192571f1426d::t_059e2c28ed0a06 18-21
+  s_a2192571f1426d::t_cbcdd7bcbf43b4 1
+.sandcastle/prompt.md
+  s_a2192571f1426d::t_5ff0e676f406c8 33
+  s_4ebe51476bb703::t_41ae80f8267d14 1-32,34-53
+.sandcastle/.env.example
+  s_4ebe51476bb703::t_41ae80f8267d14 1-9
+.sandcastle/.gitignore
+  s_4ebe51476bb703::t_41ae80f8267d14 1-3
+package.json
+  s_a2192571f1426d::t_c70487feb67f3d 39,81
+  s_a2192571f1426d::t_03dbad80af3ed2 16
+.sandcastle/main.mts
+  s_a2192571f1426d::t_53afa1fc22b2f6 49
+  s_4ebe51476bb703::t_41ae80f8267d14 1-38,41-46,50-52
+  s_a2192571f1426d::t_4dc5f12e8b454a 39-40,47-48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "ede780cd943b322f82881e504e2be9e17026f596",
+  "prompts": {},
+  "sessions": {
+    "s_4ebe51476bb703": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "803adaa6-ac98-4840-893f-2ed44b2179e0",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    },
+    "s_a2192571f1426d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "48d5f692-fbf3-4cd5-a3c6-6286a6d6caae",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
