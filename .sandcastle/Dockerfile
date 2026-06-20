@@ -15,10 +15,6 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
   && apt-get update && apt-get install -y gh \
   && rm -rf /var/lib/apt/lists/*
 
-# Enable corepack and activate the pnpm version pinned in package.json.
-# Done as root (before the USER switch) so the shims land in a writable bin dir.
-RUN corepack enable && corepack prepare pnpm@11.5.2 --activate
-
 # Build-args for UID/GID alignment: sandcastle docker build-image
 # defaults these to the host user's UID/GID so image-built files
 # and bind-mounted files share an owner without runtime chown.
@@ -32,8 +28,16 @@ USER ${AGENT_UID}:${AGENT_GID}
 # Install Claude Code CLI
 RUN curl -fsSL https://claude.ai/install.sh | bash
 
-# Add Claude to PATH
+# Add the agent's local bin to PATH (Claude CLI + corepack shims land here).
 ENV PATH="/home/agent/.local/bin:$PATH"
+
+# Enable corepack and activate pnpm AS THE AGENT USER (after the USER switch),
+# so the shims and the prepared pnpm cache live in the agent's own home and are
+# actually usable at runtime. Doing this as root left the prepared package in
+# root's corepack cache, forcing the agent to re-bootstrap pnpm on every run.
+ENV COREPACK_HOME="/home/agent/.cache/corepack"
+RUN corepack enable --install-directory /home/agent/.local/bin \
+  && corepack prepare pnpm@11.5.2 --activate
 
 WORKDIR /home/agent
 
