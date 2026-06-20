@@ -1,0 +1,25 @@
+package.json
+  s_daf203db542a25::t_0cf254ce2ce27b 22
+.sandcastle/Dockerfile
+  s_daf203db542a25::t_6c690011a33e72 71-76,78-79,84-87
+  s_daf203db542a25::t_bd073935183620 1
+  s_daf203db542a25::t_ffe1bba1ac7d3a 54-56,63,80-81,83,88
+  s_daf203db542a25::t_39b7ce89f7bc90 43-53
+  s_daf203db542a25::t_c3e7b1e2ad5379 57-62,64-70,77,82
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "029eb75f1ff59df44e0301f3b8a0faac2195a964",
+  "prompts": {},
+  "sessions": {
+    "s_daf203db542a25": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "17294330-8dfa-4b0f-8265-0d63ed3c10a5",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
