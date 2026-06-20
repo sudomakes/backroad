@@ -1,5 +1,4 @@
 import { BackroadSession } from '../server/sessions/session';
-import { SocketManager } from './socket-manager';
 
 export class RenderQueue {
   queue: string[] = [];
@@ -25,14 +24,18 @@ export class RenderQueue {
     return queue;
   }
   #flushToFrontend() {
-    const socket = SocketManager.getSocket(this.backroadSession.sessionId);
+    const socket = this.backroadSession.socketManager.getSocket(
+      this.backroadSession.sessionId
+    );
     const nodesToEmit = this.flush();
     socket.emit('render', nodesToEmit, () => {
       /* ack ignored */
     });
   }
   updateProps(props: any) {
-    const socket = SocketManager.getSocket(this.backroadSession.sessionId);
+    const socket = this.backroadSession.socketManager.getSocket(
+      this.backroadSession.sessionId
+    );
     socket.emit('props_change', props, () => {
       console.log('props change request acked by frontend');
     });

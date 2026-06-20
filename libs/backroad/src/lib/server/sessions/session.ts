@@ -7,6 +7,7 @@ import {
 } from '@backroad/core';
 import { BackroadNodeManager } from '../../backroad';
 import { RenderQueue } from '../../backroad/render-queue';
+import { SocketManager } from '../../backroad/socket-manager';
 import superjson from 'superjson';
 // import { UploadManager } from './upload-manager';
 
@@ -38,10 +39,15 @@ export class BackroadSession {
   renderQueue: RenderQueue;
   rootNodeManager: BackroadNodeManager<'base'>;
   user: BackroadUser = { isLoggedIn: false };
+  // The instance's socket registry. Held on the session so anything reachable
+  // from a session (render-queue, br.login/logout) can emit without touching a
+  // module-global — that's what keeps two Backroad apps isolated in one process.
+  socketManager: SocketManager;
   // uploadManager: UploadManager;
-  constructor(sessionId: string) {
+  constructor(sessionId: string, socketManager: SocketManager) {
     // this.uploadManager = new UploadManager();
     this.sessionId = sessionId;
+    this.socketManager = socketManager;
     this.rootNodeManager = new BackroadNodeManager(
       getInitialTreeStructure(),
       this

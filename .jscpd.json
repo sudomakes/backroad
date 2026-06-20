@@ -1,0 +1,28 @@
+{
+  "mode": "strict",
+  "minTokens": 70,
+  "minLines": 8,
+  "format": ["typescript", "tsx", "javascript", "jsx"],
+  "absolute": false,
+  "gitignore": true,
+  "pattern": "{apps,libs,examples,tools}/**/*.{ts,tsx,js,jsx,mjs}",
+  "threshold": 0,
+  "ignore": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/out-tsc/**",
+    "**/coverage/**",
+    "**/storybook-static/**",
+    "**/.storybook/**",
+    "**/.docusaurus/**",
+    "**/build/**",
+    "**/.sandcastle/**",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "**/*.stories.tsx",
+    "**/*.gen.ts",
+    "**/*.d.ts"
+  ]
+}

@@ -1,103 +1,41 @@
 import { BackroadConfig } from '@backroad/core';
-import { BackroadNodeManager } from '../backroad';
-import { SocketManager } from '../backroad/socket-manager';
-import { startBackroadServer } from '../server';
-import { sessionManager } from '../server/sessions/session-manager';
-import { socketEventHandlers } from '../server/server-socket-event-handlers';
-export type BackroadRunContext = {
-  currentPath: string;
-};
+import express from 'express';
+import * as http from 'http';
+import { buildBackroadHandler, type BackroadExecutor } from '../server/build';
 
+// Re-exported for backwards compatibility — the type now lives in build.ts
+// (the shared core) alongside the executor signature.
+export type { BackroadRunContext } from '../server/build';
+
+/**
+ * Run a Backroad app as a standalone server on its own port. This is the
+ * original entry point and is unchanged in behaviour: it's the mountable core
+ * (buildBackroadHandler) with basePath '' on a fresh express app + http server.
+ */
 export const run = async (
-  executor: (
-    nodeManager: BackroadNodeManager,
-    context: BackroadRunContext
-  ) => void | Promise<void>,
+  executor: BackroadExecutor,
   backroadOptions?: BackroadConfig
 ) => {
   const port = backroadOptions?.server?.port || 3333;
-  const authConfig = backroadOptions?.auth;
 
-  (
-    await startBackroadServer({
-      port: port,
-      auth: authConfig,
-    })
-  ).on('connection', async (socket) => {
-    const backroadSession = sessionManager.getSession(
-      socket.nsp.name.slice(1),
-      {
-        upsert: true,
-      }
+  const app = express();
+  const handler = buildBackroadHandler(executor, {
+    ...backroadOptions,
+    basePath: '',
+  });
+  app.use(handler);
+
+  const server = http.createServer(app);
+  handler.attach(server);
+
+  server.listen(port, () => {
+    console.log(
+      `Server started and can be accessed on http://localhost:${port}/`
     );
-    SocketManager.register(backroadSession.sessionId, socket);
-
-    // Resolve the better-auth session once per WS connection from the upgrade
-    // headers, then cache it on the BackroadSession. The session is NOT
-    // re-checked per-message in v1 — if a user signs out in another tab, this
-    // connection will keep its old user object until it reconnects.
-    if (authConfig) {
-      try {
-        const { fromNodeHeaders } =
-          // eslint-disable-next-line @typescript-eslint/no-var-requires
-          require('better-auth/node') as typeof import('better-auth/node');
-        const resolved = await authConfig.instance.api.getSession({
-          headers: fromNodeHeaders(socket.request.headers),
-        });
-        if (resolved?.user?.id) {
-          backroadSession.user = {
-            isLoggedIn: true,
-            id: resolved.user.id,
-            name: resolved.user.name ?? '',
-            email: resolved.user.email ?? '',
-            image: resolved.user.image ?? undefined,
-            raw: resolved,
-          };
-        } else {
-          backroadSession.user = { isLoggedIn: false };
-        }
-      } catch (err) {
-        console.error('Failed to resolve auth session for WS connection', err);
-        backroadSession.user = { isLoggedIn: false };
-      }
+    if (process.env.BACKROAD_ENV === 'dev') {
+      console.log(
+        'Backroad is running in development mode. Frontend will be running on a separate address: http://localhost:4200/'
+      );
     }
-
-    // currentPath is derived purely from the triggering request — every
-    // run-triggering event (run_script, set_value, unset_value) carries the
-    // client's pathname, so the server holds no path state and assumes no
-    // default. No run is ever server-initiated.
-    const runExecutor = async (currentPath: string) => {
-      socket.emit('running', true, () => undefined);
-      try {
-        backroadSession.resetTree();
-        await executor(backroadSession.mainPageNodeManager, { currentPath });
-      } finally {
-        socket.emit('running', false, () => undefined);
-      }
-    };
-    // execute once to populate defaults and stuff
-
-    // socket.on(
-    //   'get_value',
-    //   socketEventHandlers.getValue(socket, backroadSession)
-    // );
-    socket.on(
-      'set_value',
-      socketEventHandlers.setValue(socket, backroadSession, runExecutor)
-    );
-    socket.on(
-      'run_script',
-      socketEventHandlers.runScript(socket, backroadSession, runExecutor)
-    );
-
-    socket.on(
-      'unset_value',
-      socketEventHandlers.unsetValue(socket, backroadSession, runExecutor)
-    );
-
-    socket.emit('backroad_config', backroadOptions, () => {
-      console.log('sent backroad config to frontend');
-    });
-    // socket.on("get_tree", socketEventHandlers.getTree(socket, backroadSession));
   });
 };
