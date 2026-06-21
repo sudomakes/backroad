@@ -42,9 +42,12 @@ export const backroadWidgetsExample = (br: BackroadNodeManager) => {
     });
   }
 
-  // `downloaded` is true only on the run right after the click, so the echo
-  // below renders once per press — letting the e2e spec assert the round-trip
-  // in addition to intercepting the actual browser download.
+  // `downloaded` is true only on the run right after the click. The confirmation
+  // is fired as a toast (like Notify above) rather than a transient `br.write`:
+  // the click commits `true` then immediately unsets it, so a written node would
+  // be added on the set-rerun and removed again on the unset-rerun — a flash the
+  // e2e spec could miss. The toast persists for its duration, so the round-trip
+  // assertion is deterministic.
   const downloaded = br.downloadButton({
     label: 'Download Report',
     data: () => Promise.resolve(JSON.stringify({ status: 'ok' }, null, 2)),
@@ -52,6 +55,10 @@ export const backroadWidgetsExample = (br: BackroadNodeManager) => {
     mime: 'application/json',
   });
   if (downloaded) {
-    br.write({ body: 'Report downloaded!' });
+    br.toast({
+      message: 'Report downloaded!',
+      variant: 'success',
+      duration: 6000,
+    });
   }
 };
