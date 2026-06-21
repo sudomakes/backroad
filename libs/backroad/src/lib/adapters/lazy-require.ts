@@ -6,7 +6,17 @@ export const lazyRequire = (name: string, hint?: string): any => {
   try {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     return require(name);
-  } catch {
-    throw new Error(hint ?? `This adapter requires "${name}". Install it.`);
+  } catch (err) {
+    // Only swallow a genuine "module is not installed" error. Anything else
+    // (e.g. a syntax/runtime error thrown while loading an installed module)
+    // must propagate untouched so it is not misreported as a missing peer dep.
+    if (
+      err &&
+      typeof err === 'object' &&
+      (err as { code?: string }).code === 'MODULE_NOT_FOUND'
+    ) {
+      throw new Error(hint ?? `This adapter requires "${name}". Install it.`);
+    }
+    throw err;
   }
 };
