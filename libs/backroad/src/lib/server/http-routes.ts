@@ -94,10 +94,14 @@ export const createBackroadRouter = ({
     );
   });
 
-  // SPA fallback — serve the (base-path-patched) index.html for any non-API GET.
-  router.get('*', (_req, res) => {
+  // SPA fallback — serve the (base-path-patched) index.html for non-API GETs.
+  // Unknown /api/* paths must 404 as API misses, not get the SPA document.
+  router.get('*', (req, res) => {
+    if (req.path === '/api' || req.path.startsWith('/api/')) {
+      return res.status(404).json({ error: 'not found' });
+    }
     res.setHeader('Content-Type', 'text/html');
-    res.send(renderIndexHtml());
+    return res.send(renderIndexHtml());
   });
 
   return router;
