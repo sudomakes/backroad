@@ -14,7 +14,12 @@ export class SocketManager {
   register(sessionId: string, socket: ServerSocketType) {
     this.#sessionToSocketMapping.set(sessionId, socket);
   }
-  unregister(sessionId: string) {
-    this.#sessionToSocketMapping.delete(sessionId);
+  unregister(sessionId: string, socket: ServerSocketType) {
+    // Only drop the mapping when it still points at the disconnecting socket.
+    // A stale disconnect (older connection closing after a newer socket for the
+    // same session has registered) must not evict the live socket.
+    if (this.#sessionToSocketMapping.get(sessionId) === socket) {
+      this.#sessionToSocketMapping.delete(sessionId);
+    }
   }
 }
