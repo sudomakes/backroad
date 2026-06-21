@@ -32,6 +32,10 @@ export const Frame = ({ nodes, children }: FrameProps) => {
   const bodyNodes: FrameNodes = [];
   const dockNodes: FrameNodes = [];
   for (const child of nodes) {
+    // Defensive: a child can be a hole/null if a stale render patch ever slips
+    // past the runId gate. Skip it rather than deref `.type` and crash the whole
+    // tree render.
+    if (!child) continue;
     (child.type === 'bottom' ? dockNodes : bodyNodes).push(child);
   }
 
