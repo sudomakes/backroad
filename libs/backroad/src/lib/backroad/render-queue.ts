@@ -23,19 +23,20 @@ export class RenderQueue {
     this.queue = [];
     return queue;
   }
-  #flushToFrontend() {
-    const socket = this.backroadSession.socketManager.getSocket(
+  #getSocket() {
+    return this.backroadSession.socketManager.getSocket(
       this.backroadSession.sessionId
     );
+  }
+  #flushToFrontend() {
+    const socket = this.#getSocket();
     const nodesToEmit = this.flush();
     socket.emit('render', nodesToEmit, () => {
       /* ack ignored */
     });
   }
   updateProps(props: any) {
-    const socket = this.backroadSession.socketManager.getSocket(
-      this.backroadSession.sessionId
-    );
+    const socket = this.#getSocket();
     socket.emit('props_change', props, () => {
       console.log('props change request acked by frontend');
     });
