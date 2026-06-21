@@ -4,21 +4,13 @@ import {
   type BackroadAdapterOptions,
   type BackroadExecutor,
 } from '../server/build';
+import { lazyRequire } from './lazy-require';
 
 // hono + @hono/node-server are optional peer deps, required lazily so apps that
 // only use run()/backroadExpress never need them installed (same pattern as
 // better-auth).
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const lazyRequire = (name: string): any => {
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    return require(name);
-  } catch {
-    throw new Error(
-      `backroadHono requires "${name}". Install both \`hono\` and \`@hono/node-server\`.`
-    );
-  }
-};
+const honoHint =
+  'backroadHono requires "hono" and "@hono/node-server". Install both `hono` and `@hono/node-server`.';
 
 /**
  * Mount a Backroad app onto an existing Hono app (running on @hono/node-server).
@@ -44,11 +36,12 @@ export const backroadHono = (
   const handler = buildBackroadHandler(executor, options);
   const basePath = handler.basePath;
 
-  const { Hono } = lazyRequire('hono');
+  const { Hono } = lazyRequire('hono', honoHint);
   // RESPONSE_ALREADY_SENT tells @hono/node-server we wrote to the Node response
   // ourselves and it should not build a Response from the return value.
   const { RESPONSE_ALREADY_SENT } = lazyRequire(
-    '@hono/node-server/utils/response'
+    '@hono/node-server/utils/response',
+    honoHint
   );
 
   const app = new Hono();
