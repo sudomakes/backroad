@@ -1,3 +1,4 @@
+import { getBasePath } from 'backroad-components';
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
@@ -10,7 +11,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <StrictMode>
     <ThemeProvider>
-      <BrowserRouter>
+      {/* basename is the mount sub-path so all in-app routing is prefixed. */}
+      <BrowserRouter basename={getBasePath() || undefined}>
         <App />
       </BrowserRouter>
     </ThemeProvider>

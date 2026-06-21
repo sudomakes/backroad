@@ -1,6 +1,7 @@
 import { AuthUIProvider, AuthView } from '@daveyplate/better-auth-ui';
+import { withBasePath } from 'backroad-components';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { authClient } from '../../lib/auth-client';
+import { getAuthClient } from '../../lib/auth-client';
 
 /**
  * Auth view route. Mounted at `/signin`, `/signin/sign-up`,
@@ -23,17 +24,24 @@ export function AuthRoute() {
   // hard reload tears down the old socket and the new connection picks
   // up the fresh cookie. In-auth navigation (signin ↔ signup ↔
   // forgot-password) stays a soft React Router move.
+  //
+  // navigate()/<Link> are basename-aware (BrowserRouter basename), so the
+  // hrefs stay root-relative here. The hard reload path uses raw
+  // window.location, which is NOT basename-aware, so it must carry the mount
+  // prefix explicitly.
   const isAuthInternal = (href: string) => href.startsWith('/auth');
   const navigateOrReload = (href: string) =>
-    isAuthInternal(href) ? navigate(href) : window.location.assign(href);
+    isAuthInternal(href)
+      ? navigate(href)
+      : window.location.assign(withBasePath(href));
   const replaceOrReload = (href: string) =>
     isAuthInternal(href)
       ? navigate(href, { replace: true })
-      : window.location.replace(href);
+      : window.location.replace(withBasePath(href));
 
   return (
     <AuthUIProvider
-      authClient={authClient}
+      authClient={getAuthClient()}
       navigate={navigateOrReload}
       replace={replaceOrReload}
       Link={({ href, ...props }) => <Link to={href} {...props} />}

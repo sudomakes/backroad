@@ -4,15 +4,16 @@ import { SocketManager } from './socket-manager';
 import type { BackroadUser } from '@backroad/core';
 
 function makeSession(id = 'test-session') {
-  const session = new BackroadSession(id);
+  // Each session gets its own SocketManager (per-instance, not a global).
+  const socketManager = new SocketManager();
+  const session = new BackroadSession(id, socketManager);
   const emit = vi.fn();
-  // SocketManager is a process-global static map; register a stub so
-  // br.login()/br.logout() can find a "socket" to emit on.
-  SocketManager.register(id, {
+  // Register a stub socket so br.login()/br.logout() can find one to emit on.
+  socketManager.register(id, {
     emit,
     // The rest of the Socket interface is irrelevant to these tests;
     // cast through unknown so we don't have to stub the full surface.
-  } as unknown as Parameters<typeof SocketManager.register>[1]);
+  } as unknown as Parameters<typeof SocketManager.prototype.register>[1]);
   return { session, emit };
 }
 

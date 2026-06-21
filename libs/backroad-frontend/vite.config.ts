@@ -5,6 +5,10 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   cacheDir: '../../node_modules/.vite/backroad-frontend',
+  // Relative asset URLs (./assets/*) so the prebuilt bundle resolves against
+  // the runtime <base href> the server injects — that's what lets one build
+  // serve from the domain root OR any sub-path (e.g. /backroad).
+  base: './',
   build: {
     outDir: '../../dist/libs/backroad-frontend',
     emptyOutDir: true,

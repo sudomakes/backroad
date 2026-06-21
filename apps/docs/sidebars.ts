@@ -32,6 +32,7 @@ const sidebars: SidebarsConfig = {
       items: ['configuration/themes', 'configuration/analytics', 'auth'],
     },
     'hosting',
+    'embedding',
     {
       type: 'category',
       label: 'Advanced',

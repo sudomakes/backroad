@@ -26,10 +26,18 @@
     "better-auth": "^1.6.14"
   },
   "peerDependencies": {
-    "better-auth": "^1.6.14"
+    "@hono/node-server": "^1.13.0",
+    "better-auth": "^1.6.14",
+    "hono": "^4.6.0"
   },
   "peerDependenciesMeta": {
+    "@hono/node-server": {
+      "optional": true
+    },
     "better-auth": {
+      "optional": true
+    },
+    "hono": {
       "optional": true
     }
   }

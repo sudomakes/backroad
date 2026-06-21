@@ -18,7 +18,6 @@ import {
   type DownloadDataResolver,
 } from '../server/sessions/session';
 import { ObjectHasher } from './object-hasher';
-import { SocketManager } from './socket-manager';
 
 type BackroadComponentFormat<ComponentType extends InbuiltComponentTypes> = {
   id?: BackroadComponent<ComponentType, false>['id'];
@@ -427,20 +426,16 @@ export class BackroadNodeManager<
     const url = provider
       ? `/api/auth/sign-in/social?provider=${encodeURIComponent(provider)}`
       : '/auth/signin';
-    SocketManager.getSocket(this.backroadSession.sessionId).emit(
-      'auth_redirect',
-      { url },
-      () => undefined
-    );
+    this.backroadSession.socketManager
+      .getSocket(this.backroadSession.sessionId)
+      .emit('auth_redirect', { url }, () => undefined);
   }
 
   logout() {
     // The client handler hits better-auth's sign-out endpoint to clear the
     // cookie, then navigates to /auth/signin.
-    SocketManager.getSocket(this.backroadSession.sessionId).emit(
-      'auth_signout',
-      undefined,
-      () => undefined
-    );
+    this.backroadSession.socketManager
+      .getSocket(this.backroadSession.sessionId)
+      .emit('auth_signout', undefined, () => undefined);
   }
 }
