@@ -1,5 +1,4 @@
 import { BackroadConfig } from '@backroad/core';
-import express from 'express';
 import * as http from 'http';
 import { buildBackroadHandler, type BackroadExecutor } from '../server/build';
 
@@ -10,7 +9,12 @@ export type { BackroadRunContext } from '../server/build';
 /**
  * Run a Backroad app as a standalone server on its own port. This is the
  * original entry point and is unchanged in behaviour: it's the mountable core
- * (buildBackroadHandler) with basePath '' on a fresh express app + http server.
+ * (buildBackroadHandler) with basePath '' served on a plain Node http.Server.
+ *
+ * The standalone setup reads as a server setup that just happens to use the
+ * Backroad handler: build the app, hand it to http.createServer, listen. The
+ * handler is itself a full express app, so there's no extra express() wrapper
+ * to stand up here — that framework choice lives inside the handler/adapters.
  */
 export const run = async (
   executor: BackroadExecutor,
@@ -18,14 +22,12 @@ export const run = async (
 ) => {
   const port = backroadOptions?.server?.port ?? 3333;
 
-  const app = express();
   const handler = buildBackroadHandler(executor, {
     ...backroadOptions,
     basePath: '',
   });
-  app.use(handler);
 
-  const server = http.createServer(app);
+  const server = http.createServer(handler);
   handler.attach(server);
 
   server.listen(port, () => {
