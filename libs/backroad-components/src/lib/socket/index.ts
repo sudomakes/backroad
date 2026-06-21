@@ -5,6 +5,7 @@ registerAuthSynchronizers();
 
 export { sessionId } from './session';
 export { getBasePath, withBasePath } from './base-path';
+export { backroadFetch } from './fetch';
 export { socket } from './client';
 export { setBackroadValue, setRunUnsetBackroadValue } from './value-setters';
 export { showToast } from './show-toast';

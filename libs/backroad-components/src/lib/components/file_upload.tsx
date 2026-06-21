@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { BackroadComponentRenderer } from '../types/components';
 import { useDropzone } from 'react-dropzone';
-import { sessionId, setBackroadValue, withBasePath } from '../socket';
+import { sessionId, setBackroadValue, backroadFetch } from '../socket';
 import {
   ClipboardDocumentIcon,
   CloudArrowUpIcon,
@@ -51,7 +51,7 @@ export const FileUpload: BackroadComponentRenderer<'file_upload'> = (props) => {
     data.append('sessionId', sessionId);
     data.append('id', props.id);
     const resp = await (
-      await fetch(withBasePath('/api/uploads'), { method: 'POST', body: data })
+      await backroadFetch('/api/uploads', { method: 'POST', body: data })
     ).json();
     console.log('upload response', resp);
     setBackroadValue({ id: props.id, value: resp });

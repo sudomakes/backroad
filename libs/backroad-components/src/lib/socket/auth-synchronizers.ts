@@ -1,5 +1,6 @@
 /** Wires server-driven auth events (redirect, sign-out) to browser navigation. */
 import { withBasePath } from './base-path';
+import { backroadFetch } from './fetch';
 import { socket } from './client';
 
 export const registerAuthSynchronizers = (): void => {
@@ -15,7 +16,7 @@ export const registerAuthSynchronizers = (): void => {
   // better-auth client SDK, then navigate to the React /auth/signin route.
   socket.on('auth_signout', async () => {
     try {
-      await fetch(withBasePath('/api/auth/sign-out'), {
+      await backroadFetch('/api/auth/sign-out', {
         method: 'POST',
         credentials: 'include',
       });
