@@ -130,7 +130,7 @@ export function App() {
     return () => {
       socket.off('render', onRender);
     };
-  });
+  }, []);
 
   console.log('pages data', treeStruct);
   const nonPageChildren = treeStruct.children.filter((c) => c.type !== 'page');
