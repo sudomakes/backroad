@@ -1,0 +1,27 @@
+examples/demo/src/pages/tabs.ts
+  s_2203cf27840108::t_bafddb9df66fb9 1-25
+e2e/tabs.spec.ts
+  s_2203cf27840108::t_77d2d5ad7002c1 1-54
+examples/demo/src/main.ts
+  s_2203cf27840108::t_bbbaccf7cec4bb 58
+  s_2203cf27840108::t_c6eda79bf419fe 44
+examples/demo/src/pages/index.ts
+  s_2203cf27840108::t_eee472cf6063bf 24
+  s_2203cf27840108::t_6ff1eb9873e12d 10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "a03bfb259f621a972f83ce00fbeade11aa885326",
+  "prompts": {},
+  "sessions": {
+    "s_2203cf27840108": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "29a6fcf1-bc88-4332-b648-527a471d8e85",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
