@@ -43,8 +43,8 @@ export const backroadWidgetsExample = (br: BackroadNodeManager) => {
   }
 
   // `downloaded` is true only on the run right after the click, so the echo
-  // below renders once per press — letting the e2e spec assert the round-trip
-  // in addition to intercepting the actual browser download.
+  // below flashes once per press as a UI affordance. The e2e spec asserts the
+  // real download (filename + file contents), not this transient echo.
   const downloaded = br.downloadButton({
     label: 'Download Report',
     data: () => Promise.resolve(JSON.stringify({ status: 'ok' }, null, 2)),
