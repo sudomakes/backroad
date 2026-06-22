@@ -75,7 +75,12 @@ export type BackroadEventsMapping = {
     response?: void;
   };
   render: {
-    args: string[]; //BackroadNode<true, false>;
+    // `nodes` are the superjson-encoded tree patches; `runId` stamps the run
+    // that produced them so the client can drop patches from a superseded run
+    // (an async rerun that's still emitting after a newer run reset the tree).
+    // Positional indices in node paths are only contiguous within a single run,
+    // so applying a stale patch would punch holes in the children arrays.
+    args: { nodes: string[]; runId: number }; //BackroadNode<true, false>;
     response?: void;
   };
   running: {

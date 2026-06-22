@@ -87,6 +87,59 @@ describe('br.logout', () => {
   });
 });
 
+describe('render queue runId stamping', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  // The flush is coalesced onto a microtask, so let it run.
+  const flushMicrotasks = () => Promise.resolve();
+
+  it('stamps emitted patches with the run that produced them', async () => {
+    const { session, emit } = makeSession('rq-stamp');
+    session.runId = 7;
+    session.renderQueue.addToQueue('node-a');
+    await flushMicrotasks();
+    expect(emit).toHaveBeenCalledWith(
+      'render',
+      { nodes: ['node-a'], runId: 7 },
+      expect.any(Function)
+    );
+  });
+
+  it('splits a coalesced flush into one emit per run group', async () => {
+    const { session, emit } = makeSession('rq-split');
+    // Two patches pushed in the same tick but produced by different runs (an
+    // older async run still emitting while a newer run has taken over) must not
+    // share a runId — otherwise the stale patch would slip past the client gate.
+    session.runId = 1;
+    session.renderQueue.addToQueue('old');
+    session.runId = 2;
+    session.renderQueue.addToQueue('new');
+    await flushMicrotasks();
+
+    const renderCalls = emit.mock.calls.filter(([event]) => event === 'render');
+    expect(renderCalls).toHaveLength(2);
+    expect(renderCalls[0]).toEqual([
+      'render',
+      { nodes: ['old'], runId: 1 },
+      expect.any(Function),
+    ]);
+    expect(renderCalls[1]).toEqual([
+      'render',
+      { nodes: ['new'], runId: 2 },
+      expect.any(Function),
+    ]);
+  });
+
+  it('bumps runId on resetTree so post-reset patches outrank pre-reset ones', () => {
+    const { session } = makeSession('rq-reset');
+    const before = session.runId;
+    session.resetTree();
+    expect(session.runId).toBe(before + 1);
+  });
+});
+
 describe('components', () => {
   it('adds iframe nodes as a first-class component', () => {
     const { session } = makeSession('component-iframe');

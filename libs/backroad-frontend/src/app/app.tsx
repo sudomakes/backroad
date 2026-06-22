@@ -6,7 +6,7 @@ import {
 import { TreeRender, socket } from 'backroad-components';
 import { Toaster } from 'backroad-ui';
 import { set } from 'lodash';
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import ReactGA from 'react-ga4';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import superjson from 'superjson';
@@ -44,6 +44,11 @@ export function App() {
   const [treeStruct, setTreeStruct] = useState<BackroadContainer<'base', true>>(
     getInitialTreeStructure()
   );
+  // Highest runId whose render patch we've applied. Patches arriving with a
+  // lower runId belong to a superseded run and are ignored. -1 so the first
+  // run (runId 1) is always accepted; reset on remount, which is fine because a
+  // remount also resets treeStruct to the initial structure.
+  const lastRunIdRef = useRef(-1);
   // Keep `connected` in sync with the socket (drives the Navbar indicator).
   // `socket` is a module-level singleton — it may already be connected by the
   // time this mounts (especially with the larger better-auth-ui bundle), so
@@ -87,12 +92,28 @@ export function App() {
   }, [appearance, seedDefaults]);
 
   useEffect(() => {
-    const onRender = (nodeData: string[], callback: () => void) => {
+    const onRender = (
+      { nodes, runId }: { nodes: string[]; runId: number },
+      callback: () => void
+    ) => {
+      // Drop patches from a superseded run. Node paths carry absolute child
+      // indices that are only contiguous within a single run, so applying a
+      // stale patch on top of a freshly-reset tree would punch holes in the
+      // children arrays (which then serialize to `null` and crash the renderer).
+      if (runId < lastRunIdRef.current) {
+        callback();
+        return;
+      }
+      lastRunIdRef.current = runId;
       setTreeStruct((oldTreeStruct) => {
-        let newTree = JSON.parse(
-          JSON.stringify(oldTreeStruct)
-        ) as BackroadContainer<'base', true>;
-        nodeData.forEach((node) => {
+        // structuredClone (not JSON round-trip): if a hole ever does slip into a
+        // children array, this preserves it as a hole — which .map/.filter skip
+        // — instead of materializing it into a `null` the renderer would deref.
+        let newTree = structuredClone(oldTreeStruct) as BackroadContainer<
+          'base',
+          true
+        >;
+        nodes.forEach((node) => {
           const parsedNode = superjson.parse(node) as BackroadNode<true, true>;
           if (parsedNode.path == '') {
             // basically means a full reset
@@ -109,7 +130,7 @@ export function App() {
     return () => {
       socket.off('render', onRender);
     };
-  });
+  }, []);
 
   console.log('pages data', treeStruct);
   const nonPageChildren = treeStruct.children.filter((c) => c.type !== 'page');

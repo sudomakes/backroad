@@ -38,6 +38,13 @@ export class BackroadSession {
   renderQueue: RenderQueue;
   rootNodeManager: BackroadNodeManager<'base'>;
   user: BackroadUser = { isLoggedIn: false };
+  // Monotonic run counter, bumped on every resetTree (i.e. every rerun). Each
+  // render patch is stamped with the runId that produced it (see RenderQueue),
+  // and the client drops any patch from a run older than the latest reset. This
+  // is what makes overlapping async reruns safe: a slow run that keeps emitting
+  // after a newer run has reset the tree can no longer corrupt it, because its
+  // patches carry a stale runId and are ignored.
+  runId = 0;
   // uploadManager: UploadManager;
   constructor(sessionId: string) {
     // this.uploadManager = new UploadManager();
@@ -57,6 +64,10 @@ export class BackroadSession {
   }
   resetTree() {
     this.renderQueue.flush(); // get rid of all pending flush commands
+    // Bump BEFORE reset so the reset payload and every node this run appends are
+    // stamped with the new runId; patches still queued/in-flight from the prior
+    // run keep their older id and get dropped by the client.
+    this.runId++;
     this.rootNodeManager.reset(getInitialTreeStructure());
   }
 
