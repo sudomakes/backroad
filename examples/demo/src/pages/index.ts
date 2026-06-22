@@ -7,6 +7,7 @@ import { backroadLLMExample } from './llm';
 import { backroadMarkdownExample } from './markdown';
 import { backroadSelectExample } from './select';
 import { backroadStatsExample } from './stats';
+import { backroadTabsExample } from './tabs';
 import { backroadWidgetsExample } from './widgets';
 
 export const pages = {
@@ -20,4 +21,5 @@ export const pages = {
   fileUpload: backroadFileUploadExample,
   iframe: backroadIframeExample,
   widgets: backroadWidgetsExample,
+  tabs: backroadTabsExample,
 };
