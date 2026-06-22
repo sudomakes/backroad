@@ -1,0 +1,22 @@
+examples/demo/src/pages/widgets.ts
+  s_e84106c1b3219d::t_775c2776f8001c 46-47
+e2e/download-button.spec.ts
+  s_e84106c1b3219d::t_30ee9448ba819c 23,32-36
+  s_e84106c1b3219d::t_1f548eae155056 1,6-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "bdfd5e3daf41421bc46be60eb078de350daed274",
+  "prompts": {},
+  "sessions": {
+    "s_e84106c1b3219d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "fcf6ffd2-66b9-4ced-ab12-bdc872ecf2c1",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
