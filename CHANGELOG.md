@@ -1,3 +1,10 @@
+## [1.20.1](https://github.com/sudomakes/backroad/compare/v1.20.0...v1.20.1) (2026-06-22)
+
+### Bug Fixes
+
+- drop stale render patches from superseded reruns ([8298ec5](https://github.com/sudomakes/backroad/commit/8298ec505ab0c54278f71c6e75bbc44d15f401bd))
+- **review:** add empty dep array to render handler useEffect ([#45](https://github.com/sudomakes/backroad/issues/45)) ([a8a6ff5](https://github.com/sudomakes/backroad/commit/a8a6ff5d7e090851ea9c09bcad054fce8c6f7cfd))
+
 ## [1.20.0](https://github.com/sudomakes/backroad/compare/v1.19.0...v1.20.0) (2026-06-20)
 
 ### Features
