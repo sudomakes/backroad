@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useSyncedState } from '../hooks/use-synced-state';
 import { BackroadComponentRenderer } from '../types/components';
 import { setBackroadValue } from '../socket';
 import { RadioGroup, RadioGroupItem, Label } from 'backroad-ui';
 
 export const Radio: BackroadComponentRenderer<'radio'> = (props) => {
-  const [value, setValue] = useState(props.value);
+  const [value, setValue] = useSyncedState(props.value);
   return (
     <div className="flex w-full max-w-xs flex-col gap-3">
       <span className="backroad-label">{props.args.label}</span>

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { HexColorPicker } from 'react-colorful';
+import { useSyncedState } from '../hooks/use-synced-state';
 import { setBackroadValue } from '../socket';
 import { BackroadComponentRenderer } from '../types/components';
 
@@ -45,7 +46,7 @@ export const ColorPicker: BackroadComponentRenderer<'color_picker'> = (
   props
 ) => {
   const popover = useRef<HTMLDivElement>(null);
-  const [value, setValue] = useState(props.value || undefined);
+  const [value, setValue] = useSyncedState(props.value || undefined);
   const [isOpen, setIsOpen] = useState(false);
 
   const close = useCallback(() => setIsOpen(false), []);
