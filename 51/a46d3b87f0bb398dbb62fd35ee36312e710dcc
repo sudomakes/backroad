@@ -1,0 +1,58 @@
+libs/backroad-components/src/lib/components/multiselect.tsx
+  s_2203cf27840108::t_bedc530db16776 5,11-16,18-19,28,31-33
+libs/backroad-components/src/lib/components/radio.tsx
+  s_2203cf27840108::t_588e48d834640c 7
+  s_2203cf27840108::t_4a5f87caabd1ee 1
+libs/backroad-components/src/lib/components/select.tsx
+  s_2203cf27840108::t_cf51ace5484dab 5,9-18,27,29
+libs/backroad-components/src/lib/components/slider.tsx
+  s_2203cf27840108::t_b6dc0bc06c1857 13
+  s_2203cf27840108::t_f48421efd9c7fd 1
+libs/backroad-components/src/lib/tree.tsx
+  s_2203cf27840108::t_4d2cc49c2a6fb4 20
+  s_2203cf27840108::t_71834f7c842467 10-16
+libs/backroad-components/src/lib/components/text_input.tsx
+  s_2203cf27840108::t_264d818a2b1d3d 8
+  s_2203cf27840108::t_4716b81038ad0a 1
+libs/backroad-components/src/lib/components/time_input.tsx
+  s_2203cf27840108::t_b2318632c15e07 9
+  s_2203cf27840108::t_b52153dd41a805 1
+e2e/focus-retention.spec.ts
+  s_2203cf27840108::t_bad9cad5a0c84d 1-61
+libs/backroad-components/src/lib/components/toggle.tsx
+  s_2203cf27840108::t_cad60347c33978 7
+  s_2203cf27840108::t_301170c06838a3 1
+libs/backroad-components/src/lib/hooks/use-synced-state.ts
+  s_2203cf27840108::t_30012e7ef5cdab 1-35
+libs/backroad-components/src/lib/components/date_input.tsx
+  s_2203cf27840108::t_1c87213d6f0028 1
+  s_2203cf27840108::t_7a053a0e19cba8 9
+libs/backroad-components/src/lib/components/number_input.tsx
+  s_2203cf27840108::t_eeadb3ccc02878 9
+  s_2203cf27840108::t_7c7a95f3ab4e05 2
+libs/backroad-components/src/lib/components/text_area.tsx
+  s_2203cf27840108::t_753189bd599451 1
+  s_2203cf27840108::t_d78ddfe65bb14d 9
+libs/backroad-components/src/lib/components/checkbox.tsx
+  s_2203cf27840108::t_4771cda4454498 1
+  s_2203cf27840108::t_362ca5aca81b04 7
+libs/backroad-components/src/lib/components/color_picker.tsx
+  s_2203cf27840108::t_0d59027253981f 49
+  s_2203cf27840108::t_9b0e5518d473db 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.10",
+  "base_commit_sha": "51a46d3b87f0bb398dbb62fd35ee36312e710dcc",
+  "prompts": {},
+  "sessions": {
+    "s_2203cf27840108": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "29a6fcf1-bc88-4332-b648-527a471d8e85",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
