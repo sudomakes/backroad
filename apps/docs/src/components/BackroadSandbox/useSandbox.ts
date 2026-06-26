@@ -1,5 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { WebContainer } from '@webcontainer/api';
+import type {
+  SpawnOptions,
+  WebContainer,
+  WebContainerProcess,
+} from '@webcontainer/api';
 import type { WTerm } from '@wterm/dom';
 import { loadBlob, saveBlob } from './idbStore';
 
@@ -13,7 +17,7 @@ export type SandboxStatus =
 
 /** Deps every sandbox needs, on top of any the page passes in. */
 const FIXED_DEPS: Record<string, string> = {
-  '@backroad/backroad': '1.7.6',
+  '@backroad/backroad': '1.20.1',
   tsx: '4.22.4',
 };
 
@@ -37,6 +41,8 @@ const INSTALL_ARGS = [
   'install',
   '--prefer-offline',
   '--omit=optional',
+  '--no-audit',
+  '--no-fund',
   '--loglevel',
   'verbose',
   '--progress',
@@ -74,6 +80,7 @@ export function useSandbox({ code, dependencies }: UseSandboxArgs) {
 
   const wcRef = useRef<WebContainer | null>(null);
   const abortRef = useRef(false);
+  const processesRef = useRef<Set<WebContainerProcess>>(new Set());
 
   // wterm instance + the element it mounts into. Output that arrives before the
   // terminal has finished its async init() is buffered and flushed once ready.
@@ -121,9 +128,31 @@ export function useSandbox({ code, dependencies }: UseSandboxArgs) {
   /** Pipe a spawned process's output into the terminal. */
   const pipeToTerm = useCallback(
     (output: ReadableStream<string>) => {
-      output.pipeTo(new WritableStream({ write: (data) => writeToTerm(data) }));
+      output
+        .pipeTo(new WritableStream({ write: (data) => writeToTerm(data) }))
+        .catch(() => {
+          /* process output can close during stop/teardown */
+        });
     },
     [writeToTerm]
+  );
+
+  const spawn = useCallback(
+    async (
+      wc: WebContainer,
+      command: string,
+      args: string[],
+      options?: SpawnOptions
+    ) => {
+      const process = await wc.spawn(command, args, options);
+      processesRef.current.add(process);
+      process.exit.finally(() => {
+        processesRef.current.delete(process);
+      });
+      pipeToTerm(process.output);
+      return process;
+    },
+    [pipeToTerm]
   );
 
   /** Restore the shared npm store into the cache dir, if we have one cached.
@@ -152,22 +181,35 @@ export function useSandbox({ code, dependencies }: UseSandboxArgs) {
    *  or null on timeout. */
   const installDeps = useCallback(
     async (wc: WebContainer): Promise<number | null> => {
-      const install = await wc.spawn('npm', INSTALL_ARGS, {
+      const install = await spawn(wc, 'npm', INSTALL_ARGS, {
         env: { npm_config_cache: `${wc.workdir}/${NPM_CACHE_DIR}` },
       });
-      pipeToTerm(install.output);
-      return Promise.race([
+      let timeoutId: ReturnType<typeof setTimeout> | undefined;
+      const exitCode = await Promise.race([
         install.exit,
-        new Promise<null>((resolve) =>
-          setTimeout(() => resolve(null), INSTALL_TIMEOUT_MS)
-        ),
+        new Promise<null>((resolve) => {
+          timeoutId = setTimeout(() => {
+            install.kill();
+            resolve(null);
+          }, INSTALL_TIMEOUT_MS);
+        }),
       ]);
+      if (timeoutId) clearTimeout(timeoutId);
+      return exitCode;
     },
-    [pipeToTerm]
+    [spawn]
   );
 
   const stop = useCallback(() => {
     abortRef.current = true;
+    for (const process of processesRef.current) {
+      try {
+        process.kill();
+      } catch {
+        // ignore
+      }
+    }
+    processesRef.current.clear();
     if (wcRef.current) {
       try {
         wcRef.current.teardown?.();
@@ -249,8 +291,7 @@ export function useSandbox({ code, dependencies }: UseSandboxArgs) {
 
       setStatus('starting');
       setStatusMessage('Starting app...');
-      const app = await wc.spawn('npm', ['start']);
-      pipeToTerm(app.output);
+      await spawn(wc, 'npm', ['start']);
     } catch (err) {
       if (abortRef.current) return;
       setStatus('error');
@@ -265,8 +306,8 @@ export function useSandbox({ code, dependencies }: UseSandboxArgs) {
     dependencies,
     installDeps,
     persistNpmStore,
-    pipeToTerm,
     restoreNpmStore,
+    spawn,
   ]);
 
   // Tear everything down when the component unmounts.
