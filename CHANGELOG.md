@@ -1,3 +1,10 @@
+## [1.20.2](https://github.com/sudomakes/backroad/compare/v1.20.1...v1.20.2) (2026-06-27)
+
+### Bug Fixes
+
+- **docs:** handle sandbox start races ([fe32a79](https://github.com/sudomakes/backroad/commit/fe32a79037530624b801871e0279922c4721cb13))
+- **docs:** stabilize sandbox installs ([03ebf57](https://github.com/sudomakes/backroad/commit/03ebf57c33940f3a22938f9324bf35cf9f196cc2))
+
 ## [1.20.1](https://github.com/sudomakes/backroad/compare/v1.20.0...v1.20.1) (2026-06-22)
 
 ### Bug Fixes
