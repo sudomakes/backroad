@@ -80,6 +80,7 @@ export function useSandbox({ code, dependencies }: UseSandboxArgs) {
 
   const wcRef = useRef<WebContainer | null>(null);
   const abortRef = useRef(false);
+  const runIdRef = useRef(0);
   const processesRef = useRef<Set<WebContainerProcess>>(new Set());
 
   // wterm instance + the element it mounts into. Output that arrives before the
@@ -202,6 +203,7 @@ export function useSandbox({ code, dependencies }: UseSandboxArgs) {
 
   const stop = useCallback(() => {
     abortRef.current = true;
+    runIdRef.current += 1;
     for (const process of processesRef.current) {
       try {
         process.kill();
@@ -238,22 +240,30 @@ export function useSandbox({ code, dependencies }: UseSandboxArgs) {
     setStatus('booting');
     setStatusMessage('Booting WebContainer...');
     pendingRef.current = [];
+    const runId = runIdRef.current + 1;
     termRef.current?.write('\x1b[2J\x1b[H'); // clear screen + home cursor
+    runIdRef.current = runId;
     abortRef.current = false;
 
     try {
       // Dynamic import so WebContainer code only ships on pages with a sandbox.
       const { WebContainer } = await import('@webcontainer/api');
-      if (abortRef.current) return;
+      if (abortRef.current || runId !== runIdRef.current) return;
 
       const wc = await WebContainer.boot();
+      if (abortRef.current || runId !== runIdRef.current) {
+        wc.teardown?.();
+        return;
+      }
       wcRef.current = wc;
-      if (abortRef.current) return;
 
       await wc.mount(buildProjectFiles(dependencies, currentCode));
-      if (abortRef.current) return;
+      if (abortRef.current || runId !== runIdRef.current) return;
 
+      let serverReady = false;
       wc.on('server-ready', (_port, url) => {
+        if (abortRef.current || runId !== runIdRef.current) return;
+        serverReady = true;
         setPreviewUrl(url);
         setStatus('ready');
         setStatusMessage('Server ready');
@@ -266,7 +276,7 @@ export function useSandbox({ code, dependencies }: UseSandboxArgs) {
       } catch {
         warmed = false; // store missing/corrupt → install cold, repopulate
       }
-      if (abortRef.current) return;
+      if (abortRef.current || runId !== runIdRef.current) return;
 
       setStatus('installing');
       setStatusMessage(
@@ -276,7 +286,7 @@ export function useSandbox({ code, dependencies }: UseSandboxArgs) {
       );
 
       const installExit = await installDeps(wc);
-      if (abortRef.current) return;
+      if (abortRef.current || runId !== runIdRef.current) return;
       if (installExit !== 0) {
         setStatus('error');
         setStatusMessage(
@@ -291,9 +301,18 @@ export function useSandbox({ code, dependencies }: UseSandboxArgs) {
 
       setStatus('starting');
       setStatusMessage('Starting app...');
-      await spawn(wc, 'npm', ['start']);
+      const startProcess = await spawn(wc, 'npm', ['start']);
+      void startProcess.exit.then((exitCode) => {
+        if (abortRef.current || runId !== runIdRef.current || serverReady) {
+          return;
+        }
+        setStatus('error');
+        setStatusMessage(
+          `npm start exited before server-ready (exit ${exitCode}).`
+        );
+      });
     } catch (err) {
-      if (abortRef.current) return;
+      if (abortRef.current || runId !== runIdRef.current) return;
       setStatus('error');
       setStatusMessage(
         err instanceof Error ? err.message : 'Failed to start sandbox'
