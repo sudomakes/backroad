@@ -1,0 +1,21 @@
+apps/docs/src/components/BackroadSandbox/useSandbox.ts
+  s_0f1ed64920131b::t_9a6a39dac3f902 255-257,263,266,304-305,309-313
+  s_0f1ed64920131b::t_07d11a64aaf88a 265,315
+  s_0f1ed64920131b::t_e32d8f5f736b0f 83,206,243,245,251,254,261,279,289,306-308
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "fe32a79037530624b801871e0279922c4721cb13",
+  "prompts": {},
+  "sessions": {
+    "s_0f1ed64920131b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f0469-c6f1-7b10-b16a-3567c74d37b8",
+        "model": "gpt-5.5"
+      },
+      "human_author": "sudo-vaibhav <53619134+sudo-vaibhav@users.noreply.github.com>"
+    }
+  }
+}
