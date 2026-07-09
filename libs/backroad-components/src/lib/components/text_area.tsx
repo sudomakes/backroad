@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useSyncedState } from '../hooks/use-synced-state';
 import { BackroadComponentRenderer } from '../types/components';
 import { setBackroadValue } from '../socket';
 import { Label, Textarea } from 'backroad-ui';
@@ -6,7 +6,7 @@ import { Label, Textarea } from 'backroad-ui';
 // Unlike text_input, Enter must insert a newline rather than commit, so there's
 // no handleKeyUpBlur here — the value commits on blur only.
 export const TextArea: BackroadComponentRenderer<'text_area'> = (props) => {
-  const [value, setValue] = useState(props.value);
+  const [value, setValue] = useSyncedState(props.value);
   return (
     <div className="flex w-full max-w-md flex-col gap-2">
       <Label htmlFor={props.id}>{props.args.label}</Label>

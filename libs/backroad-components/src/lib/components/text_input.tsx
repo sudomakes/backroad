@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useSyncedState } from '../hooks/use-synced-state';
 import { BackroadComponentRenderer } from '../types/components';
 import { handleKeyUpBlur } from '../helpers/handleKeyUp';
 import { setBackroadValue } from '../socket';
 import { Input, Label } from 'backroad-ui';
 
 export const TextInput: BackroadComponentRenderer<'text_input'> = (props) => {
-  const [value, setValue] = useState(props.value);
+  const [value, setValue] = useSyncedState(props.value);
   return (
     <div className="flex w-full max-w-xs flex-col gap-2">
       <Label htmlFor={props.id}>{props.args.label}</Label>

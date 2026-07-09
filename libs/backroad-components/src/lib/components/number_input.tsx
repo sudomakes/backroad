@@ -1,12 +1,12 @@
 import { BackroadComponent } from '@backroad/core';
-import { useState } from 'react';
+import { useSyncedState } from '../hooks/use-synced-state';
 import { setBackroadValue } from '../socket';
 import { handleKeyUpBlur } from '../helpers/handleKeyUp';
 import { Minus, Plus } from 'lucide-react';
 import { Input, Label, Button } from 'backroad-ui';
 
 export const NumberInput = (props: BackroadComponent<'number_input', true>) => {
-  const [inputValue, setInputValue] = useState(props.value);
+  const [inputValue, setInputValue] = useSyncedState(props.value);
   const stepValue = props.args.step || 1;
   const precisionValue = props.args.precision || 0;
 

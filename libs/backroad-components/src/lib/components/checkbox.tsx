@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useSyncedState } from '../hooks/use-synced-state';
 import { BackroadComponentRenderer } from '../types/components';
 import { setBackroadValue } from '../socket';
 import { Checkbox as UICheckbox, Label } from 'backroad-ui';
 
 export const Checkbox: BackroadComponentRenderer<'checkbox'> = (props) => {
-  const [value, setValue] = useState(props.value);
+  const [value, setValue] = useSyncedState(props.value);
   return (
     <div className="flex items-center gap-3">
       <UICheckbox

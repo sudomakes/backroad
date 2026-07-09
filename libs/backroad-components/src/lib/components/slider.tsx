@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useSyncedState } from '../hooks/use-synced-state';
 import { BackroadComponentRenderer } from '../types/components';
 import { setBackroadValue } from '../socket';
 import { Label, Slider as SliderPrimitive } from 'backroad-ui';
@@ -10,7 +10,7 @@ import { Label, Slider as SliderPrimitive } from 'backroad-ui';
 // the thumb for sighted users.
 export const Slider: BackroadComponentRenderer<'slider'> = (props) => {
   const { label, min = 0, max = 100, step = 1 } = props.args;
-  const [value, setValue] = useState(props.value);
+  const [value, setValue] = useSyncedState(props.value);
 
   return (
     <div className="flex w-full max-w-xs flex-col gap-2">
